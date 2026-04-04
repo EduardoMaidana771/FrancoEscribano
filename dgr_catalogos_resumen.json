@@ -1,0 +1,9 @@
+{
+  "marcas": 211,
+  "tipos": 42,
+  "naturaleza_juridica": 3,
+  "combustibles": 4,
+  "cuota_parte": 0,
+  "brands_with_models": 211,
+  "output": "dgr_catalogos_completos.json"
+}

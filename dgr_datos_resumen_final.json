@@ -1,0 +1,10 @@
+{
+  "marcas": 211,
+  "tipos": 42,
+  "tipos_combustible": 4,
+  "naturaleza_juridica": 3,
+  "cuota_parte_padron": 0,
+  "modelos_por_marca_registros": 211,
+  "model_sets_unicos": 1,
+  "output": "dgr_datos_completos.json"
+}

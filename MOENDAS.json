@@ -1,0 +1,92 @@
+MONEDAS:
+
+[
+    {
+        "Id": "U$S",
+        "Value": "DOLARES USA"
+    },
+    {
+        "Id": "$U",
+        "Value": "PESOS URUGUAYOS"
+    },
+    {
+        "Id": "UR",
+        "Value": "UNIDAD REAJUSTABLE"
+    },
+    {
+        "Id": "UI",
+        "Value": "UNIDADES INDEXADAS"
+    },
+    {
+        "Id": "EUR",
+        "Value": "EURO"
+    },
+    {
+        "Id": "A",
+        "Value": "AUSTRALES"
+    },
+    {
+        "Id": "BPC",
+        "Value": "BASES PRES Y CONTRIB"
+    },
+    {
+        "Id": "CR",
+        "Value": "CRUZEIROS"
+    },
+    {
+        "Id": "FF",
+        "Value": "FRANCOS FRANCESES"
+    },
+    {
+        "Id": "FS",
+        "Value": "FRANCOS SUIZOS"
+    },
+    {
+        "Id": "G",
+        "Value": "GUARANIES"
+    },
+    {
+        "Id": "L",
+        "Value": "LIBRA ITALIANA"
+    },
+    {
+        "Id": "LE",
+        "Value": "LIBRAS ESTERLINAS"
+    },
+    {
+        "Id": "DM",
+        "Value": "MARCOS ALEMANES"
+    },
+    {
+        "Id": "N$",
+        "Value": "NUEVOS PESOS"
+    },
+    {
+        "Id": "PT",
+        "Value": "PESETAS"
+    },
+    {
+        "Id": "$A",
+        "Value": "PESOS ARGENTINOS"
+    },
+    {
+        "Id": "M$",
+        "Value": "PESOS MEXICANOS"
+    },
+    {
+        "Id": "R$",
+        "Value": "REAL"
+    },
+    {
+        "Id": "UVC",
+        "Value": "UN. VAL.CONSTRUCCION"
+    },
+    {
+        "Id": "Y$",
+        "Value": "YENES"
+    },
+    {
+        "Id": "%",
+        "Value": "PORCENTAJE"
+    }
+]

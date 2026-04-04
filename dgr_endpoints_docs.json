@@ -1,0 +1,288 @@
+{
+  "base_url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.",
+  "form": {
+    "DFFormId": 66,
+    "DFFormVer": 1,
+    "description": "Minuta de Automotores (formulario 66)"
+  },
+  "catalog_endpoints": {
+    "adgr_dscargarpaises": {
+      "elem_id": 629,
+      "method": "POST",
+      "params": "none",
+      "returns": "list of countries with ISO codes"
+    },
+    "adgr_cargarnacionalidades": {
+      "elem_id": 1459,
+      "method": "POST",
+      "params": "none",
+      "returns": "list of nationalities with ISO codes"
+    },
+    "adgr_dscargarestadocivil": {
+      "elem_id": 57,
+      "method": "POST",
+      "params": "none",
+      "returns": "civil status options"
+    },
+    "adgr_dscargardepartamento": {
+      "elem_id": 17,
+      "method": "POST",
+      "params": "none",
+      "returns": "departments with 1-letter codes"
+    },
+    "adgr_dscargarlocalidades": {
+      "elem_id": 16,
+      "method": "POST",
+      "params": "dept_code (1 letter)",
+      "returns": "localities for department"
+    },
+    "adgr_6462_dscargarnaturalezajuridica": {
+      "elem_id": 1736,
+      "method": "POST",
+      "params": "none",
+      "returns": "naturaleza juridica tipos"
+    },
+    "adgr_6462_dscargartiposintervinientesporactopers": {
+      "elem_id": 1735,
+      "method": "POST",
+      "params": "acto_code",
+      "returns": "party types for an act"
+    },
+    "adgr_6462_dscargaractos": {
+      "elem_id": 1728,
+      "method": "POST",
+      "params": "search_prefix (optional)",
+      "returns": "list of act types"
+    },
+    "adgr_6462_dscargarmarcasvehiculo": {
+      "elem_id": 1683,
+      "method": "POST",
+      "params": "none",
+      "returns": "vehicle brands"
+    },
+    "adgr_6462_dscargartiposvehiculo": {
+      "elem_id": 1677,
+      "method": "POST",
+      "params": "none",
+      "returns": "vehicle types"
+    },
+    "adgr_6462_dscargarcombustiblesvehiculo": {
+      "elem_id": 1700,
+      "method": "POST",
+      "params": "none",
+      "returns": "fuel types",
+      "note": "405 with POST on old session, works in active session"
+    },
+    "adgr_6462_dscargarmodelosvehiculo": {
+      "elem_id": 1686,
+      "method": "POST",
+      "params": "brand_id",
+      "returns": "vehicle models for brand"
+    }
+  },
+  "execute_functions": {
+    "dgr_gettramiteinstidsession": {
+      "description": "Get tramite instance ID from session",
+      "params": "none",
+      "returns": "tramite_id (number)"
+    },
+    "dgr_dsobtenerdepartamentodesede": {
+      "description": "Get department of sede",
+      "params": "sede_code",
+      "returns": "dept code letter"
+    },
+    "dgr_obtenerdepartamentodsc": {
+      "description": "Get department name from code",
+      "params": "dept_code",
+      "returns": "department name"
+    },
+    "dgr_obtenersedenombre": {
+      "description": "Get sede name from code",
+      "params": "sede_code",
+      "returns": "sede name"
+    },
+    "dgr_6462_tieneantecedentesmismopaso": {
+      "description": "Check if padron has antecedents in same step",
+      "params": "padron_grid_ref",
+      "returns": "true/false"
+    },
+    "dgr_6462_padronesconcatenardatosodt": {
+      "description": "Concatenate padron data for display",
+      "params": "paso_label",
+      "returns": "DEPTO / PADRON string"
+    },
+    "dgr_6462_obteneractocodigo": {
+      "description": "Get act code from name",
+      "params": "act_name",
+      "returns": "act code (e.g. RA@AUT@A56)"
+    },
+    "dgr_6462_actoconintervinientes": {
+      "description": "Check if act requires parties",
+      "params": "act_code",
+      "returns": "true/false"
+    },
+    "dgr_6462_controlcorrespondenestipulaciones": {
+      "description": "Check if stipulations apply",
+      "params": "grid_ref, act_code",
+      "returns": "true/false"
+    },
+    "dgr_6462_controlcorrespondecartel": {
+      "description": "Check if cartel notice applies",
+      "params": "grid_ref, act_code",
+      "returns": "empty or data"
+    },
+    "dgr_6462_validaractoconinteviniente": {
+      "description": "Validate act with parties",
+      "params": "paso_label",
+      "returns": "true/false"
+    },
+    "dgr_validaringresoactos": {
+      "description": "Validate act entry",
+      "params": "count, act_name",
+      "returns": "0 or error code"
+    },
+    "dgr_compara2elementos": {
+      "description": "Compare 2 text elements",
+      "params": "value, operator, value2",
+      "returns": "true/false"
+    },
+    "dgr_compara2elementosnum": {
+      "description": "Compare 2 numeric elements",
+      "params": "value, operator, value2",
+      "returns": "true/false"
+    },
+    "dgr_documentovalidarcedulaidentidad": {
+      "description": "Validate Uruguayan CI number",
+      "params": "ci_number",
+      "returns": "true/false"
+    },
+    "dgr_documentovalidarrut": {
+      "description": "Validate RUT number",
+      "params": "rut_number",
+      "returns": "true/false"
+    },
+    "dgr_personafisicaobtenernombresporci": {
+      "description": "Get person names from CI",
+      "params": "ci_number, doc_type",
+      "returns": "NOMBRE1@NOMBRE2@APELLIDO1@APELLIDO2@NACIMIENTO@..."
+    },
+    "dgr_obtenerpaisnombre": {
+      "description": "Get country name from code",
+      "params": "country_code",
+      "returns": "country name"
+    },
+    "dgr_obtenerestadocivildescripcion": {
+      "description": "Get civil status description",
+      "params": "status_code",
+      "returns": "status text"
+    },
+    "dgr_obtenernaturalezajuridicadesc": {
+      "description": "Get naturaleza juridica description",
+      "params": "nat_code",
+      "returns": "description"
+    },
+    "dgr_obtenerintervinientedescripcionaut": {
+      "description": "Get party type description (auto)",
+      "params": "type_code",
+      "returns": "description"
+    },
+    "dgr_obtenerintervinientedescripcioninm": {
+      "description": "Get party type description (inmueble)",
+      "params": "type_code",
+      "returns": "description"
+    },
+    "dgr_obteneractoenpersdsc": {
+      "description": "Get 'en ACT_NAME' text for person",
+      "params": "act_code",
+      "returns": "'en COMPRAVENTA ALTA'"
+    },
+    "dgr_obtenermonedadsc": {
+      "description": "Get currency name from code",
+      "params": "currency_code",
+      "returns": "currency name"
+    },
+    "dgr_obteneractodsc": {
+      "description": "Get act name from code",
+      "params": "act_code",
+      "returns": "act name"
+    },
+    "dgr_textovalidarcaracteresextranios": {
+      "description": "Validate text for special characters",
+      "params": "text",
+      "returns": "true/false"
+    },
+    "dgr_descomponerdatoconcatenadoconcoma": {
+      "description": "Decompose comma-separated data",
+      "params": "data, position",
+      "returns": "extracted value"
+    },
+    "dgr_minutacargarpersonasprecargaconcatenados": {
+      "description": "Build person concatenated string",
+      "params": "person fields...",
+      "returns": "PF@CI | CI | ... formatted string"
+    },
+    "dgr_minutacargarpersonasprecargaconcatenadosdsc": {
+      "description": "Build person display string",
+      "params": "doc_type, ci, nombre, apellido",
+      "returns": "CI | NOMBRE APELLIDO"
+    },
+    "dgr_calcularsumresmul": {
+      "description": "Calculate sum/subtract/multiply",
+      "params": "operation, values...",
+      "returns": "result number"
+    },
+    "dgr_dynformcount": {
+      "description": "Count elements in dynamic form grid",
+      "params": "grid_ref, mode",
+      "returns": "count number"
+    },
+    "aasignardocumentodesdegam": {
+      "description": "Assign document from GAM system",
+      "params": "none",
+      "returns": "document_id number"
+    }
+  },
+  "workflow_endpoints": {
+    "aobtenerdfforminststructhttp": {
+      "description": "Get full form instance structure (huge JSON)",
+      "method": "GET"
+    },
+    "aguardardfforminststructhttp": {
+      "description": "Save form instance structure",
+      "method": "POST"
+    },
+    "adynformdsgetgridforminstancehomo": {
+      "description": "Get grid data for form section",
+      "method": "POST"
+    },
+    "dynformexecutedynformfrontend": {
+      "description": "Execute page navigation/submit (main form handler)",
+      "method": "POST"
+    },
+    "adgr_minutacargarpersonasmismopaso": {
+      "description": "Load persons added in current step",
+      "method": "POST",
+      "params": "action(J/F), grid_ref"
+    },
+    "adgr_minutacargarpersonaspasoprevioconcatenados": {
+      "description": "Load persons from previous steps",
+      "method": "POST"
+    },
+    "adgr_6462_cargapadronespasoprevioconcatenados": {
+      "description": "Load padrons from previous steps",
+      "method": "POST"
+    },
+    "adgr_6462_cargaactospasoprevioconcatenados": {
+      "description": "Load acts from previous steps",
+      "method": "POST"
+    },
+    "adgr_6462_precargargrillaintervinientes": {
+      "description": "Preload parties grid for review step",
+      "method": "POST"
+    },
+    "adgr_6462_cargaractosmismopaso": {
+      "description": "Load acts for current step",
+      "method": "POST"
+    }
+  }
+}

@@ -1,0 +1,3764 @@
+{
+  "adgr_dscargarpaises": {
+    "description": "Países",
+    "endpoint": "adgr_dscargarpaises",
+    "query_suffix": "",
+    "elem_id": 629,
+    "status": 200,
+    "count": 251,
+    "data": [
+      {
+        "Id": "858",
+        "Value": "Uruguay"
+      },
+      {
+        "Id": "004",
+        "Value": "Afganistán"
+      },
+      {
+        "Id": "008",
+        "Value": "Albania"
+      },
+      {
+        "Id": "276",
+        "Value": "Alemania"
+      },
+      {
+        "Id": "020",
+        "Value": "Andorra"
+      },
+      {
+        "Id": "024",
+        "Value": "Angola"
+      },
+      {
+        "Id": "660",
+        "Value": "Anguila"
+      },
+      {
+        "Id": "010",
+        "Value": "Antártida"
+      },
+      {
+        "Id": "028",
+        "Value": "Antigua y Barbuda"
+      },
+      {
+        "Id": "530",
+        "Value": "Antillas Neerlandesas"
+      },
+      {
+        "Id": "682",
+        "Value": "Arabia Saudí"
+      },
+      {
+        "Id": "012",
+        "Value": "Argel"
+      },
+      {
+        "Id": "032",
+        "Value": "Argentina"
+      },
+      {
+        "Id": "051",
+        "Value": "Armenia"
+      },
+      {
+        "Id": "533",
+        "Value": "Aruba"
+      },
+      {
+        "Id": "036",
+        "Value": "Australia"
+      },
+      {
+        "Id": "040",
+        "Value": "Austria"
+      },
+      {
+        "Id": "031",
+        "Value": "Azerbaiyán"
+      },
+      {
+        "Id": "044",
+        "Value": "Bahamas"
+      },
+      {
+        "Id": "048",
+        "Value": "Bahréin"
+      },
+      {
+        "Id": "050",
+        "Value": "Bangladesh"
+      },
+      {
+        "Id": "052",
+        "Value": "Barbados"
+      },
+      {
+        "Id": "112",
+        "Value": "Belarús"
+      },
+      {
+        "Id": "056",
+        "Value": "Bélgica"
+      },
+      {
+        "Id": "084",
+        "Value": "Belice"
+      },
+      {
+        "Id": "204",
+        "Value": "Benin"
+      },
+      {
+        "Id": "060",
+        "Value": "Bermudas"
+      },
+      {
+        "Id": "064",
+        "Value": "Bhután"
+      },
+      {
+        "Id": "068",
+        "Value": "Bolivia"
+      },
+      {
+        "Id": "535",
+        "Value": "Bonaire, San Eustaquio y Saba"
+      },
+      {
+        "Id": "070",
+        "Value": "Bosnia y Herzegovina"
+      },
+      {
+        "Id": "072",
+        "Value": "Botsuana"
+      },
+      {
+        "Id": "076",
+        "Value": "Brasil"
+      },
+      {
+        "Id": "096",
+        "Value": "Brunéi"
+      },
+      {
+        "Id": "100",
+        "Value": "Bulgaria"
+      },
+      {
+        "Id": "854",
+        "Value": "Burkina Faso"
+      },
+      {
+        "Id": "108",
+        "Value": "Burundi"
+      },
+      {
+        "Id": "132",
+        "Value": "Cabo Verde"
+      },
+      {
+        "Id": "136",
+        "Value": "Caimán, Islas"
+      },
+      {
+        "Id": "116",
+        "Value": "Camboya"
+      },
+      {
+        "Id": "120",
+        "Value": "Camerún"
+      },
+      {
+        "Id": "124",
+        "Value": "Canadá"
+      },
+      {
+        "Id": "148",
+        "Value": "Chad"
+      },
+      {
+        "Id": "152",
+        "Value": "Chile"
+      },
+      {
+        "Id": "156",
+        "Value": "China"
+      },
+      {
+        "Id": "196",
+        "Value": "Chipre"
+      },
+      {
+        "Id": "170",
+        "Value": "Colombia"
+      },
+      {
+        "Id": "174",
+        "Value": "Comores"
+      },
+      {
+        "Id": "178",
+        "Value": "Congo"
+      },
+      {
+        "Id": "180",
+        "Value": "Congo, República democrática del"
+      },
+      {
+        "Id": "410",
+        "Value": "Corea, República de"
+      },
+      {
+        "Id": "408",
+        "Value": "Corea, República popular democrática de"
+      },
+      {
+        "Id": "384",
+        "Value": "Costa de Marfil"
+      },
+      {
+        "Id": "188",
+        "Value": "Costa Rica"
+      },
+      {
+        "Id": "191",
+        "Value": "Croacia"
+      },
+      {
+        "Id": "192",
+        "Value": "Cuba"
+      },
+      {
+        "Id": "531",
+        "Value": "Curazao"
+      },
+      {
+        "Id": "208",
+        "Value": "Dinamarca"
+      },
+      {
+        "Id": "212",
+        "Value": "Domínica"
+      },
+      {
+        "Id": "218",
+        "Value": "Ecuador"
+      },
+      {
+        "Id": "818",
+        "Value": "Egipto"
+      },
+      {
+        "Id": "222",
+        "Value": "El Salvador"
+      },
+      {
+        "Id": "784",
+        "Value": "Emiratos Árabes Unidos"
+      },
+      {
+        "Id": "232",
+        "Value": "Eritrea"
+      },
+      {
+        "Id": "703",
+        "Value": "Eslovaquia"
+      },
+      {
+        "Id": "705",
+        "Value": "Eslovenia"
+      },
+      {
+        "Id": "724",
+        "Value": "España"
+      },
+      {
+        "Id": "840",
+        "Value": "Estados Unidos"
+      },
+      {
+        "Id": "233",
+        "Value": "Estonia"
+      },
+      {
+        "Id": "231",
+        "Value": "Etiopía"
+      },
+      {
+        "Id": "238",
+        "Value": "Falkland (Malvinas), Islas"
+      },
+      {
+        "Id": "643",
+        "Value": "Federación Rusa"
+      },
+      {
+        "Id": "242",
+        "Value": "Fiji"
+      },
+      {
+        "Id": "608",
+        "Value": "Filipinas"
+      },
+      {
+        "Id": "246",
+        "Value": "Finlandia"
+      },
+      {
+        "Id": "250",
+        "Value": "Francia"
+      },
+      {
+        "Id": "266",
+        "Value": "Gabón"
+      },
+      {
+        "Id": "270",
+        "Value": "Gambia"
+      },
+      {
+        "Id": "268",
+        "Value": "Georgia"
+      },
+      {
+        "Id": "239",
+        "Value": "Georgia del Sur e Islas Sandwich del Sur"
+      },
+      {
+        "Id": "288",
+        "Value": "Ghana"
+      },
+      {
+        "Id": "292",
+        "Value": "Gibraltar"
+      },
+      {
+        "Id": "308",
+        "Value": "Granada"
+      },
+      {
+        "Id": "300",
+        "Value": "Grecia"
+      },
+      {
+        "Id": "304",
+        "Value": "Groenlandia"
+      },
+      {
+        "Id": "312",
+        "Value": "Guadalupe"
+      },
+      {
+        "Id": "316",
+        "Value": "Guam"
+      },
+      {
+        "Id": "320",
+        "Value": "Guatemala"
+      },
+      {
+        "Id": "328",
+        "Value": "Guayana"
+      },
+      {
+        "Id": "254",
+        "Value": "Guayana Francesa"
+      },
+      {
+        "Id": "831",
+        "Value": "Guernsey"
+      },
+      {
+        "Id": "324",
+        "Value": "Guinea"
+      },
+      {
+        "Id": "624",
+        "Value": "Guinea-Bissau"
+      },
+      {
+        "Id": "226",
+        "Value": "Guinea Ecuatorial"
+      },
+      {
+        "Id": "332",
+        "Value": "Haití"
+      },
+      {
+        "Id": "334",
+        "Value": "Heard y McDonald, Islas"
+      },
+      {
+        "Id": "340",
+        "Value": "Honduras"
+      },
+      {
+        "Id": "344",
+        "Value": "Hong-Kong"
+      },
+      {
+        "Id": "348",
+        "Value": "Hungría"
+      },
+      {
+        "Id": "356",
+        "Value": "India"
+      },
+      {
+        "Id": "360",
+        "Value": "Indonesia"
+      },
+      {
+        "Id": "364",
+        "Value": "Irán, República islámica de"
+      },
+      {
+        "Id": "368",
+        "Value": "Iraq"
+      },
+      {
+        "Id": "372",
+        "Value": "Irlanda"
+      },
+      {
+        "Id": "074",
+        "Value": "Isla Bouvet"
+      },
+      {
+        "Id": "352",
+        "Value": "Islandia"
+      },
+      {
+        "Id": "248",
+        "Value": "Islas Áland"
+      },
+      {
+        "Id": "162",
+        "Value": "Islas Christmas"
+      },
+      {
+        "Id": "166",
+        "Value": "Islas Cocos"
+      },
+      {
+        "Id": "184",
+        "Value": "Islas Cook"
+      },
+      {
+        "Id": "234",
+        "Value": "Islas Faroe"
+      },
+      {
+        "Id": "238",
+        "Value": "Islas Malvinas"
+      },
+      {
+        "Id": "376",
+        "Value": "Israel"
+      },
+      {
+        "Id": "380",
+        "Value": "Italia"
+      },
+      {
+        "Id": "388",
+        "Value": "Jamaica"
+      },
+      {
+        "Id": "392",
+        "Value": "Japón"
+      },
+      {
+        "Id": "832",
+        "Value": "Jersey"
+      },
+      {
+        "Id": "400",
+        "Value": "Jordania"
+      },
+      {
+        "Id": "398",
+        "Value": "Kazajstán"
+      },
+      {
+        "Id": "404",
+        "Value": "Kenia"
+      },
+      {
+        "Id": "417",
+        "Value": "Kirguistán"
+      },
+      {
+        "Id": "296",
+        "Value": "Kiribati"
+      },
+      {
+        "Id": "414",
+        "Value": "Kuwait"
+      },
+      {
+        "Id": "418",
+        "Value": "Laos, República democrática popular de"
+      },
+      {
+        "Id": "426",
+        "Value": "Lesotho"
+      },
+      {
+        "Id": "428",
+        "Value": "Letonia"
+      },
+      {
+        "Id": "422",
+        "Value": "Líbano"
+      },
+      {
+        "Id": "430",
+        "Value": "Liberia"
+      },
+      {
+        "Id": "434",
+        "Value": "Libia, Jamahiriya árabe"
+      },
+      {
+        "Id": "438",
+        "Value": "Liechtenstein"
+      },
+      {
+        "Id": "440",
+        "Value": "Lituania"
+      },
+      {
+        "Id": "442",
+        "Value": "Luxemburgo"
+      },
+      {
+        "Id": "446",
+        "Value": "Macao"
+      },
+      {
+        "Id": "807",
+        "Value": "Macedonia, antigua república yugoslava de"
+      },
+      {
+        "Id": "450",
+        "Value": "Madagascar"
+      },
+      {
+        "Id": "458",
+        "Value": "Malasia"
+      },
+      {
+        "Id": "454",
+        "Value": "Malawi"
+      },
+      {
+        "Id": "462",
+        "Value": "Maldivas"
+      },
+      {
+        "Id": "466",
+        "Value": "Mali"
+      },
+      {
+        "Id": "470",
+        "Value": "Malta"
+      },
+      {
+        "Id": "833",
+        "Value": "Man, Isla de"
+      },
+      {
+        "Id": "580",
+        "Value": "Marianas del Norte, Islas"
+      },
+      {
+        "Id": "504",
+        "Value": "Marruecos"
+      },
+      {
+        "Id": "584",
+        "Value": "Marshall, Islas"
+      },
+      {
+        "Id": "474",
+        "Value": "Martinica"
+      },
+      {
+        "Id": "480",
+        "Value": "Mauricio"
+      },
+      {
+        "Id": "478",
+        "Value": "Mauritania"
+      },
+      {
+        "Id": "175",
+        "Value": "Mayotte"
+      },
+      {
+        "Id": "484",
+        "Value": "Méjico"
+      },
+      {
+        "Id": "583",
+        "Value": "Micronesia"
+      },
+      {
+        "Id": "498",
+        "Value": "Moldavia, República de Moldova"
+      },
+      {
+        "Id": "492",
+        "Value": "Mónaco"
+      },
+      {
+        "Id": "496",
+        "Value": "Mongolia"
+      },
+      {
+        "Id": "499",
+        "Value": "Montenegro"
+      },
+      {
+        "Id": "500",
+        "Value": "Montserrat"
+      },
+      {
+        "Id": "508",
+        "Value": "Mozambique"
+      },
+      {
+        "Id": "104",
+        "Value": "Myanmar"
+      },
+      {
+        "Id": "516",
+        "Value": "Namibia"
+      },
+      {
+        "Id": "520",
+        "Value": "Nauru"
+      },
+      {
+        "Id": "524",
+        "Value": "Nepal"
+      },
+      {
+        "Id": "558",
+        "Value": "Nicaragua"
+      },
+      {
+        "Id": "562",
+        "Value": "Níger"
+      },
+      {
+        "Id": "566",
+        "Value": "Nigeria"
+      },
+      {
+        "Id": "570",
+        "Value": "Niué"
+      },
+      {
+        "Id": "574",
+        "Value": "Norfolk, Isla"
+      },
+      {
+        "Id": "578",
+        "Value": "Noruega"
+      },
+      {
+        "Id": "540",
+        "Value": "Nueva Caledonia"
+      },
+      {
+        "Id": "554",
+        "Value": "Nueva Zelanda"
+      },
+      {
+        "Id": "086",
+        "Value": "Océano Índico, Territorio británico del"
+      },
+      {
+        "Id": "512",
+        "Value": "Omán"
+      },
+      {
+        "Id": "528",
+        "Value": "Países Bajos"
+      },
+      {
+        "Id": "586",
+        "Value": "Pakistán"
+      },
+      {
+        "Id": "585",
+        "Value": "Palau"
+      },
+      {
+        "Id": "275",
+        "Value": "Palestina, Territorio ocupado de"
+      },
+      {
+        "Id": "591",
+        "Value": "Panamá"
+      },
+      {
+        "Id": "598",
+        "Value": "Papúa Nueva Guinea"
+      },
+      {
+        "Id": "600",
+        "Value": "Paraguay"
+      },
+      {
+        "Id": "604",
+        "Value": "Perú"
+      },
+      {
+        "Id": "612",
+        "Value": "Pitcairn"
+      },
+      {
+        "Id": "258",
+        "Value": "Polinesia francesa"
+      },
+      {
+        "Id": "616",
+        "Value": "Polonia"
+      },
+      {
+        "Id": "620",
+        "Value": "Portugal"
+      },
+      {
+        "Id": "630",
+        "Value": "Puerto Rico"
+      },
+      {
+        "Id": "634",
+        "Value": "Qatar"
+      },
+      {
+        "Id": "826",
+        "Value": "Reino Unido"
+      },
+      {
+        "Id": "140",
+        "Value": "República Centro-Africana"
+      },
+      {
+        "Id": "203",
+        "Value": "República Checa"
+      },
+      {
+        "Id": "214",
+        "Value": "República Dominicana"
+      },
+      {
+        "Id": "638",
+        "Value": "Reunión"
+      },
+      {
+        "Id": "646",
+        "Value": "Ruanda"
+      },
+      {
+        "Id": "642",
+        "Value": "Rumanía"
+      },
+      {
+        "Id": "732",
+        "Value": "Sahara Occidental"
+      },
+      {
+        "Id": "090",
+        "Value": "Salomón, Islas"
+      },
+      {
+        "Id": "882",
+        "Value": "Samoa"
+      },
+      {
+        "Id": "016",
+        "Value": "Samoa Americana"
+      },
+      {
+        "Id": "652",
+        "Value": "San Bartolomé"
+      },
+      {
+        "Id": "659",
+        "Value": "San Cristóbal y Nieves"
+      },
+      {
+        "Id": "674",
+        "Value": "San Marino"
+      },
+      {
+        "Id": "663",
+        "Value": "San Martín (parte francesa)"
+      },
+      {
+        "Id": "534",
+        "Value": "San Martín (parte holandesa)"
+      },
+      {
+        "Id": "666",
+        "Value": "San Pedro y Miquelón"
+      },
+      {
+        "Id": "670",
+        "Value": "San Vicente y Granadinas"
+      },
+      {
+        "Id": "654",
+        "Value": "Santa Helena"
+      },
+      {
+        "Id": "662",
+        "Value": "Santa Lucía"
+      },
+      {
+        "Id": "336",
+        "Value": "Santa Sede (Estado de la Ciudad del Vaticano)"
+      },
+      {
+        "Id": "678",
+        "Value": "Santo Tomé y Príncipe"
+      },
+      {
+        "Id": "686",
+        "Value": "Senegal"
+      },
+      {
+        "Id": "688",
+        "Value": "Serbia"
+      },
+      {
+        "Id": "690",
+        "Value": "Seychelles"
+      },
+      {
+        "Id": "694",
+        "Value": "Sierra Leona"
+      },
+      {
+        "Id": "702",
+        "Value": "Singapur"
+      },
+      {
+        "Id": "760",
+        "Value": "Siria, República árabe"
+      },
+      {
+        "Id": "706",
+        "Value": "Somalia"
+      },
+      {
+        "Id": "144",
+        "Value": "Sri Lanka"
+      },
+      {
+        "Id": "710",
+        "Value": "Sudáfrica"
+      },
+      {
+        "Id": "729",
+        "Value": "Sudán"
+      },
+      {
+        "Id": "728",
+        "Value": "Sudán del Sur"
+      },
+      {
+        "Id": "752",
+        "Value": "Suecia"
+      },
+      {
+        "Id": "756",
+        "Value": "Suiza"
+      },
+      {
+        "Id": "740",
+        "Value": "Suriname"
+      },
+      {
+        "Id": "744",
+        "Value": "Svalbard e isla Jan Mayen"
+      },
+      {
+        "Id": "748",
+        "Value": "Swazilandia"
+      },
+      {
+        "Id": "764",
+        "Value": "Tailandia"
+      },
+      {
+        "Id": "158",
+        "Value": "Taiwan, Provincia de China"
+      },
+      {
+        "Id": "834",
+        "Value": "Tanzania, República unida de"
+      },
+      {
+        "Id": "762",
+        "Value": "Tayikistán"
+      },
+      {
+        "Id": "260",
+        "Value": "Territorios Australes franceses"
+      },
+      {
+        "Id": "626",
+        "Value": "Timor oriental"
+      },
+      {
+        "Id": "768",
+        "Value": "Togo"
+      },
+      {
+        "Id": "772",
+        "Value": "Tokelau"
+      },
+      {
+        "Id": "776",
+        "Value": "Tonga"
+      },
+      {
+        "Id": "780",
+        "Value": "Trinidad y Tobago"
+      },
+      {
+        "Id": "788",
+        "Value": "Túnez"
+      },
+      {
+        "Id": "796",
+        "Value": "Turcos y Caicos, Islas"
+      },
+      {
+        "Id": "795",
+        "Value": "Turkmenistán"
+      },
+      {
+        "Id": "792",
+        "Value": "Turquía"
+      },
+      {
+        "Id": "798",
+        "Value": "Tuvalu"
+      },
+      {
+        "Id": "804",
+        "Value": "Ucrania"
+      },
+      {
+        "Id": "800",
+        "Value": "Uganda"
+      },
+      {
+        "Id": "581",
+        "Value": "Ultramarinas de los Estados Unidos, Islas"
+      },
+      {
+        "Id": "860",
+        "Value": "Uzbekistán"
+      },
+      {
+        "Id": "548",
+        "Value": "Vanuatu"
+      },
+      {
+        "Id": "862",
+        "Value": "Venezuela"
+      },
+      {
+        "Id": "704",
+        "Value": "Vietnam"
+      },
+      {
+        "Id": "850",
+        "Value": "Vírgenes (USA), Islas"
+      },
+      {
+        "Id": "092",
+        "Value": "Vírgenes británicas, Islas"
+      },
+      {
+        "Id": "876",
+        "Value": "Wallis y Futuna"
+      },
+      {
+        "Id": "887",
+        "Value": "Yemen"
+      },
+      {
+        "Id": "262",
+        "Value": "Yibuti"
+      },
+      {
+        "Id": "894",
+        "Value": "Zambia"
+      },
+      {
+        "Id": "716",
+        "Value": "Zimbabwe"
+      }
+    ]
+  },
+  "adgr_cargarnacionalidades": {
+    "description": "Nacionalidades",
+    "endpoint": "adgr_cargarnacionalidades",
+    "query_suffix": "",
+    "elem_id": 1459,
+    "status": 200,
+    "count": 252,
+    "data": [
+      {
+        "Id": "858",
+        "Value": "Uruguay"
+      },
+      {
+        "Id": "000",
+        "Value": "No se conoce"
+      },
+      {
+        "Id": "004",
+        "Value": "Afganistán"
+      },
+      {
+        "Id": "008",
+        "Value": "Albania"
+      },
+      {
+        "Id": "276",
+        "Value": "Alemania"
+      },
+      {
+        "Id": "020",
+        "Value": "Andorra"
+      },
+      {
+        "Id": "024",
+        "Value": "Angola"
+      },
+      {
+        "Id": "660",
+        "Value": "Anguila"
+      },
+      {
+        "Id": "010",
+        "Value": "Antártida"
+      },
+      {
+        "Id": "028",
+        "Value": "Antigua y Barbuda"
+      },
+      {
+        "Id": "530",
+        "Value": "Antillas Neerlandesas"
+      },
+      {
+        "Id": "682",
+        "Value": "Arabia Saudí"
+      },
+      {
+        "Id": "012",
+        "Value": "Argel"
+      },
+      {
+        "Id": "032",
+        "Value": "Argentina"
+      },
+      {
+        "Id": "051",
+        "Value": "Armenia"
+      },
+      {
+        "Id": "533",
+        "Value": "Aruba"
+      },
+      {
+        "Id": "036",
+        "Value": "Australia"
+      },
+      {
+        "Id": "040",
+        "Value": "Austria"
+      },
+      {
+        "Id": "031",
+        "Value": "Azerbaiyán"
+      },
+      {
+        "Id": "044",
+        "Value": "Bahamas"
+      },
+      {
+        "Id": "048",
+        "Value": "Bahréin"
+      },
+      {
+        "Id": "050",
+        "Value": "Bangladesh"
+      },
+      {
+        "Id": "052",
+        "Value": "Barbados"
+      },
+      {
+        "Id": "112",
+        "Value": "Belarús"
+      },
+      {
+        "Id": "056",
+        "Value": "Bélgica"
+      },
+      {
+        "Id": "084",
+        "Value": "Belice"
+      },
+      {
+        "Id": "204",
+        "Value": "Benin"
+      },
+      {
+        "Id": "060",
+        "Value": "Bermudas"
+      },
+      {
+        "Id": "064",
+        "Value": "Bhután"
+      },
+      {
+        "Id": "068",
+        "Value": "Bolivia"
+      },
+      {
+        "Id": "535",
+        "Value": "Bonaire, San Eustaquio y Saba"
+      },
+      {
+        "Id": "070",
+        "Value": "Bosnia y Herzegovina"
+      },
+      {
+        "Id": "072",
+        "Value": "Botsuana"
+      },
+      {
+        "Id": "076",
+        "Value": "Brasil"
+      },
+      {
+        "Id": "096",
+        "Value": "Brunéi"
+      },
+      {
+        "Id": "100",
+        "Value": "Bulgaria"
+      },
+      {
+        "Id": "854",
+        "Value": "Burkina Faso"
+      },
+      {
+        "Id": "108",
+        "Value": "Burundi"
+      },
+      {
+        "Id": "132",
+        "Value": "Cabo Verde"
+      },
+      {
+        "Id": "136",
+        "Value": "Caimán, Islas"
+      },
+      {
+        "Id": "116",
+        "Value": "Camboya"
+      },
+      {
+        "Id": "120",
+        "Value": "Camerún"
+      },
+      {
+        "Id": "124",
+        "Value": "Canadá"
+      },
+      {
+        "Id": "148",
+        "Value": "Chad"
+      },
+      {
+        "Id": "152",
+        "Value": "Chile"
+      },
+      {
+        "Id": "156",
+        "Value": "China"
+      },
+      {
+        "Id": "196",
+        "Value": "Chipre"
+      },
+      {
+        "Id": "170",
+        "Value": "Colombia"
+      },
+      {
+        "Id": "174",
+        "Value": "Comores"
+      },
+      {
+        "Id": "178",
+        "Value": "Congo"
+      },
+      {
+        "Id": "180",
+        "Value": "Congo, República democrática del"
+      },
+      {
+        "Id": "410",
+        "Value": "Corea, República de"
+      },
+      {
+        "Id": "408",
+        "Value": "Corea, República popular democrática de"
+      },
+      {
+        "Id": "384",
+        "Value": "Costa de Marfil"
+      },
+      {
+        "Id": "188",
+        "Value": "Costa Rica"
+      },
+      {
+        "Id": "191",
+        "Value": "Croacia"
+      },
+      {
+        "Id": "192",
+        "Value": "Cuba"
+      },
+      {
+        "Id": "531",
+        "Value": "Curazao"
+      },
+      {
+        "Id": "208",
+        "Value": "Dinamarca"
+      },
+      {
+        "Id": "212",
+        "Value": "Domínica"
+      },
+      {
+        "Id": "218",
+        "Value": "Ecuador"
+      },
+      {
+        "Id": "818",
+        "Value": "Egipto"
+      },
+      {
+        "Id": "222",
+        "Value": "El Salvador"
+      },
+      {
+        "Id": "784",
+        "Value": "Emiratos Árabes Unidos"
+      },
+      {
+        "Id": "232",
+        "Value": "Eritrea"
+      },
+      {
+        "Id": "703",
+        "Value": "Eslovaquia"
+      },
+      {
+        "Id": "705",
+        "Value": "Eslovenia"
+      },
+      {
+        "Id": "724",
+        "Value": "España"
+      },
+      {
+        "Id": "840",
+        "Value": "Estados Unidos"
+      },
+      {
+        "Id": "233",
+        "Value": "Estonia"
+      },
+      {
+        "Id": "231",
+        "Value": "Etiopía"
+      },
+      {
+        "Id": "238",
+        "Value": "Falkland (Malvinas), Islas"
+      },
+      {
+        "Id": "643",
+        "Value": "Federación Rusa"
+      },
+      {
+        "Id": "242",
+        "Value": "Fiji"
+      },
+      {
+        "Id": "608",
+        "Value": "Filipinas"
+      },
+      {
+        "Id": "246",
+        "Value": "Finlandia"
+      },
+      {
+        "Id": "250",
+        "Value": "Francia"
+      },
+      {
+        "Id": "266",
+        "Value": "Gabón"
+      },
+      {
+        "Id": "270",
+        "Value": "Gambia"
+      },
+      {
+        "Id": "268",
+        "Value": "Georgia"
+      },
+      {
+        "Id": "239",
+        "Value": "Georgia del Sur e Islas Sandwich del Sur"
+      },
+      {
+        "Id": "288",
+        "Value": "Ghana"
+      },
+      {
+        "Id": "292",
+        "Value": "Gibraltar"
+      },
+      {
+        "Id": "308",
+        "Value": "Granada"
+      },
+      {
+        "Id": "300",
+        "Value": "Grecia"
+      },
+      {
+        "Id": "304",
+        "Value": "Groenlandia"
+      },
+      {
+        "Id": "312",
+        "Value": "Guadalupe"
+      },
+      {
+        "Id": "316",
+        "Value": "Guam"
+      },
+      {
+        "Id": "320",
+        "Value": "Guatemala"
+      },
+      {
+        "Id": "328",
+        "Value": "Guayana"
+      },
+      {
+        "Id": "254",
+        "Value": "Guayana Francesa"
+      },
+      {
+        "Id": "831",
+        "Value": "Guernsey"
+      },
+      {
+        "Id": "324",
+        "Value": "Guinea"
+      },
+      {
+        "Id": "624",
+        "Value": "Guinea-Bissau"
+      },
+      {
+        "Id": "226",
+        "Value": "Guinea Ecuatorial"
+      },
+      {
+        "Id": "332",
+        "Value": "Haití"
+      },
+      {
+        "Id": "334",
+        "Value": "Heard y McDonald, Islas"
+      },
+      {
+        "Id": "340",
+        "Value": "Honduras"
+      },
+      {
+        "Id": "344",
+        "Value": "Hong-Kong"
+      },
+      {
+        "Id": "348",
+        "Value": "Hungría"
+      },
+      {
+        "Id": "356",
+        "Value": "India"
+      },
+      {
+        "Id": "360",
+        "Value": "Indonesia"
+      },
+      {
+        "Id": "364",
+        "Value": "Irán, República islámica de"
+      },
+      {
+        "Id": "368",
+        "Value": "Iraq"
+      },
+      {
+        "Id": "372",
+        "Value": "Irlanda"
+      },
+      {
+        "Id": "074",
+        "Value": "Isla Bouvet"
+      },
+      {
+        "Id": "352",
+        "Value": "Islandia"
+      },
+      {
+        "Id": "248",
+        "Value": "Islas Áland"
+      },
+      {
+        "Id": "162",
+        "Value": "Islas Christmas"
+      },
+      {
+        "Id": "166",
+        "Value": "Islas Cocos"
+      },
+      {
+        "Id": "184",
+        "Value": "Islas Cook"
+      },
+      {
+        "Id": "234",
+        "Value": "Islas Faroe"
+      },
+      {
+        "Id": "238",
+        "Value": "Islas Malvinas"
+      },
+      {
+        "Id": "376",
+        "Value": "Israel"
+      },
+      {
+        "Id": "380",
+        "Value": "Italia"
+      },
+      {
+        "Id": "388",
+        "Value": "Jamaica"
+      },
+      {
+        "Id": "392",
+        "Value": "Japón"
+      },
+      {
+        "Id": "832",
+        "Value": "Jersey"
+      },
+      {
+        "Id": "400",
+        "Value": "Jordania"
+      },
+      {
+        "Id": "398",
+        "Value": "Kazajstán"
+      },
+      {
+        "Id": "404",
+        "Value": "Kenia"
+      },
+      {
+        "Id": "417",
+        "Value": "Kirguistán"
+      },
+      {
+        "Id": "296",
+        "Value": "Kiribati"
+      },
+      {
+        "Id": "414",
+        "Value": "Kuwait"
+      },
+      {
+        "Id": "418",
+        "Value": "Laos, República democrática popular de"
+      },
+      {
+        "Id": "426",
+        "Value": "Lesotho"
+      },
+      {
+        "Id": "428",
+        "Value": "Letonia"
+      },
+      {
+        "Id": "422",
+        "Value": "Líbano"
+      },
+      {
+        "Id": "430",
+        "Value": "Liberia"
+      },
+      {
+        "Id": "434",
+        "Value": "Libia, Jamahiriya árabe"
+      },
+      {
+        "Id": "438",
+        "Value": "Liechtenstein"
+      },
+      {
+        "Id": "440",
+        "Value": "Lituania"
+      },
+      {
+        "Id": "442",
+        "Value": "Luxemburgo"
+      },
+      {
+        "Id": "446",
+        "Value": "Macao"
+      },
+      {
+        "Id": "807",
+        "Value": "Macedonia, antigua república yugoslava de"
+      },
+      {
+        "Id": "450",
+        "Value": "Madagascar"
+      },
+      {
+        "Id": "458",
+        "Value": "Malasia"
+      },
+      {
+        "Id": "454",
+        "Value": "Malawi"
+      },
+      {
+        "Id": "462",
+        "Value": "Maldivas"
+      },
+      {
+        "Id": "466",
+        "Value": "Mali"
+      },
+      {
+        "Id": "470",
+        "Value": "Malta"
+      },
+      {
+        "Id": "833",
+        "Value": "Man, Isla de"
+      },
+      {
+        "Id": "580",
+        "Value": "Marianas del Norte, Islas"
+      },
+      {
+        "Id": "504",
+        "Value": "Marruecos"
+      },
+      {
+        "Id": "584",
+        "Value": "Marshall, Islas"
+      },
+      {
+        "Id": "474",
+        "Value": "Martinica"
+      },
+      {
+        "Id": "480",
+        "Value": "Mauricio"
+      },
+      {
+        "Id": "478",
+        "Value": "Mauritania"
+      },
+      {
+        "Id": "175",
+        "Value": "Mayotte"
+      },
+      {
+        "Id": "484",
+        "Value": "Méjico"
+      },
+      {
+        "Id": "583",
+        "Value": "Micronesia"
+      },
+      {
+        "Id": "498",
+        "Value": "Moldavia, República de Moldova"
+      },
+      {
+        "Id": "492",
+        "Value": "Mónaco"
+      },
+      {
+        "Id": "496",
+        "Value": "Mongolia"
+      },
+      {
+        "Id": "499",
+        "Value": "Montenegro"
+      },
+      {
+        "Id": "500",
+        "Value": "Montserrat"
+      },
+      {
+        "Id": "508",
+        "Value": "Mozambique"
+      },
+      {
+        "Id": "104",
+        "Value": "Myanmar"
+      },
+      {
+        "Id": "516",
+        "Value": "Namibia"
+      },
+      {
+        "Id": "520",
+        "Value": "Nauru"
+      },
+      {
+        "Id": "524",
+        "Value": "Nepal"
+      },
+      {
+        "Id": "558",
+        "Value": "Nicaragua"
+      },
+      {
+        "Id": "562",
+        "Value": "Níger"
+      },
+      {
+        "Id": "566",
+        "Value": "Nigeria"
+      },
+      {
+        "Id": "570",
+        "Value": "Niué"
+      },
+      {
+        "Id": "574",
+        "Value": "Norfolk, Isla"
+      },
+      {
+        "Id": "578",
+        "Value": "Noruega"
+      },
+      {
+        "Id": "540",
+        "Value": "Nueva Caledonia"
+      },
+      {
+        "Id": "554",
+        "Value": "Nueva Zelanda"
+      },
+      {
+        "Id": "086",
+        "Value": "Océano Índico, Territorio británico del"
+      },
+      {
+        "Id": "512",
+        "Value": "Omán"
+      },
+      {
+        "Id": "528",
+        "Value": "Países Bajos"
+      },
+      {
+        "Id": "586",
+        "Value": "Pakistán"
+      },
+      {
+        "Id": "585",
+        "Value": "Palau"
+      },
+      {
+        "Id": "275",
+        "Value": "Palestina, Territorio ocupado de"
+      },
+      {
+        "Id": "591",
+        "Value": "Panamá"
+      },
+      {
+        "Id": "598",
+        "Value": "Papúa Nueva Guinea"
+      },
+      {
+        "Id": "600",
+        "Value": "Paraguay"
+      },
+      {
+        "Id": "604",
+        "Value": "Perú"
+      },
+      {
+        "Id": "612",
+        "Value": "Pitcairn"
+      },
+      {
+        "Id": "258",
+        "Value": "Polinesia francesa"
+      },
+      {
+        "Id": "616",
+        "Value": "Polonia"
+      },
+      {
+        "Id": "620",
+        "Value": "Portugal"
+      },
+      {
+        "Id": "630",
+        "Value": "Puerto Rico"
+      },
+      {
+        "Id": "634",
+        "Value": "Qatar"
+      },
+      {
+        "Id": "826",
+        "Value": "Reino Unido"
+      },
+      {
+        "Id": "140",
+        "Value": "República Centro-Africana"
+      },
+      {
+        "Id": "203",
+        "Value": "República Checa"
+      },
+      {
+        "Id": "214",
+        "Value": "República Dominicana"
+      },
+      {
+        "Id": "638",
+        "Value": "Reunión"
+      },
+      {
+        "Id": "646",
+        "Value": "Ruanda"
+      },
+      {
+        "Id": "642",
+        "Value": "Rumanía"
+      },
+      {
+        "Id": "732",
+        "Value": "Sahara Occidental"
+      },
+      {
+        "Id": "090",
+        "Value": "Salomón, Islas"
+      },
+      {
+        "Id": "882",
+        "Value": "Samoa"
+      },
+      {
+        "Id": "016",
+        "Value": "Samoa Americana"
+      },
+      {
+        "Id": "652",
+        "Value": "San Bartolomé"
+      },
+      {
+        "Id": "659",
+        "Value": "San Cristóbal y Nieves"
+      },
+      {
+        "Id": "674",
+        "Value": "San Marino"
+      },
+      {
+        "Id": "663",
+        "Value": "San Martín (parte francesa)"
+      },
+      {
+        "Id": "534",
+        "Value": "San Martín (parte holandesa)"
+      },
+      {
+        "Id": "666",
+        "Value": "San Pedro y Miquelón"
+      },
+      {
+        "Id": "670",
+        "Value": "San Vicente y Granadinas"
+      },
+      {
+        "Id": "654",
+        "Value": "Santa Helena"
+      },
+      {
+        "Id": "662",
+        "Value": "Santa Lucía"
+      },
+      {
+        "Id": "336",
+        "Value": "Santa Sede (Estado de la Ciudad del Vaticano)"
+      },
+      {
+        "Id": "678",
+        "Value": "Santo Tomé y Príncipe"
+      },
+      {
+        "Id": "686",
+        "Value": "Senegal"
+      },
+      {
+        "Id": "688",
+        "Value": "Serbia"
+      },
+      {
+        "Id": "690",
+        "Value": "Seychelles"
+      },
+      {
+        "Id": "694",
+        "Value": "Sierra Leona"
+      },
+      {
+        "Id": "702",
+        "Value": "Singapur"
+      },
+      {
+        "Id": "760",
+        "Value": "Siria, República árabe"
+      },
+      {
+        "Id": "706",
+        "Value": "Somalia"
+      },
+      {
+        "Id": "144",
+        "Value": "Sri Lanka"
+      },
+      {
+        "Id": "710",
+        "Value": "Sudáfrica"
+      },
+      {
+        "Id": "729",
+        "Value": "Sudán"
+      },
+      {
+        "Id": "728",
+        "Value": "Sudán del Sur"
+      },
+      {
+        "Id": "752",
+        "Value": "Suecia"
+      },
+      {
+        "Id": "756",
+        "Value": "Suiza"
+      },
+      {
+        "Id": "740",
+        "Value": "Suriname"
+      },
+      {
+        "Id": "744",
+        "Value": "Svalbard e isla Jan Mayen"
+      },
+      {
+        "Id": "748",
+        "Value": "Swazilandia"
+      },
+      {
+        "Id": "764",
+        "Value": "Tailandia"
+      },
+      {
+        "Id": "158",
+        "Value": "Taiwan, Provincia de China"
+      },
+      {
+        "Id": "834",
+        "Value": "Tanzania, República unida de"
+      },
+      {
+        "Id": "762",
+        "Value": "Tayikistán"
+      },
+      {
+        "Id": "260",
+        "Value": "Territorios Australes franceses"
+      },
+      {
+        "Id": "626",
+        "Value": "Timor oriental"
+      },
+      {
+        "Id": "768",
+        "Value": "Togo"
+      },
+      {
+        "Id": "772",
+        "Value": "Tokelau"
+      },
+      {
+        "Id": "776",
+        "Value": "Tonga"
+      },
+      {
+        "Id": "780",
+        "Value": "Trinidad y Tobago"
+      },
+      {
+        "Id": "788",
+        "Value": "Túnez"
+      },
+      {
+        "Id": "796",
+        "Value": "Turcos y Caicos, Islas"
+      },
+      {
+        "Id": "795",
+        "Value": "Turkmenistán"
+      },
+      {
+        "Id": "792",
+        "Value": "Turquía"
+      },
+      {
+        "Id": "798",
+        "Value": "Tuvalu"
+      },
+      {
+        "Id": "804",
+        "Value": "Ucrania"
+      },
+      {
+        "Id": "800",
+        "Value": "Uganda"
+      },
+      {
+        "Id": "581",
+        "Value": "Ultramarinas de los Estados Unidos, Islas"
+      },
+      {
+        "Id": "860",
+        "Value": "Uzbekistán"
+      },
+      {
+        "Id": "548",
+        "Value": "Vanuatu"
+      },
+      {
+        "Id": "862",
+        "Value": "Venezuela"
+      },
+      {
+        "Id": "704",
+        "Value": "Vietnam"
+      },
+      {
+        "Id": "850",
+        "Value": "Vírgenes (USA), Islas"
+      },
+      {
+        "Id": "092",
+        "Value": "Vírgenes británicas, Islas"
+      },
+      {
+        "Id": "876",
+        "Value": "Wallis y Futuna"
+      },
+      {
+        "Id": "887",
+        "Value": "Yemen"
+      },
+      {
+        "Id": "262",
+        "Value": "Yibuti"
+      },
+      {
+        "Id": "894",
+        "Value": "Zambia"
+      },
+      {
+        "Id": "716",
+        "Value": "Zimbabwe"
+      }
+    ]
+  },
+  "adgr_dscargarestadocivil": {
+    "description": "Estado civil",
+    "endpoint": "adgr_dscargarestadocivil",
+    "query_suffix": "",
+    "elem_id": 57,
+    "status": 200,
+    "count": 5,
+    "data": [
+      {
+        "Id": "CASADO",
+        "Value": "Casado"
+      },
+      {
+        "Id": "CSB",
+        "Value": "Casado c/ sep. de bienes"
+      },
+      {
+        "Id": "DIVORCIADO",
+        "Value": "Divorciado"
+      },
+      {
+        "Id": "SOLTERO",
+        "Value": "Soltero"
+      },
+      {
+        "Id": "VIUDO",
+        "Value": "Viudo"
+      }
+    ]
+  },
+  "adgr_dscargardepartamento": {
+    "description": "Departamentos",
+    "endpoint": "adgr_dscargardepartamento",
+    "query_suffix": "",
+    "elem_id": 17,
+    "status": 200,
+    "count": 20,
+    "data": [
+      {
+        "Id": "",
+        "Value": "(Seleccionar)"
+      },
+      {
+        "Id": "V",
+        "Value": "MONTEVIDEO"
+      },
+      {
+        "Id": "G",
+        "Value": "ARTIGAS"
+      },
+      {
+        "Id": "A",
+        "Value": "CANELONES"
+      },
+      {
+        "Id": "E",
+        "Value": "CERRO LARGO"
+      },
+      {
+        "Id": "L",
+        "Value": "COLONIA"
+      },
+      {
+        "Id": "Q",
+        "Value": "DURAZNO"
+      },
+      {
+        "Id": "N",
+        "Value": "FLORES"
+      },
+      {
+        "Id": "O",
+        "Value": "FLORIDA"
+      },
+      {
+        "Id": "P",
+        "Value": "LAVALLEJA"
+      },
+      {
+        "Id": "B",
+        "Value": "MALDONADO"
+      },
+      {
+        "Id": "I",
+        "Value": "PAYSANDU"
+      },
+      {
+        "Id": "J",
+        "Value": "RIO NEGRO"
+      },
+      {
+        "Id": "F",
+        "Value": "RIVERA"
+      },
+      {
+        "Id": "C",
+        "Value": "ROCHA"
+      },
+      {
+        "Id": "H",
+        "Value": "SALTO"
+      },
+      {
+        "Id": "M",
+        "Value": "SAN JOSE"
+      },
+      {
+        "Id": "K",
+        "Value": "SORIANO"
+      },
+      {
+        "Id": "R",
+        "Value": "TACUAREMBO"
+      },
+      {
+        "Id": "D",
+        "Value": "TREINTA Y TRES"
+      }
+    ]
+  },
+  "adgr_dscargarlocalidades(V)": {
+    "description": "Localidades (Montevideo)",
+    "endpoint": "adgr_dscargarlocalidades",
+    "query_suffix": "V,",
+    "elem_id": 16,
+    "status": 200,
+    "count": 2,
+    "data": [
+      {
+        "Id": "",
+        "Value": "(Seleccionar)"
+      },
+      {
+        "Id": "AA",
+        "Value": "MONTEVIDEO"
+      }
+    ]
+  },
+  "adgr_dscargarlocalidades(A)": {
+    "description": "Localidades (Canelones)",
+    "endpoint": "adgr_dscargarlocalidades",
+    "query_suffix": "A,",
+    "elem_id": 16,
+    "status": 200,
+    "count": 69,
+    "data": [
+      {
+        "Id": "",
+        "Value": "(Seleccionar)"
+      },
+      {
+        "Id": "CO",
+        "Value": "AGUAS CORRIENT"
+      },
+      {
+        "Id": "QW",
+        "Value": "ARAMINDA"
+      },
+      {
+        "Id": "PK",
+        "Value": "ATLANTIDA"
+      },
+      {
+        "Id": "RX",
+        "Value": "B.HORIZONTE"
+      },
+      {
+        "Id": "VV",
+        "Value": "BAL.ARGENTINO"
+      },
+      {
+        "Id": "NB",
+        "Value": "BARROS BLANCOS"
+      },
+      {
+        "Id": "QX",
+        "Value": "BIARRITZ"
+      },
+      {
+        "Id": "RO",
+        "Value": "BOLIVAR"
+      },
+      {
+        "Id": "WA",
+        "Value": "C. DE LA COSTA"
+      },
+      {
+        "Id": "KO",
+        "Value": "CANELON CHICO"
+      },
+      {
+        "Id": "AA",
+        "Value": "CANELONES"
+      },
+      {
+        "Id": "QN",
+        "Value": "CAPILLA CELLA"
+      },
+      {
+        "Id": "CA",
+        "Value": "CERRILLOS"
+      },
+      {
+        "Id": "PP",
+        "Value": "COLONIA NICOLI"
+      },
+      {
+        "Id": "RW",
+        "Value": "COSTA AZUL"
+      },
+      {
+        "Id": "QY",
+        "Value": "CUCHILLA ALTA"
+      },
+      {
+        "Id": "BO",
+        "Value": "EMPALME"
+      },
+      {
+        "Id": "NC",
+        "Value": "EMPALME OLMOS"
+      },
+      {
+        "Id": "LN",
+        "Value": "EST. FLORESTA"
+      },
+      {
+        "Id": "PR",
+        "Value": "EST.ATLANTIDA"
+      },
+      {
+        "Id": "HO",
+        "Value": "EST.CASTELLANO"
+      },
+      {
+        "Id": "PS",
+        "Value": "EST.P.AFILAR"
+      },
+      {
+        "Id": "QQ",
+        "Value": "ESTACION MIGUE"
+      },
+      {
+        "Id": "QS",
+        "Value": "ESTACION MONTE"
+      },
+      {
+        "Id": "ND",
+        "Value": "ESTACION OLMOS"
+      },
+      {
+        "Id": "RQ",
+        "Value": "ESTACION TAPIA"
+      },
+      {
+        "Id": "PV",
+        "Value": "FORTIN S.ROSA"
+      },
+      {
+        "Id": "RY",
+        "Value": "GUAZUVIRA"
+      },
+      {
+        "Id": "RT",
+        "Value": "JAUREGUIBERRY"
+      },
+      {
+        "Id": "AO",
+        "Value": "JOANICO"
+      },
+      {
+        "Id": "RF",
+        "Value": "JOAQUIN SUAREZ"
+      },
+      {
+        "Id": "RI",
+        "Value": "LA FLORESTA"
+      },
+      {
+        "Id": "PQ",
+        "Value": "LA MONTAÑESA"
+      },
+      {
+        "Id": "EA",
+        "Value": "LA PAZ"
+      },
+      {
+        "Id": "QT",
+        "Value": "LA TUNA"
+      },
+      {
+        "Id": "DA",
+        "Value": "LAS PIEDRAS"
+      },
+      {
+        "Id": "PY",
+        "Value": "LAS TOSCAS"
+      },
+      {
+        "Id": "QU",
+        "Value": "LOS TITANES"
+      },
+      {
+        "Id": "PU",
+        "Value": "MARINDIA"
+      },
+      {
+        "Id": "EO",
+        "Value": "MARIO FERREIRA"
+      },
+      {
+        "Id": "QC",
+        "Value": "MIGUES"
+      },
+      {
+        "Id": "QE",
+        "Value": "MONTES"
+      },
+      {
+        "Id": "OX",
+        "Value": "NEPTUNIA"
+      },
+      {
+        "Id": "NR",
+        "Value": "P. DEL TORO"
+      },
+      {
+        "Id": "NA",
+        "Value": "PANDO"
+      },
+      {
+        "Id": "RR",
+        "Value": "PEDRERA"
+      },
+      {
+        "Id": "OY",
+        "Value": "PINAMAR"
+      },
+      {
+        "Id": "OZ",
+        "Value": "PINE PARK"
+      },
+      {
+        "Id": "PM",
+        "Value": "PQUE DEL PLATA"
+      },
+      {
+        "Id": "KA",
+        "Value": "PROGRESO"
+      },
+      {
+        "Id": "RD",
+        "Value": "RUTA 7 KM 45"
+      },
+      {
+        "Id": "PG",
+        "Value": "SALINAS"
+      },
+      {
+        "Id": "JA",
+        "Value": "SAN ANTONIO"
+      },
+      {
+        "Id": "HA",
+        "Value": "SAN BAUTISTA"
+      },
+      {
+        "Id": "RC",
+        "Value": "SAN JACINTO"
+      },
+      {
+        "Id": "RU",
+        "Value": "SAN LUIS"
+      },
+      {
+        "Id": "GA",
+        "Value": "SAN RAMON"
+      },
+      {
+        "Id": "QZ",
+        "Value": "SANTA ANA"
+      },
+      {
+        "Id": "BA",
+        "Value": "SANTA LUCIA"
+      },
+      {
+        "Id": "IA",
+        "Value": "SANTA ROSA"
+      },
+      {
+        "Id": "FA",
+        "Value": "SAUCE"
+      },
+      {
+        "Id": "QB",
+        "Value": "SOCA"
+      },
+      {
+        "Id": "EP",
+        "Value": "SOFIA SANTOS"
+      },
+      {
+        "Id": "QV",
+        "Value": "STA.LUCIA ESTE"
+      },
+      {
+        "Id": "RA",
+        "Value": "TALA"
+      },
+      {
+        "Id": "SA",
+        "Value": "TOLEDO"
+      },
+      {
+        "Id": "FO",
+        "Value": "TOLEDO CHICO"
+      },
+      {
+        "Id": "NS",
+        "Value": "TOTORAL SAUCE"
+      }
+    ]
+  },
+  "adgr_dscargarlocalidades(B)": {
+    "description": "Localidades (Maldonado)",
+    "endpoint": "adgr_dscargarlocalidades",
+    "query_suffix": "B,",
+    "elem_id": 16,
+    "status": 200,
+    "count": 43,
+    "data": [
+      {
+        "Id": "",
+        "Value": "(Seleccionar)"
+      },
+      {
+        "Id": "IA",
+        "Value": "AIGUA"
+      },
+      {
+        "Id": "OG",
+        "Value": "BALN.SOLIS"
+      },
+      {
+        "Id": "NW",
+        "Value": "BAR PORTEZUELO"
+      },
+      {
+        "Id": "OU",
+        "Value": "BELLA VISTA"
+      },
+      {
+        "Id": "FI",
+        "Value": "BUENOS AIRES"
+      },
+      {
+        "Id": "NO",
+        "Value": "CERROS AZULES"
+      },
+      {
+        "Id": "GG",
+        "Value": "EDEN ROCK"
+      },
+      {
+        "Id": "FH",
+        "Value": "EL CHORRO"
+      },
+      {
+        "Id": "MS",
+        "Value": "EL EDEN"
+      },
+      {
+        "Id": "EG",
+        "Value": "EL TESORO"
+      },
+      {
+        "Id": "OO",
+        "Value": "EST. SOLIS"
+      },
+      {
+        "Id": "OR",
+        "Value": "EST.LAS FLORES"
+      },
+      {
+        "Id": "HH",
+        "Value": "FARO J.IGNACIO"
+      },
+      {
+        "Id": "JA",
+        "Value": "GARZON"
+      },
+      {
+        "Id": "ON",
+        "Value": "GRIO.AZNAREZ"
+      },
+      {
+        "Id": "KA",
+        "Value": "HIPODROMO"
+      },
+      {
+        "Id": "NP",
+        "Value": "KILOMETRO 110"
+      },
+      {
+        "Id": "OP",
+        "Value": "KILOMETRO 84"
+      },
+      {
+        "Id": "EH",
+        "Value": "LA BARRA"
+      },
+      {
+        "Id": "NQ",
+        "Value": "LA CAPUERA"
+      },
+      {
+        "Id": "HG",
+        "Value": "LA JUANITA"
+      },
+      {
+        "Id": "OV",
+        "Value": "LAS FLORES"
+      },
+      {
+        "Id": "BZ",
+        "Value": "LOS TALAS"
+      },
+      {
+        "Id": "AA",
+        "Value": "MALDONADO"
+      },
+      {
+        "Id": "FG",
+        "Value": "MANANTIALES"
+      },
+      {
+        "Id": "OQ",
+        "Value": "NVA.CARRARA"
+      },
+      {
+        "Id": "NU",
+        "Value": "OCEAN PARK"
+      },
+      {
+        "Id": "NN",
+        "Value": "PAN DE AZUCAR"
+      },
+      {
+        "Id": "NG",
+        "Value": "PIRIAPOLIS"
+      },
+      {
+        "Id": "OY",
+        "Value": "PLAYA GRANDE"
+      },
+      {
+        "Id": "OX",
+        "Value": "PLAYA HERMOSA"
+      },
+      {
+        "Id": "OW",
+        "Value": "PLAYA VERDE"
+      },
+      {
+        "Id": "CG",
+        "Value": "PUNTA BALLENA"
+      },
+      {
+        "Id": "NY",
+        "Value": "PUNTA COLORADA"
+      },
+      {
+        "Id": "BG",
+        "Value": "PUNTA DEL ESTE"
+      },
+      {
+        "Id": "NX",
+        "Value": "PUNTA NEGRA"
+      },
+      {
+        "Id": "DA",
+        "Value": "SAN CARLOS"
+      },
+      {
+        "Id": "FJ",
+        "Value": "SAN VICENTE"
+      },
+      {
+        "Id": "GH",
+        "Value": "SANTA MONICA"
+      },
+      {
+        "Id": "NV",
+        "Value": "SCE.PORTEZUELO"
+      },
+      {
+        "Id": "NR",
+        "Value": "SIERRAS TIROL"
+      },
+      {
+        "Id": "NS",
+        "Value": "VENTIMIGLIA"
+      }
+    ]
+  },
+  "adgr_6462_dscargarnaturalezajuridica": {
+    "description": "Naturaleza jurídica",
+    "endpoint": "adgr_6462_dscargarnaturalezajuridica",
+    "query_suffix": "",
+    "elem_id": 1736,
+    "status": 200,
+    "count": 3,
+    "data": [
+      {
+        "Id": "7",
+        "Value": "DOMINIO PLENO"
+      },
+      {
+        "Id": "8",
+        "Value": "NUDA PROPIEDAD"
+      },
+      {
+        "Id": "11",
+        "Value": "USUFRUCTO"
+      }
+    ]
+  },
+  "adgr_6462_dscargartiposintervinientesporactopers(RA@AUT@A56)": {
+    "description": "Tipos intervinientes COMPRAVENTA",
+    "endpoint": "adgr_6462_dscargartiposintervinientesporactopers",
+    "query_suffix": "RA@AUT@A56,",
+    "elem_id": 1735,
+    "status": 500,
+    "count": 531,
+    "data": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>500 Internal Server Error</title>\n</head><body>\n<h1>Internal Server Error</h1>\n<p>The server encountered an internal error or\nmisconfiguration and was unable to complete\nyour request.</p>\n<p>Please contact the server administrator at \n soporte@dgr.gub.uy to inform them of the time this error occurred,\n and the actions you performed just before this error.</p>\n<p>More information about this error may be available\nin the server error log.</p>\n</body></html>\n"
+  },
+  "adgr_6462_dscargaractos(CO)": {
+    "description": "Actos (búsqueda CO)",
+    "endpoint": "adgr_6462_dscargaractos",
+    "query_suffix": "CO",
+    "elem_id": 1728,
+    "status": 200,
+    "count": 4,
+    "data": [
+      {
+        "Id": "COMPRAVENTA ALTA",
+        "Value": "COMPRAVENTA ALTA"
+      },
+      {
+        "Id": "DACION EN PAGO ALTA",
+        "Value": "DACION EN PAGO ALTA"
+      },
+      {
+        "Id": "LEASING ALTA",
+        "Value": "LEASING ALTA"
+      },
+      {
+        "Id": "PRENDA ALTA",
+        "Value": "PRENDA ALTA"
+      }
+    ]
+  },
+  "adgr_6462_dscargaractos": {
+    "description": "Actos (todos)",
+    "endpoint": "adgr_6462_dscargaractos",
+    "query_suffix": "",
+    "elem_id": 1728,
+    "status": 200,
+    "count": 4,
+    "data": [
+      {
+        "Id": "COMPRAVENTA ALTA",
+        "Value": "COMPRAVENTA ALTA"
+      },
+      {
+        "Id": "DACION EN PAGO ALTA",
+        "Value": "DACION EN PAGO ALTA"
+      },
+      {
+        "Id": "LEASING ALTA",
+        "Value": "LEASING ALTA"
+      },
+      {
+        "Id": "PRENDA ALTA",
+        "Value": "PRENDA ALTA"
+      }
+    ]
+  },
+  "adgr_6462_dscargarmarcasvehiculo": {
+    "description": "Marcas vehículos",
+    "endpoint": "adgr_6462_dscargarmarcasvehiculo",
+    "query_suffix": "",
+    "elem_id": 1683,
+    "status": 200,
+    "count": 211,
+    "data": [
+      {
+        "Id": "175",
+        "Value": "AEOLUS"
+      },
+      {
+        "Id": "169",
+        "Value": "AGRALE"
+      },
+      {
+        "Id": "1",
+        "Value": "ALEKO"
+      },
+      {
+        "Id": "2",
+        "Value": "ALFA ROMEO"
+      },
+      {
+        "Id": "3",
+        "Value": "ANCHI"
+      },
+      {
+        "Id": "4",
+        "Value": "APOLO"
+      },
+      {
+        "Id": "5",
+        "Value": "ARO"
+      },
+      {
+        "Id": "6",
+        "Value": "ASAKI"
+      },
+      {
+        "Id": "7",
+        "Value": "ASIA"
+      },
+      {
+        "Id": "8",
+        "Value": "ASTON MARTIN"
+      },
+      {
+        "Id": "9",
+        "Value": "AUDI"
+      },
+      {
+        "Id": "173",
+        "Value": "AUSTIN"
+      },
+      {
+        "Id": "192",
+        "Value": "AVIA"
+      },
+      {
+        "Id": "10",
+        "Value": "BACCIO"
+      },
+      {
+        "Id": "214",
+        "Value": "BAIC YINXIANG"
+      },
+      {
+        "Id": "168",
+        "Value": "BEDFORD"
+      },
+      {
+        "Id": "11",
+        "Value": "BEIJING"
+      },
+      {
+        "Id": "223",
+        "Value": "BENTLEY"
+      },
+      {
+        "Id": "12",
+        "Value": "BMW"
+      },
+      {
+        "Id": "13",
+        "Value": "BOGNOR"
+      },
+      {
+        "Id": "14",
+        "Value": "BRILLIANCE"
+      },
+      {
+        "Id": "15",
+        "Value": "BUGGY"
+      },
+      {
+        "Id": "16",
+        "Value": "BUICK"
+      },
+      {
+        "Id": "17",
+        "Value": "BULLTRA"
+      },
+      {
+        "Id": "18",
+        "Value": "BYD"
+      },
+      {
+        "Id": "19",
+        "Value": "CADILLAC"
+      },
+      {
+        "Id": "20",
+        "Value": "CARRYALL"
+      },
+      {
+        "Id": "21",
+        "Value": "CATERPILLAR"
+      },
+      {
+        "Id": "163",
+        "Value": "CHANA"
+      },
+      {
+        "Id": "22",
+        "Value": "CHANGAN"
+      },
+      {
+        "Id": "23",
+        "Value": "CHANGE"
+      },
+      {
+        "Id": "24",
+        "Value": "CHANGFEI"
+      },
+      {
+        "Id": "25",
+        "Value": "CHANGHE"
+      },
+      {
+        "Id": "26",
+        "Value": "CHERY"
+      },
+      {
+        "Id": "190",
+        "Value": "CHEVETTE"
+      },
+      {
+        "Id": "27",
+        "Value": "CHEVROLET"
+      },
+      {
+        "Id": "28",
+        "Value": "CHRYSLER"
+      },
+      {
+        "Id": "29",
+        "Value": "CITROEN"
+      },
+      {
+        "Id": "30",
+        "Value": "CLUB CAR"
+      },
+      {
+        "Id": "230",
+        "Value": "COMMER"
+      },
+      {
+        "Id": "31",
+        "Value": "DACIA"
+      },
+      {
+        "Id": "32",
+        "Value": "DAELIM"
+      },
+      {
+        "Id": "33",
+        "Value": "DAEWOO"
+      },
+      {
+        "Id": "34",
+        "Value": "DAIHATSU"
+      },
+      {
+        "Id": "35",
+        "Value": "DFM"
+      },
+      {
+        "Id": "166",
+        "Value": "DFSK"
+      },
+      {
+        "Id": "36",
+        "Value": "DODGE"
+      },
+      {
+        "Id": "37",
+        "Value": "DONFENG"
+      },
+      {
+        "Id": "38",
+        "Value": "DONG FENG"
+      },
+      {
+        "Id": "39",
+        "Value": "E ZONE"
+      },
+      {
+        "Id": "205",
+        "Value": "EBRO"
+      },
+      {
+        "Id": "40",
+        "Value": "EFFA"
+      },
+      {
+        "Id": "41",
+        "Value": "ESPIRIT"
+      },
+      {
+        "Id": "165",
+        "Value": "ESSEX"
+      },
+      {
+        "Id": "216",
+        "Value": "FARGO"
+      },
+      {
+        "Id": "42",
+        "Value": "FAW"
+      },
+      {
+        "Id": "43",
+        "Value": "FERRARI"
+      },
+      {
+        "Id": "44",
+        "Value": "FIAT"
+      },
+      {
+        "Id": "45",
+        "Value": "FORD"
+      },
+      {
+        "Id": "46",
+        "Value": "FOTON"
+      },
+      {
+        "Id": "213",
+        "Value": "FRIEGHTLINER"
+      },
+      {
+        "Id": "47",
+        "Value": "FSO"
+      },
+      {
+        "Id": "48",
+        "Value": "FUQI"
+      },
+      {
+        "Id": "218",
+        "Value": "FUSO"
+      },
+      {
+        "Id": "49",
+        "Value": "GAZELLE"
+      },
+      {
+        "Id": "50",
+        "Value": "GEELY"
+      },
+      {
+        "Id": "51",
+        "Value": "GENESIS"
+      },
+      {
+        "Id": "52",
+        "Value": "GMC"
+      },
+      {
+        "Id": "54",
+        "Value": "GONOW"
+      },
+      {
+        "Id": "55",
+        "Value": "GRANDTIGER"
+      },
+      {
+        "Id": "56",
+        "Value": "GREAT WALL"
+      },
+      {
+        "Id": "174",
+        "Value": "GRUMETT"
+      },
+      {
+        "Id": "57",
+        "Value": "GWM"
+      },
+      {
+        "Id": "58",
+        "Value": "HAFEI"
+      },
+      {
+        "Id": "59",
+        "Value": "HAIMA"
+      },
+      {
+        "Id": "60",
+        "Value": "HERO PUCH"
+      },
+      {
+        "Id": "61",
+        "Value": "HIGER"
+      },
+      {
+        "Id": "222",
+        "Value": "HILLMAN"
+      },
+      {
+        "Id": "62",
+        "Value": "HOLDEN"
+      },
+      {
+        "Id": "63",
+        "Value": "HONDA"
+      },
+      {
+        "Id": "177",
+        "Value": "HOWO"
+      },
+      {
+        "Id": "64",
+        "Value": "HUAYANG"
+      },
+      {
+        "Id": "65",
+        "Value": "HUMMER"
+      },
+      {
+        "Id": "66",
+        "Value": "HYUNDAI"
+      },
+      {
+        "Id": "195",
+        "Value": "INDIO"
+      },
+      {
+        "Id": "67",
+        "Value": "INFINITI"
+      },
+      {
+        "Id": "68",
+        "Value": "INTERNATIONAL"
+      },
+      {
+        "Id": "69",
+        "Value": "ISUZU"
+      },
+      {
+        "Id": "70",
+        "Value": "IVECO"
+      },
+      {
+        "Id": "71",
+        "Value": "IZH"
+      },
+      {
+        "Id": "72",
+        "Value": "JAC"
+      },
+      {
+        "Id": "73",
+        "Value": "JAGUAR"
+      },
+      {
+        "Id": "74",
+        "Value": "JBC"
+      },
+      {
+        "Id": "75",
+        "Value": "JEEP"
+      },
+      {
+        "Id": "219",
+        "Value": "JETOUR"
+      },
+      {
+        "Id": "76",
+        "Value": "JIANSHE"
+      },
+      {
+        "Id": "77",
+        "Value": "JINBEI"
+      },
+      {
+        "Id": "78",
+        "Value": "JMC"
+      },
+      {
+        "Id": "79",
+        "Value": "JOHN DEERE"
+      },
+      {
+        "Id": "228",
+        "Value": "KARRY"
+      },
+      {
+        "Id": "80",
+        "Value": "KIA"
+      },
+      {
+        "Id": "81",
+        "Value": "KIN"
+      },
+      {
+        "Id": "82",
+        "Value": "KINGS"
+      },
+      {
+        "Id": "83",
+        "Value": "KINGSTAR"
+      },
+      {
+        "Id": "84",
+        "Value": "KUBOTA"
+      },
+      {
+        "Id": "85",
+        "Value": "LADA"
+      },
+      {
+        "Id": "86",
+        "Value": "LANCIA"
+      },
+      {
+        "Id": "87",
+        "Value": "LAND ROVER"
+      },
+      {
+        "Id": "88",
+        "Value": "LEXUS"
+      },
+      {
+        "Id": "204",
+        "Value": "LEYLAND"
+      },
+      {
+        "Id": "211",
+        "Value": "LIAZ"
+      },
+      {
+        "Id": "89",
+        "Value": "LIFAN"
+      },
+      {
+        "Id": "90",
+        "Value": "LIMING"
+      },
+      {
+        "Id": "91",
+        "Value": "LINCOLN"
+      },
+      {
+        "Id": "92",
+        "Value": "LOTUS"
+      },
+      {
+        "Id": "197",
+        "Value": "MACK"
+      },
+      {
+        "Id": "93",
+        "Value": "MAESTRO"
+      },
+      {
+        "Id": "94",
+        "Value": "MAHINDRA"
+      },
+      {
+        "Id": "172",
+        "Value": "MAN"
+      },
+      {
+        "Id": "203",
+        "Value": "MARINA"
+      },
+      {
+        "Id": "179",
+        "Value": "MARUTI"
+      },
+      {
+        "Id": "95",
+        "Value": "MASERATI"
+      },
+      {
+        "Id": "96",
+        "Value": "MAZDA"
+      },
+      {
+        "Id": "97",
+        "Value": "MELEX"
+      },
+      {
+        "Id": "98",
+        "Value": "MERCEDES BENZ"
+      },
+      {
+        "Id": "99",
+        "Value": "MERCURY"
+      },
+      {
+        "Id": "100",
+        "Value": "MG"
+      },
+      {
+        "Id": "101",
+        "Value": "MINI"
+      },
+      {
+        "Id": "102",
+        "Value": "MITSUBISHI"
+      },
+      {
+        "Id": "224",
+        "Value": "MOBILITY"
+      },
+      {
+        "Id": "103",
+        "Value": "MORGAN"
+      },
+      {
+        "Id": "104",
+        "Value": "MORRIS"
+      },
+      {
+        "Id": "105",
+        "Value": "MUDAN"
+      },
+      {
+        "Id": "207",
+        "Value": "NEW FUSO"
+      },
+      {
+        "Id": "106",
+        "Value": "NISSAN"
+      },
+      {
+        "Id": "107",
+        "Value": "NOBLE"
+      },
+      {
+        "Id": "108",
+        "Value": "OH 1421 L3"
+      },
+      {
+        "Id": "109",
+        "Value": "OKA"
+      },
+      {
+        "Id": "110",
+        "Value": "OLDSMOBILE"
+      },
+      {
+        "Id": "111",
+        "Value": "OLTCIT"
+      },
+      {
+        "Id": "220",
+        "Value": "OM"
+      },
+      {
+        "Id": "112",
+        "Value": "OPEL"
+      },
+      {
+        "Id": "113",
+        "Value": "ORIENT"
+      },
+      {
+        "Id": "114",
+        "Value": "OSTROVSKI"
+      },
+      {
+        "Id": "196",
+        "Value": "OVERLAND"
+      },
+      {
+        "Id": "208",
+        "Value": "PEGASSO"
+      },
+      {
+        "Id": "115",
+        "Value": "PEUGEOT"
+      },
+      {
+        "Id": "116",
+        "Value": "PIAGGIO"
+      },
+      {
+        "Id": "117",
+        "Value": "PLYMOUTH"
+      },
+      {
+        "Id": "118",
+        "Value": "POLONEZ"
+      },
+      {
+        "Id": "119",
+        "Value": "PONTIAC"
+      },
+      {
+        "Id": "120",
+        "Value": "PORSCHE"
+      },
+      {
+        "Id": "121",
+        "Value": "QQ"
+      },
+      {
+        "Id": "122",
+        "Value": "QUINGQI"
+      },
+      {
+        "Id": "217",
+        "Value": "RAM"
+      },
+      {
+        "Id": "123",
+        "Value": "RENAULT"
+      },
+      {
+        "Id": "124",
+        "Value": "ROCAR"
+      },
+      {
+        "Id": "125",
+        "Value": "ROVER"
+      },
+      {
+        "Id": "126",
+        "Value": "SAAB"
+      },
+      {
+        "Id": "127",
+        "Value": "SAILOR"
+      },
+      {
+        "Id": "128",
+        "Value": "SAMSUNG"
+      },
+      {
+        "Id": "129",
+        "Value": "SANFENG"
+      },
+      {
+        "Id": "229",
+        "Value": "SANY"
+      },
+      {
+        "Id": "130",
+        "Value": "SATURN"
+      },
+      {
+        "Id": "131",
+        "Value": "SCANIA"
+      },
+      {
+        "Id": "132",
+        "Value": "SEAT"
+      },
+      {
+        "Id": "133",
+        "Value": "SHAZHOU"
+      },
+      {
+        "Id": "134",
+        "Value": "SHINERAY"
+      },
+      {
+        "Id": "176",
+        "Value": "SIMCA"
+      },
+      {
+        "Id": "167",
+        "Value": "SIN MARCA"
+      },
+      {
+        "Id": "226",
+        "Value": "SINOTRUCK"
+      },
+      {
+        "Id": "182",
+        "Value": "SINOTRUK HOWO"
+      },
+      {
+        "Id": "135",
+        "Value": "SMA"
+      },
+      {
+        "Id": "136",
+        "Value": "SMART"
+      },
+      {
+        "Id": "137",
+        "Value": "SNGYNG"
+      },
+      {
+        "Id": "138",
+        "Value": "SR"
+      },
+      {
+        "Id": "139",
+        "Value": "SSANGYONG"
+      },
+      {
+        "Id": "187",
+        "Value": "STUDEBAKER"
+      },
+      {
+        "Id": "140",
+        "Value": "SUBARU"
+      },
+      {
+        "Id": "178",
+        "Value": "SUZU"
+      },
+      {
+        "Id": "141",
+        "Value": "SUZUKI"
+      },
+      {
+        "Id": "142",
+        "Value": "TALBOT"
+      },
+      {
+        "Id": "143",
+        "Value": "TATA"
+      },
+      {
+        "Id": "144",
+        "Value": "TAURIA"
+      },
+      {
+        "Id": "145",
+        "Value": "TAVRIA"
+      },
+      {
+        "Id": "146",
+        "Value": "TCM"
+      },
+      {
+        "Id": "189",
+        "Value": "THAMES"
+      },
+      {
+        "Id": "227",
+        "Value": "TODAY SUNSHINE"
+      },
+      {
+        "Id": "147",
+        "Value": "TONGBAO"
+      },
+      {
+        "Id": "148",
+        "Value": "TOYOTA"
+      },
+      {
+        "Id": "149",
+        "Value": "UAZ"
+      },
+      {
+        "Id": "150",
+        "Value": "UFO"
+      },
+      {
+        "Id": "151",
+        "Value": "VAZ 1111 OKA"
+      },
+      {
+        "Id": "180",
+        "Value": "VICTORY"
+      },
+      {
+        "Id": "152",
+        "Value": "VILLAGER"
+      },
+      {
+        "Id": "153",
+        "Value": "VINCE"
+      },
+      {
+        "Id": "154",
+        "Value": "VOLKSWAGEN"
+      },
+      {
+        "Id": "155",
+        "Value": "VOLVO"
+      },
+      {
+        "Id": "170",
+        "Value": "WILLYS"
+      },
+      {
+        "Id": "156",
+        "Value": "WULING"
+      },
+      {
+        "Id": "157",
+        "Value": "XINKAI"
+      },
+      {
+        "Id": "158",
+        "Value": "YANPAI"
+      },
+      {
+        "Id": "159",
+        "Value": "YASUKI"
+      },
+      {
+        "Id": "212",
+        "Value": "YCACO"
+      },
+      {
+        "Id": "201",
+        "Value": "YUEJIN"
+      },
+      {
+        "Id": "164",
+        "Value": "YUTONG"
+      },
+      {
+        "Id": "160",
+        "Value": "ZAP"
+      },
+      {
+        "Id": "171",
+        "Value": "ZHONGTONG"
+      },
+      {
+        "Id": "209",
+        "Value": "ZNA"
+      },
+      {
+        "Id": "161",
+        "Value": "ZOTYE"
+      },
+      {
+        "Id": "162",
+        "Value": "ZXAUTO"
+      }
+    ]
+  },
+  "adgr_6462_dscargartiposvehiculo": {
+    "description": "Tipos vehículos",
+    "endpoint": "adgr_6462_dscargartiposvehiculo",
+    "query_suffix": "",
+    "elem_id": 1677,
+    "status": 200,
+    "count": 42,
+    "data": [
+      {
+        "Id": "11",
+        "Value": "AMBULANCIA"
+      },
+      {
+        "Id": "1",
+        "Value": "AUTO"
+      },
+      {
+        "Id": "12",
+        "Value": "BLINDADO"
+      },
+      {
+        "Id": "13",
+        "Value": "BUGGY"
+      },
+      {
+        "Id": "14",
+        "Value": "CABINA EXTENDIDA"
+      },
+      {
+        "Id": "15",
+        "Value": "CABRIOLET"
+      },
+      {
+        "Id": "2",
+        "Value": "CAMION"
+      },
+      {
+        "Id": "16",
+        "Value": "CAMION - C/GRUA"
+      },
+      {
+        "Id": "17",
+        "Value": "CAMION - TANQUE BAROMETRICO"
+      },
+      {
+        "Id": "18",
+        "Value": "CAMION C/VOLCADORA"
+      },
+      {
+        "Id": "19",
+        "Value": "CAMION CISTERNA"
+      },
+      {
+        "Id": "20",
+        "Value": "CAMION CON GUINCHE"
+      },
+      {
+        "Id": "21",
+        "Value": "CAMION CON HORMIGONERA"
+      },
+      {
+        "Id": "22",
+        "Value": "CAMION CON REGADORA"
+      },
+      {
+        "Id": "23",
+        "Value": "CAMION FURGON"
+      },
+      {
+        "Id": "24",
+        "Value": "CAMION FURGON TERMICO"
+      },
+      {
+        "Id": "25",
+        "Value": "CAMION TANQUE"
+      },
+      {
+        "Id": "26",
+        "Value": "CAMION TRACTOR"
+      },
+      {
+        "Id": "3",
+        "Value": "CAMIONETA"
+      },
+      {
+        "Id": "28",
+        "Value": "CAMIONETA FURGON"
+      },
+      {
+        "Id": "29",
+        "Value": "CAMIONETA PICK UP"
+      },
+      {
+        "Id": "4",
+        "Value": "CASA ROD C/MOTOR"
+      },
+      {
+        "Id": "30",
+        "Value": "CONVERTIBLE"
+      },
+      {
+        "Id": "31",
+        "Value": "COUPE"
+      },
+      {
+        "Id": "27",
+        "Value": "DOBLE CABINA"
+      },
+      {
+        "Id": "32",
+        "Value": "DOBLE FAETON"
+      },
+      {
+        "Id": "9",
+        "Value": "FURGON"
+      },
+      {
+        "Id": "33",
+        "Value": "FURGON BLINDADO"
+      },
+      {
+        "Id": "34",
+        "Value": "HATCH"
+      },
+      {
+        "Id": "35",
+        "Value": "JEEP"
+      },
+      {
+        "Id": "36",
+        "Value": "LIMOUSINE"
+      },
+      {
+        "Id": "37",
+        "Value": "MICRO BUS"
+      },
+      {
+        "Id": "38",
+        "Value": "MINIBUS"
+      },
+      {
+        "Id": "39",
+        "Value": "MOTO COUPE"
+      },
+      {
+        "Id": "5",
+        "Value": "OMNIBUS"
+      },
+      {
+        "Id": "40",
+        "Value": "PICK UP"
+      },
+      {
+        "Id": "41",
+        "Value": "RURAL"
+      },
+      {
+        "Id": "42",
+        "Value": "SEDAN"
+      },
+      {
+        "Id": "0",
+        "Value": "SIN TIPO"
+      },
+      {
+        "Id": "45",
+        "Value": "SUV"
+      },
+      {
+        "Id": "43",
+        "Value": "TODO TERRENO"
+      },
+      {
+        "Id": "44",
+        "Value": "VOITURETTE"
+      }
+    ]
+  },
+  "adgr_6462_dscargarcombustiblesvehiculo": {
+    "description": "Combustibles",
+    "endpoint": "adgr_6462_dscargarcombustiblesvehiculo",
+    "query_suffix": "",
+    "elem_id": 1700,
+    "status": 405,
+    "count": 221,
+    "data": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>405 Method Not Allowed</title>\n</head><body>\n<h1>Method Not Allowed</h1>\n<p>The requested method POST is not allowed for this URL.</p>\n</body></html>\n"
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "catalog_endpoints": {
+    "adgr_6462_dscargaractos": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "CO,gx-no-cache=1774615722917",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1728,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 54,
+      "response_preview": "[{\"Id\":\"COMPRAVENTA ALTA\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+    },
+    "adgr_6462_cargaractosmismopaso": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "Ingresar%20documento,906_1,RA@AUT@A56,,,gx-no-cache=1774615725208",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1730,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 48,
+      "response_preview": "[{\"Id\":\"RA@AUT@A56\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+    },
+    "adgr_minutacargarpersonasmismopaso": {
+      "step": "Paso-4",
+      "status": 200,
+      "query": "F,908_1,,gx-no-cache=1774615824043",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1732,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 111,
+      "response_preview": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+    },
+    "adgr_dscargarpaises": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "gx-no-cache=1774615764025",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 629,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 8822,
+      "response_preview": "[{\"Id\":\"858\",\"Value\":\"Uruguay\"},{\"Id\":\"004\",\"Value\":\"Afganistán\"},{\"Id\":\"008\",\"Value\":\"Albania\"},{\"Id\":\"276\",\"Value\":\"Alemania\"},{\"Id\":\"020\",\"Value\":\"Andorra\"},{\"Id\":\"024\",\"Value\":\"Angola\"},{\"Id\":\"660\",\"Value\":\"Anguila\"},{\"Id\":\"010\",\"Value\":\"Antártida\"},{\"Id\":\"028\",\"Value\":\"Antigua y Barbuda\"},{\"Id\":\"530\",\"Value\":\"Antillas Neerlandesas\"},{\"Id\":\"682\",\"Value\":\"Arabia Saudí\"},{\"Id\":\"012\",\"Value\":\"Argel\"},{\"Id\":\"032\",\"Value\":\"Argentina\"},{\"Id\":\"051\",\"Value\":\"Armenia\"},{\"Id\":\"533\",\"Value\":\"Aruba\"},{\""
+    },
+    "adgr_cargarnacionalidades": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "gx-no-cache=1774615764132",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1459,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 8858,
+      "response_preview": "[{\"Id\":\"858\",\"Value\":\"Uruguay\"},{\"Id\":\"000\",\"Value\":\"No se conoce\"},{\"Id\":\"004\",\"Value\":\"Afganistán\"},{\"Id\":\"008\",\"Value\":\"Albania\"},{\"Id\":\"276\",\"Value\":\"Alemania\"},{\"Id\":\"020\",\"Value\":\"Andorra\"},{\"Id\":\"024\",\"Value\":\"Angola\"},{\"Id\":\"660\",\"Value\":\"Anguila\"},{\"Id\":\"010\",\"Value\":\"Antártida\"},{\"Id\":\"028\",\"Value\":\"Antigua y Barbuda\"},{\"Id\":\"530\",\"Value\":\"Antillas Neerlandesas\"},{\"Id\":\"682\",\"Value\":\"Arabia Saudí\"},{\"Id\":\"012\",\"Value\":\"Argel\"},{\"Id\":\"032\",\"Value\":\"Argentina\"},{\"Id\":\"051\",\"Value\":\"Armen"
+    },
+    "adgr_6462_dscargartiposintervinientesporactopers": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "RA@AUT@A56,,gx-no-cache=1774615764195",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1735,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 67,
+      "response_preview": "[{\"Id\":\"02\",\"Value\":\"ENAJENANTE\"},{\"Id\":\"11\",\"Value\":\"ADQUIRENTE\"}]"
+    },
+    "adgr_6462_dscargarnaturalezajuridica": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "gx-no-cache=1774615764307",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1736,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 104,
+      "response_preview": "[{\"Id\":\"7\",\"Value\":\"DOMINIO PLENO\"},{\"Id\":\"8\",\"Value\":\"NUDA PROPIEDAD\"},{\"Id\":\"11\",\"Value\":\"USUFRUCTO\"}]"
+    },
+    "adgr_dscargarestadocivil": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "gx-no-cache=1774615764494",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 57,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 189,
+      "response_preview": "[{\"Id\":\"CASADO\",\"Value\":\"Casado\"},{\"Id\":\"CSB\",\"Value\":\"Casado c/ sep. de bienes\"},{\"Id\":\"DIVORCIADO\",\"Value\":\"Divorciado\"},{\"Id\":\"SOLTERO\",\"Value\":\"Soltero\"},{\"Id\":\"VIUDO\",\"Value\":\"Viudo\"}]"
+    },
+    "adgr_dscargardepartamento": {
+      "step": "Paso-3",
+      "status": 200,
+      "query": "gx-no-cache=1774615764576",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 17,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 607,
+      "response_preview": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"V\",\"Value\":\"MONTEVIDEO\"},{\"Id\":\"G\",\"Value\":\"ARTIGAS\"},{\"Id\":\"A\",\"Value\":\"CANELONES\"},{\"Id\":\"E\",\"Value\":\"CERRO LARGO\"},{\"Id\":\"L\",\"Value\":\"COLONIA\"},{\"Id\":\"Q\",\"Value\":\"DURAZNO\"},{\"Id\":\"N\",\"Value\":\"FLORES\"},{\"Id\":\"O\",\"Value\":\"FLORIDA\"},{\"Id\":\"P\",\"Value\":\"LAVALLEJA\"},{\"Id\":\"B\",\"Value\":\"MALDONADO\"},{\"Id\":\"I\",\"Value\":\"PAYSANDU\"},{\"Id\":\"J\",\"Value\":\"RIO NEGRO\"},{\"Id\":\"F\",\"Value\":\"RIVERA\"},{\"Id\":\"C\",\"Value\":\"ROCHA\"},{\"Id\":\"H\",\"Value\":\"SALTO\"},{\"Id\":\"M\",\"Value\":\"S"
+    },
+    "adgr_dscargarlocalidades": {
+      "step": "Paso-4",
+      "status": 200,
+      "query": "V,,gx-no-cache=1774615840702",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 16,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 68,
+      "response_preview": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"AA\",\"Value\":\"MONTEVIDEO\"}]"
+    },
+    "adgr_6462_cargapadronespasoprevioconcatenados": {
+      "step": "Paso-5",
+      "status": 200,
+      "query": "Ingresar%20documento,,gx-no-cache=1774615886968",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1745,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 88,
+      "response_preview": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"903959934@B\",\"Value\":\"903959934 | MALDONADO\"}]"
+    },
+    "adgr_6462_cargaactospasoprevioconcatenados": {
+      "step": "Paso-5",
+      "status": 200,
+      "query": "Ingresar%20documento,,gx-no-cache=1774615887036",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1746,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 82,
+      "response_preview": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"RA@AUT@A56\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+    },
+    "adgr_minutacargarpersonaspasoprevioconcatenados": {
+      "step": "Paso-5",
+      "status": 200,
+      "query": "Ingresar%20documento,,gx-no-cache=1774615887169",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1542,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 145,
+      "response_preview": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+    },
+    "adgr_6462_precargargrillaintervinientes": {
+      "step": "Paso-5",
+      "status": 200,
+      "query": "516601,0,1748,1,0,0,,gx-no-cache=1774615887370",
+      "context": {
+        "DFFormInstId": "516601",
+        "DFFormId": 66,
+        "DFFormVer": 1,
+        "DFElemId": 1748,
+        "DFElemVer": 1,
+        "Mode": "edit"
+      },
+      "resp_size": 2797,
+      "response_preview": "[{\"Id\":\"\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Values\":[{\"Id\":\"1127_1\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"903959934@B\",\"Metadata\":[{\"Id\":\"inherit_frminsid\",\"Name\":\"inherit_frminsid\",\"Value\":\"516601\"}]},{\"Id\":\"1551_1\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"903959934 | MALDONADO\",\"Metadata\":[{\"Id\":\"inherit_frminsid\",\"Name\":\"inherit_frminsid\",\"Value\":\"516601\"}]},{\"Id\":\"1552_1\",\"Name\""
+    }
+  },
+  "execute_functions": {
+    "dgr_validaringresoactos": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_validaringresoactos,519990!66!1!1141!1!1!!1!COMPRAVENTA%20ALTA!!end",
+      "resp_size": 1,
+      "response_preview": "0"
+    },
+    "dgr_compara2elementos": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_compara2elementos,519990!66!1!1147!1!1!!COMPRAVENTA%20ALTA!IGUAL!!end",
+      "resp_size": 5,
+      "response_preview": "false"
+    },
+    "dgr_6462_obteneractocodigo": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_6462_obteneractocodigo,519990!66!1!1425!1!2!!COMPRAVENTA%20ALTA!end",
+      "resp_size": 10,
+      "response_preview": "RA@AUT@A56"
+    },
+    "dgr_6462_actoconintervinientes": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_6462_actoconintervinientes,519990!66!1!1427!1!1!!RA%40AUT%40A56!end",
+      "resp_size": 4,
+      "response_preview": "true"
+    },
+    "dgr_6462_controlcorrespondenestipulaciones": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_6462_controlcorrespondenestipulaciones,519990!66!1!1430!1!1!!906_1!RA%40AUT%40A56!!end",
+      "resp_size": 4,
+      "response_preview": "true"
+    },
+    "dgr_obtenermonedadsc": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_obtenermonedadsc,519990!66!1!1432!1!1!1!%24A!end",
+      "resp_size": 16,
+      "response_preview": "PESOS ARGENTINOS"
+    },
+    "dgr_6462_controlcorrespondecartel": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_6462_controlcorrespondecartel,519990!66!1!2015!1!1!!906_1!RA%40AUT%40A56!!end",
+      "resp_size": 0,
+      "response_preview": ""
+    },
+    "dgr_obteneractodsc": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_obteneractodsc,519990!66!1!1433!1!1!1!RA%40AUT%40A56!end",
+      "resp_size": 16,
+      "response_preview": "COMPRAVENTA ALTA"
+    },
+    "dgr_gettramiteinstidsession": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_gettramiteinstidsession,519990!66!1!992!1!1!!none!end",
+      "resp_size": 6,
+      "response_preview": "231041"
+    },
+    "dgr_dsobtenerdepartamentodesede": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_dsobtenerdepartamentodesede,519990!66!1!887!1!2!!B!end",
+      "resp_size": 1,
+      "response_preview": "B"
+    },
+    "dgr_obtenerdepartamentodsc": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_obtenerdepartamentodsc,519990!66!1!1156!1!1!!B!end",
+      "resp_size": 9,
+      "response_preview": "MALDONADO"
+    },
+    "dgr_obtenersedenombre": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_obtenersedenombre,519990!66!1!977!1!1!!B!end",
+      "resp_size": 9,
+      "response_preview": "MALDONADO"
+    },
+    "dgr_6462_tieneantecedentesmismopaso": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_6462_tieneantecedentesmismopaso,519990!66!1!1874!1!1!!471_1!end",
+      "resp_size": 5,
+      "response_preview": "false"
+    },
+    "aasignardocumentodesdegam": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "aasignardocumentodesdegam,519990!66!1!855!1!1!!end",
+      "resp_size": 8,
+      "response_preview": "47086104"
+    },
+    "dgr_6462_padronesconcatenardatosodt": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_6462_padronesconcatenardatosodt,519990!66!1!1726!1!1!!Ingresar%20documento!end",
+      "resp_size": 21,
+      "response_preview": "MALDONADO / 903959934"
+    },
+    "dgr_compara2elementosnum": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_compara2elementosnum,519990!66!1!521!1!1!!0!MAYORIGUAL!1!end",
+      "resp_size": 5,
+      "response_preview": "false"
+    },
+    "dgr_descomponerdatoconcatenadoconcoma": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_descomponerdatoconcatenadoconcoma,519990!66!1!1312!1!1!!MALDONADO%20%2F%20903959934!1!end",
+      "resp_size": 21,
+      "response_preview": "MALDONADO / 903959934"
+    },
+    "dgr_6462_validaractoconinteviniente": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_6462_validaractoconinteviniente,519990!66!1!1533!1!1!!Ingresar%20documento!end",
+      "resp_size": 4,
+      "response_preview": "true"
+    },
+    "dgr_minutacargarpersonasprecargaconcatenados": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!EDUARDO!MANUEL!858!end",
+      "resp_size": 65,
+      "response_preview": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858"
+    },
+    "dgr_documentovalidarcedulaidentidad": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_documentovalidarcedulaidentidad,519990!66!1!1457!1!1!1!!end",
+      "resp_size": 5,
+      "response_preview": "false"
+    },
+    "dgr_obtenerpaisnombre": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_obtenerpaisnombre,519990!66!1!1460!1!1!1!858!end",
+      "resp_size": 7,
+      "response_preview": "Uruguay"
+    },
+    "dgr_obteneractoenpersdsc": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_obteneractoenpersdsc,519990!66!1!1110!1!1!1!RA%40AUT%40A56!end",
+      "resp_size": 19,
+      "response_preview": "en COMPRAVENTA ALTA"
+    },
+    "dgr_obtenerestadocivildescripcion": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_obtenerestadocivildescripcion,519990!66!1!1478!1!1!1!SOLTERO!end",
+      "resp_size": 7,
+      "response_preview": "Soltero"
+    },
+    "dgr_documentovalidarrut": {
+      "step": "Paso-3",
+      "status": 200,
+      "full_query": "dgr_documentovalidarrut,519990!66!1!516!1!1!1!!end",
+      "resp_size": 4,
+      "response_preview": "true"
+    },
+    "dgr_obtenerintervinientedescripcionaut": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_obtenerintervinientedescripcionaut,519990!66!1!1122!1!1!1!02!end",
+      "resp_size": 10,
+      "response_preview": "ENAJENANTE"
+    },
+    "dgr_minutacargarpersonasprecargaconcatenadosdsc": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!49033949!EDUARDO!GOMEZ!end",
+      "resp_size": 24,
+      "response_preview": "49033949 | EDUARDO GOMEZ"
+    },
+    "dgr_obtenernaturalezajuridicadesc": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_obtenernaturalezajuridicadesc,519990!66!1!1524!1!1!1!7!end",
+      "resp_size": 13,
+      "response_preview": "DOMINIO PLENO"
+    },
+    "dgr_obtenerintervinientedescripcioninm": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_obtenerintervinientedescripcioninm,519990!66!1!1120!1!1!1!02!end",
+      "resp_size": 10,
+      "response_preview": "ENAJENANTE"
+    },
+    "dgr_personafisicaobtenernombresporci": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_personafisicaobtenernombresporci,519990!66!1!229!1!1!1!49033949!CI!end",
+      "resp_size": 71,
+      "response_preview": "EDUARDO@MANUEL@GOMEZ@MAIDANA@1995 07 08@1@EDUARDO MANUEL GOMEZ MAIDANA@"
+    },
+    "dgr_textovalidarcaracteresextranios": {
+      "step": "Paso-4",
+      "status": 200,
+      "full_query": "dgr_textovalidarcaracteresextranios,519990!66!1!1150!1!1!1!GOMEZ!end",
+      "resp_size": 4,
+      "response_preview": "true"
+    },
+    "dgr_calcularsumresmul": {
+      "step": "Paso-5",
+      "status": 200,
+      "full_query": "dgr_calcularsumresmul,519990!66!1!1006!1!1!!MULTIPLICACION!!2!0!0!end",
+      "resp_size": 1,
+      "response_preview": "0"
+    },
+    "dgr_dynformcount": {
+      "step": "Paso-5",
+      "status": 200,
+      "full_query": "dgr_dynformcount,519990!66!1!518!1!1!!906_1!none!end",
+      "resp_size": 1,
+      "response_preview": "0"
+    }
+  },
+  "workflow_endpoints": {
+    "adynformdsgetgridforminstancehomo": {
+      "step": "Paso-3",
+      "status": 200,
+      "resp_size": 8904
+    },
+    "aguardardfforminststructhttp": {
+      "step": "Paso-3",
+      "status": 200,
+      "resp_size": 0
+    },
+    "dynformexecutedynformfrontend": {
+      "step": "Paso-5",
+      "status": 200,
+      "resp_size": 15876
+    },
+    "aobtenerdfforminststructhttp": {
+      "step": "Paso-5",
+      "status": 200,
+      "resp_size": 383969
+    }
+  },
+  "new_catalog_endpoints": [
+    "adgr_6462_cargaactospasoprevioconcatenados",
+    "adgr_6462_cargapadronespasoprevioconcatenados",
+    "adgr_6462_cargaractosmismopaso",
+    "adgr_6462_dscargaractos",
+    "adgr_6462_dscargartiposintervinientesporactopers",
+    "adgr_6462_precargargrillaintervinientes",
+    "adgr_cargarnacionalidades",
+    "adgr_dscargardepartamento",
+    "adgr_dscargarestadocivil",
+    "adgr_dscargarlocalidades",
+    "adgr_dscargarpaises",
+    "adgr_minutacargarpersonasmismopaso",
+    "adgr_minutacargarpersonaspasoprevioconcatenados"
+  ],
+  "new_execute_functions": [
+    "aasignardocumentodesdegam",
+    "dgr_6462_actoconintervinientes",
+    "dgr_6462_controlcorrespondecartel",
+    "dgr_6462_controlcorrespondenestipulaciones",
+    "dgr_6462_obteneractocodigo",
+    "dgr_6462_padronesconcatenardatosodt",
+    "dgr_6462_tieneantecedentesmismopaso",
+    "dgr_6462_validaractoconinteviniente",
+    "dgr_calcularsumresmul",
+    "dgr_compara2elementos",
+    "dgr_compara2elementosnum",
+    "dgr_descomponerdatoconcatenadoconcoma",
+    "dgr_documentovalidarcedulaidentidad",
+    "dgr_documentovalidarrut",
+    "dgr_dsobtenerdepartamentodesede",
+    "dgr_dynformcount",
+    "dgr_gettramiteinstidsession",
+    "dgr_minutacargarpersonasprecargaconcatenados",
+    "dgr_minutacargarpersonasprecargaconcatenadosdsc",
+    "dgr_obteneractodsc",
+    "dgr_obteneractoenpersdsc",
+    "dgr_obtenerdepartamentodsc",
+    "dgr_obtenerestadocivildescripcion",
+    "dgr_obtenerintervinientedescripcionaut",
+    "dgr_obtenerintervinientedescripcioninm",
+    "dgr_obtenermonedadsc",
+    "dgr_obtenernaturalezajuridicadesc",
+    "dgr_obtenerpaisnombre",
+    "dgr_obtenersedenombre",
+    "dgr_personafisicaobtenernombresporci",
+    "dgr_textovalidarcaracteresextranios",
+    "dgr_validaringresoactos"
+  ],
+  "har_cookie": "",
+  "old_cookie": "",
+  "form_instance_id_har": "516601",
+  "form_instance_id_old": "515159"
+}

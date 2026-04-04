@@ -1,0 +1,18 @@
+{
+  "adgr_6462_dscargarcombustiblesvehiculo": {
+    "status": 405,
+    "error": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>405 Method Not Allowed</title>\n</head><body>\n<h1>Method Not Allowed</h1>\n<p>The requested method POST is not allowed for this URL"
+  },
+  "adgr_6462_descargarcombustiblesvehiculo": {
+    "status": 405,
+    "error": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>405 Method Not Allowed</title>\n</head><body>\n<h1>Method Not Allowed</h1>\n<p>The requested method POST is not allowed for this URL"
+  },
+  "adgr_6462_dscargarunidadcuotaparte": {
+    "status": 405,
+    "error": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>405 Method Not Allowed</title>\n</head><body>\n<h1>Method Not Allowed</h1>\n<p>The requested method POST is not allowed for this URL"
+  },
+  "adgr_6462_descargarunidadcuotaparte": {
+    "status": 405,
+    "error": "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>405 Method Not Allowed</title>\n</head><body>\n<h1>Method Not Allowed</h1>\n<p>The requested method POST is not allowed for this URL"
+  }
+}

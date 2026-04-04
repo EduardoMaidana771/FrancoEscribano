@@ -1,0 +1,16 @@
+.env
+.env.local
+.env*.local
+__pycache__/
+*.pyc
+
+# Archivos con credenciales / tokens
+run_schema.py
+token_check_*.txt
+cuota_probe_results.json
+dgr_response_raw.json
+
+# Salidas temporales de análisis
+out_adgr_*.txt
+err_adgr_*.txt
+tmp_adgr_*.cmd

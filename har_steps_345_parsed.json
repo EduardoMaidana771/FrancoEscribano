@@ -1,0 +1,2262 @@
+[
+  {
+    "step": "Paso-3",
+    "method": "GET",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformcleangroup?516601,144_1,gx-no-cache=1774615704507",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?AS,gx-no-cache=1774615708075",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 46,
+    "resp_snippet": "[{\"Id\":\"LEASING ALTA\",\"Value\":\"LEASING ALTA\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASD,gx-no-cache=1774615708165",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDA,gx-no-cache=1774615708262",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDAS,gx-no-cache=1774615708292",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDASD,gx-no-cache=1774615708319",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDASDA,gx-no-cache=1774615708460",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDASDAS,gx-no-cache=1774615708489",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDASDASD,gx-no-cache=1774615708517",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDASDASDA,gx-no-cache=1774615708672",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDASDASDAS,gx-no-cache=1774615708704",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?ASDASDASDASD,gx-no-cache=1774615708735",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?CO,gx-no-cache=1774615722917",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 54,
+    "resp_snippet": "[{\"Id\":\"COMPRAVENTA ALTA\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargaractos?COM,gx-no-cache=1774615723005",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 54,
+    "resp_snippet": "[{\"Id\":\"COMPRAVENTA ALTA\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_validaringresoactos,519990!66!1!1141!1!1!!1!COMPRAVENTA%20ALTA!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "0"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementos,519990!66!1!1147!1!1!!COMPRAVENTA%20ALTA!IGUAL!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_obteneractocodigo,519990!66!1!1425!1!2!!COMPRAVENTA%20ALTA!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 10,
+    "resp_snippet": "RA@AUT@A56"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_actoconintervinientes,519990!66!1!1427!1!1!!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_controlcorrespondenestipulaciones,519990!66!1!1430!1!1!!906_1!RA%40AUT%40A56!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1728,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformdsgetgridforminstancehomo?516601,0,144,1,0,0,,gx-no-cache=1774615725167",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":144,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 1039,
+    "resp_snippet": "[{\"Id\":\"\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Values\":[{\"Id\":\"1730_1\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Metadata\":[{\"Id\":\"inherit_frminsid\",\"Name\":\"inherit_frminsid\",\"Value\":\"516601\"}]},{\"Id\":\"146_1\",\"Name\":\"\",\"Mod"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_cargaractosmismopaso?Ingresar%20documento,906_1,RA@AUT@A56,,,gx-no-cache=1774615725208",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1730,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 48,
+    "resp_snippet": "[{\"Id\":\"RA@AUT@A56\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_cargaractosmismopaso?Ingresar%20documento,906_1,RA@AUT@A56,,,gx-no-cache=1774615725363",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1730,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 48,
+    "resp_snippet": "[{\"Id\":\"RA@AUT@A56\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenermonedadsc,519990!66!1!1432!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1420,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_controlcorrespondecartel,519990!66!1!2015!1!1!!906_1!RA%40AUT%40A56!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1420,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_cargaractosmismopaso?Ingresar%20documento,906_1,RA@AUT@A56,,,gx-no-cache=1774615725683",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1730,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 48,
+    "resp_snippet": "[{\"Id\":\"RA@AUT@A56\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_cargaractosmismopaso?Ingresar%20documento,906_1,RA@AUT@A56,,,gx-no-cache=1774615725848",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1730,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 48,
+    "resp_snippet": "[{\"Id\":\"RA@AUT@A56\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractodsc,519990!66!1!1433!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1730,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D",
+    "resp_size": 16,
+    "resp_snippet": "COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenermonedadsc,519990!66!1!1432!1!1!1!%24A!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1730,\"DFElemVer\":1,\"Mode\":\"edit\"}&906_1=%5B%5D&144_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%221730_1%22%2C%22Name%22%3A%22Acto%2A%22%2C%22Value%22%3A%22RA%40AUT%40A56%22%7D%2C%7B%22Id%22%3A%22146_1%22%2C%22Name%22%3A%22Moneda%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221432_1%22%2C%22Name%22%3A%22Moneda%20impresion%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%22147_1%22%2C%22Name",
+    "resp_size": 16,
+    "resp_snippet": "PESOS ARGENTINOS"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.aguardardfforminststructhttp?3e2df465-2f67-4b75-8f5d-f0877c99a8f0,gx-no-cache=1774615757479",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "DFFormInstStructBody=%7B%22Id%22%3A%2266_1_53%22%2C%22DynProperty%22%3A%7B%22Id%22%3A%221420_1%22%2C%22Name%22%3A%22Acto%22%2C%22Mode%22%3A%22edit%22%2C%22Type%22%3A%22group%22%2C%22UITypeEditor%22%3A%22default%22%2C%22UITypeViewer%22%3A%22default%22%2C%22Composition%22%3A%5B%7B%22Id%22%3A%22314_1%22%2C%22Name%22%3A%22msgError%22%2C%22Mode%22%3A%22edit%22%2C%22Type%22%3A%22message%22%2C%22UITypeEditor%22%3A%22default%22%2C%22UITypeViewer%22%3A%22default%22%2C%22Value%22%3A%22%5B%5D%22%2C%22Metad",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.dynformexecutedynformfrontend?a3a04f12077a576622c2f50c61e4f031,6ad31bfb-b163-4717-9652-50117f874938,50,225753,1742049,gx-no-cache=1774615757524",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "=&MPW0006TEXTBLOCKUSUARIO=Franco%20Castiglioni%20Abe...&MPW0006GESTIONUSUARIO=Gestionar%20Usuario&MPW0006CERRAR=Salir&W0006vINICIALIZED=true&520_1edit=&521_1edit=false&1728_1edit=COMPRAVENTA%20ALTA&1728_1edit=COMPRAVENTA%20ALTA&1729_1edit=&1729_1edit=&1141_1edit=0&1147_1edit=false&1425_1edit=RA%40AUT%40A56&1426_1edit=&1427_1edit=true&1428_1edit=&1429_1edit=&1430_1edit=true&2015_1edit=&1730_1-1edit=RA%40AUT%40A56&146_1-1edit=%24A&1432_1-1edit=PESOS%20ARGENTINOS&147_1-1edit=1000000&1433_1-1edit=CO",
+    "resp_size": 15814,
+    "resp_snippet": "{\"gxProps\":[{\"CmpContext\":\"\",\"IsMasterPage\":\"true\",\"TXTHTMLMENU_MPAGE\":{\"Caption\":\"<ul class=\\\"menu\\\"><li class=\\\"menu__item \\\"><a href=\\\"com.tramitesenlinea.bandejaciudadano\\\" class=\\\"menu__link\\\">Bandeja de entrada<\\/a><\\/li><!----><li class=\\\"menu__item \\\"><a href=\\\"com.tramitesenlinea.mistramite"
+  },
+  {
+    "step": "Paso-3",
+    "method": "GET",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.aobtenerdfforminststructhttp?3e2df465-2f67-4b75-8f5d-f0877c99a8f0,gx-no-cache=1774615763794",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "",
+    "resp_size": 341967,
+    "resp_snippet": "[{\"Id\":\"66_1_46\",\"DynProperty\":{\"Id\":\"66_1_51\",\"Name\":\"6462 - Ingresar documento\",\"Mode\":\"edit\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Composition\":[{\"Id\":\"1095_1\",\"Name\":\"Información sobre el trámite\",\"Mode\":\"edit\",\"Type\":\"group\",\"UITypeEditor\":\"default\",\"UITypeViewer\":\"default\","
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformdsgetgridforminstancehomo?516601,0,908,1,0,0,,gx-no-cache=1774615763906",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":908,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 8904,
+    "resp_snippet": "[{\"Id\":\"\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Values\":[{\"Id\":\"909_1\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Metadata\":[{\"Id\":\"inherit_frminsid\",\"Name\":\"inherit_frminsid\",\"Value\":\"516601\"}]},{\"Id\":\"1731_1\",\"Name\":\"\",\"Mod"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?909_1,908_1,,gx-no-cache=1774615763997",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 35,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargarpaises?gx-no-cache=1774615764025",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":629,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 8822,
+    "resp_snippet": "[{\"Id\":\"858\",\"Value\":\"Uruguay\"},{\"Id\":\"004\",\"Value\":\"Afganistán\"},{\"Id\":\"008\",\"Value\":\"Albania\"},{\"Id\":\"276\",\"Value\":\"Alemania\"},{\"Id\":\"020\",\"Value\":\"Andorra\"},{\"Id\":\"024\",\"Value\":\"Angola\"},{\"Id\":\"660\",\"Value\":\"Anguila\"},{\"Id\":\"010\",\"Value\":\"Antártida\"},{\"Id\":\"028\",\"Value\":\"Antigua y Barbuda\"},{\"Id\""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_cargarnacionalidades?gx-no-cache=1774615764132",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1459,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 8858,
+    "resp_snippet": "[{\"Id\":\"858\",\"Value\":\"Uruguay\"},{\"Id\":\"000\",\"Value\":\"No se conoce\"},{\"Id\":\"004\",\"Value\":\"Afganistán\"},{\"Id\":\"008\",\"Value\":\"Albania\"},{\"Id\":\"276\",\"Value\":\"Alemania\"},{\"Id\":\"020\",\"Value\":\"Andorra\"},{\"Id\":\"024\",\"Value\":\"Angola\"},{\"Id\":\"660\",\"Value\":\"Anguila\"},{\"Id\":\"010\",\"Value\":\"Antártida\"},{\"Id\":\"028"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargartiposintervinientesporactopers?RA@AUT@A56,,gx-no-cache=1774615764195",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1735,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 67,
+    "resp_snippet": "[{\"Id\":\"02\",\"Value\":\"ENAJENANTE\"},{\"Id\":\"11\",\"Value\":\"ADQUIRENTE\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargarnaturalezajuridica?gx-no-cache=1774615764307",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1736,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 104,
+    "resp_snippet": "[{\"Id\":\"7\",\"Value\":\"DOMINIO PLENO\"},{\"Id\":\"8\",\"Value\":\"NUDA PROPIEDAD\"},{\"Id\":\"11\",\"Value\":\"USUFRUCTO\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargartiposintervinientesporactopers?gx-no-cache=1774615764435",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1737,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargarestadocivil?gx-no-cache=1774615764494",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":57,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 189,
+    "resp_snippet": "[{\"Id\":\"CASADO\",\"Value\":\"Casado\"},{\"Id\":\"CSB\",\"Value\":\"Casado c/ sep. de bienes\"},{\"Id\":\"DIVORCIADO\",\"Value\":\"Divorciado\"},{\"Id\":\"SOLTERO\",\"Value\":\"Soltero\"},{\"Id\":\"VIUDO\",\"Value\":\"Viudo\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargardepartamento?gx-no-cache=1774615764576",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":17,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 607,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"V\",\"Value\":\"MONTEVIDEO\"},{\"Id\":\"G\",\"Value\":\"ARTIGAS\"},{\"Id\":\"A\",\"Value\":\"CANELONES\"},{\"Id\":\"E\",\"Value\":\"CERRO LARGO\"},{\"Id\":\"L\",\"Value\":\"COLONIA\"},{\"Id\":\"Q\",\"Value\":\"DURAZNO\"},{\"Id\":\"N\",\"Value\":\"FLORES\"},{\"Id\":\"O\",\"Value\":\"FLORIDA\"},{\"Id\":\"P\",\"Value\":\"LAVALL"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargarlocalidades?17_1,,gx-no-cache=1774615764664",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":16,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 35,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargartiposintervinientesporactopers?RA@AUT@A56,,gx-no-cache=1774615764778",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1740,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 67,
+    "resp_snippet": "[{\"Id\":\"02\",\"Value\":\"ENAJENANTE\"},{\"Id\":\"11\",\"Value\":\"ADQUIRENTE\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargarlocalidades?1502_1,,gx-no-cache=1774615764878",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1503,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 35,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_gettramiteinstidsession,519990!66!1!992!1!1!!none!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 6,
+    "resp_snippet": "231041"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_dsobtenerdepartamentodesede,519990!66!1!887!1!2!!B!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "B"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerdepartamentodsc,519990!66!1!1156!1!1!!B!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 9,
+    "resp_snippet": "MALDONADO"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenersedenombre,519990!66!1!977!1!1!!B!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 9,
+    "resp_snippet": "MALDONADO"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_tieneantecedentesmismopaso,519990!66!1!1874!1!1!!471_1!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?aasignardocumentodesdegam,519990!66!1!855!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 8,
+    "resp_snippet": "47086104"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_padronesconcatenardatosodt,519990!66!1!1726!1!1!!Ingresar%20documento!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 21,
+    "resp_snippet": "MALDONADO / 903959934"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementosnum,519990!66!1!521!1!1!!0!MAYORIGUAL!1!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_validaringresoactos,519990!66!1!1141!1!1!!1!COMPRAVENTA%20ALTA!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "0"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementos,519990!66!1!1147!1!1!!COMPRAVENTA%20ALTA!IGUAL!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_obteneractocodigo,519990!66!1!1425!1!2!!COMPRAVENTA%20ALTA!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 10,
+    "resp_snippet": "RA@AUT@A56"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_obteneractocodigo,519990!66!1!1426!1!2!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_actoconintervinientes,519990!66!1!1427!1!1!!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_actoconintervinientes,519990!66!1!1428!1!1!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_controlcorrespondenestipulaciones,519990!66!1!1430!1!1!!906_1!RA%40AUT%40A56!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_controlcorrespondecartel,519990!66!1!2015!1!1!!906_1!RA%40AUT%40A56!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_descomponerdatoconcatenadoconcoma,519990!66!1!1312!1!1!!MALDONADO%20%2F%20903959934!1!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 21,
+    "resp_snippet": "MALDONADO / 903959934"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_validaractoconinteviniente,519990!66!1!1533!1!1!!Ingresar%20documento!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615766243",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 22,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"\"}]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!!!!!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 29,
+    "resp_snippet": "PF@CI |  |  |  |  |  |  |  | "
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_documentovalidarcedulaidentidad,519990!66!1!1457!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerpaisnombre,519990!66!1!1460!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1110!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1464!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1113!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1468!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerestadocivildescripcion,519990!66!1!1478!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargarlocalidades?gx-no-cache=1774615766625",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":16,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_documentovalidarrut,519990!66!1!516!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1122!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1123!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": " |  "
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenernaturalezajuridicadesc,519990!66!1!1524!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenernaturalezajuridicadesc,519990!66!1!1525!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenernaturalezajuridicadesc,519990!66!1!1526!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenernaturalezajuridicadesc,519990!66!1!1527!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcioninm,519990!66!1!1120!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcioninm,519990!66!1!1121!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1517!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1518!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-3",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615767036",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615803363",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1116!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1492!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1119!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1496!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!2!1!J!CI!!!!!!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 6,
+    "resp_snippet": "PJ@ | "
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!2!1!J!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 5,
+    "resp_snippet": "-  | "
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615803846",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615804202",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615804296",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615806178",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1116!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1119!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615806379",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615807439",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615807534",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_documentovalidarcedulaidentidad,519990!66!1!1457!1!1!1!49033949!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!49033949!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 12,
+    "resp_snippet": "49033949 |  "
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_personafisicaobtenernombresporci,519990!66!1!229!1!1!1!49033949!CI!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 71,
+    "resp_snippet": "EDUARDO@MANUEL@GOMEZ@MAIDANA@1995 07 08@1@EDUARDO MANUEL GOMEZ MAIDANA@"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 42,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ |  |  |  | "
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!49033949!!GOMEZ!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 17,
+    "resp_snippet": "49033949 |  GOMEZ"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1150!1!1!1!GOMEZ!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 49,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA |  |  | "
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1151!1!1!1!MAIDANA!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!EDUARDO!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 56,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO |  | "
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!49033949!EDUARDO!GOMEZ!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 24,
+    "resp_snippet": "49033949 | EDUARDO GOMEZ"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1152!1!1!1!EDUARDO!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!EDUARDO!MANUEL!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 62,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | "
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1153!1!1!1!MANUEL!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615813888",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 108,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | \",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerpaisnombre,519990!66!1!1460!1!1!1!858!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 7,
+    "resp_snippet": "Uruguay"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!EDUARDO!MANUEL!858!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 65,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615824043",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1122!1!1!1!02!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 10,
+    "resp_snippet": "ENAJENANTE"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcioninm,519990!66!1!1120!1!1!1!02!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 10,
+    "resp_snippet": "ENAJENANTE"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1517!1!1!1!02!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 10,
+    "resp_snippet": "ENAJENANTE"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615826191",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenernaturalezajuridicadesc,519990!66!1!1524!1!1!1!7!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 13,
+    "resp_snippet": "DOMINIO PLENO"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615827557",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615828544",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615831758",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerestadocivildescripcion,519990!66!1!1478!1!1!1!SOLTERO!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 7,
+    "resp_snippet": "Soltero"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615833098",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615834720",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615836374",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargarlocalidades?V,,gx-no-cache=1774615840702",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":16,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22Desc",
+    "resp_size": 68,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"AA\",\"Value\":\"MONTEVIDEO\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615840906",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615842201",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615844224",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615845898",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615847535",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615849071",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-4",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615850070",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615803363",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1116!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1492!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1119!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1496!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!2!1!J!CI!!!!!!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 6,
+    "resp_snippet": "PJ@ | "
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!2!1!J!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 5,
+    "resp_snippet": "-  | "
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615803846",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615804202",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615804296",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615806178",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1116!1!1!1!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 19,
+    "resp_snippet": "en COMPRAVENTA ALTA"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obteneractoenpersdsc,519990!66!1!1119!1!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?J,908_1,,gx-no-cache=1774615806379",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22J%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615807439",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 33,
+    "resp_snippet": "[{\"Id\":\"PJ@ | \",\"Value\":\"-  | \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615807534",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 55,
+    "resp_snippet": "[{\"Id\":\"PF@CI |  |  |  |  |  |  |  | \",\"Value\":\" |  \"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_documentovalidarcedulaidentidad,519990!66!1!1457!1!1!1!49033949!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!49033949!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 12,
+    "resp_snippet": "49033949 |  "
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_personafisicaobtenernombresporci,519990!66!1!229!1!1!1!49033949!CI!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 71,
+    "resp_snippet": "EDUARDO@MANUEL@GOMEZ@MAIDANA@1995 07 08@1@EDUARDO MANUEL GOMEZ MAIDANA@"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 42,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ |  |  |  | "
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!49033949!!GOMEZ!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 17,
+    "resp_snippet": "49033949 |  GOMEZ"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1150!1!1!1!GOMEZ!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 49,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA |  |  | "
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1151!1!1!1!MAIDANA!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!EDUARDO!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 56,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO |  | "
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenadosdsc,519990!66!1!1280!1!1!1!F!49033949!EDUARDO!GOMEZ!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 24,
+    "resp_snippet": "49033949 | EDUARDO GOMEZ"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1152!1!1!1!EDUARDO!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!EDUARDO!MANUEL!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 62,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | "
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_textovalidarcaracteresextranios,519990!66!1!1153!1!1!1!MANUEL!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1450,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615813888",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 108,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | \",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerpaisnombre,519990!66!1!1460!1!1!1!858!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 7,
+    "resp_snippet": "Uruguay"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_minutacargarpersonasprecargaconcatenados,519990!66!1!1124!1!1!1!F!CI!!49033949!!GOMEZ!MAIDANA!EDUARDO!MANUEL!858!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 65,
+    "resp_snippet": "PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615824043",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1122!1!1!1!02!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 10,
+    "resp_snippet": "ENAJENANTE"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcioninm,519990!66!1!1120!1!1!1!02!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 10,
+    "resp_snippet": "ENAJENANTE"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerintervinientedescripcionaut,519990!66!1!1517!1!1!1!02!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 10,
+    "resp_snippet": "ENAJENANTE"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615826191",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenernaturalezajuridicadesc,519990!66!1!1524!1!1!1!7!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 13,
+    "resp_snippet": "DOMINIO PLENO"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615827557",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615828544",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615831758",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerestadocivildescripcion,519990!66!1!1478!1!1!1!SOLTERO!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 7,
+    "resp_snippet": "Soltero"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615833098",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615834720",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615836374",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_dscargarlocalidades?V,,gx-no-cache=1774615840702",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":16,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22Desc",
+    "resp_size": 68,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"AA\",\"Value\":\"MONTEVIDEO\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615840906",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615842201",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615844224",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615845898",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615847535",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615849071",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonasmismopaso?F,908_1,,gx-no-cache=1774615850070",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1732,\"DFElemVer\":1,\"Mode\":\"edit\"}&908_1=%5B%7B%22Id%22%3A1%2C%22Value%22%3A%22%22%2C%22Values%22%3A%5B%7B%22Id%22%3A%22909_1%22%2C%22Name%22%3A%22Persona%22%2C%22Value%22%3A%22F%22%7D%2C%7B%22Id%22%3A%221731_1%22%2C%22Name%22%3A%22Es%20variante%22%2C%22Value%22%3A%22false%22%7D%2C%7B%22Id%22%3A%221732_1%22%2C%22Name%22%3A%22Elija%20la%20persona%2A%22%2C%22Value%22%3A%22%22%7D%2C%7B%22Id%22%3A%221733_1%22%2C%22Name%22%3A%22De",
+    "resp_size": 111,
+    "resp_snippet": "[{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.aguardardfforminststructhttp?3e2df465-2f67-4b75-8f5d-f0877c99a8f0,gx-no-cache=1774615866966",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "DFFormInstStructBody=%7B%22Id%22%3A%2266_1_46%22%2C%22DynProperty%22%3A%7B%22Id%22%3A%221450_1%22%2C%22Name%22%3A%22Personas%22%2C%22Mode%22%3A%22edit%22%2C%22Type%22%3A%22group%22%2C%22UITypeEditor%22%3A%22default%22%2C%22UITypeViewer%22%3A%22default%22%2C%22Composition%22%3A%5B%7B%22Id%22%3A%221451_1%22%2C%22Name%22%3A%22msgError%22%2C%22Mode%22%3A%22edit%22%2C%22Type%22%3A%22message%22%2C%22UITypeEditor%22%3A%22default%22%2C%22UITypeViewer%22%3A%22default%22%2C%22Value%22%3A%22%5B%5D%22%2C%22",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.dynformexecutedynformfrontend?a3a04f12077a576622c2f50c61e4f031,6ad31bfb-b163-4717-9652-50117f874938,50,225753,1742049,gx-no-cache=1774615867038",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "=&MPW0006TEXTBLOCKUSUARIO=Franco%20Castiglioni%20Abe...&MPW0006GESTIONUSUARIO=Gestionar%20Usuario&MPW0006CERRAR=Salir&W0006vINICIALIZED=true&909_1-1edit=F&1731_1-1edit=&1731_1-1edit=false&1732_1-1edit=&1733_1-1edit=&1455_1-1edit=Persona%20F%C3%ADsica&788_1-1edit=CI&789_1-1edit=49033949&1915_1-1edit=CI&1028_1-1edit=&629_1-1edit=&1734_1-1edit=Uruguay&1457_1-1edit=true&24_1-1edit=GOMEZ&25_1-1edit=MAIDANA&27_1-1edit=EDUARDO&28_1-1edit=MANUEL&562_1-1edit=&562_1-1edit=false&254_1-1edit=&255_1-1edit=&2",
+    "resp_size": 15876,
+    "resp_snippet": "{\"gxProps\":[{\"CmpContext\":\"\",\"IsMasterPage\":\"true\",\"TXTHTMLMENU_MPAGE\":{\"Caption\":\"<ul class=\\\"menu\\\"><li class=\\\"menu__item \\\"><a href=\\\"com.tramitesenlinea.bandejaciudadano\\\" class=\\\"menu__link\\\">Bandeja de entrada<\\/a><\\/li><!----><li class=\\\"menu__item \\\"><a href=\\\"com.tramitesenlinea.mistramite"
+  },
+  {
+    "step": "Paso-5",
+    "method": "GET",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.aobtenerdfforminststructhttp?3e2df465-2f67-4b75-8f5d-f0877c99a8f0,gx-no-cache=1774615886778",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "",
+    "resp_size": 383969,
+    "resp_snippet": "[{\"Id\":\"66_1_26\",\"DynProperty\":{\"Id\":\"66_1_51\",\"Name\":\"6462 - Ingresar documento\",\"Mode\":\"edit\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Composition\":[{\"Id\":\"1095_1\",\"Name\":\"Información sobre el trámite\",\"Mode\":\"edit\",\"Type\":\"group\",\"UITypeEditor\":\"default\",\"UITypeViewer\":\"default\","
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformdsgetgridforminstancehomo?516601,0,1536,1,0,0,,gx-no-cache=1774615886910",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1536,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2965,
+    "resp_snippet": "[{\"Id\":\"\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Values\":[{\"Id\":\"1745_1\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Metadata\":[{\"Id\":\"inherit_frminsid\",\"Name\":\"inherit_frminsid\",\"Value\":\"516601\"}]},{\"Id\":\"1537_1\",\"Name\":\"\",\"Mo"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_cargapadronespasoprevioconcatenados?Ingresar%20documento,,gx-no-cache=1774615886968",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1745,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 88,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"903959934@B\",\"Value\":\"903959934 | MALDONADO\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_cargaactospasoprevioconcatenados?Ingresar%20documento,,gx-no-cache=1774615887036",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1746,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 82,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"RA@AUT@A56\",\"Value\":\"COMPRAVENTA ALTA\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargartiposintervinientesporactopers?1746_1,,gx-no-cache=1774615887115",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1747,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2,
+    "resp_snippet": "[]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_minutacargarpersonaspasoprevioconcatenados?Ingresar%20documento,,gx-no-cache=1774615887169",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1542,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 145,
+    "resp_snippet": "[{\"Id\":\"\",\"Value\":\"(Seleccionar)\"},{\"Id\":\"PF@CI | 49033949 |  |  | GOMEZ | MAIDANA | EDUARDO | MANUEL | 858\",\"Value\":\"49033949 | EDUARDO GOMEZ\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_dscargarnaturalezajuridica?gx-no-cache=1774615887246",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1774,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 104,
+    "resp_snippet": "[{\"Id\":\"7\",\"Value\":\"DOMINIO PLENO\"},{\"Id\":\"8\",\"Value\":\"NUDA PROPIEDAD\"},{\"Id\":\"11\",\"Value\":\"USUFRUCTO\"}]"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adgr_6462_precargargrillaintervinientes?516601,0,1748,1,0,0,,gx-no-cache=1774615887370",
+    "status": 200,
+    "mime": "application/json",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":1748,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 2797,
+    "resp_snippet": "[{\"Id\":\"\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"\",\"Values\":[{\"Id\":\"1127_1\",\"Name\":\"\",\"Mode\":\"\",\"Type\":\"\",\"UITypeEditor\":\"\",\"UITypeViewer\":\"\",\"Value\":\"903959934@B\",\"Metadata\":[{\"Id\":\"inherit_frminsid\",\"Name\":\"inherit_frminsid\",\"Value\":\"516601\"}]},{\"Id\":\"1551_1\",\"N"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_gettramiteinstidsession,519990!66!1!992!1!1!!none!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 6,
+    "resp_snippet": "231041"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_dsobtenerdepartamentodesede,519990!66!1!887!1!2!!B!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "B"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenerdepartamentodsc,519990!66!1!1156!1!1!!B!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 9,
+    "resp_snippet": "MALDONADO"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_obtenersedenombre,519990!66!1!977!1!1!!B!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 9,
+    "resp_snippet": "MALDONADO"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_tieneantecedentesmismopaso,519990!66!1!1874!1!1!!471_1!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?aasignardocumentodesdegam,519990!66!1!855!1!1!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 8,
+    "resp_snippet": "47086104"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_padronesconcatenardatosodt,519990!66!1!1726!1!1!!Ingresar%20documento!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 21,
+    "resp_snippet": "MALDONADO / 903959934"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementosnum,519990!66!1!521!1!1!!0!MAYORIGUAL!1!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_validaringresoactos,519990!66!1!1141!1!1!!1!COMPRAVENTA%20ALTA!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "0"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementos,519990!66!1!1147!1!1!!COMPRAVENTA%20ALTA!IGUAL!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_obteneractocodigo,519990!66!1!1425!1!2!!COMPRAVENTA%20ALTA!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 10,
+    "resp_snippet": "RA@AUT@A56"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_obteneractocodigo,519990!66!1!1426!1!2!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_actoconintervinientes,519990!66!1!1427!1!1!!RA%40AUT%40A56!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_actoconintervinientes,519990!66!1!1428!1!1!!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_controlcorrespondenestipulaciones,519990!66!1!1430!1!1!!906_1!RA%40AUT%40A56!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_controlcorrespondecartel,519990!66!1!2015!1!1!!906_1!RA%40AUT%40A56!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_descomponerdatoconcatenadoconcoma,519990!66!1!1312!1!1!!MALDONADO%20%2F%20903959934!1!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 21,
+    "resp_snippet": "MALDONADO / 903959934"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_validaractoconinteviniente,519990!66!1!1533!1!1!!Ingresar%20documento!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  },
+  {
+    "step": "Paso-5",
+    "method": "GET",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformcleangroup?516601,1536_1,gx-no-cache=1774615889071",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "",
+    "resp_size": 0,
+    "resp_snippet": ""
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementosnum,519990!66!1!527!1!1!!5!IGUAL!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementosnum,519990!66!1!942!1!1!!941_1!MENORIGUAL!!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_calcularsumresmul,519990!66!1!1006!1!1!!MULTIPLICACION!!2!0!0!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "0"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_compara2elementosnum,519990!66!1!942!1!1!!941_1!MENORIGUAL!0!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 5,
+    "resp_snippet": "false"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_dynformcount,519990!66!1!518!1!1!!906_1!none!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "0"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_calcularsumresmul,519990!66!1!1006!1!1!!MULTIPLICACION!0!2!0!0!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 1,
+    "resp_snippet": "0"
+  },
+  {
+    "step": "Paso-5",
+    "method": "POST",
+    "url": "https://digital.dgr.gub.uy/DGR_FRONTEND/servlet/com.tramitesenlinea.adynformexecute?dgr_6462_validaractoconinteviniente,519990!66!1!1561!1!1!!Ingresar%20documento!end",
+    "status": 200,
+    "mime": "text/plain",
+    "post_data": "context={\"DFFormInstId\":\"516601\",\"DFFormId\":66,\"DFFormVer\":1,\"DFElemId\":898,\"DFElemVer\":1,\"Mode\":\"edit\"}",
+    "resp_size": 4,
+    "resp_snippet": "true"
+  }
+]
