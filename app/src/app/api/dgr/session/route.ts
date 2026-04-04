@@ -25,7 +25,21 @@ export async function GET() {
     .single();
 
   if (!session) {
-    return NextResponse.json({ status: "no_session", valid: false });
+    const sharedRaw = process.env.DGR_SHARED_COOKIE_STRING;
+    if (!sharedRaw) {
+      return NextResponse.json({ status: "no_session", valid: false });
+    }
+
+    const sharedCookies = parseCookies(sharedRaw);
+    const sharedValid = await testSession(sharedCookies);
+
+    return NextResponse.json({
+      status: sharedValid ? "active" : "expired",
+      valid: sharedValid,
+      last_checked: new Date().toISOString(),
+      source: "shared_env",
+      dgr_user: "47086104",
+    });
   }
 
   // Test if cookies still work

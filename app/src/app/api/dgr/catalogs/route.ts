@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import {
   fetchCatalog,
   CATALOG_ENDPOINTS,
+  parseCookies,
   type DgrCookies,
 } from "@/lib/dgr-client";
 
@@ -54,14 +55,19 @@ export async function GET(req: NextRequest) {
     .eq("status", "active")
     .single();
 
-  if (!session) {
+  const cookies = session?.cookies
+    ? (session.cookies as DgrCookies)
+    : process.env.DGR_SHARED_COOKIE_STRING
+      ? parseCookies(process.env.DGR_SHARED_COOKIE_STRING)
+      : null;
+
+  if (!cookies) {
     return NextResponse.json(
       { error: "No active DGR session. Please log in to DGR first." },
       { status: 401 },
     );
   }
 
-  const cookies = session.cookies as DgrCookies;
   const def = CATALOG_ENDPOINTS[name as keyof typeof CATALOG_ENDPOINTS];
   const queryPrefix = prefix ? `${prefix},,` : "";
 
