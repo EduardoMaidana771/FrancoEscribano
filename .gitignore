@@ -9,6 +9,7 @@ run_schema.py
 token_check_*.txt
 cuota_probe_results.json
 dgr_response_raw.json
+ACCESO_CUENTA_PRUEBAS.txt
 
 # Salidas temporales de análisis
 out_adgr_*.txt
