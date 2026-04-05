@@ -140,7 +140,10 @@ export default function FileManager({
         <div className="flex items-center gap-2">
           {breadcrumbs.length > 1 && (
             <button
-              onClick={() => router.back()}
+              onClick={() => {
+                const parent = breadcrumbs[breadcrumbs.length - 2];
+                router.push(parent.id ? `/carpeta/${parent.id}` : "/archivos");
+              }}
               className="p-1 hover:bg-gray-200 rounded"
             >
               <ArrowLeft size={20} />

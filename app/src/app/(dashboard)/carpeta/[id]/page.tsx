@@ -24,7 +24,7 @@ export default async function FolderPage({ params }: Props) {
     .eq("id", id)
     .single();
 
-  if (!currentFolder) redirect("/");
+  if (!currentFolder) redirect("/archivos");
 
   // Build breadcrumbs
   const breadcrumbs: { id: string | null; name: string }[] = [
