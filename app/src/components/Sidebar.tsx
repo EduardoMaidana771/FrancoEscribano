@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  { href: "/", label: "Archivos", icon: FolderOpen },
+  { href: "/archivos", label: "Archivos", icon: FolderOpen },
   { href: "/compraventa/nueva", label: "Nueva Compraventa", icon: FilePlus },
   { href: "/compraventas", label: "Compraventas", icon: FileText },
   { href: "/configuracion", label: "Configuración", icon: Settings },
@@ -43,7 +43,7 @@ export default function Sidebar() {
         {navItems.map((item) => {
           const isActive =
             pathname === item.href ||
-            (item.href !== "/" && pathname.startsWith(item.href));
+            pathname.startsWith(item.href);
           const Icon = item.icon;
 
           return (
