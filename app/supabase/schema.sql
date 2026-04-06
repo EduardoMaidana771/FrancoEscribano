@@ -104,10 +104,14 @@ create table public.vehicles (
   id uuid primary key default uuid_generate_v4(),
   user_id uuid references public.profiles(id) on delete cascade not null,
   brand text,
+  brand_dgr_id text, -- DGR catalog ID for future minuta submission
   model text,
+  model_dgr_id text,
   year int,
   type text, -- CAMIONETA CAB.DOB. C/CAJA, HATCH 5 PUERTAS, etc.
+  type_dgr_id text,
   fuel text default 'NAFTA',
+  fuel_dgr_id text,
   cylinders int,
   motor_number text,
   chassis_number text,

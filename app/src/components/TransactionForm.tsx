@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import type { Client, Vehicle, Transaction } from "@/lib/types";
 import { Save, ArrowLeftRight, ChevronDown, ChevronUp, Plus, Trash2 } from "lucide-react";
+import DgrCombobox from "./DgrCombobox";
 
 interface PlateHistoryEntry {
   department: string;
@@ -118,10 +119,14 @@ interface FormData {
   buyer_rep_can_substitute: boolean;
   // Vehicle
   vehicle_brand: string;
+  vehicle_brand_dgr_id: string;
   vehicle_model: string;
+  vehicle_model_dgr_id: string;
   vehicle_year: string;
   vehicle_type: string;
+  vehicle_type_dgr_id: string;
   vehicle_fuel: string;
+  vehicle_fuel_dgr_id: string;
   vehicle_cylinders: string;
   vehicle_motor_number: string;
   vehicle_chassis_number: string;
@@ -281,10 +286,14 @@ const defaultForm: FormData = {
   buyer_rep_power_type: "",
   buyer_rep_can_substitute: false,
   vehicle_brand: "",
+  vehicle_brand_dgr_id: "",
   vehicle_model: "",
+  vehicle_model_dgr_id: "",
   vehicle_year: "",
   vehicle_type: "",
+  vehicle_type_dgr_id: "",
   vehicle_fuel: "nafta",
+  vehicle_fuel_dgr_id: "",
   vehicle_cylinders: "",
   vehicle_motor_number: "",
   vehicle_chassis_number: "",
@@ -1248,15 +1257,33 @@ export default function TransactionForm({
       {/* Vehículo */}
       <Section title="Vehículo">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <Input
+          <DgrCombobox
             label="Marca"
             value={form.vehicle_brand}
-            onChange={(v) => set("vehicle_brand", v)}
+            dgrId={form.vehicle_brand_dgr_id}
+            onChange={(v, id) => {
+              set("vehicle_brand", v);
+              set("vehicle_brand_dgr_id", id);
+              // Reset model when brand changes
+              if (id !== form.vehicle_brand_dgr_id) {
+                set("vehicle_model", "");
+                set("vehicle_model_dgr_id", "");
+              }
+            }}
+            catalogName="marcas"
           />
-          <Input
+          <DgrCombobox
             label="Modelo"
             value={form.vehicle_model}
-            onChange={(v) => set("vehicle_model", v)}
+            dgrId={form.vehicle_model_dgr_id}
+            onChange={(v, id) => {
+              set("vehicle_model", v);
+              set("vehicle_model_dgr_id", id);
+            }}
+            catalogName="modelos"
+            prefix={form.vehicle_brand_dgr_id}
+            disabled={!form.vehicle_brand_dgr_id && !form.vehicle_brand}
+            placeholder={form.vehicle_brand ? "Buscar modelo..." : "Seleccioná una marca primero"}
           />
           <Input
             label="Año"
@@ -1264,22 +1291,26 @@ export default function TransactionForm({
             value={form.vehicle_year}
             onChange={(v) => set("vehicle_year", v)}
           />
-          <Input
-            label="Tipo (auto, camioneta, moto...)"
+          <DgrCombobox
+            label="Tipo de vehículo"
             value={form.vehicle_type}
-            onChange={(v) => set("vehicle_type", v)}
+            dgrId={form.vehicle_type_dgr_id}
+            onChange={(v, id) => {
+              set("vehicle_type", v);
+              set("vehicle_type_dgr_id", id);
+            }}
+            catalogName="tipos_vehiculo"
           />
-          <Select
+          <DgrCombobox
             label="Combustible"
             value={form.vehicle_fuel}
-            onChange={(v) => set("vehicle_fuel", v)}
-            options={[
-              { value: "nafta", label: "Nafta" },
-              { value: "gasoil", label: "Gasoil" },
-              { value: "electrico", label: "Eléctrico" },
-              { value: "gas", label: "Gas" },
-              { value: "hibrido", label: "Híbrido" },
-            ]}
+            dgrId={form.vehicle_fuel_dgr_id}
+            onChange={(v, id) => {
+              set("vehicle_fuel", v);
+              set("vehicle_fuel_dgr_id", id);
+            }}
+            catalogName="combustibles"
+            placeholder="Buscar combustible..."
           />
           <Input
             label="Cilindrada"

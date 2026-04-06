@@ -234,4 +234,8 @@ export const CATALOG_ENDPOINTS = {
     elemId: 1677,
   },
   modelos: { endpoint: "adgr_6462_dscargarmodelosvehiculo", elemId: 1686 },
+  combustibles: {
+    endpoint: "adgr_6462_dscargarcombustiblevehiculo",
+    elemId: 1699,
+  },
 } as const;

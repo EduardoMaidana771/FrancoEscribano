@@ -50,10 +50,14 @@ export interface Vehicle {
   id: string;
   user_id: string;
   brand: string | null;
+  brand_dgr_id: string | null;
   model: string | null;
+  model_dgr_id: string | null;
   year: number | null;
   type: string | null;
+  type_dgr_id: string | null;
   fuel: string;
+  fuel_dgr_id: string | null;
   cylinders: number | null;
   motor_number: string | null;
   chassis_number: string | null;
