@@ -747,10 +747,14 @@ export default function TransactionForm({
         .insert({
           user_id: userId,
           brand: form.vehicle_brand || null,
+          brand_dgr_id: form.vehicle_brand_dgr_id || null,
           model: form.vehicle_model || null,
+          model_dgr_id: form.vehicle_model_dgr_id || null,
           year: form.vehicle_year ? parseInt(form.vehicle_year) : null,
           type: form.vehicle_type || null,
+          type_dgr_id: form.vehicle_type_dgr_id || null,
           fuel: form.vehicle_fuel,
+          fuel_dgr_id: form.vehicle_fuel_dgr_id || null,
           cylinders: form.vehicle_cylinders
             ? parseInt(form.vehicle_cylinders)
             : null,
