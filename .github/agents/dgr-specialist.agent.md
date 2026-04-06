@@ -40,6 +40,30 @@ When user has no personal DGR session stored, the system falls back to `DGR_SHAR
 - Cache catalog data in `dgr_cache` table to minimize DGR API calls
 - Model fetching depends on brand selection — always pass brand ID
 
+## Supabase Database Connection
+
+When you need to run SQL migrations or queries directly against the database:
+
+- **Project Ref**: `cmvayxadgsucyzwwkghy`
+- **Region**: `aws-0-sa-east-1` (São Paulo)
+- **Direct host**: `db.cmvayxadgsucyzwwkghy.supabase.co:5432` (IPv6 only — may not work from local machines without IPv6 support)
+- **Pooler host (transaction mode)**: `aws-0-sa-east-1.pooler.supabase.com:6543` (IPv4, user: `postgres.cmvayxadgsucyzwwkghy`)
+- **Pooler host (session mode)**: `aws-0-sa-east-1.pooler.supabase.com:5432` (IPv4, user: `postgres.cmvayxadgsucyzwwkghy`)
+- **Database user**: `postgres` (direct) or `postgres.cmvayxadgsucyzwwkghy` (pooler)
+- **Database password**: `71934268Manuel._`
+- **Database name**: `postgres`
+- **SSL**: Required (`rejectUnauthorized: false`)
+
+### Connection Notes
+- The direct host only resolves to IPv6. If the local machine doesn't support IPv6, use the pooler or the Supabase SQL Editor.
+- For DDL operations (ALTER TABLE, CREATE), prefer **session mode pooler** (port 5432) or the **Supabase Dashboard SQL Editor**: `https://supabase.com/dashboard/project/cmvayxadgsucyzwwkghy/sql/new`
+- REST API (PostgREST) cannot run DDL statements — only DML (SELECT, INSERT, UPDATE, DELETE).
+- Service role key and anon key are in `app/.env.local`.
+
+### Running Migrations
+If `pg` module is available: install temporarily with `npm install pg --no-save`, create a Node script, connect via pooler, run the SQL, then remove the script.
+If that fails, instruct the user to run the SQL in the Supabase Dashboard SQL Editor.
+
 ## Approach
 
 1. Read existing code in `dgr-client.ts` and related files first

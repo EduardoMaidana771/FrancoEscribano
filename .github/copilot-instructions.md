@@ -95,6 +95,20 @@ GEMINI_API_KEY                  # Google Gemini API key (server-only)
 DGR_SHARED_COOKIE_STRING        # Fallback DGR session cookies (server-only)
 ```
 
+## Database Connection (Supabase PostgreSQL)
+
+- **Project Ref**: `cmvayxadgsucyzwwkghy`
+- **Region**: `aws-0-sa-east-1` (São Paulo)
+- **Direct host**: `db.cmvayxadgsucyzwwkghy.supabase.co:5432` (IPv6 only)
+- **Pooler (transaction mode)**: `aws-0-sa-east-1.pooler.supabase.com:6543` (user: `postgres.cmvayxadgsucyzwwkghy`)
+- **Pooler (session mode)**: `aws-0-sa-east-1.pooler.supabase.com:5432` (user: `postgres.cmvayxadgsucyzwwkghy`)
+- **DB password**: `71934268Manuel._`
+- **DB name**: `postgres`
+- **SSL**: Required
+- **SQL Editor**: https://supabase.com/dashboard/project/cmvayxadgsucyzwwkghy/sql/new
+
+> **Note**: Direct host is IPv6 only. If local machine lacks IPv6, use the pooler or the Supabase SQL Editor for DDL operations (ALTER TABLE, CREATE). REST API cannot run DDL.
+
 ## Commands
 
 ```bash
