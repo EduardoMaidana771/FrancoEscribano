@@ -43,6 +43,13 @@ Formato esperado:
 
 Devolvé SOLO el JSON, sin texto adicional ni backticks.`;
 
+const CLASSIFY_PROMPT = `Analizá esta imagen y clasificala en una de estas categorías:
+- "cedula": es una cédula de identidad uruguaya (documento de identidad de una persona)
+- "libreta": es una libreta de propiedad de un vehículo uruguayo (documento de registro vehicular)
+- "otro": no es ninguno de los anteriores
+
+Respondé SOLO con una de estas tres palabras: cedula, libreta, otro. Sin puntuación ni texto adicional.`;
+
 const TEXT_PROMPT = `Sos un asistente de un escribano uruguayo. Del siguiente texto (posiblemente un mensaje de WhatsApp con datos de una operación), extraé toda la información que puedas identificar como datos de personas o vehículos. Devolvé un JSON con la estructura:
 
 {
@@ -94,7 +101,7 @@ export async function POST(request: NextRequest) {
   }
 
   const formData = await request.formData();
-  const type = formData.get("type") as string; // "cedula" | "libreta" | "text"
+  let type = formData.get("type") as string; // "cedula" | "libreta" | "text" | "auto"
   const fileId = formData.get("fileId") as string | null;
 
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
@@ -122,18 +129,40 @@ export async function POST(request: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const base64 = Buffer.from(bytes).toString("base64");
+    const inlineData = { mimeType: file.type, data: base64 };
+
+    // Auto-detect document type
+    if (type === "auto") {
+      // 1. Try filename heuristic first
+      const name = (file.name ?? "").toLowerCase();
+      if (name.includes("cedula") || name.includes("cédula") || name.includes("ci_") || name.includes("ci-")) {
+        type = "cedula";
+      } else if (name.includes("libreta") || name.includes("vehiculo") || name.includes("vehículo") || name.includes("padron") || name.includes("padrón")) {
+        type = "libreta";
+      } else {
+        // 2. Ask Gemini to classify
+        const classifyRes = await model.generateContent([
+          CLASSIFY_PROMPT,
+          { inlineData },
+        ]);
+        const classification = classifyRes.response.text().trim().toLowerCase();
+        if (classification === "cedula") {
+          type = "cedula";
+        } else if (classification === "libreta") {
+          type = "libreta";
+        } else {
+          // Unknown type — return early so UI can ask user
+          return NextResponse.json({ data: null, type: "unknown" });
+        }
+      }
+    }
 
     const prompt =
       type === "cedula" ? PERSON_PROMPT : VEHICLE_PROMPT;
 
     const response = await model.generateContent([
       prompt,
-      {
-        inlineData: {
-          mimeType: file.type,
-          data: base64,
-        },
-      },
+      { inlineData },
     ]);
     result = response.response.text();
   }

@@ -18,6 +18,9 @@ import {
   Copy,
   Check,
   Loader2,
+  FileSearch,
+  ChevronDown,
+  ArrowRight,
 } from "lucide-react";
 
 interface FileManagerProps {
@@ -50,6 +53,15 @@ export default function FileManager({
   } | null>(null);
   const [extractError, setExtractError] = useState("");
   const [copied, setCopied] = useState(false);
+  // Bulk extraction state
+  const [bulkPhase, setBulkPhase] = useState<"idle" | "extracting" | "assign">("idle");
+  const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0, fileName: "" });
+  const [bulkResults, setBulkResults] = useState<
+    { fileId: string; fileName: string; type: string; data: Record<string, unknown> }[]
+  >([]);
+  const [bulkError, setBulkError] = useState("");
+  // Role assignment state: index into bulkResults persons → role
+  const [personRoles, setPersonRoles] = useState<Record<number, string>>({});
   const supabase = createClient();
   const router = useRouter();
 
@@ -182,6 +194,146 @@ export default function FileManager({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const imageFiles = files.filter((f) => isImageFile(f.file_type));
+  const hasImages = imageFiles.length > 0;
+
+  async function bulkExtract() {
+    const targets = imageFiles;
+    setBulkPhase("extracting");
+    setBulkError("");
+    setBulkResults([]);
+    setPersonRoles({});
+    const results: typeof bulkResults = [];
+
+    for (let i = 0; i < targets.length; i++) {
+      const file = targets[i];
+      setBulkProgress({ current: i + 1, total: targets.length, fileName: file.file_name });
+
+      // Use cached data if available
+      if (file.extracted_data) {
+        const cached = file.extracted_data as Record<string, unknown>;
+        const detectedType = cached.brand || cached.plate ? "libreta" : "cedula";
+        results.push({ fileId: file.id, fileName: file.file_name, type: detectedType, data: cached });
+        continue;
+      }
+
+      try {
+        const { data: blob, error: dlErr } = await supabase.storage
+          .from("documents")
+          .download(file.file_path);
+        if (dlErr || !blob) throw new Error("Error al descargar");
+
+        const fd = new FormData();
+        fd.append("type", "auto");
+        fd.append("file", blob, file.file_name);
+        fd.append("fileId", file.id);
+
+        const res = await fetch("/api/extract", { method: "POST", body: fd });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Error en extracción");
+        }
+
+        const json = await res.json();
+        if (json.type === "unknown") {
+          // Couldn't classify — skip with note
+          results.push({ fileId: file.id, fileName: file.file_name, type: "unknown", data: {} });
+          continue;
+        }
+
+        // Update local state
+        setFiles((prev) =>
+          prev.map((f) => (f.id === file.id ? { ...f, extracted_data: json.data } : f))
+        );
+        results.push({ fileId: file.id, fileName: file.file_name, type: json.type, data: json.data });
+      } catch (err) {
+        results.push({
+          fileId: file.id,
+          fileName: file.file_name,
+          type: "error",
+          data: { _error: err instanceof Error ? err.message : "Error desconocido" },
+        });
+      }
+    }
+
+    setBulkResults(results);
+    // Auto-assign first person as seller, second as buyer
+    const persons = results.filter((r) => r.type === "cedula");
+    const roles: Record<number, string> = {};
+    persons.forEach((_, i) => {
+      if (i === 0) roles[i] = "vendedor";
+      else if (i === 1) roles[i] = "comprador";
+      else roles[i] = "ignorar";
+    });
+    setPersonRoles(roles);
+    setBulkPhase("assign");
+  }
+
+  function buildPrefillData(): Record<string, unknown> {
+    const prefill: Record<string, unknown> = {};
+    const persons = bulkResults.filter((r) => r.type === "cedula");
+    const vehicles = bulkResults.filter((r) => r.type === "libreta");
+
+    // Map persons by role
+    for (let i = 0; i < persons.length; i++) {
+      const role = personRoles[i];
+      if (!role || role === "ignorar") continue;
+
+      const d = persons[i].data;
+      let prefix: string;
+      if (role === "vendedor") prefix = "seller";
+      else if (role === "comprador") prefix = "buyer";
+      else if (role === "co_vendedor") { prefix = "seller2"; prefill.has_seller2 = true; }
+      else if (role === "co_comprador") { prefix = "buyer2"; prefill.has_buyer2 = true; }
+      else continue;
+
+      if (d.full_name) prefill[`${prefix}_full_name`] = d.full_name;
+      if (d.ci_number) prefill[`${prefix}_ci`] = d.ci_number;
+      if (d.nationality) prefill[`${prefix}_nationality`] = d.nationality;
+      if (d.birth_date) prefill[`${prefix}_birth_date`] = d.birth_date;
+      if (d.birth_place) prefill[`${prefix}_birth_place`] = d.birth_place;
+      if (d.civil_status) prefill[`${prefix}_civil_status`] = d.civil_status;
+      if (d.address) prefill[`${prefix}_address`] = d.address;
+      if (d.department) prefill[`${prefix}_department`] = d.department;
+    }
+
+    // Map first vehicle
+    if (vehicles.length > 0) {
+      const v = vehicles[0].data;
+      if (v.brand) prefill.vehicle_brand = v.brand;
+      if (v.model) prefill.vehicle_model = v.model;
+      if (v.year) prefill.vehicle_year = String(v.year);
+      if (v.type) prefill.vehicle_type = v.type;
+      if (v.fuel) prefill.vehicle_fuel = v.fuel;
+      if (v.cylinders) prefill.vehicle_cylinders = String(v.cylinders);
+      if (v.motor_number) prefill.vehicle_motor_number = v.motor_number;
+      if (v.chassis_number) prefill.vehicle_chassis_number = v.chassis_number;
+      if (v.plate) prefill.vehicle_plate = v.plate;
+      if (v.padron) prefill.vehicle_padron = v.padron;
+      if (v.padron_department) prefill.vehicle_padron_department = v.padron_department;
+      if (v.national_code) prefill.vehicle_national_code = v.national_code;
+      if (v.affectation) prefill.vehicle_affectation = v.affectation;
+      if (v.owner_name) prefill.vehicle_owner_name = v.owner_name;
+      if (v.owner_ci) prefill.vehicle_owner_ci = v.owner_ci;
+    }
+
+    return prefill;
+  }
+
+  function handleContinueToForm() {
+    const prefill = buildPrefillData();
+    sessionStorage.setItem("prefill_compraventa", JSON.stringify(prefill));
+    router.push("/compraventa/nueva");
+  }
+
+  const roleOptions = [
+    { value: "vendedor", label: "Vendedor" },
+    { value: "comprador", label: "Comprador" },
+    { value: "co_vendedor", label: "Co-vendedor (cónyuge)" },
+    { value: "co_comprador", label: "Co-comprador (cónyuge)" },
+    { value: "ignorar", label: "Ignorar" },
+  ];
+
   function isImageFile(type: string | null) {
     return type?.startsWith("image/") ?? false;
   }
@@ -278,6 +430,16 @@ export default function FileManager({
         </div>
 
         <div className="flex items-center gap-2">
+          {hasImages && currentFolderId && (
+            <button
+              onClick={bulkExtract}
+              disabled={bulkPhase === "extracting"}
+              className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:opacity-50"
+            >
+              <FileSearch size={16} />
+              Generar compraventa
+            </button>
+          )}
           <button
             onClick={() => setShowNewFolder(true)}
             className="flex items-center gap-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
@@ -476,6 +638,157 @@ export default function FileManager({
           </div>
         )}
       </div>
+
+      {/* Bulk extraction progress */}
+      {bulkPhase === "extracting" && (
+        <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <Loader2 size={20} className="animate-spin text-blue-600" />
+            <div>
+              <p className="text-sm font-medium text-blue-800">
+                Extrayendo archivo {bulkProgress.current} de {bulkProgress.total}...
+              </p>
+              <p className="text-xs text-blue-600 mt-0.5">{bulkProgress.fileName}</p>
+            </div>
+          </div>
+          <div className="mt-3 w-full bg-blue-200 rounded-full h-2">
+            <div
+              className="bg-blue-600 h-2 rounded-full transition-all"
+              style={{ width: `${(bulkProgress.current / bulkProgress.total) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Bulk role assignment panel */}
+      {bulkPhase === "assign" && bulkResults.length > 0 && (
+        <div className="mt-4 bg-white border rounded-lg shadow-sm">
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-gray-50 rounded-t-lg">
+            <div>
+              <h3 className="font-semibold text-gray-800 text-sm">Asignar roles</h3>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Revisá los datos extraídos y asigná quién es vendedor y comprador
+              </p>
+            </div>
+            <button
+              onClick={() => { setBulkPhase("idle"); setBulkResults([]); }}
+              className="p-1 hover:bg-gray-200 rounded"
+            >
+              <X size={16} className="text-gray-500" />
+            </button>
+          </div>
+
+          <div className="p-4 space-y-4">
+            {/* Persons */}
+            {bulkResults
+              .filter((r) => r.type === "cedula")
+              .map((person, idx) => (
+                <div key={person.fileId} className="border rounded-lg p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
+                        Persona
+                      </span>
+                      <span className="text-xs text-gray-500">{person.fileName}</span>
+                    </div>
+                    <select
+                      value={personRoles[idx] ?? "ignorar"}
+                      onChange={(e) =>
+                        setPersonRoles((prev) => ({ ...prev, [idx]: e.target.value }))
+                      }
+                      className="text-sm border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    >
+                      {roleOptions.map((o) => (
+                        <option key={o.value} value={o.value}>{o.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                    {Object.entries(person.data)
+                      .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                      .map(([key, value]) => (
+                        <div key={key} className="text-xs">
+                          <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
+                          <span className="font-medium text-gray-800">{String(value)}</span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              ))}
+
+            {/* Vehicles */}
+            {bulkResults
+              .filter((r) => r.type === "libreta")
+              .map((vehicle) => (
+                <div key={vehicle.fileId} className="border rounded-lg p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
+                      Vehículo
+                    </span>
+                    <span className="text-xs text-gray-500">{vehicle.fileName}</span>
+                    <span className="text-xs text-green-600 ml-auto">Se asigna automáticamente</span>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                    {Object.entries(vehicle.data)
+                      .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                      .map(([key, value]) => (
+                        <div key={key} className="text-xs">
+                          <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
+                          <span className="font-medium text-gray-800">{String(value)}</span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              ))}
+
+            {/* Unknown / errors */}
+            {bulkResults
+              .filter((r) => r.type === "unknown" || r.type === "error")
+              .map((item) => (
+                <div key={item.fileId} className="border border-amber-200 rounded-lg p-3 bg-amber-50">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">
+                      {item.type === "error" ? "Error" : "No clasificado"}
+                    </span>
+                    <span className="text-xs text-gray-500">{item.fileName}</span>
+                  </div>
+                  {"_error" in item.data && (
+                    <p className="text-xs text-red-600 mt-1">{String(item.data._error)}</p>
+                  )}
+                </div>
+              ))}
+
+            {/* Actions */}
+            <div className="flex items-center justify-end gap-3 pt-2 border-t">
+              <button
+                onClick={() => { setBulkPhase("idle"); setBulkResults([]); }}
+                className="px-4 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleContinueToForm}
+                disabled={
+                  bulkResults.filter((r) => r.type === "cedula").length === 0 &&
+                  bulkResults.filter((r) => r.type === "libreta").length === 0
+                }
+                className="flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+              >
+                Continuar a compraventa
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Bulk error */}
+      {bulkError && (
+        <div className="mt-4 bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center justify-between">
+          <span>{bulkError}</span>
+          <button onClick={() => setBulkError("")}><X size={16} /></button>
+        </div>
+      )}
 
       {/* Extraction error */}
       {extractError && (

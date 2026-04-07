@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import TransactionForm from "@/components/TransactionForm";
+import TransactionFormWrapper from "@/components/TransactionFormWrapper";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +19,7 @@ export default async function NuevaCompraventaPage() {
     .single();
 
   return (
-    <TransactionForm
+    <TransactionFormWrapper
       userId={user.id}
       nextMatriz={profile?.next_matriz_number ?? 133}
       nextFolio={profile?.next_folio_number ?? 1}
