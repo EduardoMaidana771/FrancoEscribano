@@ -218,13 +218,6 @@ export default function FileManager({
         continue;
       }
 
-      // Delay between API calls to respect rate limits (4s gap ≈ 15 RPM max)
-      if (i > 0) {
-        setBulkProgress({ current: i + 1, total: targets.length, fileName: `Esperando... → ${file.file_name}` });
-        await new Promise((r) => setTimeout(r, 4000));
-        setBulkProgress({ current: i + 1, total: targets.length, fileName: file.file_name });
-      }
-
       try {
         const { data: blob, error: dlErr } = await supabase.storage
           .from("documents")
