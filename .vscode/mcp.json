@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "mcp-doc": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/.mcp/mcp-doc/server.py"
+      ]
+    }
+  }
+}

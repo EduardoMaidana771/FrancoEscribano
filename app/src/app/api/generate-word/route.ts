@@ -76,7 +76,7 @@ function buildParteVendedora(
   tx: Record<string, unknown>
 ): string {
   if (seller.is_company) {
-    let t = `PARTE VENDEDORA: ${seller.company_name || "___"} persona jurídica`;
+    let t = `1.PARTE VENDEDORA. – ${seller.company_name || "___"}, persona jurídica`;
     if (seller.rut) t += ` inscripta en el RUT de la DGI con el número ${seller.rut}`;
     t += `, con domicilio en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
     if (seller.representative_name) {
@@ -90,7 +90,7 @@ function buildParteVendedora(
 
   // Two co-sellers (married couple)
   if (seller2) {
-    let t = `PARTE VENDEDORA: ${seller.full_name || "___"} y ${seller2.full_name || "___"}`;
+    let t = `1.PARTE VENDEDORA. – ${seller.full_name || "___"} y ${seller2.full_name || "___"}`;
     t += `, ${formatCivilStatusSimple(seller)}`;
     t += `, con C.I ${seller.ci_number || "___"} y ${seller2.ci_number || "___"} respectivamente`;
     t += `, ${seller.nationality || "orientales"}, mayores de edad`;
@@ -105,7 +105,7 @@ function buildParteVendedora(
   }
 
   // Single person seller
-  let t = `PARTE VENDEDORA: ${seller.full_name || "___"}`;
+  let t = `1.PARTE VENDEDORA. – ${seller.full_name || "___"}`;
   t += `, ${seller.nationality || "oriental"}, mayor de edad`;
   t += `, ${formatCivilStatusSimple(seller)}`;
   t += `, titular de la cédula de identidad número ${seller.ci_number || "___"}`;
@@ -125,7 +125,7 @@ function buildParteCompradora(
   tx: Record<string, unknown>
 ): string {
   if (buyer.is_company) {
-    let t = `PARTE COMPRADORA: ${buyer.company_name || "___"} persona jurídica`;
+    let t = `2. PARTE COMPRADORA. – ${buyer.company_name || "___"}, persona jurídica`;
     if (buyer.rut) t += ` inscripta en el RUT de la DGI con el número ${buyer.rut}`;
     t += `, con domicilio en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
     if (buyer.representative_name) {
@@ -138,7 +138,7 @@ function buildParteCompradora(
   }
 
   if (buyer2) {
-    let t = `PARTE COMPRADORA: ${buyer.full_name || "___"} y ${buyer2.full_name || "___"}`;
+    let t = `2. PARTE COMPRADORA. – ${buyer.full_name || "___"} y ${buyer2.full_name || "___"}`;
     t += `, ${formatCivilStatusSimple(buyer)}`;
     t += `, con C.I ${buyer.ci_number || "___"} y ${buyer2.ci_number || "___"} respectivamente`;
     t += `, ${buyer.nationality || "orientales"}, mayores de edad`;
@@ -147,7 +147,7 @@ function buildParteCompradora(
     return t;
   }
 
-  let t = `PARTE COMPRADORA: ${buyer.full_name || "___"}`;
+  let t = `2. PARTE COMPRADORA. – ${buyer.full_name || "___"}`;
   t += `, ${buyer.nationality || "oriental"}, mayor de edad`;
   t += `, ${formatCivilStatusSimple(buyer)}`;
   t += `, titular de la cédula de identidad número ${buyer.ci_number || "___"}`;
@@ -161,30 +161,6 @@ function buildParteCompradora(
   return t;
 }
 
-function buildBienQueSeVende(
-  vehicle: Record<string, unknown>,
-  plateEntries: PlateHistoryEntry[]
-): string {
-  let t = `BIEN QUE SE VENDE. La parte vendedora vende a la parte compradora y ésta adquiere libre de toda obligación, gravamen y multas el AUTOMOVIL:`;
-  t += ` tipo ${vehicle.type || "___"}`;
-  t += `, Marca ${vehicle.brand || "___"}`;
-  t += `, Modelo: ${vehicle.model || "___"}`;
-  t += `, matrícula ${vehicle.plate || "___"}`;
-  t += `, padrón ${vehicle.padron || "___"} de ${vehicle.padron_department || "___"}`;
-  t += `, año ${vehicle.year || "___"}`;
-  t += `, Motor ${vehicle.motor_number || "___"} a ${vehicle.fuel || "___"}`;
-  t += `, chasis: ${vehicle.chassis_number || "___"}`;
-  // Plate history (inline)
-  if (plateEntries && plateEntries.length > 0) {
-    const hist = plateEntries.map(e =>
-      `padrón ${e.padron || "___"} de ${e.department || "___"} y matrícula ${e.matricula || "___"}`
-    ).join(", ");
-    t += ` (antes ${hist})`;
-  }
-  t += ".";
-  return t;
-}
-
 function buildPrecioTexto(tx: Record<string, unknown>): string {
   const currency = tx.price_currency === "USD"
     ? "dólares estadounidenses"
@@ -192,7 +168,7 @@ function buildPrecioTexto(tx: Record<string, unknown>): string {
   const symbol = tx.price_currency === "USD" ? "U$S" : "$";
   const amount = tx.price_amount || "___";
   const words = tx.price_in_words || "___";
-  let t = `PRECIO. El precio de esta compraventa asciende a la suma de ${currency} ${String(words).toUpperCase()} (${symbol} ${amount})`;
+  let t = `5. PRECIO. - El precio de esta compraventa asciende a la suma de ${currency} ${String(words)} (${symbol} ${amount})`;
 
   switch (tx.payment_type) {
     case "contado":
@@ -217,21 +193,47 @@ function buildPrecioTexto(tx: Record<string, unknown>): string {
 }
 
 function buildTradicionTexto(): string {
-  return "TRADICION Como tradición la parte vendedora entrega a la parte compradora la posesión del vehículo objeto de este contrato, que tomo antes de este acto.";
+  return "6. TRADICIÓN. - Como tradición la parte vendedora trasmite a la parte compradora todos los derechos de propiedad y posesión que sobre el referido vehículo le corresponden, el que toma en este acto. -";
 }
 
 function buildDeclaracionTexto(tx: Record<string, unknown>): string {
   const bps = tx.bps_status as string;
   let t: string;
   if (bps === "si") {
-    t = "DECLARACION. La parte vendedora declara bajo juramento: sí ser contribuyente al B.P.S, y si corresponder el C.U.D. por estar comprendida en la ley 17930 y su decreto reglamentario.";
+    t = ". DECLARACIONES. - La parte vendedora: declara bajo juramento: SI ser contribuyente de BPS, IRAE y/o IMEBA.";
   } else {
-    t = "DECLARACION. La parte vendedora declaro bajo juramento no estar comprendido en las disposiciones de la ley 16170, y no corresponder el impuesto de IRAE e IMEBA.";
+    t = ". DECLARACIONES. - La parte vendedora: declara bajo juramento: NO ser contribuyente de BPS, IRAE, ni de IMEBA.-";
   }
+  t += " La parte adquirente: i) Conoce que es su responsabilidad verificar que número de motor y chasis coincidan con el indicado en la libreta de circulación, exonerando de responsabilidad al Escribano actuante;";
+  return t;
+}
+
+function buildDeclaracionResponsabilidadTexto(tx: Record<string, unknown>): string {
+  let t = "La parte vendedora es responsable de toda obligación, gravamen, deudas por multas o patente de rodados, infracciones y demás responsabilidades civiles, tributarias y penales que puedan resultar del vehículo hasta el día de hoy.";
   if (tx.has_traffic_responsibility_clause) {
-    t += ` II) Ambas partes declaran conocer que para el caso de surgir deudas por concepto de multas de policía caminera y/o tránsito, el pago corresponde a la parte vendedora hasta el ${formatDate(tx.traffic_responsibility_date as string | null)}, en virtud de no estar actualizado en tiempo y forma real el sistema del sucive con la información brindada.`;
+    t += ` Asimismo, ambas partes declaran que por multas de policía caminera y/o tránsito, el pago corresponde a la parte vendedora hasta el ${formatDate(tx.traffic_responsibility_date as string | null)}.`;
   }
   return t;
+}
+
+function buildSolicitudIntervencionTexto(
+  tx: Record<string, unknown>,
+  profile: Record<string, unknown>,
+  seller: Record<string, unknown>,
+  seller2: Record<string, unknown> | null,
+  buyer: Record<string, unknown>,
+  buyer2: Record<string, unknown> | null,
+): string {
+  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
+  const firmas = buildFirmas(seller, seller2, buyer, buyer2, tx);
+  return `10. SOLICITUD DE INTERVENCIÓN NOTARIAL. - Las partes solicitan al Escribano ${name}, que certifique el otorgamiento y suscripción de este contrato. - De conformidad las partes suscriben el mismo escrito en el lugar y fecha indicados ut supra. ${firmas.vendedor.replace("PARTE VENDEDORA- ", "")}. ${firmas.comprador.replace("PARTE COMPRADORA – ", "")}.`;
+}
+
+function buildCertificadoSeguroTexto(tx: Record<string, unknown>, profile: Record<string, unknown>): string {
+  if (!tx.insurance_policy_number) return "";
+  const city = profile?.city || "Maldonado";
+  const date = formatDateLetras(tx.transaction_date as string | null);
+  return `CERTIFICO QUE: Tuve a la vista Certificado de Seguro Obligatorio póliza número ${tx.insurance_policy_number}, expedido por ${tx.insurance_company || "___"} y vencimiento el ${formatDateShort(tx.insurance_expiry as string | null)}, dando cumplimento a la ley 18412. EN FE DE ELLO a solicitud de parte interesada y para su presentación ante quien corresponda expido el presente que sello, signo y firmo en ${city} el día ${date}.`;
 }
 
 function buildFirmas(
@@ -268,8 +270,7 @@ function buildCertificoQue(
   seller2: Record<string, unknown> | null,
   buyer: Record<string, unknown>,
   tx: Record<string, unknown>,
-  profile: Record<string, unknown>,
-  vehicle: Record<string, unknown>
+  profile: Record<string, unknown>
 ): string {
   // I) Authentication of signatures
   const names: string[] = [];
@@ -394,7 +395,6 @@ function buildPrimerTestimonio(
   const n = tx.matriz_number || "___";
   const city = profile?.city || "Maldonado";
   const date = formatDateLetras(tx.transaction_date as string | null);
-  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
   const serieProto = tx.paper_series_proto || "___";
   const numProto = tx.paper_number_proto || "___";
   const serieTest = tx.paper_series_testimony || "___";
@@ -408,13 +408,6 @@ function buildPrimerTestimonio(
 }
 
 // ─── TYPES ───────────────────────────────────────────────────
-
-interface PlateHistoryEntry {
-  department: string;
-  padron: string;
-  matricula: string;
-  date: string;
-}
 
 // ─── MAIN HANDLER ────────────────────────────────────────────
 
@@ -496,21 +489,9 @@ export async function POST(request: NextRequest) {
   const vehicle = tx.vehicle as Record<string, unknown>;
   const prof = (profile || {}) as Record<string, unknown>;
 
-  // Parse plate history entries
-  let plateEntries: PlateHistoryEntry[] = [];
-  if (tx.plate_history_entries) {
-    try {
-      plateEntries =
-        typeof tx.plate_history_entries === "string"
-          ? JSON.parse(tx.plate_history_entries)
-          : tx.plate_history_entries;
-    } catch {
-      plateEntries = [];
-    }
-  }
-
   // Build firmas
   const firmas = buildFirmas(seller, seller2, buyer, buyer2, tx);
+  const cuotaParte = tx?.election_declaration || "1/1";
 
   // Build template data — all text blocks pre-formatted
   const data = {
@@ -522,25 +503,45 @@ export async function POST(request: NextRequest) {
     // Dates
     fecha_letras: formatDateLetras(tx.transaction_date),
 
+    // Clauses
+    clausula_vendedora: buildParteVendedora(seller, seller2, tx),
+    clausula_compradora: buildParteCompradora(buyer, buyer2, tx),
+    cuota_parte: cuotaParte,
+
     // Main sections — pre-built text
-    parte_vendedora: buildParteVendedora(seller, seller2, tx),
-    parte_compradora: buildParteCompradora(buyer, buyer2, tx),
-    bien_que_se_vende: buildBienQueSeVende(vehicle, plateEntries),
     precio_texto: buildPrecioTexto(tx as unknown as Record<string, unknown>),
     tradicion_texto: buildTradicionTexto(),
     declaracion_texto: buildDeclaracionTexto(tx as unknown as Record<string, unknown>),
+    declaracion_responsabilidad_texto: buildDeclaracionResponsabilidadTexto(tx as unknown as Record<string, unknown>),
+    solicitud_intervencion_texto: buildSolicitudIntervencionTexto(tx as unknown as Record<string, unknown>, prof, seller, seller2, buyer, buyer2),
+
+    // Vehicle table
+    vehicle_type: vehicle.type || "___",
+    vehicle_brand: vehicle.brand || "___",
+    vehicle_model: vehicle.model || "___",
+    vehicle_year: vehicle.year || "___",
+    vehicle_padron: vehicle.padron || "___",
+    vehicle_padron_department: vehicle.padron_department || "___",
+    vehicle_plate: vehicle.plate || "___",
+    vehicle_motor: vehicle.motor_number || "___",
+    vehicle_fuel: vehicle.fuel || "___",
+    vehicle_chassis: vehicle.chassis_number || "___",
+    vehicle_cylinders: vehicle.cylinders || "___",
 
     // Signatures
     firmas_vendedor: firmas.vendedor,
     firmas_comprador: firmas.comprador,
 
     // Certification & protocol
-    certifico_que: buildCertificoQue(seller, seller2, buyer, tx as unknown as Record<string, unknown>, prof, vehicle),
+    certifico_que: buildCertificoQue(seller, seller2, buyer, tx as unknown as Record<string, unknown>, prof),
     protocolizacion_texto: buildProtocolizacion(seller, seller2, buyer, tx as unknown as Record<string, unknown>, prof, vehicle),
     primer_testimonio: buildPrimerTestimonio(tx as unknown as Record<string, unknown>, prof),
 
     // Protocol numbers (used in template directly)
     matriz_numero: tx.matriz_number || "___",
+
+    // Optional trailing insurance block
+    certificado_seguro_texto: buildCertificadoSeguroTexto(tx as unknown as Record<string, unknown>, prof),
   };
 
   doc.render(data);

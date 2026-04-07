@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "docx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "150be87ff7b18f273ad07da303adb1cf2ca21cc3e76db7a2cf0373405178a278"
+    },
+    "docx-manipulation": {
+      "source": "claude-office-skills/skills",
+      "sourceType": "github",
+      "computedHash": "bcc46df3f1891c0150f209857b7e510ab016925c71bca0bf48ade99d02f0bc80"
+    },
+    "pdf-to-docx": {
+      "source": "claude-office-skills/skills",
+      "sourceType": "github",
+      "computedHash": "eba1988b444c9b3a9ae7e547f7163706a00ac5c2c297677b9cafaa0b3cf42f4c"
+    }
+  }
+}
