@@ -74,138 +74,134 @@ function buildParteVendedora(
   seller: Record<string, unknown>,
   seller2: Record<string, unknown> | null,
   tx: Record<string, unknown>
-): string {
+): { titulo: string; texto: string } {
   if (seller.is_company) {
-    let t = `1.PARTE VENDEDORA. – ${seller.company_name || "___"}, persona jurídica`;
-    if (seller.rut) t += ` inscripta en el RUT de la DGI con el número ${seller.rut}`;
-    t += `, con domicilio en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
+    const name = String(seller.company_name || "___");
+    let texto = ", persona jurídica";
+    if (seller.rut) texto += ` inscripta en el RUT de la DGI con el número ${seller.rut}`;
+    texto += `, con domicilio en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
     if (seller.representative_name) {
-      t += `, representada en este acto por ${seller.representative_name}`;
-      if (seller.representative_ci) t += `, con cédula de identidad número ${seller.representative_ci}`;
-      if (seller.representative_address) t += `, domiciliado en ${seller.representative_address}`;
+      texto += `, representada en este acto por ${seller.representative_name}`;
+      if (seller.representative_ci) texto += `, con cédula de identidad número ${seller.representative_ci}`;
+      if (seller.representative_address) texto += `, domiciliado en ${seller.representative_address}`;
     }
-    t += ".";
-    return t;
+    texto += ".";
+    return { titulo: `1.PARTE VENDEDORA. – ${name}`, texto };
   }
 
-  // Two co-sellers (married couple)
   if (seller2) {
-    let t = `1.PARTE VENDEDORA. – ${seller.full_name || "___"} y ${seller2.full_name || "___"}`;
-    t += `, ${formatCivilStatusSimple(seller)}`;
-    t += `, con C.I ${seller.ci_number || "___"} y ${seller2.ci_number || "___"} respectivamente`;
-    t += `, ${seller.nationality || "orientales"}, mayores de edad`;
-    t += `, domiciliados en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
+    const name = `${seller.full_name || "___"} y ${seller2.full_name || "___"}`;
+    let texto = `, ${formatCivilStatusSimple(seller)}`;
+    texto += `, con C.I ${seller.ci_number || "___"} y ${seller2.ci_number || "___"} respectivamente`;
+    texto += `, ${seller.nationality || "orientales"}, mayores de edad`;
+    texto += `, domiciliados en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
     if (tx.seller_has_representative) {
-      t += `, representado en este acto por ${tx.seller_representative_name || "___"}`;
-      t += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
-      t += ` y domicilio en ${tx.seller_representative_address || "___"}`;
+      texto += `, representado en este acto por ${tx.seller_representative_name || "___"}`;
+      texto += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
+      texto += ` y domicilio en ${tx.seller_representative_address || "___"}`;
     }
-    t += ".";
-    return t;
+    texto += ".";
+    return { titulo: `1.PARTE VENDEDORA. – ${name}`, texto };
   }
 
-  // Single person seller
-  let t = `1.PARTE VENDEDORA. – ${seller.full_name || "___"}`;
-  t += `, ${seller.nationality || "oriental"}, mayor de edad`;
-  t += `, ${formatCivilStatusSimple(seller)}`;
-  t += `, titular de la cédula de identidad número ${seller.ci_number || "___"}`;
-  t += `, con domicilio en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
+  const name = String(seller.full_name || "___");
+  let texto = `, ${seller.nationality || "oriental"}, mayor de edad`;
+  texto += `, ${formatCivilStatusSimple(seller)}`;
+  texto += `, titular de la cédula de identidad número ${seller.ci_number || "___"}`;
+  texto += `, domiciliado en la calle ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
   if (tx.seller_has_representative) {
-    t += `, representado en este acto por ${tx.seller_representative_name || "___"}`;
-    t += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
-    t += ` y domicilio en ${tx.seller_representative_address || "___"}`;
+    texto += `, representado en este acto por ${tx.seller_representative_name || "___"}`;
+    texto += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
+    texto += ` y domicilio en ${tx.seller_representative_address || "___"}`;
   }
-  t += ".";
-  return t;
+  texto += ".";
+  return { titulo: `1.PARTE VENDEDORA. – ${name}`, texto };
 }
 
 function buildParteCompradora(
   buyer: Record<string, unknown>,
   buyer2: Record<string, unknown> | null,
   tx: Record<string, unknown>
-): string {
+): { titulo: string; texto: string } {
   if (buyer.is_company) {
-    let t = `2. PARTE COMPRADORA. – ${buyer.company_name || "___"}, persona jurídica`;
-    if (buyer.rut) t += ` inscripta en el RUT de la DGI con el número ${buyer.rut}`;
-    t += `, con domicilio en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
+    const name = String(buyer.company_name || "___");
+    let texto = ", persona jurídica";
+    if (buyer.rut) texto += ` inscripta en el RUT de la DGI con el número ${buyer.rut}`;
+    texto += `, con domicilio en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
     if (buyer.representative_name) {
-      t += `, representada en este acto por ${buyer.representative_name}`;
-      if (buyer.representative_ci) t += `, con cédula de identidad número ${buyer.representative_ci}`;
-      if (buyer.representative_address) t += `, domiciliado en ${buyer.representative_address}`;
+      texto += `, representada en este acto por ${buyer.representative_name}`;
+      if (buyer.representative_ci) texto += `, con cédula de identidad número ${buyer.representative_ci}`;
+      if (buyer.representative_address) texto += `, domiciliado en ${buyer.representative_address}`;
     }
-    t += ".";
-    return t;
+    texto += ".";
+    return { titulo: `2. PARTE COMPRADORA. – ${name}`, texto };
   }
 
   if (buyer2) {
-    let t = `2. PARTE COMPRADORA. – ${buyer.full_name || "___"} y ${buyer2.full_name || "___"}`;
-    t += `, ${formatCivilStatusSimple(buyer)}`;
-    t += `, con C.I ${buyer.ci_number || "___"} y ${buyer2.ci_number || "___"} respectivamente`;
-    t += `, ${buyer.nationality || "orientales"}, mayores de edad`;
-    t += `, domiciliados en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
-    t += ".";
-    return t;
+    const name = `${buyer.full_name || "___"} y ${buyer2.full_name || "___"}`;
+    let texto = `, ${formatCivilStatusSimple(buyer)}`;
+    texto += `, con C.I ${buyer.ci_number || "___"} y ${buyer2.ci_number || "___"} respectivamente`;
+    texto += `, ${buyer.nationality || "orientales"}, mayores de edad`;
+    texto += `, domiciliados en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
+    texto += ".";
+    return { titulo: `2. PARTE COMPRADORA. – ${name}`, texto };
   }
 
-  let t = `2. PARTE COMPRADORA. – ${buyer.full_name || "___"}`;
-  t += `, ${buyer.nationality || "oriental"}, mayor de edad`;
-  t += `, ${formatCivilStatusSimple(buyer)}`;
-  t += `, titular de la cédula de identidad número ${buyer.ci_number || "___"}`;
-  t += `, domiciliado en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
+  const name = String(buyer.full_name || "___");
+  let texto = `, ${buyer.nationality || "oriental"}, mayor de edad`;
+  texto += `, titular de la cedula de identidad número ${buyer.ci_number || "___"}`;
+  texto += `, ${formatCivilStatusSimple(buyer)}`;
+  texto += `, domiciliado en la calle ${buyer.address || "___"}, Departamento de ${buyer.department || "___"}`;
   if (tx.buyer_has_representative) {
-    t += `, representado en este acto por ${tx.buyer_representative_name || "___"}`;
-    t += `, con cédula de identidad número ${tx.buyer_representative_ci || "___"}`;
-    t += ` y domicilio en ${tx.buyer_representative_address || "___"}`;
+    texto += `, representado en este acto por ${tx.buyer_representative_name || "___"}`;
+    texto += `, con cédula de identidad número ${tx.buyer_representative_ci || "___"}`;
+    texto += ` y domicilio en ${tx.buyer_representative_address || "___"}`;
   }
-  t += ".";
-  return t;
+  texto += ".";
+  return { titulo: `2. PARTE COMPRADORA. – ${name}`, texto };
 }
 
-function buildPrecioTexto(tx: Record<string, unknown>): string {
-  const currency = tx.price_currency === "USD"
+function buildPrecio(tx: Record<string, unknown>): {
+  moneda: string;
+  monto: string;
+  pago: string;
+} {
+  const moneda = tx.price_currency === "USD"
     ? "dólares estadounidenses"
     : "pesos uruguayos";
   const symbol = tx.price_currency === "USD" ? "U$S" : "$";
   const amount = tx.price_amount || "___";
   const words = tx.price_in_words || "___";
-  let t = `5. PRECIO. - El precio de esta compraventa asciende a la suma de ${currency} ${String(words)} (${symbol} ${amount})`;
+  const monto = `${String(words)} (${symbol} ${amount}, oo)`;
 
+  let pago: string;
   switch (tx.payment_type) {
     case "contado":
-      t += `, que se abona totalmente en este acto, al contado, suma por la cual se otorga total carta de pago.`;
+      pago = `, pagaderos al contado, en este acto, suma por la cual la parte vendedora entrega a la parte compradora carta total y eficaz de pago por el total del precio estipulado, declarando no tener más nada que reclamar por ningún concepto. -`;
       break;
     case "contado_cheque":
-      t += `, que se abona totalmente en este acto, mediante cheque de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total y eficaz carta de pago.`;
+      pago = `, que se abona totalmente en este acto, mediante cheque de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total y eficaz carta de pago.`;
       break;
     case "contado_transferencia":
-      t += `, que se abona totalmente en este acto, mediante transferencia bancaria de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total carta de pago.`;
+      pago = `, que se abona totalmente en este acto, mediante transferencia bancaria de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total carta de pago.`;
       break;
     case "saldo_precio":
-      t += `, pagaderos en ${tx.payment_installments_count || "___"} cuotas de ${symbol} ${tx.payment_installment_amount || "___"} cada una. ${tx.payment_detail || ""}`;
+      pago = `, pagaderos en ${tx.payment_installments_count || "___"} cuotas de ${symbol} ${tx.payment_installment_amount || "___"} cada una. ${tx.payment_detail || ""}`;
       break;
     case "mixto":
-      t += `, parte al contado (${symbol} ${tx.payment_cash_amount || "___"}) y ${tx.payment_detail || "saldo en cuotas"}, suma por la cual se otorga total carta de pago.`;
+      pago = `, parte al contado (${symbol} ${tx.payment_cash_amount || "___"}) y ${tx.payment_detail || "saldo en cuotas"}, suma por la cual se otorga total carta de pago.`;
       break;
     default:
-      t += `, que fueron abonados antes de este acto, suma por la cual la parte vendedora otorga total carta de pago.`;
+      pago = `, que fueron abonados antes de este acto, suma por la cual la parte vendedora otorga total carta de pago.`;
   }
-  return t;
+  return { moneda, monto, pago };
 }
 
-function buildTradicionTexto(): string {
-  return "6. TRADICIÓN. - Como tradición la parte vendedora trasmite a la parte compradora todos los derechos de propiedad y posesión que sobre el referido vehículo le corresponden, el que toma en este acto. -";
-}
-
-function buildDeclaracionTexto(tx: Record<string, unknown>): string {
-  const bps = tx.bps_status as string;
-  let t: string;
-  if (bps === "si") {
-    t = ". DECLARACIONES. - La parte vendedora: declara bajo juramento: SI ser contribuyente de BPS, IRAE y/o IMEBA.";
-  } else {
-    t = ". DECLARACIONES. - La parte vendedora: declara bajo juramento: NO ser contribuyente de BPS, IRAE, ni de IMEBA.-";
+function buildDeclaracionBps(bpsStatus: string | unknown): string {
+  if (bpsStatus === "si") {
+    return "SI ser contribuyente de BPS, IRAE y/o IMEBA.";
   }
-  t += " La parte adquirente: i) Conoce que es su responsabilidad verificar que número de motor y chasis coincidan con el indicado en la libreta de circulación, exonerando de responsabilidad al Escribano actuante;";
-  return t;
+  return "NO ser contribuyente de BPS, IRAE, ni de IMEBA.-";
 }
 
 function buildDeclaracionResponsabilidadTexto(tx: Record<string, unknown>): string {
@@ -216,53 +212,45 @@ function buildDeclaracionResponsabilidadTexto(tx: Record<string, unknown>): stri
   return t;
 }
 
-function buildSolicitudIntervencionTexto(
-  tx: Record<string, unknown>,
-  profile: Record<string, unknown>,
-  seller: Record<string, unknown>,
-  seller2: Record<string, unknown> | null,
-  buyer: Record<string, unknown>,
-  buyer2: Record<string, unknown> | null,
-): string {
-  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
-  const firmas = buildFirmas(seller, seller2, buyer, buyer2, tx);
-  return `10. SOLICITUD DE INTERVENCIÓN NOTARIAL. - Las partes solicitan al Escribano ${name}, que certifique el otorgamiento y suscripción de este contrato. - De conformidad las partes suscriben el mismo escrito en el lugar y fecha indicados ut supra. ${firmas.vendedor.replace("PARTE VENDEDORA- ", "")}. ${firmas.comprador.replace("PARTE COMPRADORA – ", "")}.`;
-}
-
-function buildCertificadoSeguroTexto(tx: Record<string, unknown>, profile: Record<string, unknown>): string {
-  if (!tx.insurance_policy_number) return "";
-  const city = profile?.city || "Maldonado";
-  const date = formatDateLetras(tx.transaction_date as string | null);
-  return `CERTIFICO QUE: Tuve a la vista Certificado de Seguro Obligatorio póliza número ${tx.insurance_policy_number}, expedido por ${tx.insurance_company || "___"} y vencimiento el ${formatDateShort(tx.insurance_expiry as string | null)}, dando cumplimento a la ley 18412. EN FE DE ELLO a solicitud de parte interesada y para su presentación ante quien corresponda expido el presente que sello, signo y firmo en ${city} el día ${date}.`;
-}
-
-function buildFirmas(
+function buildFirmasTexto(
   seller: Record<string, unknown>,
   seller2: Record<string, unknown> | null,
   buyer: Record<string, unknown>,
   buyer2: Record<string, unknown> | null,
   tx: Record<string, unknown>
-): { vendedor: string; comprador: string } {
-  let v: string;
+): string {
+  const signers: string[] = [];
+
+  // Seller signer(s)
   if (seller.is_company && seller.representative_name) {
-    v = `PARTE VENDEDORA- Hay una firma de ${String(seller.representative_name).toUpperCase()}`;
-  } else if (seller2) {
-    v = `PARTE VENDEDORA- Hay una firma de ${String(seller.full_name || "___").toUpperCase()} y otra de ${String(seller2.full_name || "___").toUpperCase()}`;
+    signers.push(String(seller.representative_name));
   } else if (tx.seller_has_representative) {
-    v = `PARTE VENDEDORA- Hay una firma de ${String(tx.seller_representative_name || "___").toUpperCase()}`;
+    signers.push(String(tx.seller_representative_name || "___"));
   } else {
-    v = `PARTE VENDEDORA- Hay una firma de ${String(seller.full_name || "___").toUpperCase()}`;
+    signers.push(String(seller.full_name || "___"));
+    if (seller2) signers.push(String(seller2.full_name || "___"));
   }
 
-  let c: string;
+  // Buyer signer(s)
   if (buyer.is_company && buyer.representative_name) {
-    c = `PARTE COMPRADORA – Hay una firma de ${String(buyer.representative_name).toUpperCase()}`;
-  } else if (buyer2) {
-    c = `PARTE COMPRADORA – Hay una firma de ${String(buyer.full_name || "___").toUpperCase()} y otra de ${String(buyer2.full_name || "___").toUpperCase()}`;
+    signers.push(String(buyer.representative_name));
   } else {
-    c = `PARTE COMPRADORA – Hay una firma de ${String(buyer.full_name || "___").toUpperCase()}`;
+    signers.push(String(buyer.full_name || "___"));
+    if (buyer2) signers.push(String(buyer2.full_name || "___"));
   }
-  return { vendedor: v, comprador: c };
+
+  if (signers.length === 1) {
+    return `Hay una firma de ${signers[0]}.`;
+  }
+  let result = `Hay una firma de ${signers[0]}`;
+  for (let i = 1; i < signers.length; i++) {
+    if (i === signers.length - 1) {
+      result += ` y otra de ${signers[i]}`;
+    } else {
+      result += `, otra de ${signers[i]}`;
+    }
+  }
+  return result + ".";
 }
 
 function buildCertificoQue(
@@ -270,9 +258,8 @@ function buildCertificoQue(
   seller2: Record<string, unknown> | null,
   buyer: Record<string, unknown>,
   tx: Record<string, unknown>,
-  profile: Record<string, unknown>
-): string {
-  // I) Authentication of signatures
+): { nombres: string; cedulas_texto: string; secciones: string } {
+  // Collect signer names and CIs
   const names: string[] = [];
   const cis: string[] = [];
   if (tx.seller_has_representative) {
@@ -297,71 +284,68 @@ function buildCertificoQue(
     cis.push(String(buyer.ci_number || "___"));
   }
 
-  let t = `CERTIFICO QUE: I) Las firmas que anteceden son auténticas, fueron puestas en mi presencia y pertenecen a personas hábiles que no conozco, pero acreditaron su identidad con los documentos respectivos señores ${names.join(", ")}`;
+  // nombres: bold in template — includes trailing ", "
+  const nombres = names.join(" y ") + ", ";
+
+  // cedulas_texto: normal text
+  let cedulas_texto: string;
   if (cis.length > 1) {
-    t += `, titulares de la cédula de identidad número ${cis.join(" y ")} respectivamente`;
+    cedulas_texto = `titulares de la cedula de identidad número ${cis.join(" y ")} respectivamente`;
   } else {
-    t += `, titular de la cédula de identidad número ${cis[0]}`;
+    cedulas_texto = `titular de la cédula de identidad número ${cis[0]}`;
   }
-  t += `, cuyos demás datos surgen del documento que antecede, a quienes leí y así lo otorgaron.`;
+  cedulas_texto += `, cuyos demás datos surgen del documento que antecede, a quienes leí y así lo otorgaron.`;
+
+  // secciones: conditional numbered sections (II, III, IV, etc.)
+  let secciones = "";
 
   // II) Title chain
   if (tx.previous_owner_name || tx.previous_title_date) {
     const civilDesc = formatCivilStatusSimple(seller);
-    t += ` II) La parte vendedora siendo ${civilDesc} hubo el bien que se enajena de ${tx.previous_owner_name || "___"}`;
-    t += `, según documento privado de fecha ${formatDateShort(tx.previous_title_date as string | null)}`;
-    t += ` certificado y protocolizado por el Escribano ${tx.previous_title_notary || "___"} en la misma fecha`;
-    t += `, e inscripta en el Registro Mobiliario de ${tx.previous_title_registry || "___"} con el número ${tx.previous_title_number || "___"} el ${formatDateShort(tx.previous_title_registry_date as string | null)}.`;
+    secciones += ` II) La parte vendedora siendo ${civilDesc} hubo el bien que se enajena de ${tx.previous_owner_name || "___"}`;
+    secciones += `, según documento privado de fecha ${formatDateShort(tx.previous_title_date as string | null)}`;
+    secciones += ` certificado y protocolizado por el Escribano ${tx.previous_title_notary || "___"} en la misma fecha`;
+    secciones += `, e inscripta en el Registro Mobiliario de ${tx.previous_title_registry || "___"} con el número ${tx.previous_title_number || "___"} el ${formatDateShort(tx.previous_title_registry_date as string | null)}.`;
   }
 
   // III) Power of attorney
   if (tx.seller_has_representative) {
-    t += ` III) El señor ${tx.seller_representative_name || "___"}, lo hace en representación de ${seller.is_company ? seller.company_name : seller.full_name || "___"}`;
-    t += ` según ${tx.seller_representative_power_type || "poder"} de fecha ${formatDateShort(tx.seller_representative_power_date as string | null)}`;
-    t += ` certificado y protocolizado por el Escribano ${tx.seller_representative_power_notary || "___"} en la misma fecha`;
-    t += `, con facultades para este acto y vigente a la fecha.`;
+    secciones += ` III) El señor ${tx.seller_representative_name || "___"}, lo hace en representación de ${seller.is_company ? seller.company_name : seller.full_name || "___"}`;
+    secciones += ` según ${tx.seller_representative_power_type || "poder"} de fecha ${formatDateShort(tx.seller_representative_power_date as string | null)}`;
+    secciones += ` certificado y protocolizado por el Escribano ${tx.seller_representative_power_notary || "___"} en la misma fecha`;
+    secciones += `, con facultades para este acto y vigente a la fecha.`;
   }
 
   // Insurance
   if (tx.insurance_policy_number) {
-    t += ` Tuve a la vista Certificado de Seguro Obligatorio póliza número ${tx.insurance_policy_number}`;
-    t += ` expedido por ${tx.insurance_company || "___"}`;
-    t += ` y vencimiento el ${formatDateShort(tx.insurance_expiry as string | null)}`;
-    t += `, dando cumplimento a la ley 18412.`;
+    secciones += ` Tuve a la vista Certificado de Seguro Obligatorio póliza número ${tx.insurance_policy_number}`;
+    secciones += ` expedido por ${tx.insurance_company || "___"}`;
+    secciones += ` y vencimiento el ${formatDateShort(tx.insurance_expiry as string | null)}`;
+    secciones += `, dando cumplimento a la ley 18412.`;
   }
 
   // BPS cert
   if (tx.bps_status === "si" && tx.bps_cert_number) {
-    t += ` Tuve a la vista el Certificado Común número ${tx.bps_cert_number} expedido por el Banco de Previsión Social el ${formatDateShort(tx.bps_cert_date as string | null)}.`;
+    secciones += ` Tuve a la vista el Certificado Común número ${tx.bps_cert_number} expedido por el Banco de Previsión Social el ${formatDateShort(tx.bps_cert_date as string | null)}.`;
   }
 
   // CUD
   if (tx.cud_number) {
-    t += ` Certificado Único Departamental (CUD) ${tx.cud_number} expedido el ${formatDateShort(tx.cud_date as string | null)}.`;
+    secciones += ` Certificado Único Departamental (CUD) ${tx.cud_number} expedido el ${formatDateShort(tx.cud_date as string | null)}.`;
   }
 
   // Tax declaration
   if (tx.bps_status !== "si") {
-    t += ` No se controla el Certificado Único Departamental en virtud de lo declarado por la parte vendedora, declaro no corresponder los impuestos de Irae e Imeba por no estar comprendido en la ley 17930 y su decreto reglamentario.`;
+    secciones += ` No se controla el Certificado Único Departamental en virtud de lo declarado por la parte vendedora, declaro no corresponder los impuestos de Irae e Imeba por no estar comprendido en la ley 17930 y su decreto reglamentario.`;
   }
 
-  // Closing
-  const city = profile?.city || "Maldonado";
-  const date = formatDateLetras(tx.transaction_date as string | null);
-  const initials = profile?.notary_initials || "F.C.";
-  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
-  t += ` EN FE DE ELLO a solicitud de parte interesada y para su presentación ante quien corresponda expido el presente que sello, signo y firmo en ${city} el día ${date}. ${initials} ${name}.`;
-
-  return t;
+  return { nombres, cedulas_texto, secciones };
 }
 
-function buildProtocolizacion(
+function buildProtoPartes(
   seller: Record<string, unknown>,
   seller2: Record<string, unknown> | null,
-  buyer: Record<string, unknown>,
-  tx: Record<string, unknown>,
-  profile: Record<string, unknown>,
-  vehicle: Record<string, unknown>
+  buyer: Record<string, unknown>
 ): string {
   const sellerName = seller.is_company
     ? String(seller.company_name || "___")
@@ -371,40 +355,7 @@ function buildProtocolizacion(
   const buyerName = buyer.is_company
     ? String(buyer.company_name || "___")
     : String(buyer.full_name || "___");
-  const n = tx.matriz_number || "___";
-  const city = profile?.city || "Maldonado";
-  const date = formatDateLetras(tx.transaction_date as string | null);
-  const initials = profile?.notary_initials || "F.C.";
-  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
-  const folioStart = tx.folio_start || "___";
-  const folioEnd = tx.folio_end || "___";
-  const padron = vehicle.padron || "___";
-  const dept = vehicle.padron_department ? ` de ${vehicle.padron_department}` : "";
-
-  let t = `Nº ${n} PROTOCOLIZACION PRECEPTIVA DE COMPRAVENTA AUTOMOTOR. ${sellerName} con ${buyerName}. En ${city} el día ${date}`;
-  t += ` cumpliendo con lo dispuesto por el artículo 292 de la ley 18362 incorporo a mi Registro de Protocolizaciones compraventa automotor de padrón ${padron}${dept}`;
-  t += ` con certificación y la presente con el número ${n}, extendida de folio ${folioStart} a ${folioEnd} vuelto.`;
-  t += ` ${initials} ${name}`;
-  return t;
-}
-
-function buildPrimerTestimonio(
-  tx: Record<string, unknown>,
-  profile: Record<string, unknown>
-): string {
-  const n = tx.matriz_number || "___";
-  const city = profile?.city || "Maldonado";
-  const date = formatDateLetras(tx.transaction_date as string | null);
-  const serieProto = tx.paper_series_proto || "___";
-  const numProto = tx.paper_number_proto || "___";
-  const serieTest = tx.paper_series_testimony || "___";
-  const numsTest = tx.paper_numbers_testimony || "___";
-
-  let t = `ES PRIMER TESTIMONIO que he compulsado de la protocolización que incorpore a mi Registro con el número ${n}`;
-  t += ` en hoja de papel notarial serie ${serieProto} número ${numProto}.`;
-  t += ` EN FE DE ELLO y para la compradora expido el presente que sello signo y firmo en ${city} el día ${date}`;
-  t += ` en hojas de papel notarial serie ${serieTest} número ${numsTest}.`;
-  return t;
+  return `${sellerName} con ${buyerName}.`;
 }
 
 // ─── TYPES ───────────────────────────────────────────────────
@@ -490,30 +441,57 @@ export async function POST(request: NextRequest) {
   const prof = (profile || {}) as Record<string, unknown>;
 
   // Build firmas
-  const firmas = buildFirmas(seller, seller2, buyer, buyer2, tx);
   const cuotaParte = tx?.election_declaration || "1/1";
+  const vendedora = buildParteVendedora(seller, seller2, tx);
+  const compradora = buildParteCompradora(buyer, buyer2, tx);
+  const precio = buildPrecio(tx as unknown as Record<string, unknown>);
+  const certQ = buildCertificoQue(seller, seller2, buyer, tx as unknown as Record<string, unknown>);
+  const initials = String(prof.notary_initials || "F.C.");
+  const notaryName = String(prof.notary_name || prof.full_name || "Franco Castiglioni");
 
-  // Build template data — all text blocks pre-formatted
+  // Build template data — split at bold boundaries
   const data = {
-    // Header
+    // Ciudad y fecha
     ciudad: prof.city || "___",
-    escribano_nombre: prof.notary_name || prof.full_name || "___",
-    escribano_domicilio: prof.notary_address || "calle San Carlos 1093, Maldonado",
-
-    // Dates
     fecha_letras: formatDateLetras(tx.transaction_date),
 
-    // Clauses
-    clausula_vendedora: buildParteVendedora(seller, seller2, tx),
-    clausula_compradora: buildParteCompradora(buyer, buyer2, tx),
+    // Notary
+    notary_name: notaryName,
+    notary_firma: `${initials} ${notaryName}.`,
+    notary_firma_short: `${initials} ${notaryName}`,
+
+    // Cláusula 1 - Vendedora (titulo=bold, texto=normal)
+    vendedora_titulo: vendedora.titulo,
+    vendedora_texto: vendedora.texto,
+
+    // Cláusula 2 - Compradora (titulo=bold, texto=normal)
+    compradora_titulo: compradora.titulo,
+    compradora_texto: compradora.texto,
+
+    // Cláusula 4 - Cuota parte
     cuota_parte: cuotaParte,
 
-    // Main sections — pre-built text
-    precio_texto: buildPrecioTexto(tx as unknown as Record<string, unknown>),
-    tradicion_texto: buildTradicionTexto(),
-    declaracion_texto: buildDeclaracionTexto(tx as unknown as Record<string, unknown>),
+    // Cláusula 5 - Precio (moneda=normal, monto=bold, pago=normal)
+    precio_moneda: precio.moneda,
+    precio_monto: precio.monto,
+    precio_pago: precio.pago,
+
+    // Cláusula 9 - Declaraciones
+    declaracion_bps: buildDeclaracionBps(tx.bps_status),
+
+    // Responsabilidad
     declaracion_responsabilidad_texto: buildDeclaracionResponsabilidadTexto(tx as unknown as Record<string, unknown>),
-    solicitud_intervencion_texto: buildSolicitudIntervencionTexto(tx as unknown as Record<string, unknown>, prof, seller, seller2, buyer, buyer2),
+
+    // Cláusula 10 - Firmas (bold)
+    firmas_texto: buildFirmasTexto(seller, seller2, buyer, buyer2, tx as unknown as Record<string, unknown>),
+
+    // Certifico que (nombres=bold, rest=normal)
+    certifico_nombres: certQ.nombres,
+    certifico_cedulas_texto: certQ.cedulas_texto,
+    certifico_secciones: certQ.secciones,
+
+    // Protocolización
+    proto_partes: buildProtoPartes(seller, seller2, buyer),
 
     // Vehicle table
     vehicle_type: vehicle.type || "___",
@@ -528,20 +506,22 @@ export async function POST(request: NextRequest) {
     vehicle_chassis: vehicle.chassis_number || "___",
     vehicle_cylinders: vehicle.cylinders || "___",
 
-    // Signatures
-    firmas_vendedor: firmas.vendedor,
-    firmas_comprador: firmas.comprador,
-
-    // Certification & protocol
-    certifico_que: buildCertificoQue(seller, seller2, buyer, tx as unknown as Record<string, unknown>, prof),
-    protocolizacion_texto: buildProtocolizacion(seller, seller2, buyer, tx as unknown as Record<string, unknown>, prof, vehicle),
-    primer_testimonio: buildPrimerTestimonio(tx as unknown as Record<string, unknown>, prof),
-
-    // Protocol numbers (used in template directly)
+    // Protocol numbers
     matriz_numero: tx.matriz_number || "___",
+    folio_start: tx.folio_start || "___",
+    folio_end: tx.folio_end || "___",
 
-    // Optional trailing insurance block
-    certificado_seguro_texto: buildCertificadoSeguroTexto(tx as unknown as Record<string, unknown>, prof),
+    // Paper
+    paper_series_proto: tx.paper_series_proto || "___",
+    paper_number_proto: tx.paper_number_proto || "___",
+    paper_series_testimony: tx.paper_series_testimony || "___",
+    paper_numbers_testimony: tx.paper_numbers_testimony || "___",
+
+    // Insurance (conditional via {#has_insurance} in template)
+    has_insurance: !!tx.insurance_policy_number,
+    insurance_policy: tx.insurance_policy_number || "___",
+    insurance_company: tx.insurance_company || "___",
+    insurance_expiry: formatDateShort(tx.insurance_expiry as string | null),
   };
 
   doc.render(data);
