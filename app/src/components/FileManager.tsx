@@ -1,15 +1,22 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import type { DragEvent, ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import type { Folder, FileRecord } from "@/lib/types";
+import type {
+  Folder,
+  FileRecord,
+  ExtractedPersonData,
+  ExtractedTextData,
+  ExtractedVehicleData,
+} from "@/lib/types";
 import {
   FolderPlus,
   Upload,
   Folder as FolderIcon,
   FileText,
-  Image,
+  Image as ImageIcon,
   FileIcon,
   Trash2,
   ArrowLeft,
@@ -19,7 +26,6 @@ import {
   Check,
   Loader2,
   FileSearch,
-  ChevronDown,
   ArrowRight,
 } from "lucide-react";
 
@@ -29,6 +35,15 @@ interface FileManagerProps {
   currentFolderId: string | null;
   userId: string;
   breadcrumbs?: { id: string | null; name: string }[];
+}
+
+type ExtractResultType = "cedula" | "libreta" | "cached" | "text";
+
+interface ExtractResultState {
+  fileId: string;
+  fileName: string;
+  type: ExtractResultType;
+  data: Record<string, unknown>;
 }
 
 export default function FileManager({
@@ -45,14 +60,13 @@ export default function FileManager({
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [extracting, setExtracting] = useState<string | null>(null);
-  const [extractResult, setExtractResult] = useState<{
-    fileId: string;
-    fileName: string;
-    type: string;
-    data: Record<string, unknown>;
-  } | null>(null);
+  const [extractResult, setExtractResult] = useState<ExtractResultState | null>(null);
   const [extractError, setExtractError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [showTextInput, setShowTextInput] = useState(false);
+  const [textTitle, setTextTitle] = useState("");
+  const [manualText, setManualText] = useState("");
+  const [extractingText, setExtractingText] = useState(false);
   // Bulk extraction state
   const [bulkPhase, setBulkPhase] = useState<"idle" | "extracting" | "assign">("idle");
   const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0, fileName: "" });
@@ -64,6 +78,121 @@ export default function FileManager({
   const [personRoles, setPersonRoles] = useState<Record<number, string>>({});
   const supabase = createClient();
   const router = useRouter();
+
+  const isRecord = (value: unknown): value is Record<string, unknown> =>
+    typeof value === "object" && value !== null && !Array.isArray(value);
+
+  const applyPersonToPrefill = (
+    prefill: Record<string, unknown>,
+    prefix: "seller" | "seller2" | "buyer" | "buyer2",
+    person: ExtractedPersonData & { phone?: string }
+  ) => {
+    if (prefix === "seller2") prefill.has_seller2 = true;
+    if (prefix === "buyer2") prefill.has_buyer2 = true;
+    if (person.full_name) prefill[`${prefix}_full_name`] = person.full_name;
+    if (person.ci_number) prefill[`${prefix}_ci`] = person.ci_number;
+    if (person.nationality) prefill[`${prefix}_nationality`] = person.nationality;
+    if (person.birth_date) prefill[`${prefix}_birth_date`] = person.birth_date;
+    if (person.birth_place) prefill[`${prefix}_birth_place`] = person.birth_place;
+    if (person.civil_status) prefill[`${prefix}_civil_status`] = person.civil_status;
+    if (person.address) prefill[`${prefix}_address`] = person.address;
+    if (person.department) prefill[`${prefix}_department`] = person.department;
+    if (person.phone) prefill[`${prefix}_phone`] = person.phone;
+  };
+
+  const applyVehicleToPrefill = (
+    prefill: Record<string, unknown>,
+    vehicle: ExtractedVehicleData
+  ) => {
+    if (vehicle.brand) prefill.vehicle_brand = vehicle.brand;
+    if (vehicle.model) prefill.vehicle_model = vehicle.model;
+    if (vehicle.year !== undefined && vehicle.year !== null) {
+      prefill.vehicle_year = String(vehicle.year);
+    }
+    if (vehicle.type) prefill.vehicle_type = vehicle.type;
+    if (vehicle.fuel) prefill.vehicle_fuel = vehicle.fuel;
+    if (vehicle.cylinders !== undefined && vehicle.cylinders !== null) {
+      prefill.vehicle_cylinders = String(vehicle.cylinders);
+    }
+    if (vehicle.motor_number) prefill.vehicle_motor_number = vehicle.motor_number;
+    if (vehicle.chassis_number) prefill.vehicle_chassis_number = vehicle.chassis_number;
+    if (vehicle.plate) prefill.vehicle_plate = vehicle.plate;
+    if (vehicle.padron) prefill.vehicle_padron = vehicle.padron;
+    if (vehicle.padron_department) {
+      prefill.vehicle_padron_department = vehicle.padron_department;
+    }
+    if (vehicle.owner_name) prefill.vehicle_owner_name = vehicle.owner_name;
+    if (vehicle.owner_ci) prefill.vehicle_owner_ci = vehicle.owner_ci;
+  };
+
+  const applyPriceToPrefill = (
+    prefill: Record<string, unknown>,
+    price: ExtractedTextData["price"]
+  ) => {
+    if (!price) return;
+    if (price.amount !== undefined && price.amount !== null) {
+      prefill.price_amount = String(price.amount);
+    }
+    if (price.currency) prefill.price_currency = price.currency;
+    if (price.in_words) prefill.price_in_words = price.in_words;
+  };
+
+  const navigateToForm = (prefill: Record<string, unknown>) => {
+    sessionStorage.setItem("prefill_compraventa", JSON.stringify(prefill));
+    router.push("/compraventa/nueva");
+  };
+
+  const buildPrefillDataFromText = (data: Record<string, unknown>) => {
+    const prefill: Record<string, unknown> = {};
+    const extracted = data as ExtractedTextData;
+    const persons = Array.isArray(extracted.persons) ? extracted.persons : [];
+    const vehicles = Array.isArray(extracted.vehicles) ? extracted.vehicles : [];
+    const remaining = [...persons];
+
+    const takePerson = (role: string) => {
+      const index = remaining.findIndex((person) => person.role === role);
+      if (index === -1) return null;
+      const [person] = remaining.splice(index, 1);
+      return person;
+    };
+
+    const seller = takePerson("vendedor") ?? remaining.shift() ?? null;
+    const buyer = takePerson("comprador") ?? remaining.shift() ?? null;
+    const seller2 = remaining.shift() ?? null;
+    const buyer2 = remaining.shift() ?? null;
+
+    if (seller) applyPersonToPrefill(prefill, "seller", seller);
+    if (buyer) applyPersonToPrefill(prefill, "buyer", buyer);
+    if (seller2) applyPersonToPrefill(prefill, "seller2", seller2);
+    if (buyer2) applyPersonToPrefill(prefill, "buyer2", buyer2);
+    if (vehicles[0]) applyVehicleToPrefill(prefill, vehicles[0]);
+    applyPriceToPrefill(prefill, extracted.price);
+
+    return prefill;
+  };
+
+  const buildPrefillDataFromResult = (result: ExtractResultState) => {
+    if (
+      result.type === "text" ||
+      Array.isArray(result.data.persons) ||
+      Array.isArray(result.data.vehicles)
+    ) {
+      return buildPrefillDataFromText(result.data);
+    }
+
+    const prefill: Record<string, unknown> = {};
+    const flatData = result.data as ExtractedPersonData & ExtractedVehicleData;
+
+    if (result.type === "libreta" || flatData.brand || flatData.plate || flatData.padron) {
+      applyVehicleToPrefill(prefill, flatData);
+    }
+
+    if (result.type !== "libreta") {
+      applyPersonToPrefill(prefill, "seller", flatData);
+    }
+
+    return prefill;
+  };
 
   const createFolder = async () => {
     if (!newFolderName.trim()) return;
@@ -132,6 +261,48 @@ export default function FileManager({
     setFiles((prev) => prev.filter((f) => f.id !== fileRecord.id));
   };
 
+  const extractManualText = async () => {
+    if (!manualText.trim()) {
+      setExtractError("Pegá un texto para extraer datos.");
+      return;
+    }
+
+    setExtractingText(true);
+    setExtractError("");
+    setExtractResult(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("type", "text");
+      formData.append("text", manualText.trim());
+
+      const res = await fetch("/api/extract", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Error en la extracción");
+      }
+
+      const { data } = await res.json();
+      setExtractResult({
+        fileId: "manual-text",
+        fileName: textTitle.trim() || "Texto manual",
+        type: "text",
+        data,
+      });
+      setShowTextInput(false);
+    } catch (err) {
+      setExtractError(
+        err instanceof Error ? err.message : "Error al extraer datos desde texto"
+      );
+    } finally {
+      setExtractingText(false);
+    }
+  };
+
   const extractData = async (
     fileRecord: FileRecord,
     type: "cedula" | "libreta"
@@ -194,7 +365,6 @@ export default function FileManager({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const imageFiles = files.filter((f) => isImageFile(f.file_type));
   const extractableFiles = files.filter((f) => isExtractableFile(f.file_type));
   const hasExtractableFiles = extractableFiles.length > 0;
 
@@ -289,50 +459,34 @@ export default function FileManager({
       if (!role || role === "ignorar") continue;
 
       const d = persons[i].data;
-      let prefix: string;
+      let prefix: "seller" | "seller2" | "buyer" | "buyer2";
       if (role === "vendedor") prefix = "seller";
       else if (role === "comprador") prefix = "buyer";
       else if (role === "co_vendedor") { prefix = "seller2"; prefill.has_seller2 = true; }
       else if (role === "co_comprador") { prefix = "buyer2"; prefill.has_buyer2 = true; }
       else continue;
 
-      if (d.full_name) prefill[`${prefix}_full_name`] = d.full_name;
-      if (d.ci_number) prefill[`${prefix}_ci`] = d.ci_number;
-      if (d.nationality) prefill[`${prefix}_nationality`] = d.nationality;
-      if (d.birth_date) prefill[`${prefix}_birth_date`] = d.birth_date;
-      if (d.birth_place) prefill[`${prefix}_birth_place`] = d.birth_place;
-      if (d.civil_status) prefill[`${prefix}_civil_status`] = d.civil_status;
-      if (d.address) prefill[`${prefix}_address`] = d.address;
-      if (d.department) prefill[`${prefix}_department`] = d.department;
+      applyPersonToPrefill(prefill, prefix, d as ExtractedPersonData);
     }
 
     // Map first vehicle
     if (vehicles.length > 0) {
-      const v = vehicles[0].data;
-      if (v.brand) prefill.vehicle_brand = v.brand;
-      if (v.model) prefill.vehicle_model = v.model;
-      if (v.year) prefill.vehicle_year = String(v.year);
-      if (v.type) prefill.vehicle_type = v.type;
-      if (v.fuel) prefill.vehicle_fuel = v.fuel;
-      if (v.cylinders) prefill.vehicle_cylinders = String(v.cylinders);
-      if (v.motor_number) prefill.vehicle_motor_number = v.motor_number;
-      if (v.chassis_number) prefill.vehicle_chassis_number = v.chassis_number;
-      if (v.plate) prefill.vehicle_plate = v.plate;
-      if (v.padron) prefill.vehicle_padron = v.padron;
-      if (v.padron_department) prefill.vehicle_padron_department = v.padron_department;
+      const v = vehicles[0].data as ExtractedVehicleData & Record<string, unknown>;
+      applyVehicleToPrefill(prefill, v);
       if (v.national_code) prefill.vehicle_national_code = v.national_code;
       if (v.affectation) prefill.vehicle_affectation = v.affectation;
-      if (v.owner_name) prefill.vehicle_owner_name = v.owner_name;
-      if (v.owner_ci) prefill.vehicle_owner_ci = v.owner_ci;
     }
 
     return prefill;
   }
 
   function handleContinueToForm() {
-    const prefill = buildPrefillData();
-    sessionStorage.setItem("prefill_compraventa", JSON.stringify(prefill));
-    router.push("/compraventa/nueva");
+    navigateToForm(buildPrefillData());
+  }
+
+  function handleContinueFromExtractResult() {
+    if (!extractResult) return;
+    navigateToForm(buildPrefillDataFromResult(extractResult));
   }
 
   const roleOptions = [
@@ -343,12 +497,15 @@ export default function FileManager({
     { value: "ignorar", label: "Ignorar" },
   ];
 
-  function isImageFile(type: string | null) {
-    return type?.startsWith("image/") ?? false;
-  }
-
   function isExtractableFile(type: string | null) {
     return (type?.startsWith("image/") || type === "application/pdf") ?? false;
+  }
+
+  function isWordFile(type: string | null) {
+    return (
+      type === "application/msword" ||
+      type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    );
   }
 
   function formatExtractedLabel(key: string): string {
@@ -382,7 +539,7 @@ export default function FileManager({
   }
 
   const handleDrop = useCallback(
-    (e: React.DragEvent) => {
+    (e: DragEvent) => {
       e.preventDefault();
       setDragOver(false);
       if (e.dataTransfer.files.length > 0) {
@@ -395,10 +552,62 @@ export default function FileManager({
   function getFileIcon(type: string | null) {
     if (!type) return <FileIcon size={20} className="text-gray-400" />;
     if (type.startsWith("image/"))
-      return <Image size={20} className="text-green-500" />;
+      return <ImageIcon size={20} className="text-green-500" />;
     if (type.includes("pdf"))
       return <FileText size={20} className="text-red-500" />;
+    if (isWordFile(type))
+      return <FileText size={20} className="text-blue-600" />;
     return <FileIcon size={20} className="text-blue-500" />;
+  }
+
+  function renderValue(value: unknown, depth = 0): ReactNode {
+    if (value === null || value === undefined || value === "") return null;
+
+    if (Array.isArray(value)) {
+      return (
+        <div className="space-y-2">
+          {value.map((item, index) => (
+            <div key={`${depth}-${index}`} className="rounded-md border border-gray-200 bg-gray-50 p-3">
+              {isRecord(item) ? (
+                <div className="space-y-1.5">
+                  {Object.entries(item)
+                    .filter(([, nestedValue]) => nestedValue !== null && nestedValue !== undefined && nestedValue !== "")
+                    .map(([nestedKey, nestedValue]) => (
+                      <div key={nestedKey} className="flex items-baseline gap-2 text-sm">
+                        <span className="min-w-[120px] text-xs text-gray-500">
+                          {formatExtractedLabel(nestedKey)}:
+                        </span>
+                        <div className="font-medium text-gray-800">{renderValue(nestedValue, depth + 1)}</div>
+                      </div>
+                    ))}
+                </div>
+              ) : (
+                <span className="text-sm font-medium text-gray-800">{String(item)}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (isRecord(value)) {
+      return (
+        <div className="space-y-1.5 rounded-md border border-gray-200 bg-gray-50 p-3">
+          {Object.entries(value)
+            .filter(([, nestedValue]) => nestedValue !== null && nestedValue !== undefined && nestedValue !== "")
+            .map(([nestedKey, nestedValue]) => (
+              <div key={nestedKey} className="flex items-baseline gap-2 text-sm">
+                <span className="min-w-[120px] text-xs text-gray-500">
+                  {formatExtractedLabel(nestedKey)}:
+                </span>
+                <div className="font-medium text-gray-800">{renderValue(nestedValue, depth + 1)}</div>
+              </div>
+            ))}
+        </div>
+      );
+    }
+
+    return <span className="font-medium text-gray-800">{String(value)}</span>;
   }
 
   function formatSize(bytes: number | null) {
@@ -460,6 +669,13 @@ export default function FileManager({
             <FolderPlus size={16} />
             Nueva carpeta
           </button>
+          <button
+            onClick={() => setShowTextInput((prev) => !prev)}
+            className="flex items-center gap-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+          >
+            <FileText size={16} />
+            Pegar texto
+          </button>
           <label className="flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer transition-colors">
             <Upload size={16} />
             Subir archivos
@@ -474,6 +690,66 @@ export default function FileManager({
           </label>
         </div>
       </div>
+
+      {showTextInput && (
+        <div className="mb-4 rounded-lg border bg-white p-4 shadow-sm">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900">Extraer desde texto</h3>
+              <p className="mt-1 text-xs text-gray-500">
+                Pegá un mensaje, correo o resumen de la operación. Se procesa igual que el modo texto del extractor.
+              </p>
+            </div>
+            <button
+              onClick={() => setShowTextInput(false)}
+              className="rounded p-1 hover:bg-gray-100"
+            >
+              <X size={16} className="text-gray-500" />
+            </button>
+          </div>
+          <div className="mt-4 grid gap-3">
+            <input
+              type="text"
+              value={textTitle}
+              onChange={(e) => setTextTitle(e.target.value)}
+              placeholder="Nombre opcional para identificar este texto"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <textarea
+              value={manualText}
+              onChange={(e) => setManualText(e.target.value)}
+              placeholder="Ej: Vendedor Juan Pérez CI..., comprador María..., vehículo Toyota Corolla matrícula..."
+              rows={8}
+              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-xs text-gray-500">
+                Este texto no se guarda como archivo todavía; se usa para extraer datos y pasar al formulario.
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    setShowTextInput(false);
+                    setTextTitle("");
+                    setManualText("");
+                  }}
+                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={extractManualText}
+                  disabled={extractingText || !manualText.trim()}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+                >
+                  {extractingText ? <Loader2 size={16} className="animate-spin" /> : <Scan size={16} />}
+                  Extraer datos
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* New folder input */}
       {showNewFolder && (
@@ -585,6 +861,11 @@ export default function FileManager({
                   <span className="text-xs text-gray-400">
                     {new Date(file.uploaded_at).toLocaleDateString("es-UY")}
                   </span>
+                  {isWordFile(file.file_type) && (
+                    <span className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">
+                      Word
+                    </span>
+                  )}
                   {file.extracted_data ? (
                     <button
                       onClick={() =>
@@ -646,7 +927,7 @@ export default function FileManager({
               Arrastrá archivos aquí o usá el botón &ldquo;Subir archivos&rdquo;
             </p>
             <p className="text-sm mt-1">
-              Fotos de cédula, libreta de propiedad, PDFs, texto
+              Fotos, PDFs, documentos Word o texto pegado manualmente
             </p>
           </div>
         )}
@@ -851,6 +1132,13 @@ export default function FileManager({
                 )}
               </button>
               <button
+                onClick={handleContinueFromExtractResult}
+                className="flex items-center gap-1 px-3 py-1.5 text-xs border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+              >
+                Continuar a compraventa
+                <ArrowRight size={13} />
+              </button>
+              <button
                 onClick={() => setExtractResult(null)}
                 className="p-1 hover:bg-gray-200 rounded"
               >
@@ -859,20 +1147,18 @@ export default function FileManager({
             </div>
           </div>
           <div className="p-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {Object.entries(extractResult.data)
                 .filter(([, v]) => v !== null && v !== undefined && v !== "")
                 .map(([key, value]) => (
                   <div
                     key={key}
-                    className="flex items-baseline gap-2 text-sm"
+                    className={Array.isArray(value) || isRecord(value) ? "md:col-span-2" : "flex items-baseline gap-2 text-sm"}
                   >
                     <span className="text-gray-500 min-w-[120px] text-xs">
                       {formatExtractedLabel(key)}:
                     </span>
-                    <span className="font-medium text-gray-800">
-                      {String(value)}
-                    </span>
+                    <div className="flex-1">{renderValue(value)}</div>
                   </div>
                 ))}
             </div>

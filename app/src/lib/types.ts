@@ -209,6 +209,16 @@ export interface ExtractedVehicleData {
   owner_ci?: string;
 }
 
+export interface ExtractedTextData {
+  persons?: Array<ExtractedPersonData & { role?: string; phone?: string }>;
+  vehicles?: ExtractedVehicleData[];
+  price?: {
+    amount?: number;
+    currency?: string;
+    in_words?: string;
+  };
+}
+
 // ── DGR ──────────────────────────────────────────────────────
 
 export interface DgrSession {
