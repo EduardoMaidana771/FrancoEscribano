@@ -22,6 +22,11 @@ export default async function CompraventasPage() {
       price_amount,
       price_currency,
       created_at,
+      seller_id,
+      seller2_id,
+      buyer_id,
+      buyer2_id,
+      vehicle_id,
       seller:clients!transactions_seller_id_fkey(full_name),
       buyer:clients!transactions_buyer_id_fkey(full_name),
       vehicle:vehicles!transactions_vehicle_id_fkey(brand, model, plate)

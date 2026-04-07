@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, Download, Search } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { FileText, Download, Search, Pencil, Trash2 } from "lucide-react";
 
 interface TransactionRow {
   id: string;
@@ -11,6 +14,11 @@ interface TransactionRow {
   price_amount: number | null;
   price_currency: string;
   created_at: string;
+  seller_id: string | null;
+  seller2_id: string | null;
+  buyer_id: string | null;
+  buyer2_id: string | null;
+  vehicle_id: string | null;
   seller: { full_name: string } | null;
   buyer: { full_name: string } | null;
   vehicle: { brand: string; model: string; plate: string } | null;
@@ -23,6 +31,10 @@ export default function CompraventasList({
 }) {
   const [search, setSearch] = useState("");
   const [downloading, setDownloading] = useState<string | null>(null);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const supabase = createClient();
+  const router = useRouter();
 
   const filtered = transactions.filter((tx) => {
     if (!search) return true;
@@ -66,6 +78,46 @@ export default function CompraventasList({
     }
   }
 
+  async function handleDelete() {
+    if (!deleteId) return;
+    setDeleting(true);
+    try {
+      const tx = transactions.find((t) => t.id === deleteId);
+      // Delete transaction first (has FKs to clients/vehicle)
+      const { error: txErr } = await supabase
+        .from("transactions")
+        .delete()
+        .eq("id", deleteId);
+      if (txErr) throw txErr;
+
+      // Delete associated records
+      if (tx) {
+        const clientIds = [
+          (tx as unknown as Record<string, unknown>).seller_id,
+          (tx as unknown as Record<string, unknown>).seller2_id,
+          (tx as unknown as Record<string, unknown>).buyer_id,
+          (tx as unknown as Record<string, unknown>).buyer2_id,
+        ].filter(Boolean) as string[];
+
+        if (clientIds.length > 0) {
+          await supabase.from("clients").delete().in("id", clientIds);
+        }
+
+        const vehicleId = (tx as unknown as Record<string, unknown>).vehicle_id as string | null;
+        if (vehicleId) {
+          await supabase.from("vehicles").delete().eq("id", vehicleId);
+        }
+      }
+
+      setDeleteId(null);
+      router.refresh();
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Error al eliminar");
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -104,7 +156,7 @@ export default function CompraventasList({
                 <th className="px-4 py-3">Vehículo</th>
                 <th className="px-4 py-3">Precio</th>
                 <th className="px-4 py-3">Estado</th>
-                <th className="px-4 py-3"></th>
+                <th className="px-4 py-3 text-right">Acciones</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -145,19 +197,67 @@ export default function CompraventasList({
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <button
-                      onClick={() => downloadWord(tx.id)}
-                      disabled={downloading === tx.id}
-                      className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-xs disabled:opacity-50"
-                    >
-                      <Download size={14} />
-                      {downloading === tx.id ? "Generando..." : "Word"}
-                    </button>
+                    <div className="flex items-center gap-2 justify-end">
+                      <Link
+                        href={`/compraventa/${tx.id}/editar`}
+                        className="flex items-center gap-1 text-gray-600 hover:text-blue-600 text-xs"
+                      >
+                        <Pencil size={14} />
+                        Editar
+                      </Link>
+                      <button
+                        onClick={() => downloadWord(tx.id)}
+                        disabled={downloading === tx.id}
+                        className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-xs disabled:opacity-50"
+                      >
+                        <Download size={14} />
+                        {downloading === tx.id ? "..." : "Word"}
+                      </button>
+                      <button
+                        onClick={() => setDeleteId(tx.id)}
+                        className="flex items-center gap-1 text-red-500 hover:text-red-700 text-xs"
+                      >
+                        <Trash2 size={14} />
+                        Eliminar
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Delete confirmation dialog */}
+      {deleteId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Confirmar eliminación
+            </h3>
+            <p className="text-sm text-gray-600 mb-4">
+              ¿Estás seguro de que querés eliminar esta compraventa? Se borrarán
+              también los datos del vendedor, comprador y vehículo asociados.
+              Esta acción no se puede deshacer.
+            </p>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setDeleteId(null)}
+                disabled={deleting}
+                className="px-4 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-100 transition-colors disabled:opacity-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="px-4 py-2 text-sm bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors disabled:opacity-50"
+              >
+                {deleting ? "Eliminando..." : "Eliminar"}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

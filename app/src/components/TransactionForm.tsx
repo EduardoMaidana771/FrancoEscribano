@@ -503,18 +503,35 @@ function Section({
   );
 }
 
+interface EditIds {
+  transactionId: string;
+  sellerId: string | null;
+  seller2Id: string | null;
+  buyerId: string | null;
+  buyer2Id: string | null;
+  vehicleId: string | null;
+  currentStatus: "borrador" | "completado";
+}
+
 interface TransactionFormProps {
   userId: string;
   nextMatriz: number;
   nextFolio: number;
+  initialData?: Partial<FormData>;
+  editIds?: EditIds;
 }
 
 export default function TransactionForm({
   userId,
   nextMatriz,
   nextFolio,
+  initialData,
+  editIds,
 }: TransactionFormProps) {
-  const [form, setForm] = useState<FormData>(defaultForm);
+  const isEditing = !!editIds;
+  const [form, setForm] = useState<FormData>(
+    initialData ? { ...defaultForm, ...initialData } : defaultForm
+  );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const supabase = createClient();
@@ -610,281 +627,337 @@ export default function TransactionForm({
     set("plate_history_entries", entries);
   }
 
+  function buildClientPayload(prefix: "seller" | "seller2" | "buyer" | "buyer2") {
+    const p = (field: string) => `${prefix}_${field}` as keyof FormData;
+    const base: Record<string, unknown> = {
+      full_name: form[p("full_name")] as string,
+      ci_number: (form[p("ci")] as string) || null,
+      nationality: form[p("nationality")] as string,
+      birth_date: (form[p("birth_date")] as string) || null,
+      birth_place: (form[p("birth_place")] as string) || null,
+      civil_status: form[p("civil_status")] as string,
+      civil_status_detail: (form[p("civil_status_detail")] as string) || null,
+      nupcias_type: (form[p("nupcias_type")] as string) || null,
+      address: (form[p("address")] as string) || null,
+      department: form[p("department")] as string,
+    };
+    // Full fields only for main seller/buyer
+    if (prefix === "seller" || prefix === "buyer") {
+      Object.assign(base, {
+        spouse_name: (form[p("spouse_name")] as string) || null,
+        divorce_ficha: (form[p("divorce_ficha")] as string) || null,
+        divorce_year: (form[p("divorce_year")] as string) || null,
+        divorce_court: (form[p("divorce_court")] as string) || null,
+        phone: (form[p("phone")] as string) || null,
+        is_company: form[p("is_company")] as boolean,
+        company_name: (form[p("company_name")] as string) || null,
+        company_type: (form[p("company_type")] as string) || null,
+        rut: (form[p("rut")] as string) || null,
+        company_registry_number: (form[p("company_registry_number")] as string) || null,
+        company_registry_folio: (form[p("company_registry_folio")] as string) || null,
+        company_registry_book: (form[p("company_registry_book")] as string) || null,
+        company_business_purpose: (form[p("company_business_purpose")] as string) || null,
+        company_law_19484: form[p("company_law_19484")] as boolean,
+        representative_name: (form[p("representative_name")] as string) || null,
+        representative_ci: (form[p("representative_ci")] as string) || null,
+        representative_role: (form[p("representative_role")] as string) || null,
+        representative_address: (form[p("representative_address")] as string) || null,
+      });
+    }
+    return base;
+  }
+
+  function buildVehiclePayload() {
+    return {
+      brand: form.vehicle_brand || null,
+      brand_dgr_id: form.vehicle_brand_dgr_id || null,
+      model: form.vehicle_model || null,
+      model_dgr_id: form.vehicle_model_dgr_id || null,
+      year: form.vehicle_year ? parseInt(form.vehicle_year) : null,
+      type: form.vehicle_type || null,
+      type_dgr_id: form.vehicle_type_dgr_id || null,
+      fuel: form.vehicle_fuel,
+      fuel_dgr_id: form.vehicle_fuel_dgr_id || null,
+      cylinders: form.vehicle_cylinders ? parseInt(form.vehicle_cylinders) : null,
+      motor_number: form.vehicle_motor_number || null,
+      chassis_number: form.vehicle_chassis_number || null,
+      plate: form.vehicle_plate || null,
+      padron: form.vehicle_padron || null,
+      padron_department: form.vehicle_padron_department || null,
+      national_code: form.vehicle_national_code || null,
+      affectation: form.vehicle_affectation,
+      owner_name: form.vehicle_owner_name || null,
+      owner_ci: form.vehicle_owner_ci || null,
+    };
+  }
+
+  function buildTransactionPayload(status: string, sellerId: string, seller2Id: string | null, buyerId: string, buyer2Id: string | null, vehicleId: string, matrizNumber: number | null, folioStart: number | null) {
+    return {
+      seller_id: sellerId,
+      seller2_id: seller2Id,
+      buyer_id: buyerId,
+      buyer2_id: buyer2Id,
+      vehicle_id: vehicleId,
+      seller_has_representative: form.seller_has_representative,
+      seller_representative_name: form.seller_rep_name || null,
+      seller_representative_ci: form.seller_rep_ci || null,
+      seller_representative_address: form.seller_rep_address || null,
+      seller_representative_power_date: form.seller_rep_power_date || null,
+      seller_representative_power_notary: form.seller_rep_power_notary || null,
+      seller_representative_power_protocol_date: form.seller_rep_power_protocol_date || null,
+      seller_representative_power_type: form.seller_rep_power_type || null,
+      seller_representative_can_substitute: form.seller_rep_can_substitute,
+      buyer_has_representative: form.buyer_has_representative,
+      buyer_representative_name: form.buyer_rep_name || null,
+      buyer_representative_ci: form.buyer_rep_ci || null,
+      buyer_representative_address: form.buyer_rep_address || null,
+      buyer_representative_power_date: form.buyer_rep_power_date || null,
+      buyer_representative_power_notary: form.buyer_rep_power_notary || null,
+      buyer_representative_power_protocol_date: form.buyer_rep_power_protocol_date || null,
+      buyer_representative_power_type: form.buyer_rep_power_type || null,
+      buyer_representative_can_substitute: form.buyer_rep_can_substitute,
+      price_amount: form.price_amount ? parseFloat(form.price_amount) : null,
+      price_currency: form.price_currency,
+      price_in_words: form.price_in_words || null,
+      payment_type: form.payment_type,
+      payment_detail: form.payment_detail || null,
+      payment_installments_count: form.payment_installments_count ? parseInt(form.payment_installments_count) : null,
+      payment_installment_amount: form.payment_installment_amount ? parseFloat(form.payment_installment_amount) : null,
+      payment_cash_amount: form.payment_cash_amount ? parseFloat(form.payment_cash_amount) : null,
+      payment_bank_name: form.payment_bank_name || null,
+      payment_third_party_name: form.payment_third_party_name || null,
+      payment_third_party_ci: form.payment_third_party_ci || null,
+      bps_status: form.bps_status,
+      irae_status: form.irae_status,
+      imeba_status: form.imeba_status,
+      bps_cert_number: form.bps_cert_number || null,
+      bps_cert_date: form.bps_cert_date || null,
+      cud_number: form.cud_number || null,
+      cud_date: form.cud_date || null,
+      previous_owner_name: form.previous_owner_name || null,
+      previous_title_date: form.previous_title_date || null,
+      previous_title_notary: form.previous_title_notary || null,
+      previous_title_same_notary: form.previous_title_same_notary,
+      previous_title_registry: form.previous_title_registry || null,
+      previous_title_number: form.previous_title_number || null,
+      previous_title_registry_date: form.previous_title_registry_date || null,
+      previous_title_type: form.previous_title_type || null,
+      previous_title_is_first_registration: form.previous_title_is_first_registration,
+      insurance_policy_number: form.insurance_policy_number || null,
+      insurance_company: form.insurance_company || null,
+      insurance_expiry: form.insurance_expiry || null,
+      insurance_separate_cert: form.insurance_separate_cert,
+      has_plate_history: form.has_plate_history,
+      plate_history_entries: form.plate_history_entries.length > 0 ? JSON.stringify(form.plate_history_entries) : null,
+      election_declaration: form.election_declaration || null,
+      has_traffic_responsibility_clause: form.has_traffic_responsibility_clause,
+      traffic_responsibility_date: form.traffic_responsibility_date || null,
+      matriz_number: matrizNumber,
+      folio_start: folioStart,
+      paper_series_proto: form.paper_series_proto || null,
+      paper_number_proto: form.paper_number_proto || null,
+      paper_series_testimony: form.paper_series_testimony || null,
+      paper_numbers_testimony: form.paper_numbers_testimony || null,
+      transaction_date: form.transaction_date,
+      status,
+      folder_name: `${form.vehicle_brand}-${form.vehicle_model}-${form.vehicle_plate}`.toUpperCase(),
+    };
+  }
+
   async function saveTransaction(status: "borrador" | "completado") {
     setSaving(true);
     setError("");
 
     try {
-      // 1. Create/update seller client
-      const { data: seller, error: sellerErr } = await supabase
-        .from("clients")
-        .insert({
-          user_id: userId,
-          full_name: form.seller_full_name,
-          ci_number: form.seller_ci || null,
-          nationality: form.seller_nationality,
-          birth_date: form.seller_birth_date || null,
-          birth_place: form.seller_birth_place || null,
-          civil_status: form.seller_civil_status,
-          civil_status_detail: form.seller_civil_status_detail || null,
-          nupcias_type: form.seller_nupcias_type || null,
-          spouse_name: form.seller_spouse_name || null,
-          divorce_ficha: form.seller_divorce_ficha || null,
-          divorce_year: form.seller_divorce_year || null,
-          divorce_court: form.seller_divorce_court || null,
-          address: form.seller_address || null,
-          department: form.seller_department,
-          phone: form.seller_phone || null,
-          is_company: form.seller_is_company,
-          company_name: form.seller_company_name || null,
-          company_type: form.seller_company_type || null,
-          rut: form.seller_rut || null,
-          company_registry_number: form.seller_company_registry_number || null,
-          company_registry_folio: form.seller_company_registry_folio || null,
-          company_registry_book: form.seller_company_registry_book || null,
-          company_business_purpose: form.seller_company_business_purpose || null,
-          company_law_19484: form.seller_company_law_19484,
-          representative_name: form.seller_representative_name || null,
-          representative_ci: form.seller_representative_ci || null,
-          representative_role: form.seller_representative_role || null,
-          representative_address: form.seller_representative_address || null,
-        })
-        .select()
-        .single();
+      if (isEditing) {
+        // --- UPDATE MODE ---
+        // 1. Update seller
+        if (editIds.sellerId) {
+          const { error: sellerErr } = await supabase
+            .from("clients")
+            .update(buildClientPayload("seller"))
+            .eq("id", editIds.sellerId);
+          if (sellerErr) throw sellerErr;
+        }
 
-      if (sellerErr) throw sellerErr;
+        // 2. Handle seller2
+        let seller2Id = editIds.seller2Id;
+        if (form.has_seller2) {
+          if (seller2Id) {
+            const { error: s2Err } = await supabase
+              .from("clients")
+              .update(buildClientPayload("seller2"))
+              .eq("id", seller2Id);
+            if (s2Err) throw s2Err;
+          } else {
+            const { data: s2, error: s2Err } = await supabase
+              .from("clients")
+              .insert({ user_id: userId, ...buildClientPayload("seller2") })
+              .select()
+              .single();
+            if (s2Err) throw s2Err;
+            seller2Id = s2?.id ?? null;
+          }
+        } else if (seller2Id) {
+          await supabase.from("clients").delete().eq("id", seller2Id);
+          seller2Id = null;
+        }
 
-      // 2. Create seller2 if applicable
-      let seller2Id: string | null = null;
-      if (form.has_seller2) {
-        const { data: seller2, error: s2Err } = await supabase
-          .from("clients")
-          .insert({
-            user_id: userId,
-            full_name: form.seller2_full_name,
-            ci_number: form.seller2_ci || null,
-            nationality: form.seller2_nationality,
-            birth_date: form.seller2_birth_date || null,
-            birth_place: form.seller2_birth_place || null,
-            civil_status: form.seller2_civil_status,
-            civil_status_detail: form.seller2_civil_status_detail || null,
-            nupcias_type: form.seller2_nupcias_type || null,
-            address: form.seller2_address || null,
-            department: form.seller2_department,
-          })
-          .select()
-          .single();
-        if (s2Err) throw s2Err;
-        seller2Id = seller2?.id ?? null;
-      }
+        // 3. Update buyer
+        if (editIds.buyerId) {
+          const { error: buyerErr } = await supabase
+            .from("clients")
+            .update(buildClientPayload("buyer"))
+            .eq("id", editIds.buyerId);
+          if (buyerErr) throw buyerErr;
+        }
 
-      // 3. Create buyer client
-      const { data: buyer, error: buyerErr } = await supabase
-        .from("clients")
-        .insert({
-          user_id: userId,
-          full_name: form.buyer_full_name,
-          ci_number: form.buyer_ci || null,
-          nationality: form.buyer_nationality,
-          birth_date: form.buyer_birth_date || null,
-          birth_place: form.buyer_birth_place || null,
-          civil_status: form.buyer_civil_status,
-          civil_status_detail: form.buyer_civil_status_detail || null,
-          nupcias_type: form.buyer_nupcias_type || null,
-          spouse_name: form.buyer_spouse_name || null,
-          divorce_ficha: form.buyer_divorce_ficha || null,
-          divorce_year: form.buyer_divorce_year || null,
-          divorce_court: form.buyer_divorce_court || null,
-          address: form.buyer_address || null,
-          department: form.buyer_department,
-          phone: form.buyer_phone || null,
-          is_company: form.buyer_is_company,
-          company_name: form.buyer_company_name || null,
-          company_type: form.buyer_company_type || null,
-          rut: form.buyer_rut || null,
-          company_registry_number: form.buyer_company_registry_number || null,
-          company_registry_folio: form.buyer_company_registry_folio || null,
-          company_registry_book: form.buyer_company_registry_book || null,
-          company_business_purpose: form.buyer_company_business_purpose || null,
-          company_law_19484: form.buyer_company_law_19484,
-          representative_name: form.buyer_representative_name || null,
-          representative_ci: form.buyer_representative_ci || null,
-          representative_role: form.buyer_representative_role || null,
-          representative_address: form.buyer_representative_address || null,
-        })
-        .select()
-        .single();
+        // 4. Handle buyer2
+        let buyer2Id = editIds.buyer2Id;
+        if (form.has_buyer2) {
+          if (buyer2Id) {
+            const { error: b2Err } = await supabase
+              .from("clients")
+              .update(buildClientPayload("buyer2"))
+              .eq("id", buyer2Id);
+            if (b2Err) throw b2Err;
+          } else {
+            const { data: b2, error: b2Err } = await supabase
+              .from("clients")
+              .insert({ user_id: userId, ...buildClientPayload("buyer2") })
+              .select()
+              .single();
+            if (b2Err) throw b2Err;
+            buyer2Id = b2?.id ?? null;
+          }
+        } else if (buyer2Id) {
+          await supabase.from("clients").delete().eq("id", buyer2Id);
+          buyer2Id = null;
+        }
 
-      if (buyerErr) throw buyerErr;
+        // 5. Update vehicle
+        if (editIds.vehicleId) {
+          const { error: vehicleErr } = await supabase
+            .from("vehicles")
+            .update(buildVehiclePayload())
+            .eq("id", editIds.vehicleId);
+          if (vehicleErr) throw vehicleErr;
+        }
 
-      // 4. Create buyer2 if applicable
-      let buyer2Id: string | null = null;
-      if (form.has_buyer2) {
-        const { data: buyer2, error: b2Err } = await supabase
-          .from("clients")
-          .insert({
-            user_id: userId,
-            full_name: form.buyer2_full_name,
-            ci_number: form.buyer2_ci || null,
-            nationality: form.buyer2_nationality,
-            birth_date: form.buyer2_birth_date || null,
-            birth_place: form.buyer2_birth_place || null,
-            civil_status: form.buyer2_civil_status,
-            civil_status_detail: form.buyer2_civil_status_detail || null,
-            nupcias_type: form.buyer2_nupcias_type || null,
-            address: form.buyer2_address || null,
-            department: form.buyer2_department,
-          })
-          .select()
-          .single();
-        if (b2Err) throw b2Err;
-        buyer2Id = buyer2?.id ?? null;
-      }
+        // 6. Update transaction — keep existing matriz/folio, assign if completing a draft
+        let matrizNumber: number | null = null;
+        let folioStart: number | null = null;
+        if (status === "completado" && editIds.currentStatus === "borrador") {
+          matrizNumber = nextMatriz;
+          folioStart = nextFolio;
+        }
 
-      // 5. Create vehicle
-      const { data: vehicle, error: vehicleErr } = await supabase
-        .from("vehicles")
-        .insert({
-          user_id: userId,
-          brand: form.vehicle_brand || null,
-          brand_dgr_id: form.vehicle_brand_dgr_id || null,
-          model: form.vehicle_model || null,
-          model_dgr_id: form.vehicle_model_dgr_id || null,
-          year: form.vehicle_year ? parseInt(form.vehicle_year) : null,
-          type: form.vehicle_type || null,
-          type_dgr_id: form.vehicle_type_dgr_id || null,
-          fuel: form.vehicle_fuel,
-          fuel_dgr_id: form.vehicle_fuel_dgr_id || null,
-          cylinders: form.vehicle_cylinders
-            ? parseInt(form.vehicle_cylinders)
-            : null,
-          motor_number: form.vehicle_motor_number || null,
-          chassis_number: form.vehicle_chassis_number || null,
-          plate: form.vehicle_plate || null,
-          padron: form.vehicle_padron || null,
-          padron_department: form.vehicle_padron_department || null,
-          national_code: form.vehicle_national_code || null,
-          affectation: form.vehicle_affectation,
-          owner_name: form.vehicle_owner_name || null,
-          owner_ci: form.vehicle_owner_ci || null,
-        })
-        .select()
-        .single();
-
-      if (vehicleErr) throw vehicleErr;
-
-      // 6. Create transaction
-      const matrizNumber = status === "completado" ? nextMatriz : null;
-      const folioStart = status === "completado" ? nextFolio : null;
-
-      const { data: transaction, error: txErr } = await supabase
-        .from("transactions")
-        .insert({
-          user_id: userId,
-          seller_id: seller!.id,
-          seller2_id: seller2Id,
-          buyer_id: buyer!.id,
-          buyer2_id: buyer2Id,
-          vehicle_id: vehicle!.id,
-          // Seller representative
-          seller_has_representative: form.seller_has_representative,
-          seller_representative_name: form.seller_rep_name || null,
-          seller_representative_ci: form.seller_rep_ci || null,
-          seller_representative_address: form.seller_rep_address || null,
-          seller_representative_power_date: form.seller_rep_power_date || null,
-          seller_representative_power_notary: form.seller_rep_power_notary || null,
-          seller_representative_power_protocol_date: form.seller_rep_power_protocol_date || null,
-          seller_representative_power_type: form.seller_rep_power_type || null,
-          seller_representative_can_substitute: form.seller_rep_can_substitute,
-          // Buyer representative
-          buyer_has_representative: form.buyer_has_representative,
-          buyer_representative_name: form.buyer_rep_name || null,
-          buyer_representative_ci: form.buyer_rep_ci || null,
-          buyer_representative_address: form.buyer_rep_address || null,
-          buyer_representative_power_date: form.buyer_rep_power_date || null,
-          buyer_representative_power_notary: form.buyer_rep_power_notary || null,
-          buyer_representative_power_protocol_date: form.buyer_rep_power_protocol_date || null,
-          buyer_representative_power_type: form.buyer_rep_power_type || null,
-          buyer_representative_can_substitute: form.buyer_rep_can_substitute,
-          // Price
-          price_amount: form.price_amount
-            ? parseFloat(form.price_amount)
-            : null,
-          price_currency: form.price_currency,
-          price_in_words: form.price_in_words || null,
-          payment_type: form.payment_type,
-          payment_detail: form.payment_detail || null,
-          payment_installments_count: form.payment_installments_count
-            ? parseInt(form.payment_installments_count)
-            : null,
-          payment_installment_amount: form.payment_installment_amount
-            ? parseFloat(form.payment_installment_amount)
-            : null,
-          payment_cash_amount: form.payment_cash_amount
-            ? parseFloat(form.payment_cash_amount)
-            : null,
-          payment_bank_name: form.payment_bank_name || null,
-          payment_third_party_name: form.payment_third_party_name || null,
-          payment_third_party_ci: form.payment_third_party_ci || null,
-          // Tax
-          bps_status: form.bps_status,
-          irae_status: form.irae_status,
-          imeba_status: form.imeba_status,
-          bps_cert_number: form.bps_cert_number || null,
-          bps_cert_date: form.bps_cert_date || null,
-          cud_number: form.cud_number || null,
-          cud_date: form.cud_date || null,
-          // Previous title
-          previous_owner_name: form.previous_owner_name || null,
-          previous_title_date: form.previous_title_date || null,
-          previous_title_notary: form.previous_title_notary || null,
-          previous_title_same_notary: form.previous_title_same_notary,
-          previous_title_registry: form.previous_title_registry || null,
-          previous_title_number: form.previous_title_number || null,
-          previous_title_registry_date:
-            form.previous_title_registry_date || null,
-          previous_title_type: form.previous_title_type || null,
-          previous_title_is_first_registration: form.previous_title_is_first_registration,
-          // Insurance
-          insurance_policy_number: form.insurance_policy_number || null,
-          insurance_company: form.insurance_company || null,
-          insurance_expiry: form.insurance_expiry || null,
-          insurance_separate_cert: form.insurance_separate_cert,
-          // Plate history
-          has_plate_history: form.has_plate_history,
-          plate_history_entries:
-            form.plate_history_entries.length > 0
-              ? JSON.stringify(form.plate_history_entries)
-              : null,
-          // Extra clauses
-          election_declaration: form.election_declaration || null,
-          has_traffic_responsibility_clause: form.has_traffic_responsibility_clause,
-          traffic_responsibility_date: form.traffic_responsibility_date || null,
-          // Proto
-          matriz_number: matrizNumber,
-          folio_start: folioStart,
-          paper_series_proto: form.paper_series_proto || null,
-          paper_number_proto: form.paper_number_proto || null,
-          paper_series_testimony: form.paper_series_testimony || null,
-          paper_numbers_testimony: form.paper_numbers_testimony || null,
-          transaction_date: form.transaction_date,
+        const txPayload = buildTransactionPayload(
           status,
-          folder_name: `${form.vehicle_brand}-${form.vehicle_model}-${form.vehicle_plate}`.toUpperCase(),
-        })
-        .select()
-        .single();
+          editIds.sellerId!,
+          seller2Id,
+          editIds.buyerId!,
+          buyer2Id,
+          editIds.vehicleId!,
+          matrizNumber,
+          folioStart,
+        );
+        // Don't overwrite existing matriz/folio if already set
+        if (editIds.currentStatus === "completado") {
+          delete (txPayload as Record<string, unknown>).matriz_number;
+          delete (txPayload as Record<string, unknown>).folio_start;
+        }
 
-      if (txErr) throw txErr;
+        const { error: txErr } = await supabase
+          .from("transactions")
+          .update(txPayload)
+          .eq("id", editIds.transactionId);
+        if (txErr) throw txErr;
 
-      // 7. Update next matriz/folio if completed
-      if (status === "completado" && matrizNumber) {
-        await supabase
-          .from("profiles")
-          .update({
-            next_matriz_number: matrizNumber + 1,
-            next_folio_number: (folioStart ?? 0) + 4,
+        // 7. Increment counters if moving from borrador to completado
+        if (status === "completado" && editIds.currentStatus === "borrador" && matrizNumber) {
+          await supabase
+            .from("profiles")
+            .update({
+              next_matriz_number: matrizNumber + 1,
+              next_folio_number: (folioStart ?? 0) + 4,
+            })
+            .eq("id", userId);
+        }
+      } else {
+        // --- CREATE MODE ---
+        // 1. Create seller client
+        const { data: seller, error: sellerErr } = await supabase
+          .from("clients")
+          .insert({ user_id: userId, ...buildClientPayload("seller") })
+          .select()
+          .single();
+        if (sellerErr) throw sellerErr;
+
+        // 2. Create seller2 if applicable
+        let seller2Id: string | null = null;
+        if (form.has_seller2) {
+          const { data: seller2, error: s2Err } = await supabase
+            .from("clients")
+            .insert({ user_id: userId, ...buildClientPayload("seller2") })
+            .select()
+            .single();
+          if (s2Err) throw s2Err;
+          seller2Id = seller2?.id ?? null;
+        }
+
+        // 3. Create buyer client
+        const { data: buyer, error: buyerErr } = await supabase
+          .from("clients")
+          .insert({ user_id: userId, ...buildClientPayload("buyer") })
+          .select()
+          .single();
+        if (buyerErr) throw buyerErr;
+
+        // 4. Create buyer2 if applicable
+        let buyer2Id: string | null = null;
+        if (form.has_buyer2) {
+          const { data: buyer2, error: b2Err } = await supabase
+            .from("clients")
+            .insert({ user_id: userId, ...buildClientPayload("buyer2") })
+            .select()
+            .single();
+          if (b2Err) throw b2Err;
+          buyer2Id = buyer2?.id ?? null;
+        }
+
+        // 5. Create vehicle
+        const { data: vehicle, error: vehicleErr } = await supabase
+          .from("vehicles")
+          .insert({ user_id: userId, ...buildVehiclePayload() })
+          .select()
+          .single();
+        if (vehicleErr) throw vehicleErr;
+
+        // 6. Create transaction
+        const matrizNumber = status === "completado" ? nextMatriz : null;
+        const folioStart = status === "completado" ? nextFolio : null;
+
+        const { error: txErr } = await supabase
+          .from("transactions")
+          .insert({
+            user_id: userId,
+            ...buildTransactionPayload(status, seller!.id, seller2Id, buyer!.id, buyer2Id, vehicle!.id, matrizNumber, folioStart),
           })
-          .eq("id", userId);
+          .select()
+          .single();
+        if (txErr) throw txErr;
+
+        // 7. Update next matriz/folio if completed
+        if (status === "completado" && matrizNumber) {
+          await supabase
+            .from("profiles")
+            .update({
+              next_matriz_number: matrizNumber + 1,
+              next_folio_number: (folioStart ?? 0) + 4,
+            })
+            .eq("id", userId);
+        }
       }
 
       router.push("/compraventas");
@@ -1227,7 +1300,7 @@ export default function TransactionForm({
     <div className="max-w-4xl mx-auto space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold text-gray-900">
-          Nueva Compraventa
+          {isEditing ? "Editar Compraventa" : "Nueva Compraventa"}
         </h1>
         <button
           onClick={swapBuyerSeller}
@@ -1748,7 +1821,7 @@ export default function TransactionForm({
           className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors disabled:opacity-50"
         >
           <Save size={16} />
-          Guardar borrador
+          {isEditing ? "Guardar cambios (borrador)" : "Guardar borrador"}
         </button>
         <button
           onClick={() => saveTransaction("completado")}
@@ -1756,7 +1829,7 @@ export default function TransactionForm({
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
         >
           <Save size={16} />
-          Completar y generar Word
+          {isEditing ? "Guardar cambios (completado)" : "Completar y generar Word"}
         </button>
       </div>
     </div>
