@@ -19,6 +19,10 @@ interface DgrComboboxProps {
   /** Disable fetching (e.g. models before brand is selected) */
   disabled?: boolean;
   placeholder?: string;
+  /** External validation error message */
+  validationError?: string;
+  /** data-field attribute for scroll-to-error */
+  fieldKey?: string;
 }
 
 export default function DgrCombobox({
@@ -30,6 +34,8 @@ export default function DgrCombobox({
   prefix = "",
   disabled = false,
   placeholder = "",
+  validationError,
+  fieldKey,
 }: DgrComboboxProps) {
   const [options, setOptions] = useState<DgrOption[]>([]);
   const [loading, setLoading] = useState(false);
@@ -113,7 +119,8 @@ export default function DgrCombobox({
             value={value}
             onChange={(e) => onChange(e.target.value, "")}
             placeholder={placeholder || `Escribir ${label.toLowerCase()}...`}
-            className="flex-1 border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            data-field={fieldKey}
+            className={`flex-1 border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${validationError ? "border-red-500 bg-red-50" : "border-gray-300"}`}
           />
           {error && !loading && (
             <button
@@ -133,6 +140,9 @@ export default function DgrCombobox({
           <p className="text-xs text-amber-600 mt-0.5">
             DGR no disponible — ingreso manual
           </p>
+        )}
+        {validationError && (
+          <p className="text-red-600 text-xs mt-1">{validationError}</p>
         )}
       </div>
     );
@@ -164,7 +174,8 @@ export default function DgrCombobox({
                 : placeholder || `Buscar ${label.toLowerCase()}...`
           }
           disabled={disabled || loading}
-          className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-400"
+          data-field={fieldKey}
+          className={`w-full border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-400 ${validationError ? "border-red-500 bg-red-50" : "border-gray-300"}`}
         />
         {loading && (
           <Loader2
@@ -221,6 +232,9 @@ export default function DgrCombobox({
             </button>
           </div>
         </div>
+      )}
+      {validationError && (
+        <p className="text-red-600 text-xs mt-1">{validationError}</p>
       )}
     </div>
   );

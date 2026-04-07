@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import type { Client, Vehicle, Transaction } from "@/lib/types";
+import { validateTransactionForm, type ValidationErrors } from "@/lib/validation";
 import { Save, ArrowLeftRight, ChevronDown, ChevronUp, Plus, Trash2 } from "lucide-react";
 import DgrCombobox from "./DgrCombobox";
 
@@ -399,6 +400,8 @@ function Input({
   type = "text",
   placeholder = "",
   className = "",
+  error,
+  fieldKey,
 }: {
   label: string;
   value: string;
@@ -406,6 +409,8 @@ function Input({
   type?: string;
   placeholder?: string;
   className?: string;
+  error?: string;
+  fieldKey?: string;
 }) {
   return (
     <div className={className}>
@@ -417,8 +422,10 @@ function Input({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        data-field={fieldKey}
+        className={`w-full border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${error ? "border-red-500 bg-red-50" : "border-gray-300"}`}
       />
+      {error && <p className="text-red-600 text-xs mt-1">{error}</p>}
     </div>
   );
 }
@@ -534,11 +541,20 @@ export default function TransactionForm({
   );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
   const supabase = createClient();
   const router = useRouter();
 
   function set<K extends keyof FormData>(key: K, value: FormData[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
+    // Clear validation error for this field when user types
+    if (validationErrors[key]) {
+      setValidationErrors((prev) => {
+        const next = { ...prev };
+        delete next[key];
+        return next;
+      });
+    }
   }
 
   function swapBuyerSeller() {
@@ -765,6 +781,20 @@ export default function TransactionForm({
   }
 
   async function saveTransaction(status: "borrador" | "completado") {
+    // Validate required fields
+    const errors = validateTransactionForm(form as unknown as Record<string, unknown>);
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      // Scroll to first error field
+      const firstErrorKey = Object.keys(errors)[0];
+      const el = document.querySelector(`[data-field="${firstErrorKey}"]`) as HTMLElement | null;
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.focus();
+      }
+      return;
+    }
+    setValidationErrors({});
     setSaving(true);
     setError("");
 
@@ -996,6 +1026,8 @@ export default function TransactionForm({
               label="Razón social"
               value={form[p("company_name")] as string}
               onChange={(v) => set(p("company_name"), v)}
+              error={validationErrors[p("company_name")]}
+              fieldKey={p("company_name")}
             />
             <Input
               label="Tipo (SA, SRL, SAS)"
@@ -1006,6 +1038,8 @@ export default function TransactionForm({
               label="RUT"
               value={form[p("rut")] as string}
               onChange={(v) => set(p("rut"), v)}
+              error={validationErrors[p("rut")]}
+              fieldKey={p("rut")}
             />
             <Input
               label="Nro. inscripción registro"
@@ -1063,11 +1097,15 @@ export default function TransactionForm({
               label="Nombre completo"
               value={form[p("full_name")] as string}
               onChange={(v) => set(p("full_name"), v)}
+              error={validationErrors[p("full_name")]}
+              fieldKey={p("full_name")}
             />
             <Input
               label="Cédula de identidad"
               value={form[p("ci")] as string}
               onChange={(v) => set(p("ci"), v)}
+              error={validationErrors[p("ci")]}
+              fieldKey={p("ci")}
             />
             <Input
               label="Nacionalidad"
@@ -1348,6 +1386,8 @@ export default function TransactionForm({
               }
             }}
             catalogName="marcas"
+            validationError={validationErrors.vehicle_brand}
+            fieldKey="vehicle_brand"
           />
           <DgrCombobox
             label="Modelo"
@@ -1361,6 +1401,8 @@ export default function TransactionForm({
             prefix={form.vehicle_brand_dgr_id}
             disabled={!form.vehicle_brand_dgr_id && !form.vehicle_brand}
             placeholder={form.vehicle_brand ? "Buscar modelo..." : "Seleccioná una marca primero"}
+            validationError={validationErrors.vehicle_model}
+            fieldKey="vehicle_model"
           />
           <Input
             label="Año"
@@ -1409,11 +1451,15 @@ export default function TransactionForm({
             value={form.vehicle_plate}
             onChange={(v) => set("vehicle_plate", v)}
             placeholder="ABC1234"
+            error={validationErrors.vehicle_plate}
+            fieldKey="vehicle_plate"
           />
           <Input
             label="Padrón"
             value={form.vehicle_padron}
             onChange={(v) => set("vehicle_padron", v)}
+            error={validationErrors.vehicle_padron}
+            fieldKey="vehicle_padron"
           />
           <Input
             label="Depto. del padrón"
@@ -1457,6 +1503,8 @@ export default function TransactionForm({
             type="number"
             value={form.price_amount}
             onChange={(v) => set("price_amount", v)}
+            error={validationErrors.price_amount}
+            fieldKey="price_amount"
           />
           <Select
             label="Moneda"
