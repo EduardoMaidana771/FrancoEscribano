@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
   let type = formData.get("type") as string; // "cedula" | "libreta" | "text" | "auto"
   const fileId = formData.get("fileId") as string | null;
 
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   // Resolve MIME type from file extension when the blob type is missing or generic
   function resolveMimeType(file: File): string {
