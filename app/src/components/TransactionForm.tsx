@@ -781,18 +781,20 @@ export default function TransactionForm({
   }
 
   async function saveTransaction(status: "borrador" | "completado") {
-    // Validate required fields
-    const errors = validateTransactionForm(form as unknown as Record<string, unknown>);
-    if (Object.keys(errors).length > 0) {
-      setValidationErrors(errors);
-      // Scroll to first error field
-      const firstErrorKey = Object.keys(errors)[0];
-      const el = document.querySelector(`[data-field="${firstErrorKey}"]`) as HTMLElement | null;
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        el.focus();
+    // Only validate for completado — drafts can be saved with incomplete data
+    if (status === "completado") {
+      const errors = validateTransactionForm(form as unknown as Record<string, unknown>);
+      if (Object.keys(errors).length > 0) {
+        setValidationErrors(errors);
+        // Scroll to first error field
+        const firstErrorKey = Object.keys(errors)[0];
+        const el = document.querySelector(`[data-field="${firstErrorKey}"]`) as HTMLElement | null;
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.focus();
+        }
+        return;
       }
-      return;
     }
     setValidationErrors({});
     setSaving(true);

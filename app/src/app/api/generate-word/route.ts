@@ -5,6 +5,8 @@ import PizZip from "pizzip";
 import { readFileSync } from "fs";
 import path from "path";
 
+// ─── FORMAT HELPERS ──────────────────────────────────────────
+
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return "___";
   const d = new Date(dateStr + "T12:00:00");
@@ -15,70 +17,397 @@ function formatDate(dateStr: string | null): string {
   return `${d.getDate()} de ${months[d.getMonth()]} de ${d.getFullYear()}`;
 }
 
-function formatCivilStatus(
-  status: string,
-  detail: string | null,
-  nupcias: string | null,
-  spouseName: string | null,
-  divorceFicha: string | null,
-  divorceYear: string | null,
-  divorceCourt: string | null
-): string {
+function formatDateLetras(dateStr: string | null): string {
+  if (!dateStr) return "___";
+  const d = new Date(dateStr + "T12:00:00");
+  const months = [
+    "enero", "febrero", "marzo", "abril", "mayo", "junio",
+    "julio", "agosto", "setiembre", "octubre", "noviembre", "diciembre",
+  ];
+  const dayWords: Record<number, string> = {
+    1: "primero", 2: "dos", 3: "tres", 4: "cuatro", 5: "cinco",
+    6: "seis", 7: "siete", 8: "ocho", 9: "nueve", 10: "diez",
+    11: "once", 12: "doce", 13: "trece", 14: "catorce", 15: "quince",
+    16: "dieciséis", 17: "diecisiete", 18: "dieciocho", 19: "diecinueve",
+    20: "veinte", 21: "veintiuno", 22: "veintidós", 23: "veintitrés",
+    24: "veinticuatro", 25: "veinticinco", 26: "veintiséis", 27: "veintisiete",
+    28: "veintiocho", 29: "veintinueve", 30: "treinta", 31: "treinta y uno",
+  };
+  const yearWords: Record<number, string> = {
+    2024: "dos mil veinticuatro", 2025: "dos mil veinticinco",
+    2026: "dos mil veintiséis", 2027: "dos mil veintisiete",
+    2028: "dos mil veintiocho", 2029: "dos mil veintinueve",
+    2030: "dos mil treinta",
+  };
+  const day = dayWords[d.getDate()] || String(d.getDate());
+  const month = months[d.getMonth()];
+  const year = yearWords[d.getFullYear()] || String(d.getFullYear());
+  return `${day} de ${month} de ${year}`;
+}
+
+function formatDateShort(dateStr: string | null): string {
+  if (!dateStr) return "___";
+  const d = new Date(dateStr + "T12:00:00");
+  return `${String(d.getDate()).padStart(2, "0")}/${String(d.getMonth() + 1).padStart(2, "0")}/${d.getFullYear()}`;
+}
+
+function formatCivilStatusSimple(c: Record<string, unknown>): string {
   const map: Record<string, string> = {
     soltero: "soltero/a",
+    casado: "casado/a",
     divorciado: "divorciado/a",
     viudo: "viudo/a",
-    casado: "casado/a",
-    separado_bienes: "casado/a con separaci\u00f3n de bienes",
+    separado_bienes: "casado/a con separación judicial de bienes",
   };
-  let text = map[status] || status;
-  if (nupcias) {
-    text += `, en ${nupcias} nupcias`;
-  }
-  if ((status === "casado" || status === "separado_bienes") && spouseName) {
-    text += ` con ${spouseName}`;
-  }
-  if (detail) {
-    text += ` ${detail}`;
-  }
-  if (status === "divorciado" && divorceFicha) {
-    text += `, Ficha ${divorceFicha}`;
-    if (divorceYear) text += ` del a\u00f1o ${divorceYear}`;
-    if (divorceCourt) text += `, Juzgado ${divorceCourt}`;
+  const status = c.civil_status as string;
+  let text = map[status] || String(status || "___");
+  if ((status === "casado" || status === "separado_bienes") && c.nupcias_type) {
+    text += ` en ${c.nupcias_type} nupcias`;
+    if (c.spouse_name) text += ` con ${c.spouse_name}`;
   }
   return text;
 }
 
-function formatPayment(tx: Record<string, unknown>): string {
-  const currency = tx.price_currency === "USD" ? "d\u00f3lares americanos" : "pesos uruguayos";
-  switch (tx.payment_type) {
-    case "contado":
-      return `al contado, en efectivo, en este acto`;
-    case "contado_cheque":
-      return `al contado, mediante cheque de ${tx.payment_bank_name || "___"}`;
-    case "contado_transferencia":
-      return `al contado, mediante transferencia bancaria de ${tx.payment_bank_name || "___"}`;
-    case "saldo_precio": {
-      const count = tx.payment_installments_count || "___";
-      const amount = tx.payment_installment_amount || "___";
-      return `quedando un saldo de precio de ${count} cuotas de ${currency} ${amount} cada una. ${tx.payment_detail || ""}`;
+// ─── TEXT BLOCK BUILDERS ─────────────────────────────────────
+
+function buildParteVendedora(
+  seller: Record<string, unknown>,
+  seller2: Record<string, unknown> | null,
+  tx: Record<string, unknown>
+): string {
+  if (seller.is_company) {
+    let t = `PARTE VENDEDORA: ${seller.company_name || "___"} persona jurídica`;
+    if (seller.rut) t += ` inscripta en el RUT de la DGI con el número ${seller.rut}`;
+    t += `, con domicilio en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
+    if (seller.representative_name) {
+      t += `, representada en este acto por ${seller.representative_name}`;
+      if (seller.representative_ci) t += `, con cédula de identidad número ${seller.representative_ci}`;
+      if (seller.representative_address) t += `, domiciliado en ${seller.representative_address}`;
     }
-    case "mixto": {
-      const cash = tx.payment_cash_amount || "___";
-      return `parte al contado (${currency} ${cash}) y ${tx.payment_detail || "saldo en cuotas"}`;
-    }
-    case "tercero":
-      return `paga un tercero: ${tx.payment_third_party_name || "___"} (CI ${tx.payment_third_party_ci || "___"}). ${tx.payment_detail || ""}`;
-    default:
-      return tx.payment_detail as string || "al contado";
+    t += ".";
+    return t;
   }
+
+  // Two co-sellers (married couple)
+  if (seller2) {
+    let t = `PARTE VENDEDORA: ${seller.full_name || "___"} y ${seller2.full_name || "___"}`;
+    t += `, ${formatCivilStatusSimple(seller)}`;
+    t += `, con C.I ${seller.ci_number || "___"} y ${seller2.ci_number || "___"} respectivamente`;
+    t += `, ${seller.nationality || "orientales"}, mayores de edad`;
+    t += `, domiciliados en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
+    if (tx.seller_has_representative) {
+      t += `, representado en este acto por ${tx.seller_representative_name || "___"}`;
+      t += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
+      t += ` y domicilio en ${tx.seller_representative_address || "___"}`;
+    }
+    t += ".";
+    return t;
+  }
+
+  // Single person seller
+  let t = `PARTE VENDEDORA: ${seller.full_name || "___"}`;
+  t += `, ${seller.nationality || "oriental"}, mayor de edad`;
+  t += `, ${formatCivilStatusSimple(seller)}`;
+  t += `, titular de la cédula de identidad número ${seller.ci_number || "___"}`;
+  t += `, con domicilio en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
+  if (tx.seller_has_representative) {
+    t += `, representado en este acto por ${tx.seller_representative_name || "___"}`;
+    t += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
+    t += ` y domicilio en ${tx.seller_representative_address || "___"}`;
+  }
+  t += ".";
+  return t;
 }
 
-function formatTaxStatus(status: string): string {
-  if (status === "si") return "es contribuyente";
-  if (status === "no") return "no es contribuyente";
-  return "no corresponde";
+function buildParteCompradora(
+  buyer: Record<string, unknown>,
+  buyer2: Record<string, unknown> | null,
+  tx: Record<string, unknown>
+): string {
+  if (buyer.is_company) {
+    let t = `PARTE COMPRADORA: ${buyer.company_name || "___"} persona jurídica`;
+    if (buyer.rut) t += ` inscripta en el RUT de la DGI con el número ${buyer.rut}`;
+    t += `, con domicilio en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
+    if (buyer.representative_name) {
+      t += `, representada en este acto por ${buyer.representative_name}`;
+      if (buyer.representative_ci) t += `, con cédula de identidad número ${buyer.representative_ci}`;
+      if (buyer.representative_address) t += `, domiciliado en ${buyer.representative_address}`;
+    }
+    t += ".";
+    return t;
+  }
+
+  if (buyer2) {
+    let t = `PARTE COMPRADORA: ${buyer.full_name || "___"} y ${buyer2.full_name || "___"}`;
+    t += `, ${formatCivilStatusSimple(buyer)}`;
+    t += `, con C.I ${buyer.ci_number || "___"} y ${buyer2.ci_number || "___"} respectivamente`;
+    t += `, ${buyer.nationality || "orientales"}, mayores de edad`;
+    t += `, domiciliados en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
+    t += ".";
+    return t;
+  }
+
+  let t = `PARTE COMPRADORA: ${buyer.full_name || "___"}`;
+  t += `, ${buyer.nationality || "oriental"}, mayor de edad`;
+  t += `, ${formatCivilStatusSimple(buyer)}`;
+  t += `, titular de la cédula de identidad número ${buyer.ci_number || "___"}`;
+  t += `, domiciliado en ${buyer.address || "___"}, departamento de ${buyer.department || "___"}`;
+  if (tx.buyer_has_representative) {
+    t += `, representado en este acto por ${tx.buyer_representative_name || "___"}`;
+    t += `, con cédula de identidad número ${tx.buyer_representative_ci || "___"}`;
+    t += ` y domicilio en ${tx.buyer_representative_address || "___"}`;
+  }
+  t += ".";
+  return t;
 }
+
+function buildBienQueSeVende(
+  vehicle: Record<string, unknown>,
+  plateEntries: PlateHistoryEntry[]
+): string {
+  let t = `BIEN QUE SE VENDE. La parte vendedora vende a la parte compradora y ésta adquiere libre de toda obligación, gravamen y multas el AUTOMOVIL:`;
+  t += ` tipo ${vehicle.type || "___"}`;
+  t += `, Marca ${vehicle.brand || "___"}`;
+  t += `, Modelo: ${vehicle.model || "___"}`;
+  t += `, matrícula ${vehicle.plate || "___"}`;
+  t += `, padrón ${vehicle.padron || "___"} de ${vehicle.padron_department || "___"}`;
+  t += `, año ${vehicle.year || "___"}`;
+  t += `, Motor ${vehicle.motor_number || "___"} a ${vehicle.fuel || "___"}`;
+  t += `, chasis: ${vehicle.chassis_number || "___"}`;
+  // Plate history (inline)
+  if (plateEntries && plateEntries.length > 0) {
+    const hist = plateEntries.map(e =>
+      `padrón ${e.padron || "___"} de ${e.department || "___"} y matrícula ${e.matricula || "___"}`
+    ).join(", ");
+    t += ` (antes ${hist})`;
+  }
+  t += ".";
+  return t;
+}
+
+function buildPrecioTexto(tx: Record<string, unknown>): string {
+  const currency = tx.price_currency === "USD"
+    ? "dólares estadounidenses"
+    : "pesos uruguayos";
+  const symbol = tx.price_currency === "USD" ? "U$S" : "$";
+  const amount = tx.price_amount || "___";
+  const words = tx.price_in_words || "___";
+  let t = `PRECIO. El precio de esta compraventa asciende a la suma de ${currency} ${String(words).toUpperCase()} (${symbol} ${amount})`;
+
+  switch (tx.payment_type) {
+    case "contado":
+      t += `, que se abona totalmente en este acto, al contado, suma por la cual se otorga total carta de pago.`;
+      break;
+    case "contado_cheque":
+      t += `, que se abona totalmente en este acto, mediante cheque de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total y eficaz carta de pago.`;
+      break;
+    case "contado_transferencia":
+      t += `, que se abona totalmente en este acto, mediante transferencia bancaria de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total carta de pago.`;
+      break;
+    case "saldo_precio":
+      t += `, pagaderos en ${tx.payment_installments_count || "___"} cuotas de ${symbol} ${tx.payment_installment_amount || "___"} cada una. ${tx.payment_detail || ""}`;
+      break;
+    case "mixto":
+      t += `, parte al contado (${symbol} ${tx.payment_cash_amount || "___"}) y ${tx.payment_detail || "saldo en cuotas"}, suma por la cual se otorga total carta de pago.`;
+      break;
+    default:
+      t += `, que fueron abonados antes de este acto, suma por la cual la parte vendedora otorga total carta de pago.`;
+  }
+  return t;
+}
+
+function buildTradicionTexto(): string {
+  return "TRADICION Como tradición la parte vendedora entrega a la parte compradora la posesión del vehículo objeto de este contrato, que tomo antes de este acto.";
+}
+
+function buildDeclaracionTexto(tx: Record<string, unknown>): string {
+  const bps = tx.bps_status as string;
+  let t: string;
+  if (bps === "si") {
+    t = "DECLARACION. La parte vendedora declara bajo juramento: sí ser contribuyente al B.P.S, y si corresponder el C.U.D. por estar comprendida en la ley 17930 y su decreto reglamentario.";
+  } else {
+    t = "DECLARACION. La parte vendedora declaro bajo juramento no estar comprendido en las disposiciones de la ley 16170, y no corresponder el impuesto de IRAE e IMEBA.";
+  }
+  if (tx.has_traffic_responsibility_clause) {
+    t += ` II) Ambas partes declaran conocer que para el caso de surgir deudas por concepto de multas de policía caminera y/o tránsito, el pago corresponde a la parte vendedora hasta el ${formatDate(tx.traffic_responsibility_date as string | null)}, en virtud de no estar actualizado en tiempo y forma real el sistema del sucive con la información brindada.`;
+  }
+  return t;
+}
+
+function buildFirmas(
+  seller: Record<string, unknown>,
+  seller2: Record<string, unknown> | null,
+  buyer: Record<string, unknown>,
+  buyer2: Record<string, unknown> | null,
+  tx: Record<string, unknown>
+): { vendedor: string; comprador: string } {
+  let v: string;
+  if (seller.is_company && seller.representative_name) {
+    v = `PARTE VENDEDORA- Hay una firma de ${String(seller.representative_name).toUpperCase()}`;
+  } else if (seller2) {
+    v = `PARTE VENDEDORA- Hay una firma de ${String(seller.full_name || "___").toUpperCase()} y otra de ${String(seller2.full_name || "___").toUpperCase()}`;
+  } else if (tx.seller_has_representative) {
+    v = `PARTE VENDEDORA- Hay una firma de ${String(tx.seller_representative_name || "___").toUpperCase()}`;
+  } else {
+    v = `PARTE VENDEDORA- Hay una firma de ${String(seller.full_name || "___").toUpperCase()}`;
+  }
+
+  let c: string;
+  if (buyer.is_company && buyer.representative_name) {
+    c = `PARTE COMPRADORA – Hay una firma de ${String(buyer.representative_name).toUpperCase()}`;
+  } else if (buyer2) {
+    c = `PARTE COMPRADORA – Hay una firma de ${String(buyer.full_name || "___").toUpperCase()} y otra de ${String(buyer2.full_name || "___").toUpperCase()}`;
+  } else {
+    c = `PARTE COMPRADORA – Hay una firma de ${String(buyer.full_name || "___").toUpperCase()}`;
+  }
+  return { vendedor: v, comprador: c };
+}
+
+function buildCertificoQue(
+  seller: Record<string, unknown>,
+  seller2: Record<string, unknown> | null,
+  buyer: Record<string, unknown>,
+  tx: Record<string, unknown>,
+  profile: Record<string, unknown>,
+  vehicle: Record<string, unknown>
+): string {
+  // I) Authentication of signatures
+  const names: string[] = [];
+  const cis: string[] = [];
+  if (tx.seller_has_representative) {
+    names.push(String(tx.seller_representative_name || "___"));
+    cis.push(String(tx.seller_representative_ci || "___"));
+  } else if (seller.is_company && seller.representative_name) {
+    names.push(String(seller.representative_name));
+    cis.push(String(seller.representative_ci || "___"));
+  } else {
+    names.push(String(seller.full_name || "___"));
+    cis.push(String(seller.ci_number || "___"));
+    if (seller2) {
+      names.push(String(seller2.full_name || "___"));
+      cis.push(String(seller2.ci_number || "___"));
+    }
+  }
+  if (buyer.is_company && buyer.representative_name) {
+    names.push(String(buyer.representative_name));
+    cis.push(String(buyer.representative_ci || "___"));
+  } else {
+    names.push(String(buyer.full_name || "___"));
+    cis.push(String(buyer.ci_number || "___"));
+  }
+
+  let t = `CERTIFICO QUE: I) Las firmas que anteceden son auténticas, fueron puestas en mi presencia y pertenecen a personas hábiles que no conozco, pero acreditaron su identidad con los documentos respectivos señores ${names.join(", ")}`;
+  if (cis.length > 1) {
+    t += `, titulares de la cédula de identidad número ${cis.join(" y ")} respectivamente`;
+  } else {
+    t += `, titular de la cédula de identidad número ${cis[0]}`;
+  }
+  t += `, cuyos demás datos surgen del documento que antecede, a quienes leí y así lo otorgaron.`;
+
+  // II) Title chain
+  if (tx.previous_owner_name || tx.previous_title_date) {
+    const civilDesc = formatCivilStatusSimple(seller);
+    t += ` II) La parte vendedora siendo ${civilDesc} hubo el bien que se enajena de ${tx.previous_owner_name || "___"}`;
+    t += `, según documento privado de fecha ${formatDateShort(tx.previous_title_date as string | null)}`;
+    t += ` certificado y protocolizado por el Escribano ${tx.previous_title_notary || "___"} en la misma fecha`;
+    t += `, e inscripta en el Registro Mobiliario de ${tx.previous_title_registry || "___"} con el número ${tx.previous_title_number || "___"} el ${formatDateShort(tx.previous_title_registry_date as string | null)}.`;
+  }
+
+  // III) Power of attorney
+  if (tx.seller_has_representative) {
+    t += ` III) El señor ${tx.seller_representative_name || "___"}, lo hace en representación de ${seller.is_company ? seller.company_name : seller.full_name || "___"}`;
+    t += ` según ${tx.seller_representative_power_type || "poder"} de fecha ${formatDateShort(tx.seller_representative_power_date as string | null)}`;
+    t += ` certificado y protocolizado por el Escribano ${tx.seller_representative_power_notary || "___"} en la misma fecha`;
+    t += `, con facultades para este acto y vigente a la fecha.`;
+  }
+
+  // Insurance
+  if (tx.insurance_policy_number) {
+    t += ` Tuve a la vista Certificado de Seguro Obligatorio póliza número ${tx.insurance_policy_number}`;
+    t += ` expedido por ${tx.insurance_company || "___"}`;
+    t += ` y vencimiento el ${formatDateShort(tx.insurance_expiry as string | null)}`;
+    t += `, dando cumplimento a la ley 18412.`;
+  }
+
+  // BPS cert
+  if (tx.bps_status === "si" && tx.bps_cert_number) {
+    t += ` Tuve a la vista el Certificado Común número ${tx.bps_cert_number} expedido por el Banco de Previsión Social el ${formatDateShort(tx.bps_cert_date as string | null)}.`;
+  }
+
+  // CUD
+  if (tx.cud_number) {
+    t += ` Certificado Único Departamental (CUD) ${tx.cud_number} expedido el ${formatDateShort(tx.cud_date as string | null)}.`;
+  }
+
+  // Tax declaration
+  if (tx.bps_status !== "si") {
+    t += ` No se controla el Certificado Único Departamental en virtud de lo declarado por la parte vendedora, declaro no corresponder los impuestos de Irae e Imeba por no estar comprendido en la ley 17930 y su decreto reglamentario.`;
+  }
+
+  // Closing
+  const city = profile?.city || "Maldonado";
+  const date = formatDateLetras(tx.transaction_date as string | null);
+  const initials = profile?.notary_initials || "F.C.";
+  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
+  t += ` EN FE DE ELLO a solicitud de parte interesada y para su presentación ante quien corresponda expido el presente que sello, signo y firmo en ${city} el día ${date}. ${initials} ${name}.`;
+
+  return t;
+}
+
+function buildProtocolizacion(
+  seller: Record<string, unknown>,
+  seller2: Record<string, unknown> | null,
+  buyer: Record<string, unknown>,
+  tx: Record<string, unknown>,
+  profile: Record<string, unknown>,
+  vehicle: Record<string, unknown>
+): string {
+  const sellerName = seller.is_company
+    ? String(seller.company_name || "___")
+    : seller2
+      ? `${seller.full_name || "___"} y otro`
+      : String(seller.full_name || "___");
+  const buyerName = buyer.is_company
+    ? String(buyer.company_name || "___")
+    : String(buyer.full_name || "___");
+  const n = tx.matriz_number || "___";
+  const city = profile?.city || "Maldonado";
+  const date = formatDateLetras(tx.transaction_date as string | null);
+  const initials = profile?.notary_initials || "F.C.";
+  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
+  const folioStart = tx.folio_start || "___";
+  const folioEnd = tx.folio_end || "___";
+  const padron = vehicle.padron || "___";
+  const dept = vehicle.padron_department ? ` de ${vehicle.padron_department}` : "";
+
+  let t = `Nº ${n} PROTOCOLIZACION PRECEPTIVA DE COMPRAVENTA AUTOMOTOR. ${sellerName} con ${buyerName}. En ${city} el día ${date}`;
+  t += ` cumpliendo con lo dispuesto por el artículo 292 de la ley 18362 incorporo a mi Registro de Protocolizaciones compraventa automotor de padrón ${padron}${dept}`;
+  t += ` con certificación y la presente con el número ${n}, extendida de folio ${folioStart} a ${folioEnd} vuelto.`;
+  t += ` ${initials} ${name}`;
+  return t;
+}
+
+function buildPrimerTestimonio(
+  tx: Record<string, unknown>,
+  profile: Record<string, unknown>
+): string {
+  const n = tx.matriz_number || "___";
+  const city = profile?.city || "Maldonado";
+  const date = formatDateLetras(tx.transaction_date as string | null);
+  const name = profile?.notary_name || profile?.full_name || "Franco Castiglioni";
+  const serieProto = tx.paper_series_proto || "___";
+  const numProto = tx.paper_number_proto || "___";
+  const serieTest = tx.paper_series_testimony || "___";
+  const numsTest = tx.paper_numbers_testimony || "___";
+
+  let t = `ES PRIMER TESTIMONIO que he compulsado de la protocolización que incorpore a mi Registro con el número ${n}`;
+  t += ` en hoja de papel notarial serie ${serieProto} número ${numProto}.`;
+  t += ` EN FE DE ELLO y para la compradora expido el presente que sello signo y firmo en ${city} el día ${date}`;
+  t += ` en hojas de papel notarial serie ${serieTest} número ${numsTest}.`;
+  return t;
+}
+
+// ─── TYPES ───────────────────────────────────────────────────
 
 interface PlateHistoryEntry {
   department: string;
@@ -87,15 +416,7 @@ interface PlateHistoryEntry {
   date: string;
 }
 
-function formatPlateHistory(entries: PlateHistoryEntry[]): string {
-  if (!entries || entries.length === 0) return "";
-  return entries
-    .map(
-      (e) =>
-        `Depto. ${e.department || "___"}, Padrón ${e.padron || "___"}, Matrícula ${e.matricula || "___"}${e.date ? ` (${formatDate(e.date)})` : ""}`
-    )
-    .join("; ");
-}
+// ─── MAIN HANDLER ────────────────────────────────────────────
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient();
@@ -168,25 +489,12 @@ export async function POST(request: NextRequest) {
     linebreaks: true,
   });
 
-  const seller = tx.seller;
-  const seller2 = tx.seller2;
-  const buyer = tx.buyer;
-  const buyer2 = tx.buyer2;
-  const vehicle = tx.vehicle;
-
-  // Helper to format civil status for a client record
-  const fmtCS = (c: Record<string, unknown> | null) =>
-    c
-      ? formatCivilStatus(
-          c.civil_status as string,
-          c.civil_status_detail as string | null,
-          c.nupcias_type as string | null,
-          c.spouse_name as string | null,
-          c.divorce_ficha as string | null,
-          c.divorce_year as string | null,
-          c.divorce_court as string | null
-        )
-      : "___";
+  const seller = tx.seller as Record<string, unknown>;
+  const seller2 = tx.seller2 as Record<string, unknown> | null;
+  const buyer = tx.buyer as Record<string, unknown>;
+  const buyer2 = tx.buyer2 as Record<string, unknown> | null;
+  const vehicle = tx.vehicle as Record<string, unknown>;
+  const prof = (profile || {}) as Record<string, unknown>;
 
   // Parse plate history entries
   let plateEntries: PlateHistoryEntry[] = [];
@@ -201,193 +509,38 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Build template data
+  // Build firmas
+  const firmas = buildFirmas(seller, seller2, buyer, buyer2, tx);
+
+  // Build template data — all text blocks pre-formatted
   const data = {
-    // Date
-    fecha: formatDate(tx.transaction_date),
-    fecha_operacion: formatDate(tx.transaction_date),
+    // Header
+    ciudad: prof.city || "___",
+    escribano_nombre: prof.notary_name || prof.full_name || "___",
+    escribano_domicilio: prof.notary_address || "calle San Carlos 1093, Maldonado",
 
-    // Notary
-    escribano_nombre: profile?.notary_name || profile?.full_name || "___",
-    escribano_iniciales: profile?.notary_initials || "___",
-    ciudad: profile?.city || "___",
+    // Dates
+    fecha_letras: formatDateLetras(tx.transaction_date),
 
-    // Seller
-    vendedor_nombre: seller?.full_name || "___",
-    vendedor_ci: seller?.ci_number || "___",
-    vendedor_nacionalidad: seller?.nationality || "___",
-    vendedor_nacimiento: formatDate(seller?.birth_date || null),
-    vendedor_lugar_nacimiento: seller?.birth_place || "___",
-    vendedor_estado_civil: fmtCS(seller),
-    vendedor_conyuge: seller?.spouse_name || "",
-    vendedor_domicilio: seller?.address || "___",
-    vendedor_departamento: seller?.department || "___",
-    vendedor_es_empresa: seller?.is_company || false,
-    vendedor_razon_social: seller?.company_name || "",
-    vendedor_tipo_empresa: seller?.company_type || "",
-    vendedor_rut: seller?.rut || "",
-    vendedor_registro_nro: seller?.company_registry_number || "",
-    vendedor_registro_folio: seller?.company_registry_folio || "",
-    vendedor_registro_libro: seller?.company_registry_book || "",
-    vendedor_objeto_social: seller?.company_business_purpose || "",
-    vendedor_ley_19484: seller?.company_law_19484 || false,
-    vendedor_rep_nombre: seller?.representative_name || "",
-    vendedor_rep_ci: seller?.representative_ci || "",
-    vendedor_rep_cargo: seller?.representative_role || "",
-    vendedor_rep_domicilio: seller?.representative_address || "",
+    // Main sections — pre-built text
+    parte_vendedora: buildParteVendedora(seller, seller2, tx),
+    parte_compradora: buildParteCompradora(buyer, buyer2, tx),
+    bien_que_se_vende: buildBienQueSeVende(vehicle, plateEntries),
+    precio_texto: buildPrecioTexto(tx as unknown as Record<string, unknown>),
+    tradicion_texto: buildTradicionTexto(),
+    declaracion_texto: buildDeclaracionTexto(tx as unknown as Record<string, unknown>),
 
-    // Seller 2 (spouse)
-    hay_vendedor2: !!seller2,
-    vendedor2_nombre: seller2?.full_name || "",
-    vendedor2_ci: seller2?.ci_number || "",
-    vendedor2_nacionalidad: seller2?.nationality || "",
-    vendedor2_nacimiento: formatDate(seller2?.birth_date || null),
-    vendedor2_lugar_nacimiento: seller2?.birth_place || "",
-    vendedor2_estado_civil: fmtCS(seller2),
-    vendedor2_domicilio: seller2?.address || "",
-    vendedor2_departamento: seller2?.department || "",
+    // Signatures
+    firmas_vendedor: firmas.vendedor,
+    firmas_comprador: firmas.comprador,
 
-    // Seller representative (apoderado)
-    tiene_apoderado_vendedor: tx.seller_has_representative,
-    apoderado_vendedor_nombre: tx.seller_representative_name || "",
-    apoderado_vendedor_ci: tx.seller_representative_ci || "",
-    apoderado_vendedor_domicilio: tx.seller_representative_address || "",
-    apoderado_vendedor_poder_tipo: tx.seller_representative_power_type || "",
-    apoderado_vendedor_poder_fecha: formatDate(tx.seller_representative_power_date),
-    apoderado_vendedor_escribano: tx.seller_representative_power_notary || "",
-    apoderado_vendedor_protocolo_fecha: formatDate(tx.seller_representative_power_protocol_date),
-    apoderado_vendedor_sustitucion: tx.seller_representative_can_substitute || false,
-    // Legacy aliases
-    tiene_apoderado: tx.seller_has_representative,
-    apoderado_nombre: tx.seller_representative_name || "",
-    apoderado_ci: tx.seller_representative_ci || "",
-    apoderado_domicilio: tx.seller_representative_address || "",
+    // Certification & protocol
+    certifico_que: buildCertificoQue(seller, seller2, buyer, tx as unknown as Record<string, unknown>, prof, vehicle),
+    protocolizacion_texto: buildProtocolizacion(seller, seller2, buyer, tx as unknown as Record<string, unknown>, prof, vehicle),
+    primer_testimonio: buildPrimerTestimonio(tx as unknown as Record<string, unknown>, prof),
 
-    // Buyer
-    comprador_nombre: buyer?.full_name || "___",
-    comprador_ci: buyer?.ci_number || "___",
-    comprador_nacionalidad: buyer?.nationality || "___",
-    comprador_nacimiento: formatDate(buyer?.birth_date || null),
-    comprador_lugar_nacimiento: buyer?.birth_place || "___",
-    comprador_estado_civil: fmtCS(buyer),
-    comprador_conyuge: buyer?.spouse_name || "",
-    comprador_domicilio: buyer?.address || "___",
-    comprador_departamento: buyer?.department || "___",
-    comprador_es_empresa: buyer?.is_company || false,
-    comprador_razon_social: buyer?.company_name || "",
-    comprador_tipo_empresa: buyer?.company_type || "",
-    comprador_rut: buyer?.rut || "",
-    comprador_registro_nro: buyer?.company_registry_number || "",
-    comprador_registro_folio: buyer?.company_registry_folio || "",
-    comprador_registro_libro: buyer?.company_registry_book || "",
-    comprador_objeto_social: buyer?.company_business_purpose || "",
-    comprador_ley_19484: buyer?.company_law_19484 || false,
-    comprador_rep_nombre: buyer?.representative_name || "",
-    comprador_rep_ci: buyer?.representative_ci || "",
-    comprador_rep_cargo: buyer?.representative_role || "",
-    comprador_rep_domicilio: buyer?.representative_address || "",
-
-    // Buyer representative (apoderado)
-    tiene_apoderado_comprador: tx.buyer_has_representative,
-    apoderado_comprador_nombre: tx.buyer_representative_name || "",
-    apoderado_comprador_ci: tx.buyer_representative_ci || "",
-    apoderado_comprador_domicilio: tx.buyer_representative_address || "",
-    apoderado_comprador_poder_tipo: tx.buyer_representative_power_type || "",
-    apoderado_comprador_poder_fecha: formatDate(tx.buyer_representative_power_date),
-    apoderado_comprador_escribano: tx.buyer_representative_power_notary || "",
-    apoderado_comprador_protocolo_fecha: formatDate(tx.buyer_representative_power_protocol_date),
-    apoderado_comprador_sustitucion: tx.buyer_representative_can_substitute || false,
-
-    // Buyer 2
-    hay_comprador2: !!buyer2,
-    comprador2_nombre: buyer2?.full_name || "",
-    comprador2_ci: buyer2?.ci_number || "",
-    comprador2_nacionalidad: buyer2?.nationality || "",
-    comprador2_nacimiento: formatDate(buyer2?.birth_date || null),
-    comprador2_lugar_nacimiento: buyer2?.birth_place || "",
-    comprador2_estado_civil: fmtCS(buyer2),
-    comprador2_domicilio: buyer2?.address || "",
-    comprador2_departamento: buyer2?.department || "",
-
-    // Vehicle
-    vehiculo_marca: vehicle?.brand || "___",
-    vehiculo_modelo: vehicle?.model || "___",
-    vehiculo_anio: vehicle?.year || "___",
-    vehiculo_tipo: vehicle?.type || "___",
-    vehiculo_combustible: vehicle?.fuel || "___",
-    vehiculo_cilindrada: vehicle?.cylinders || "___",
-    vehiculo_motor: vehicle?.motor_number || "___",
-    vehiculo_chasis: vehicle?.chassis_number || "___",
-    vehiculo_matricula: vehicle?.plate || "___",
-    vehiculo_padron: vehicle?.padron || "___",
-    vehiculo_padron_depto: vehicle?.padron_department || "___",
-    vehiculo_codigo_nacional: vehicle?.national_code || "___",
-    vehiculo_afectacion: vehicle?.affectation || "___",
-    vehiculo_titular: vehicle?.owner_name || "___",
-    vehiculo_titular_ci: vehicle?.owner_ci || "___",
-
-    // Price
-    precio_monto: tx.price_amount || "___",
-    precio_moneda: tx.price_currency === "USD" ? "d\u00f3lares americanos" : "pesos uruguayos",
-    precio_moneda_simbolo: tx.price_currency === "USD" ? "USD" : "$",
-    precio_letras: tx.price_in_words || "___",
-    forma_pago: formatPayment(tx as unknown as Record<string, unknown>),
-    pago_tipo: tx.payment_type || "contado",
-    pago_contado: tx.payment_type === "contado" || tx.payment_type === "contado_cheque" || tx.payment_type === "contado_transferencia",
-    pago_financiado: tx.payment_type === "saldo_precio",
-    pago_detalle: tx.payment_detail || "",
-
-    // Taxes (3-state)
-    bps_texto: formatTaxStatus(tx.bps_status || "no_corresponde"),
-    irae_texto: formatTaxStatus(tx.irae_status || "no_corresponde"),
-    imeba_texto: formatTaxStatus(tx.imeba_status || "no_corresponde"),
-    es_contribuyente_bps: tx.bps_status === "si",
-    es_contribuyente_irae: tx.irae_status === "si",
-    es_contribuyente_imeba: tx.imeba_status === "si",
-    no_contribuyente_bps: tx.bps_status === "no",
-    no_contribuyente_irae: tx.irae_status === "no",
-    no_contribuyente_imeba: tx.imeba_status === "no",
-    bps_cert_numero: tx.bps_cert_number || "",
-    bps_cert_fecha: formatDate(tx.bps_cert_date),
-    cud_numero: tx.cud_number || "",
-    cud_fecha: formatDate(tx.cud_date),
-
-    // Previous title
-    anterior_tipo: tx.previous_title_type || "compraventa",
-    anterior_primera_inscripcion: tx.previous_title_is_first_registration || false,
-    anterior_propietario: tx.previous_owner_name || "___",
-    anterior_fecha: formatDate(tx.previous_title_date),
-    anterior_escribano: tx.previous_title_notary || "___",
-    anterior_mismo_escribano: tx.previous_title_same_notary,
-    anterior_registro: tx.previous_title_registry || "___",
-    anterior_numero: tx.previous_title_number || "___",
-    anterior_fecha_registro: formatDate(tx.previous_title_registry_date),
-
-    // Insurance
-    seguro_poliza: tx.insurance_policy_number || "___",
-    seguro_compania: tx.insurance_company || "___",
-    seguro_vigencia: formatDate(tx.insurance_expiry),
-    seguro_separado: tx.insurance_separate_cert,
-
-    // Plate history
-    tiene_historial_matricula: tx.has_plate_history,
-    historial_matricula: formatPlateHistory(plateEntries),
-    historial_matricula_entries: plateEntries,
-
-    // Extra clauses
-    declaracion_eleccion: tx.election_declaration || "",
-    tiene_clausula_transito: tx.has_traffic_responsibility_clause || false,
-    fecha_responsabilidad_transito: formatDate(tx.traffic_responsibility_date),
-
-    // Protocalizaci\u00f3n
+    // Protocol numbers (used in template directly)
     matriz_numero: tx.matriz_number || "___",
-    folio_inicio: tx.folio_start || "___",
-    folio_fin: tx.folio_end || "___",
-    papel_serie_proto: tx.paper_series_proto || "___",
-    papel_numero_proto: tx.paper_number_proto || "___",
-    papel_serie_testimonio: tx.paper_series_testimony || "___",
-    papel_numeros_testimonio: tx.paper_numbers_testimony || "___",
-    fecha_protocolizacion: formatDate(tx.protocolization_date),
   };
 
   doc.render(data);

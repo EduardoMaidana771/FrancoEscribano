@@ -53,7 +53,10 @@ export default function DgrCombobox({
     try {
       const params = new URLSearchParams({ name: catalogName });
       if (prefix) params.set("prefix", prefix);
-      const res = await fetch(`/api/dgr/catalogs?${params}`);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      const res = await fetch(`/api/dgr/catalogs?${params}`, { signal: controller.signal });
+      clearTimeout(timeout);
       if (!res.ok) {
         setError(true);
         setManualMode(true);
@@ -121,6 +124,7 @@ export default function DgrCombobox({
             placeholder={placeholder || `Escribir ${label.toLowerCase()}...`}
             data-field={fieldKey}
             className={`flex-1 border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${validationError ? "border-red-500 bg-red-50" : "border-gray-300"}`}
+            suppressHydrationWarning
           />
           {error && !loading && (
             <button
@@ -176,6 +180,7 @@ export default function DgrCombobox({
           disabled={disabled || loading}
           data-field={fieldKey}
           className={`w-full border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-400 ${validationError ? "border-red-500 bg-red-50" : "border-gray-300"}`}
+          suppressHydrationWarning
         />
         {loading && (
           <Loader2

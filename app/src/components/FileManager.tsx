@@ -761,10 +761,13 @@ export default function FileManager({
                 <div key={item.fileId} className="border border-amber-200 rounded-lg p-3 bg-amber-50">
                   <div className="flex items-center gap-2">
                     <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">
-                      {item.type === "error" ? "Error" : "No clasificado"}
+                      {item.type === "error" ? "Error" : "Omitido"}
                     </span>
                     <span className="text-xs text-gray-500">{item.fileName}</span>
                   </div>
+                  {item.type === "unknown" && (
+                    <p className="text-xs text-amber-700 mt-1">No es cédula ni libreta — no se puede extraer datos</p>
+                  )}
                   {"_error" in item.data && (
                     <p className="text-xs text-red-600 mt-1">{String(item.data._error)}</p>
                   )}
