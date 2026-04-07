@@ -19,6 +19,13 @@ def set_paragraph_text(paragraph, text: str) -> None:
         paragraph.add_run(text)
 
 
+def clear_run_emphasis(paragraph) -> None:
+    # Important for Docxtemplater: replacement text inherits run style.
+    for run in paragraph.runs:
+        run.bold = False
+        run.underline = False
+
+
 def main() -> None:
     if not REFERENCE_DOCX.exists():
         raise FileNotFoundError(f"No existe referencia: {REFERENCE_DOCX}")
@@ -46,6 +53,11 @@ def main() -> None:
 
     for index_1_based, text in replacements.items():
         set_paragraph_text(doc.paragraphs[index_1_based - 1], text)
+
+    # These clauses are rendered from long placeholders and must not inherit
+    # full bold/underline from the source document formatting.
+    for index_1_based in [7, 9, 12, 14, 15, 16, 17]:
+        clear_run_emphasis(doc.paragraphs[index_1_based - 1])
 
     # Optional trailing insurance certificate block.
     if len(doc.paragraphs) >= 32:
