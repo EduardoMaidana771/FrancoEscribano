@@ -4,6 +4,30 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
 
+// Retry wrapper with exponential backoff for Gemini 429 errors
+async function callGeminiWithRetry<T>(
+  fn: () => Promise<T>,
+  maxRetries = 3
+): Promise<T> {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      const is429 = message.includes("429") || message.includes("Too Many Requests") || message.includes("quota");
+      if (!is429 || attempt === maxRetries) throw err;
+
+      // Parse retry delay from error or use exponential backoff
+      const retryMatch = message.match(/retry\s*(?:in|after)\s*([\d.]+)s/i);
+      const waitSec = retryMatch ? parseFloat(retryMatch[1]) : Math.pow(2, attempt + 1) * 5;
+      const waitMs = Math.min(waitSec * 1000, 60000); // Cap at 60s
+      console.log(`Gemini 429 — retry ${attempt + 1}/${maxRetries} in ${waitMs}ms`);
+      await new Promise((r) => setTimeout(r, waitMs));
+    }
+  }
+  throw new Error("Max retries exceeded");
+}
+
 const PERSON_PROMPT = `Sos un asistente de un escribano uruguayo. Analizá esta imagen de una cédula de identidad uruguaya y extraé los siguientes datos en formato JSON estricto. Si un campo no es visible o legible, usá null.
 
 Formato esperado:
@@ -129,7 +153,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    const response = await model.generateContent(TEXT_PROMPT + text);
+    const response = await callGeminiWithRetry(() => model.generateContent(TEXT_PROMPT + text));
     result = response.response.text();
   } else {
     const file = formData.get("file") as File | null;
@@ -155,10 +179,9 @@ export async function POST(request: NextRequest) {
         type = "libreta";
       } else {
         // 2. Ask Gemini to classify
-        const classifyRes = await model.generateContent([
-          CLASSIFY_PROMPT,
-          { inlineData },
-        ]);
+        const classifyRes = await callGeminiWithRetry(() =>
+          model.generateContent([CLASSIFY_PROMPT, { inlineData }])
+        );
         const classification = classifyRes.response.text().trim().toLowerCase();
         if (classification === "cedula") {
           type = "cedula";
@@ -174,10 +197,9 @@ export async function POST(request: NextRequest) {
     const prompt =
       type === "cedula" ? PERSON_PROMPT : VEHICLE_PROMPT;
 
-    const response = await model.generateContent([
-      prompt,
-      { inlineData },
-    ]);
+    const response = await callGeminiWithRetry(() =>
+      model.generateContent([prompt, { inlineData }])
+    );
     result = response.response.text();
   }
   } catch (aiError) {

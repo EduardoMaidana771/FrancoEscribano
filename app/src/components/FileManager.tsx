@@ -218,6 +218,13 @@ export default function FileManager({
         continue;
       }
 
+      // Delay between API calls to respect rate limits (4s gap ≈ 15 RPM max)
+      if (i > 0) {
+        setBulkProgress({ current: i + 1, total: targets.length, fileName: `Esperando... → ${file.file_name}` });
+        await new Promise((r) => setTimeout(r, 4000));
+        setBulkProgress({ current: i + 1, total: targets.length, fileName: file.file_name });
+      }
+
       try {
         const { data: blob, error: dlErr } = await supabase.storage
           .from("documents")
@@ -229,9 +236,17 @@ export default function FileManager({
         fd.append("file", blob, file.file_name);
         fd.append("fileId", file.id);
 
-        const res = await fetch("/api/extract", { method: "POST", body: fd });
-        if (!res.ok) {
-          const err = await res.json();
+        // Fetch with retry for 429/502
+        let res: Response | null = null;
+        for (let attempt = 0; attempt < 3; attempt++) {
+          res = await fetch("/api/extract", { method: "POST", body: fd });
+          if (res.ok || (res.status !== 429 && res.status !== 502)) break;
+          const waitSec = Math.pow(2, attempt + 1) * 5;
+          setBulkProgress({ current: i + 1, total: targets.length, fileName: `Reintentando ${file.file_name} en ${waitSec}s...` });
+          await new Promise((r) => setTimeout(r, waitSec * 1000));
+        }
+        if (!res || !res.ok) {
+          const err = res ? await res.json() : { error: "Sin respuesta" };
           throw new Error(err.error || "Error en extracción");
         }
 
