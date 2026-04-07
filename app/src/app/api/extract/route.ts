@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import mammoth from "mammoth";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
 
@@ -86,9 +87,15 @@ const TEXT_PROMPT = `Sos un asistente de un escribano uruguayo. Del siguiente te
       "birth_date": "YYYY-MM-DD",
       "birth_place": "...",
       "civil_status": "soltero|casado|divorciado|viudo",
+      "civil_status_detail": "...",
+      "spouse_name": "...",
       "address": "...",
       "department": "...",
-      "phone": "..."
+      "phone": "...",
+      "is_company": false,
+      "company_name": "...",
+      "company_type": "...",
+      "rut": "..."
     }
   ],
   "vehicles": [
@@ -96,16 +103,35 @@ const TEXT_PROMPT = `Sos un asistente de un escribano uruguayo. Del siguiente te
       "brand": "...",
       "model": "...",
       "year": 2020,
+      "type": "...",
+      "fuel": "...",
+      "cylinders": 1600,
       "plate": "...",
       "padron": "...",
+      "padron_department": "...",
       "motor_number": "...",
-      "chassis_number": "..."
+      "chassis_number": "...",
+      "national_code": "...",
+      "affectation": "particular|comercial|otro",
+      "owner_name": "...",
+      "owner_ci": "..."
     }
   ],
   "price": {
     "amount": 5000,
     "currency": "USD",
     "in_words": "..."
+  },
+  "transaction": {
+    "transaction_date": "YYYY-MM-DD",
+    "payment_type": "contado|saldo_precio|transferencia_bancaria|letra_cambio|mixto|cesion_tercero",
+    "payment_detail": "...",
+    "bps_status": "no|si|no_controlado",
+    "irae_status": "no|si|no_controlado",
+    "imeba_status": "no|si|no_controlado",
+    "previous_owner_name": "...",
+    "previous_title_date": "YYYY-MM-DD",
+    "previous_title_notary": "..."
   }
 }
 
@@ -138,8 +164,14 @@ export async function POST(request: NextRequest) {
       jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png",
       gif: "image/gif", webp: "image/webp", bmp: "image/bmp",
       pdf: "application/pdf",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      doc: "application/msword",
     };
     return map[ext ?? ""] ?? "application/octet-stream";
+  }
+
+  function isDocxMimeType(mimeType: string): boolean {
+    return mimeType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
   }
 
   let result;
@@ -165,8 +197,34 @@ export async function POST(request: NextRequest) {
     }
 
     const bytes = await file.arrayBuffer();
-    const base64 = Buffer.from(bytes).toString("base64");
     const mimeType = resolveMimeType(file);
+
+    if (mimeType === "application/msword") {
+      return NextResponse.json(
+        { error: "El formato .doc no está soportado. Convertí el archivo a .docx." },
+        { status: 400 }
+      );
+    }
+
+    if (isDocxMimeType(mimeType)) {
+      const { value: docxText } = await mammoth.extractRawText({
+        buffer: Buffer.from(bytes),
+      });
+      const normalizedText = docxText.replace(/\s+/g, " ").trim();
+      if (!normalizedText) {
+        return NextResponse.json(
+          { error: "No se pudo extraer texto del archivo .docx" },
+          { status: 400 }
+        );
+      }
+
+      const response = await callGeminiWithRetry(() =>
+        model.generateContent(`${TEXT_PROMPT}${normalizedText.slice(0, 20000)}`)
+      );
+      result = response.response.text();
+      type = "text";
+    } else {
+    const base64 = Buffer.from(bytes).toString("base64");
     const inlineData = { mimeType, data: base64 };
 
     // Auto-detect document type
@@ -201,6 +259,7 @@ export async function POST(request: NextRequest) {
       model.generateContent([prompt, { inlineData }])
     );
     result = response.response.text();
+    }
   }
   } catch (aiError) {
     console.error("Gemini API error:", aiError);

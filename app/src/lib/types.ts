@@ -210,12 +210,34 @@ export interface ExtractedVehicleData {
 }
 
 export interface ExtractedTextData {
-  persons?: Array<ExtractedPersonData & { role?: string; phone?: string }>;
+  persons?: Array<
+    ExtractedPersonData & {
+      role?: string;
+      phone?: string;
+      civil_status_detail?: string;
+      spouse_name?: string;
+      is_company?: boolean;
+      company_name?: string;
+      company_type?: string;
+      rut?: string;
+    }
+  >;
   vehicles?: ExtractedVehicleData[];
   price?: {
     amount?: number;
     currency?: string;
     in_words?: string;
+  };
+  transaction?: {
+    transaction_date?: string;
+    payment_type?: string;
+    payment_detail?: string;
+    bps_status?: string;
+    irae_status?: string;
+    imeba_status?: string;
+    previous_owner_name?: string;
+    previous_title_date?: string;
+    previous_title_notary?: string;
   };
 }
 

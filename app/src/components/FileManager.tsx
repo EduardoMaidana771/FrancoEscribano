@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import type {
   Folder,
   FileRecord,
-  ExtractedPersonData,
   ExtractedTextData,
   ExtractedVehicleData,
 } from "@/lib/types";
@@ -46,6 +45,9 @@ interface ExtractResultState {
   data: Record<string, unknown>;
 }
 
+type ExtractedTextPerson = NonNullable<ExtractedTextData["persons"]>[number];
+type ExtractedTransactionData = NonNullable<ExtractedTextData["transaction"]>;
+
 export default function FileManager({
   initialFolders,
   initialFiles,
@@ -82,22 +84,92 @@ export default function FileManager({
   const isRecord = (value: unknown): value is Record<string, unknown> =>
     typeof value === "object" && value !== null && !Array.isArray(value);
 
+  const normalizeRole = (role: string | undefined) =>
+    (role ?? "").trim().toLowerCase();
+
+  const isMeaningfulValue = (value: unknown) => {
+    if (value === null || value === undefined) return false;
+    if (typeof value === "string") return value.trim().length > 0;
+    return true;
+  };
+
+  const setIfMeaningful = (
+    target: Record<string, unknown>,
+    key: string,
+    value: unknown
+  ) => {
+    if (isMeaningfulValue(value)) target[key] = value;
+  };
+
+  const mergeIntoPrefill = (
+    target: Record<string, unknown>,
+    source: Record<string, unknown>
+  ) => {
+    for (const [key, value] of Object.entries(source)) {
+      if (!isMeaningfulValue(value)) continue;
+      if (!isMeaningfulValue(target[key])) target[key] = value;
+    }
+  };
+
+  const normalizeTaxStatus = (value: unknown) => {
+    const status = typeof value === "string" ? value.trim().toLowerCase() : "";
+    if (status === "si" || status === "no" || status === "no_controlado") return status;
+    return undefined;
+  };
+
+  const normalizePaymentType = (value: unknown) => {
+    const paymentType = typeof value === "string" ? value.trim().toLowerCase() : "";
+    const allowed = [
+      "contado",
+      "saldo_precio",
+      "transferencia_bancaria",
+      "letra_cambio",
+      "mixto",
+      "cesion_tercero",
+    ];
+    return allowed.includes(paymentType) ? paymentType : undefined;
+  };
+
+  const normalizeTextFileName = (value: string) => {
+    const base = value
+      .trim()
+      .replace(/[^a-zA-Z0-9._\-\s]/g, "")
+      .replace(/\s+/g, "_")
+      .slice(0, 80);
+    const fallback = `texto_${new Date().toISOString().replace(/[:.]/g, "-")}`;
+    const safeBase = base || fallback;
+    return safeBase.toLowerCase().endsWith(".txt") ? safeBase : `${safeBase}.txt`;
+  };
+
   const applyPersonToPrefill = (
     prefill: Record<string, unknown>,
     prefix: "seller" | "seller2" | "buyer" | "buyer2",
-    person: ExtractedPersonData & { phone?: string }
+    person: ExtractedTextPerson
   ) => {
     if (prefix === "seller2") prefill.has_seller2 = true;
     if (prefix === "buyer2") prefill.has_buyer2 = true;
-    if (person.full_name) prefill[`${prefix}_full_name`] = person.full_name;
-    if (person.ci_number) prefill[`${prefix}_ci`] = person.ci_number;
-    if (person.nationality) prefill[`${prefix}_nationality`] = person.nationality;
-    if (person.birth_date) prefill[`${prefix}_birth_date`] = person.birth_date;
-    if (person.birth_place) prefill[`${prefix}_birth_place`] = person.birth_place;
-    if (person.civil_status) prefill[`${prefix}_civil_status`] = person.civil_status;
-    if (person.address) prefill[`${prefix}_address`] = person.address;
-    if (person.department) prefill[`${prefix}_department`] = person.department;
-    if (person.phone) prefill[`${prefix}_phone`] = person.phone;
+    const isPrimaryParty = prefix === "seller" || prefix === "buyer";
+
+    setIfMeaningful(prefill, `${prefix}_full_name`, person.full_name);
+    setIfMeaningful(prefill, `${prefix}_ci`, person.ci_number);
+    setIfMeaningful(prefill, `${prefix}_nationality`, person.nationality);
+    setIfMeaningful(prefill, `${prefix}_birth_date`, person.birth_date);
+    setIfMeaningful(prefill, `${prefix}_birth_place`, person.birth_place);
+    setIfMeaningful(prefill, `${prefix}_civil_status`, person.civil_status);
+    setIfMeaningful(prefill, `${prefix}_civil_status_detail`, person.civil_status_detail);
+    setIfMeaningful(prefill, `${prefix}_address`, person.address);
+    setIfMeaningful(prefill, `${prefix}_department`, person.department);
+
+    if (isPrimaryParty) {
+      setIfMeaningful(prefill, `${prefix}_phone`, person.phone);
+      setIfMeaningful(prefill, `${prefix}_spouse_name`, person.spouse_name);
+      if (typeof person.is_company === "boolean") {
+        prefill[`${prefix}_is_company`] = person.is_company;
+      }
+      setIfMeaningful(prefill, `${prefix}_company_name`, person.company_name);
+      setIfMeaningful(prefill, `${prefix}_company_type`, person.company_type);
+      setIfMeaningful(prefill, `${prefix}_rut`, person.rut);
+    }
   };
 
   const applyVehicleToPrefill = (
@@ -137,6 +209,22 @@ export default function FileManager({
     if (price.in_words) prefill.price_in_words = price.in_words;
   };
 
+  const applyTransactionToPrefill = (
+    prefill: Record<string, unknown>,
+    transaction: ExtractedTextData["transaction"]
+  ) => {
+    if (!transaction) return;
+    setIfMeaningful(prefill, "transaction_date", transaction.transaction_date);
+    setIfMeaningful(prefill, "payment_type", normalizePaymentType(transaction.payment_type));
+    setIfMeaningful(prefill, "payment_detail", transaction.payment_detail);
+    setIfMeaningful(prefill, "bps_status", normalizeTaxStatus(transaction.bps_status));
+    setIfMeaningful(prefill, "irae_status", normalizeTaxStatus(transaction.irae_status));
+    setIfMeaningful(prefill, "imeba_status", normalizeTaxStatus(transaction.imeba_status));
+    setIfMeaningful(prefill, "previous_owner_name", transaction.previous_owner_name);
+    setIfMeaningful(prefill, "previous_title_date", transaction.previous_title_date);
+    setIfMeaningful(prefill, "previous_title_notary", transaction.previous_title_notary);
+  };
+
   const navigateToForm = (prefill: Record<string, unknown>) => {
     sessionStorage.setItem("prefill_compraventa", JSON.stringify(prefill));
     router.push("/compraventa/nueva");
@@ -150,7 +238,9 @@ export default function FileManager({
     const remaining = [...persons];
 
     const takePerson = (role: string) => {
-      const index = remaining.findIndex((person) => person.role === role);
+      const index = remaining.findIndex(
+        (person) => normalizeRole(person.role) === normalizeRole(role)
+      );
       if (index === -1) return null;
       const [person] = remaining.splice(index, 1);
       return person;
@@ -165,8 +255,14 @@ export default function FileManager({
     if (buyer) applyPersonToPrefill(prefill, "buyer", buyer);
     if (seller2) applyPersonToPrefill(prefill, "seller2", seller2);
     if (buyer2) applyPersonToPrefill(prefill, "buyer2", buyer2);
-    if (vehicles[0]) applyVehicleToPrefill(prefill, vehicles[0]);
+    if (vehicles[0]) {
+      const vehicle = vehicles[0] as ExtractedVehicleData & Record<string, unknown>;
+      applyVehicleToPrefill(prefill, vehicle);
+      setIfMeaningful(prefill, "vehicle_national_code", vehicle.national_code);
+      setIfMeaningful(prefill, "vehicle_affectation", vehicle.affectation);
+    }
     applyPriceToPrefill(prefill, extracted.price);
+    applyTransactionToPrefill(prefill, extracted.transaction as ExtractedTransactionData);
 
     return prefill;
   };
@@ -181,7 +277,7 @@ export default function FileManager({
     }
 
     const prefill: Record<string, unknown> = {};
-    const flatData = result.data as ExtractedPersonData & ExtractedVehicleData;
+    const flatData = result.data as ExtractedTextPerson & ExtractedVehicleData;
 
     if (result.type === "libreta" || flatData.brand || flatData.plate || flatData.padron) {
       applyVehicleToPrefill(prefill, flatData);
@@ -272,9 +368,43 @@ export default function FileManager({
     setExtractResult(null);
 
     try {
+      const normalizedName = normalizeTextFileName(textTitle || "texto_manual");
+      const textBlob = new Blob([manualText.trim()], {
+        type: "text/plain;charset=utf-8",
+      });
+      const filePath = `${userId}/${currentFolderId ?? "root"}/${Date.now()}_${normalizedName}`;
+
+      const { error: storageError } = await supabase.storage
+        .from("documents")
+        .upload(filePath, textBlob);
+
+      if (storageError) {
+        throw new Error("No se pudo guardar el texto en archivos");
+      }
+
+      const { data: createdFile, error: dbError } = await supabase
+        .from("files")
+        .insert({
+          user_id: userId,
+          folder_id: currentFolderId,
+          file_name: normalizedName,
+          file_path: filePath,
+          file_type: "text/plain",
+          file_size: textBlob.size,
+        })
+        .select()
+        .single();
+
+      if (dbError || !createdFile) {
+        throw new Error("No se pudo registrar el texto en la base de datos");
+      }
+
+      setFiles((prev) => [createdFile, ...prev]);
+
       const formData = new FormData();
       formData.append("type", "text");
       formData.append("text", manualText.trim());
+      formData.append("fileId", createdFile.id);
 
       const res = await fetch("/api/extract", {
         method: "POST",
@@ -287,13 +417,22 @@ export default function FileManager({
       }
 
       const { data } = await res.json();
+
+      setFiles((prev) =>
+        prev.map((file) =>
+          file.id === createdFile.id ? { ...file, extracted_data: data } : file
+        )
+      );
+
       setExtractResult({
-        fileId: "manual-text",
-        fileName: textTitle.trim() || "Texto manual",
+        fileId: createdFile.id,
+        fileName: createdFile.file_name,
         type: "text",
         data,
       });
       setShowTextInput(false);
+      setTextTitle("");
+      setManualText("");
     } catch (err) {
       setExtractError(
         err instanceof Error ? err.message : "Error al extraer datos desde texto"
@@ -305,7 +444,7 @@ export default function FileManager({
 
   const extractData = async (
     fileRecord: FileRecord,
-    type: "cedula" | "libreta"
+    type: "cedula" | "libreta" | "auto"
   ) => {
     setExtracting(fileRecord.id);
     setExtractError("");
@@ -334,7 +473,18 @@ export default function FileManager({
         throw new Error(err.error || "Error en la extracción");
       }
 
-      const { data } = await res.json();
+      const json = await res.json();
+      if (json.type === "unknown") {
+        throw new Error("No se pudo clasificar el documento para extracción automática");
+      }
+      const data = json.data as Record<string, unknown>;
+      const responseType = json.type as string;
+      const normalizedType: ExtractResultType =
+        responseType === "cedula" || responseType === "libreta" || responseType === "text"
+          ? responseType
+          : type === "auto"
+            ? "text"
+            : type;
 
       // Update local file state with extracted_data
       setFiles((prev) =>
@@ -346,7 +496,7 @@ export default function FileManager({
       setExtractResult({
         fileId: fileRecord.id,
         fileName: fileRecord.file_name,
-        type,
+        type: normalizedType,
         data,
       });
     } catch (err) {
@@ -452,6 +602,7 @@ export default function FileManager({
     const prefill: Record<string, unknown> = {};
     const persons = bulkResults.filter((r) => r.type === "cedula");
     const vehicles = bulkResults.filter((r) => r.type === "libreta");
+    const textResults = bulkResults.filter((r) => r.type === "text");
 
     // Map persons by role
     for (let i = 0; i < persons.length; i++) {
@@ -466,7 +617,7 @@ export default function FileManager({
       else if (role === "co_comprador") { prefix = "buyer2"; prefill.has_buyer2 = true; }
       else continue;
 
-      applyPersonToPrefill(prefill, prefix, d as ExtractedPersonData);
+      applyPersonToPrefill(prefill, prefix, d as ExtractedTextPerson);
     }
 
     // Map first vehicle
@@ -475,6 +626,10 @@ export default function FileManager({
       applyVehicleToPrefill(prefill, v);
       if (v.national_code) prefill.vehicle_national_code = v.national_code;
       if (v.affectation) prefill.vehicle_affectation = v.affectation;
+    }
+
+    for (const textResult of textResults) {
+      mergeIntoPrefill(prefill, buildPrefillDataFromText(textResult.data));
     }
 
     return prefill;
@@ -498,7 +653,7 @@ export default function FileManager({
   ];
 
   function isExtractableFile(type: string | null) {
-    return (type?.startsWith("image/") || type === "application/pdf") ?? false;
+    return (type?.startsWith("image/") || type === "application/pdf" || isWordFile(type)) ?? false;
   }
 
   function isWordFile(type: string | null) {
@@ -516,6 +671,12 @@ export default function FileManager({
       birth_date: "Fecha nacimiento",
       birth_place: "Lugar nacimiento",
       civil_status: "Estado civil",
+      civil_status_detail: "Detalle estado civil",
+      spouse_name: "Cónyuge",
+      is_company: "Es empresa",
+      company_name: "Razón social",
+      company_type: "Tipo de sociedad",
+      rut: "RUT",
       address: "Domicilio",
       department: "Departamento",
       brand: "Marca",
@@ -533,6 +694,15 @@ export default function FileManager({
       affectation: "Afectación",
       owner_name: "Titular",
       owner_ci: "CI Titular",
+      transaction_date: "Fecha compraventa",
+      payment_type: "Forma de pago",
+      payment_detail: "Detalle de pago",
+      bps_status: "BPS",
+      irae_status: "IRAE",
+      imeba_status: "IMEBA",
+      previous_owner_name: "Titular anterior",
+      previous_title_date: "Fecha título anterior",
+      previous_title_notary: "Escribano título anterior",
       phone: "Teléfono",
     };
     return labels[key] || key;
@@ -724,7 +894,7 @@ export default function FileManager({
             />
             <div className="flex items-center justify-between gap-3">
               <p className="text-xs text-gray-500">
-                Este texto no se guarda como archivo todavía; se usa para extraer datos y pasar al formulario.
+                Este texto se guarda como archivo .txt dentro de la carpeta actual y queda disponible como respaldo.
               </p>
               <div className="flex items-center gap-2">
                 <button
@@ -888,22 +1058,35 @@ export default function FileManager({
                       </span>
                     ) : (
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                          onClick={() => extractData(file, "cedula")}
-                          className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded hover:bg-blue-50"
-                          title="Extraer datos de cédula"
-                        >
-                          <Scan size={13} />
-                          Cédula
-                        </button>
-                        <button
-                          onClick={() => extractData(file, "libreta")}
-                          className="flex items-center gap-1 text-xs text-purple-600 hover:text-purple-800 px-1.5 py-0.5 rounded hover:bg-purple-50"
-                          title="Extraer datos de libreta"
-                        >
-                          <Scan size={13} />
-                          Libreta
-                        </button>
+                        {isWordFile(file.file_type) ? (
+                          <button
+                            onClick={() => extractData(file, "auto")}
+                            className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded hover:bg-blue-50"
+                            title="Extraer texto del documento Word"
+                          >
+                            <Scan size={13} />
+                            Texto
+                          </button>
+                        ) : (
+                          <>
+                            <button
+                              onClick={() => extractData(file, "cedula")}
+                              className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded hover:bg-blue-50"
+                              title="Extraer datos de cédula"
+                            >
+                              <Scan size={13} />
+                              Cédula
+                            </button>
+                            <button
+                              onClick={() => extractData(file, "libreta")}
+                              className="flex items-center gap-1 text-xs text-purple-600 hover:text-purple-800 px-1.5 py-0.5 rounded hover:bg-purple-50"
+                              title="Extraer datos de libreta"
+                            >
+                              <Scan size={13} />
+                              Libreta
+                            </button>
+                          </>
+                        )}
                       </div>
                     )
                   ) : null}
