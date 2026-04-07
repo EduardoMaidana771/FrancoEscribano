@@ -43,10 +43,10 @@ Formato esperado:
 
 Devolvé SOLO el JSON, sin texto adicional ni backticks.`;
 
-const CLASSIFY_PROMPT = `Analizá esta imagen y clasificala en una de estas categorías:
+const CLASSIFY_PROMPT = `Analizá este documento y clasificalo en una de estas categorías:
 - "cedula": es una cédula de identidad uruguaya (documento de identidad de una persona)
 - "libreta": es una libreta de propiedad de un vehículo uruguayo (documento de registro vehicular)
-- "otro": no es ninguno de los anteriores
+- "otro": no es ninguno de los anteriores (por ejemplo: carta poder, antecedentes, u otro documento legal)
 
 Respondé SOLO con una de estas tres palabras: cedula, libreta, otro. Sin puntuación ni texto adicional.`;
 
@@ -106,8 +106,21 @@ export async function POST(request: NextRequest) {
 
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
+  // Resolve MIME type from file extension when the blob type is missing or generic
+  function resolveMimeType(file: File): string {
+    if (file.type && file.type !== "application/octet-stream") return file.type;
+    const ext = (file.name ?? "").split(".").pop()?.toLowerCase();
+    const map: Record<string, string> = {
+      jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png",
+      gif: "image/gif", webp: "image/webp", bmp: "image/bmp",
+      pdf: "application/pdf",
+    };
+    return map[ext ?? ""] ?? "application/octet-stream";
+  }
+
   let result;
 
+  try {
   if (type === "text") {
     const text = formData.get("text") as string;
     if (!text) {
@@ -129,7 +142,8 @@ export async function POST(request: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const base64 = Buffer.from(bytes).toString("base64");
-    const inlineData = { mimeType: file.type, data: base64 };
+    const mimeType = resolveMimeType(file);
+    const inlineData = { mimeType, data: base64 };
 
     // Auto-detect document type
     if (type === "auto") {
@@ -165,6 +179,13 @@ export async function POST(request: NextRequest) {
       { inlineData },
     ]);
     result = response.response.text();
+  }
+  } catch (aiError) {
+    console.error("Gemini API error:", aiError);
+    return NextResponse.json(
+      { error: "Error al procesar con IA", details: aiError instanceof Error ? aiError.message : String(aiError) },
+      { status: 502 }
+    );
   }
 
   // Parse JSON from response

@@ -195,10 +195,11 @@ export default function FileManager({
   };
 
   const imageFiles = files.filter((f) => isImageFile(f.file_type));
-  const hasImages = imageFiles.length > 0;
+  const extractableFiles = files.filter((f) => isExtractableFile(f.file_type));
+  const hasExtractableFiles = extractableFiles.length > 0;
 
   async function bulkExtract() {
-    const targets = imageFiles;
+    const targets = extractableFiles;
     setBulkPhase("extracting");
     setBulkError("");
     setBulkResults([]);
@@ -338,6 +339,10 @@ export default function FileManager({
     return type?.startsWith("image/") ?? false;
   }
 
+  function isExtractableFile(type: string | null) {
+    return (type?.startsWith("image/") || type === "application/pdf") ?? false;
+  }
+
   function formatExtractedLabel(key: string): string {
     const labels: Record<string, string> = {
       full_name: "Nombre completo",
@@ -430,7 +435,7 @@ export default function FileManager({
         </div>
 
         <div className="flex items-center gap-2">
-          {hasImages && currentFolderId && (
+          {hasExtractableFiles && currentFolderId && (
             <button
               onClick={bulkExtract}
               disabled={bulkPhase === "extracting"}
@@ -586,7 +591,7 @@ export default function FileManager({
                     >
                       Procesado
                     </button>
-                  ) : isImageFile(file.file_type) ? (
+                  ) : isExtractableFile(file.file_type) ? (
                     extracting === file.id ? (
                       <span className="flex items-center gap-1 text-xs text-blue-600">
                         <Loader2 size={14} className="animate-spin" />

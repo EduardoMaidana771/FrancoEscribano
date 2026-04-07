@@ -4,9 +4,9 @@
  * Output: templates/compraventa.docx
  */
 
-const PizZip = require("pizzip");
-const fs = require("fs");
-const path = require("path");
+import PizZip from "pizzip";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { join } from "path";
 
 // Helper to create a paragraph with optional formatting
 function p(text, opts = {}) {
@@ -40,12 +40,12 @@ function escXml(s) {
 }
 
 // Shorthand for a conditional block
-function cond(tag, content) {
-  return `${p(`{#${tag}}`)}${content}${p(`{/${tag}}`)}`;
-}
-function condInv(tag, content) {
-  return `${p(`{^${tag}}`)}${content}${p(`{/${tag}}`)}`;
-}
+// function cond(tag, content) {
+//   return `${p(`{#${tag}}`)}${content}${p(`{/${tag}}`)}`;
+// }
+// function condInv(tag, content) {
+//   return `${p(`{^${tag}}`)}${content}${p(`{/${tag}}`)}`;
+// }
 
 // Build the document body paragraphs
 const body = [
@@ -304,11 +304,11 @@ zip.folder("word").file("document.xml", document);
 zip.folder("word").file("styles.xml", styles);
 zip.folder("word").folder("_rels").file("document.xml.rels", wordRels);
 
-const outDir = path.join(__dirname, "..", "templates");
-if (!fs.existsSync(outDir)) {
-  fs.mkdirSync(outDir, { recursive: true });
+const outDir = join(__dirname, "..", "templates");
+if (!existsSync(outDir)) {
+  mkdirSync(outDir, { recursive: true });
 }
 
-const outPath = path.join(outDir, "compraventa.docx");
-fs.writeFileSync(outPath, zip.generate({ type: "nodebuffer", compression: "DEFLATE" }));
+const outPath = join(outDir, "compraventa.docx");
+writeFileSync(outPath, zip.generate({ type: "nodebuffer", compression: "DEFLATE" }));
 console.log("Template generated:", outPath);
