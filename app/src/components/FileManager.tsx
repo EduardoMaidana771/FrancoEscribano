@@ -13,6 +13,11 @@ import {
   FileIcon,
   Trash2,
   ArrowLeft,
+  Scan,
+  X,
+  Copy,
+  Check,
+  Loader2,
 } from "lucide-react";
 
 interface FileManagerProps {
@@ -36,6 +41,15 @@ export default function FileManager({
   const [showNewFolder, setShowNewFolder] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [extracting, setExtracting] = useState<string | null>(null);
+  const [extractResult, setExtractResult] = useState<{
+    fileId: string;
+    fileName: string;
+    type: string;
+    data: Record<string, unknown>;
+  } | null>(null);
+  const [extractError, setExtractError] = useState("");
+  const [copied, setCopied] = useState(false);
   const supabase = createClient();
   const router = useRouter();
 
@@ -105,6 +119,102 @@ export default function FileManager({
     await supabase.from("files").delete().eq("id", fileRecord.id);
     setFiles((prev) => prev.filter((f) => f.id !== fileRecord.id));
   };
+
+  const extractData = async (
+    fileRecord: FileRecord,
+    type: "cedula" | "libreta"
+  ) => {
+    setExtracting(fileRecord.id);
+    setExtractError("");
+    setExtractResult(null);
+
+    try {
+      // Download file from Supabase Storage
+      const { data: blob, error: dlErr } = await supabase.storage
+        .from("documents")
+        .download(fileRecord.file_path);
+
+      if (dlErr || !blob) throw new Error("Error al descargar archivo");
+
+      const formData = new FormData();
+      formData.append("type", type);
+      formData.append("file", blob, fileRecord.file_name);
+      formData.append("fileId", fileRecord.id);
+
+      const res = await fetch("/api/extract", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Error en la extracción");
+      }
+
+      const { data } = await res.json();
+
+      // Update local file state with extracted_data
+      setFiles((prev) =>
+        prev.map((f) =>
+          f.id === fileRecord.id ? { ...f, extracted_data: data } : f
+        )
+      );
+
+      setExtractResult({
+        fileId: fileRecord.id,
+        fileName: fileRecord.file_name,
+        type,
+        data,
+      });
+    } catch (err) {
+      setExtractError(
+        err instanceof Error ? err.message : "Error al extraer datos"
+      );
+    } finally {
+      setExtracting(null);
+    }
+  };
+
+  const copyToClipboard = async (data: Record<string, unknown>) => {
+    const text = JSON.stringify(data, null, 2);
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  function isImageFile(type: string | null) {
+    return type?.startsWith("image/") ?? false;
+  }
+
+  function formatExtractedLabel(key: string): string {
+    const labels: Record<string, string> = {
+      full_name: "Nombre completo",
+      ci_number: "Cédula",
+      nationality: "Nacionalidad",
+      birth_date: "Fecha nacimiento",
+      birth_place: "Lugar nacimiento",
+      civil_status: "Estado civil",
+      address: "Domicilio",
+      department: "Departamento",
+      brand: "Marca",
+      model: "Modelo",
+      year: "Año",
+      type: "Tipo",
+      fuel: "Combustible",
+      cylinders: "Cilindrada",
+      motor_number: "N° Motor",
+      chassis_number: "N° Chasis",
+      plate: "Matrícula",
+      padron: "Padrón",
+      padron_department: "Depto. Padrón",
+      national_code: "Código Nacional",
+      affectation: "Afectación",
+      owner_name: "Titular",
+      owner_ci: "CI Titular",
+      phone: "Teléfono",
+    };
+    return labels[key] || key;
+  }
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -300,11 +410,47 @@ export default function FileManager({
                   <span className="text-xs text-gray-400">
                     {new Date(file.uploaded_at).toLocaleDateString("es-UY")}
                   </span>
-                  {file.extracted_data && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                  {file.extracted_data ? (
+                    <button
+                      onClick={() =>
+                        setExtractResult({
+                          fileId: file.id,
+                          fileName: file.file_name,
+                          type: "cached",
+                          data: file.extracted_data as Record<string, unknown>,
+                        })
+                      }
+                      className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full hover:bg-green-200 transition-colors cursor-pointer"
+                    >
                       Procesado
-                    </span>
-                  )}
+                    </button>
+                  ) : isImageFile(file.file_type) ? (
+                    extracting === file.id ? (
+                      <span className="flex items-center gap-1 text-xs text-blue-600">
+                        <Loader2 size={14} className="animate-spin" />
+                        Extrayendo...
+                      </span>
+                    ) : (
+                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                          onClick={() => extractData(file, "cedula")}
+                          className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded hover:bg-blue-50"
+                          title="Extraer datos de cédula"
+                        >
+                          <Scan size={13} />
+                          Cédula
+                        </button>
+                        <button
+                          onClick={() => extractData(file, "libreta")}
+                          className="flex items-center gap-1 text-xs text-purple-600 hover:text-purple-800 px-1.5 py-0.5 rounded hover:bg-purple-50"
+                          title="Extraer datos de libreta"
+                        >
+                          <Scan size={13} />
+                          Libreta
+                        </button>
+                      </div>
+                    )
+                  ) : null}
                   <button
                     onClick={() => deleteFile(file)}
                     className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-100 rounded transition-opacity"
@@ -330,6 +476,80 @@ export default function FileManager({
           </div>
         )}
       </div>
+
+      {/* Extraction error */}
+      {extractError && (
+        <div className="mt-4 bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center justify-between">
+          <span>{extractError}</span>
+          <button onClick={() => setExtractError("")}>
+            <X size={16} />
+          </button>
+        </div>
+      )}
+
+      {/* Extraction result panel */}
+      {extractResult && (
+        <div className="mt-4 bg-white border rounded-lg shadow-sm">
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-gray-50 rounded-t-lg">
+            <div>
+              <h3 className="font-semibold text-gray-800 text-sm">
+                Datos extraídos
+              </h3>
+              <p className="text-xs text-gray-500 mt-0.5">
+                {extractResult.fileName}
+                {extractResult.type !== "cached" && (
+                  <span className="ml-1">
+                    ({extractResult.type === "cedula" ? "Cédula" : "Libreta"})
+                  </span>
+                )}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => copyToClipboard(extractResult.data)}
+                className="flex items-center gap-1 px-3 py-1.5 text-xs bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              >
+                {copied ? (
+                  <>
+                    <Check size={13} />
+                    Copiado
+                  </>
+                ) : (
+                  <>
+                    <Copy size={13} />
+                    Copiar al portapapeles
+                  </>
+                )}
+              </button>
+              <button
+                onClick={() => setExtractResult(null)}
+                className="p-1 hover:bg-gray-200 rounded"
+              >
+                <X size={16} className="text-gray-500" />
+              </button>
+            </div>
+          </div>
+          <div className="p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {Object.entries(extractResult.data)
+                .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                .map(([key, value]) => (
+                  <div
+                    key={key}
+                    className="flex items-baseline gap-2 text-sm"
+                  >
+                    <span className="text-gray-500 min-w-[120px] text-xs">
+                      {formatExtractedLabel(key)}:
+                    </span>
+                    <span className="font-medium text-gray-800">
+                      {String(value)}
+                    </span>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
