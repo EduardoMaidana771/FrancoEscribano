@@ -65,6 +65,9 @@ export default function FileManager({
   const [extractResult, setExtractResult] = useState<ExtractResultState | null>(null);
   const [extractError, setExtractError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [editingExtractResult, setEditingExtractResult] = useState(false);
+  const [editedExtractJson, setEditedExtractJson] = useState("");
+  const [savingExtractResult, setSavingExtractResult] = useState(false);
   const [showTextInput, setShowTextInput] = useState(false);
   const [textTitle, setTextTitle] = useState("");
   const [manualText, setManualText] = useState("");
@@ -83,6 +86,30 @@ export default function FileManager({
 
   const isRecord = (value: unknown): value is Record<string, unknown> =>
     typeof value === "object" && value !== null && !Array.isArray(value);
+
+  const hasStructuredTextPayload = (data: Record<string, unknown>) =>
+    Array.isArray(data.persons) ||
+    Array.isArray(data.vehicles) ||
+    isRecord(data.price) ||
+    isRecord(data.transaction);
+
+  const isTextFile = (type: string | null) => type === "text/plain";
+
+  const detectExtractResultType = (
+    data: Record<string, unknown>,
+    fileType?: string | null
+  ): ExtractResultType => {
+    if (fileType === "text/plain" || hasStructuredTextPayload(data)) return "text";
+    if (data.brand || data.plate || data.padron) return "libreta";
+    return "cedula";
+  };
+
+  const isTextExtractResult = (result: ExtractResultState | null) => {
+    if (!result) return false;
+    if (result.type === "text") return true;
+    const file = files.find((item) => item.id === result.fileId);
+    return file?.file_type === "text/plain" || hasStructuredTextPayload(result.data);
+  };
 
   const normalizeRole = (role: string | undefined) =>
     (role ?? "").trim().toLowerCase();
@@ -230,6 +257,12 @@ export default function FileManager({
     router.push("/compraventa/nueva");
   };
 
+  const openExtractResult = (result: ExtractResultState) => {
+    setExtractResult(result);
+    setEditingExtractResult(false);
+    setEditedExtractJson(JSON.stringify(result.data, null, 2));
+  };
+
   const buildPrefillDataFromText = (data: Record<string, unknown>) => {
     const prefill: Record<string, unknown> = {};
     const extracted = data as ExtractedTextData;
@@ -355,6 +388,11 @@ export default function FileManager({
     await supabase.storage.from("documents").remove([fileRecord.file_path]);
     await supabase.from("files").delete().eq("id", fileRecord.id);
     setFiles((prev) => prev.filter((f) => f.id !== fileRecord.id));
+    if (extractResult?.fileId === fileRecord.id) {
+      setExtractResult(null);
+      setEditingExtractResult(false);
+      setEditedExtractJson("");
+    }
   };
 
   const extractManualText = async () => {
@@ -424,7 +462,7 @@ export default function FileManager({
         )
       );
 
-      setExtractResult({
+      openExtractResult({
         fileId: createdFile.id,
         fileName: createdFile.file_name,
         type: "text",
@@ -493,7 +531,7 @@ export default function FileManager({
         )
       );
 
-      setExtractResult({
+      openExtractResult({
         fileId: fileRecord.id,
         fileName: fileRecord.file_name,
         type: normalizedType,
@@ -515,11 +553,57 @@ export default function FileManager({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const extractableFiles = files.filter((f) => isExtractableFile(f.file_type));
-  const hasExtractableFiles = extractableFiles.length > 0;
+  const saveEditedExtractResult = async () => {
+    if (!extractResult) return;
+
+    let parsed: Record<string, unknown>;
+    try {
+      parsed = JSON.parse(editedExtractJson) as Record<string, unknown>;
+    } catch {
+      setExtractError("El JSON editado no es válido.");
+      return;
+    }
+
+    setSavingExtractResult(true);
+    setExtractError("");
+
+    try {
+      const { error } = await supabase
+        .from("files")
+        .update({ extracted_data: parsed })
+        .eq("id", extractResult.fileId)
+        .eq("user_id", userId);
+
+      if (error) throw new Error("No se pudo guardar la edición");
+
+      setFiles((prev) =>
+        prev.map((file) =>
+          file.id === extractResult.fileId ? { ...file, extracted_data: parsed } : file
+        )
+      );
+
+      openExtractResult({
+        ...extractResult,
+        type: detectExtractResultType(
+          parsed,
+          files.find((file) => file.id === extractResult.fileId)?.file_type
+        ),
+        data: parsed,
+      });
+    } catch (err) {
+      setExtractError(err instanceof Error ? err.message : "Error al guardar cambios");
+    } finally {
+      setSavingExtractResult(false);
+    }
+  };
+
+  const processableFiles = files.filter(
+    (file) => isExtractableFile(file.file_type) || isTextFile(file.file_type)
+  );
+  const hasExtractableFiles = processableFiles.length > 0;
 
   async function bulkExtract() {
-    const targets = extractableFiles;
+    const targets = processableFiles;
     setBulkPhase("extracting");
     setBulkError("");
     setBulkResults([]);
@@ -533,7 +617,7 @@ export default function FileManager({
       // Use cached data if available
       if (file.extracted_data) {
         const cached = file.extracted_data as Record<string, unknown>;
-        const detectedType = cached.brand || cached.plate ? "libreta" : "cedula";
+        const detectedType = detectExtractResultType(cached, file.file_type);
         results.push({ fileId: file.id, fileName: file.file_name, type: detectedType, data: cached });
         continue;
       }
@@ -545,8 +629,13 @@ export default function FileManager({
         if (dlErr || !blob) throw new Error("Error al descargar");
 
         const fd = new FormData();
-        fd.append("type", "auto");
-        fd.append("file", blob, file.file_name);
+        if (isTextFile(file.file_type)) {
+          fd.append("type", "text");
+          fd.append("text", await blob.text());
+        } else {
+          fd.append("type", "auto");
+          fd.append("file", blob, file.file_name);
+        }
         fd.append("fileId", file.id);
 
         // Fetch with retry for 429/502
@@ -574,7 +663,12 @@ export default function FileManager({
         setFiles((prev) =>
           prev.map((f) => (f.id === file.id ? { ...f, extracted_data: json.data } : f))
         );
-        results.push({ fileId: file.id, fileName: file.file_name, type: json.type, data: json.data });
+        results.push({
+          fileId: file.id,
+          fileName: file.file_name,
+          type: detectExtractResultType(json.data as Record<string, unknown>, file.file_type),
+          data: json.data,
+        });
       } catch (err) {
         results.push({
           fileId: file.id,
@@ -1039,10 +1133,13 @@ export default function FileManager({
                   {file.extracted_data ? (
                     <button
                       onClick={() =>
-                        setExtractResult({
+                        openExtractResult({
                           fileId: file.id,
                           fileName: file.file_name,
-                          type: "cached",
+                          type: detectExtractResultType(
+                            file.extracted_data as Record<string, unknown>,
+                            file.file_type
+                          ),
                           data: file.extracted_data as Record<string, unknown>,
                         })
                       }
@@ -1050,7 +1147,7 @@ export default function FileManager({
                     >
                       Procesado
                     </button>
-                  ) : isExtractableFile(file.file_type) ? (
+                  ) : isExtractableFile(file.file_type) || isTextFile(file.file_type) ? (
                     extracting === file.id ? (
                       <span className="flex items-center gap-1 text-xs text-blue-600">
                         <Loader2 size={14} className="animate-spin" />
@@ -1058,11 +1155,11 @@ export default function FileManager({
                       </span>
                     ) : (
                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        {isWordFile(file.file_type) ? (
+                        {isWordFile(file.file_type) || isTextFile(file.file_type) ? (
                           <button
                             onClick={() => extractData(file, "auto")}
                             className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded hover:bg-blue-50"
-                            title="Extraer texto del documento Word"
+                            title={isTextFile(file.file_type) ? "Extraer datos del archivo de texto" : "Extraer texto del documento Word"}
                           >
                             <Scan size={13} />
                             Texto
@@ -1298,31 +1395,71 @@ export default function FileManager({
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => copyToClipboard(extractResult.data)}
-                className="flex items-center gap-1 px-3 py-1.5 text-xs bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-              >
-                {copied ? (
+              {isTextExtractResult(extractResult) ? (
+                editingExtractResult ? (
                   <>
-                    <Check size={13} />
-                    Copiado
+                    <button
+                      onClick={() => {
+                        setEditingExtractResult(false);
+                        setEditedExtractJson(JSON.stringify(extractResult.data, null, 2));
+                      }}
+                      className="px-3 py-1.5 text-xs border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      onClick={saveEditedExtractResult}
+                      disabled={savingExtractResult}
+                      className="flex items-center gap-1 px-3 py-1.5 text-xs bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+                    >
+                      {savingExtractResult ? <Loader2 size={13} className="animate-spin" /> : null}
+                      Guardar
+                    </button>
                   </>
                 ) : (
-                  <>
-                    <Copy size={13} />
-                    Copiar al portapapeles
-                  </>
-                )}
-              </button>
+                  <button
+                    onClick={() => {
+                      setEditingExtractResult(true);
+                      setEditedExtractJson(JSON.stringify(extractResult.data, null, 2));
+                    }}
+                    className="px-3 py-1.5 text-xs border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                  >
+                    Editar
+                  </button>
+                )
+              ) : (
+                <>
+                  <button
+                    onClick={() => copyToClipboard(extractResult.data)}
+                    className="flex items-center gap-1 px-3 py-1.5 text-xs bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={13} />
+                        Copiado
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={13} />
+                        Copiar al portapapeles
+                      </>
+                    )}
+                  </button>
+                  <button
+                    onClick={handleContinueFromExtractResult}
+                    className="flex items-center gap-1 px-3 py-1.5 text-xs border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                  >
+                    Continuar a compraventa
+                    <ArrowRight size={13} />
+                  </button>
+                </>
+              )}
               <button
-                onClick={handleContinueFromExtractResult}
-                className="flex items-center gap-1 px-3 py-1.5 text-xs border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
-              >
-                Continuar a compraventa
-                <ArrowRight size={13} />
-              </button>
-              <button
-                onClick={() => setExtractResult(null)}
+                onClick={() => {
+                  setExtractResult(null);
+                  setEditingExtractResult(false);
+                  setEditedExtractJson("");
+                }}
                 className="p-1 hover:bg-gray-200 rounded"
               >
                 <X size={16} className="text-gray-500" />
@@ -1330,21 +1467,30 @@ export default function FileManager({
             </div>
           </div>
           <div className="p-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {Object.entries(extractResult.data)
-                .filter(([, v]) => v !== null && v !== undefined && v !== "")
-                .map(([key, value]) => (
-                  <div
-                    key={key}
-                    className={Array.isArray(value) || isRecord(value) ? "md:col-span-2" : "flex items-baseline gap-2 text-sm"}
-                  >
-                    <span className="text-gray-500 min-w-[120px] text-xs">
-                      {formatExtractedLabel(key)}:
-                    </span>
-                    <div className="flex-1">{renderValue(value)}</div>
-                  </div>
-                ))}
-            </div>
+            {editingExtractResult && isTextExtractResult(extractResult) ? (
+              <textarea
+                value={editedExtractJson}
+                onChange={(e) => setEditedExtractJson(e.target.value)}
+                rows={18}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {Object.entries(extractResult.data)
+                  .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                  .map(([key, value]) => (
+                    <div
+                      key={key}
+                      className={Array.isArray(value) || isRecord(value) ? "md:col-span-2" : "flex items-baseline gap-2 text-sm"}
+                    >
+                      <span className="text-gray-500 min-w-[120px] text-xs">
+                        {formatExtractedLabel(key)}:
+                      </span>
+                      <div className="flex-1">{renderValue(value)}</div>
+                    </div>
+                  ))}
+              </div>
+            )}
           </div>
         </div>
       )}
