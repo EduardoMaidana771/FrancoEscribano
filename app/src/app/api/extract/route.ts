@@ -5,28 +5,75 @@ import mammoth from "mammoth";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
 
-// Retry wrapper with exponential backoff for Gemini 429 errors
+// Prioridad pensada para extracción: balance costo/rendimiento y alta disponibilidad.
+const EXTRACTION_MODELS = [
+  "gemini-2.0-flash",
+  "gemini-2.5-flash-lite",
+  "gemini-2.0-flash-001",
+  "gemini-flash-lite-latest",
+  "gemini-2.5-flash",
+] as const;
+
+function isTransientGeminiError(message: string): boolean {
+  const normalized = message.toLowerCase();
+  return (
+    normalized.includes("429") ||
+    normalized.includes("too many requests") ||
+    normalized.includes("quota") ||
+    normalized.includes("503") ||
+    normalized.includes("service unavailable") ||
+    normalized.includes("high demand") ||
+    normalized.includes("temporarily unavailable") ||
+    normalized.includes("timeout") ||
+    normalized.includes("econnreset")
+  );
+}
+
+// Retry wrapper with exponential backoff for transient Gemini errors.
 async function callGeminiWithRetry<T>(
   fn: () => Promise<T>,
-  maxRetries = 3
+  maxRetries = 2
 ): Promise<T> {
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       return await fn();
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err);
-      const is429 = message.includes("429") || message.includes("Too Many Requests") || message.includes("quota");
-      if (!is429 || attempt === maxRetries) throw err;
+      const isTransient = isTransientGeminiError(message);
+      if (!isTransient || attempt === maxRetries) throw err;
 
       // Parse retry delay from error or use exponential backoff
       const retryMatch = message.match(/retry\s*(?:in|after)\s*([\d.]+)s/i);
-      const waitSec = retryMatch ? parseFloat(retryMatch[1]) : Math.pow(2, attempt + 1) * 5;
+      const waitSec = retryMatch ? parseFloat(retryMatch[1]) : Math.pow(2, attempt + 1) * 3;
       const waitMs = Math.min(waitSec * 1000, 60000); // Cap at 60s
-      console.log(`Gemini 429 — retry ${attempt + 1}/${maxRetries} in ${waitMs}ms`);
+      console.log(`Gemini transient error — retry ${attempt + 1}/${maxRetries} in ${waitMs}ms`);
       await new Promise((r) => setTimeout(r, waitMs));
     }
   }
   throw new Error("Max retries exceeded");
+}
+
+async function generateWithModelFallback(input: unknown) {
+  const failures: string[] = [];
+
+  for (const modelName of EXTRACTION_MODELS) {
+    try {
+      const model = genAI.getGenerativeModel({ model: modelName });
+      const response = await callGeminiWithRetry(() =>
+        model.generateContent(input as Parameters<typeof model.generateContent>[0])
+      );
+      return {
+        text: response.response.text(),
+        modelName,
+      };
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      failures.push(`${modelName}: ${message}`);
+      console.warn(`Gemini fallback: falló ${modelName}, probando siguiente modelo.`);
+    }
+  }
+
+  throw new Error(`No fue posible generar contenido con ningún modelo. ${failures.join(" | ")}`);
 }
 
 const PERSON_PROMPT = `Sos un asistente de un escribano uruguayo. Analizá esta imagen de una cédula de identidad uruguaya y extraé los siguientes datos en formato JSON estricto. Si un campo no es visible o legible, usá null.
@@ -153,8 +200,7 @@ export async function POST(request: NextRequest) {
   const formData = await request.formData();
   let type = formData.get("type") as string; // "cedula" | "libreta" | "text" | "auto"
   const fileId = formData.get("fileId") as string | null;
-
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  let usedModel: string | null = null;
 
   // Resolve MIME type from file extension when the blob type is missing or generic
   function resolveMimeType(file: File): string {
@@ -185,8 +231,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    const response = await callGeminiWithRetry(() => model.generateContent(TEXT_PROMPT + text));
-    result = response.response.text();
+    const response = await generateWithModelFallback(TEXT_PROMPT + text);
+    usedModel = response.modelName;
+    result = response.text;
   } else {
     const file = formData.get("file") as File | null;
     if (!file) {
@@ -218,10 +265,11 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const response = await callGeminiWithRetry(() =>
-        model.generateContent(`${TEXT_PROMPT}${normalizedText.slice(0, 20000)}`)
+      const response = await generateWithModelFallback(
+        `${TEXT_PROMPT}${normalizedText.slice(0, 20000)}`
       );
-      result = response.response.text();
+      usedModel = response.modelName;
+      result = response.text;
       type = "text";
     } else {
     const base64 = Buffer.from(bytes).toString("base64");
@@ -237,10 +285,9 @@ export async function POST(request: NextRequest) {
         type = "libreta";
       } else {
         // 2. Ask Gemini to classify
-        const classifyRes = await callGeminiWithRetry(() =>
-          model.generateContent([CLASSIFY_PROMPT, { inlineData }])
-        );
-        const classification = classifyRes.response.text().trim().toLowerCase();
+        const classifyRes = await generateWithModelFallback([CLASSIFY_PROMPT, { inlineData }]);
+        usedModel = classifyRes.modelName;
+        const classification = classifyRes.text.trim().toLowerCase();
         if (classification === "cedula") {
           type = "cedula";
         } else if (classification === "libreta") {
@@ -255,10 +302,9 @@ export async function POST(request: NextRequest) {
     const prompt =
       type === "cedula" ? PERSON_PROMPT : VEHICLE_PROMPT;
 
-    const response = await callGeminiWithRetry(() =>
-      model.generateContent([prompt, { inlineData }])
-    );
-    result = response.response.text();
+    const response = await generateWithModelFallback([prompt, { inlineData }]);
+    usedModel = response.modelName;
+    result = response.text;
     }
   }
   } catch (aiError) {
@@ -294,5 +340,5 @@ export async function POST(request: NextRequest) {
       .eq("user_id", user.id);
   }
 
-  return NextResponse.json({ data: parsed, type });
+  return NextResponse.json({ data: parsed, type, model: usedModel });
 }
