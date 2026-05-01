@@ -7,6 +7,10 @@ export interface Profile {
   city: string;
   notary_name: string;
   notary_initials: string;
+  paper_series_proto: string;
+  paper_number_proto: string;
+  paper_series_testimony: string;
+  paper_numbers_testimony: string;
   created_at: string;
   updated_at: string;
 }
@@ -20,6 +24,7 @@ export interface Client {
   birth_date: string | null;
   birth_place: string | null;
   civil_status: "soltero" | "casado" | "divorciado" | "viudo" | "separado_bienes";
+  gender: "M" | "F" | null;
   civil_status_detail: string | null;
   nupcias_type: "unicas" | "primeras" | "segundas" | "terceras" | null;
   spouse_name: string | null;
@@ -137,6 +142,7 @@ export interface Transaction {
   matriz_number: number | null;
   folio_start: number | null;
   folio_end: number | null;
+  folio_end_is_vuelto: boolean;
   previous_matriz_number: number | null;
   previous_matriz_type: string | null;
   previous_matriz_folio_start: number | null;
@@ -189,6 +195,7 @@ export interface ExtractedPersonData {
   birth_date?: string;
   birth_place?: string;
   civil_status?: string;
+  gender?: "M" | "F" | null;
   address?: string;
   department?: string;
 }
@@ -215,6 +222,7 @@ export interface ExtractedTextData {
       role?: string;
       phone?: string;
       civil_status_detail?: string;
+      nupcias_type?: "unicas" | "primeras" | "segundas" | "terceras";
       spouse_name?: string;
       is_company?: boolean;
       company_name?: string;
@@ -238,6 +246,12 @@ export interface ExtractedTextData {
     previous_owner_name?: string;
     previous_title_date?: string;
     previous_title_notary?: string;
+    previous_title_registry?: string;
+    previous_title_number?: string;
+    previous_title_registry_date?: string;
+    insurance_policy_number?: string;
+    insurance_company?: string;
+    insurance_expiry?: string;
   };
 }
 

@@ -46,7 +46,7 @@ export default async function EditarCompraventaPage({ params }: PageProps) {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("next_matriz_number, next_folio_number")
+    .select("next_matriz_number, next_folio_number, paper_series_proto, paper_number_proto, paper_series_testimony, paper_numbers_testimony")
     .eq("id", user.id)
     .single();
 
@@ -73,6 +73,7 @@ export default async function EditarCompraventaPage({ params }: PageProps) {
     seller_birth_place: seller?.birth_place ?? "",
     seller_civil_status: seller?.civil_status ?? "soltero",
     seller_civil_status_detail: seller?.civil_status_detail ?? "",
+    seller_gender: seller?.gender ?? "",
     seller_nupcias_type: seller?.nupcias_type ?? "",
     seller_spouse_name: seller?.spouse_name ?? "",
     seller_divorce_ficha: seller?.divorce_ficha ?? "",
@@ -103,6 +104,7 @@ export default async function EditarCompraventaPage({ params }: PageProps) {
     seller2_birth_place: seller2?.birth_place ?? "",
     seller2_civil_status: seller2?.civil_status ?? "casado",
     seller2_civil_status_detail: seller2?.civil_status_detail ?? "",
+    seller2_gender: seller2?.gender ?? "",
     seller2_nupcias_type: seller2?.nupcias_type ?? "",
     seller2_address: seller2?.address ?? "",
     seller2_department: seller2?.department ?? "",
@@ -124,6 +126,7 @@ export default async function EditarCompraventaPage({ params }: PageProps) {
     buyer_birth_place: buyer?.birth_place ?? "",
     buyer_civil_status: buyer?.civil_status ?? "soltero",
     buyer_civil_status_detail: buyer?.civil_status_detail ?? "",
+    buyer_gender: buyer?.gender ?? "",
     buyer_nupcias_type: buyer?.nupcias_type ?? "",
     buyer_spouse_name: buyer?.spouse_name ?? "",
     buyer_divorce_ficha: buyer?.divorce_ficha ?? "",
@@ -154,6 +157,7 @@ export default async function EditarCompraventaPage({ params }: PageProps) {
     buyer2_birth_place: buyer2?.birth_place ?? "",
     buyer2_civil_status: buyer2?.civil_status ?? "casado",
     buyer2_civil_status_detail: buyer2?.civil_status_detail ?? "",
+    buyer2_gender: buyer2?.gender ?? "",
     buyer2_nupcias_type: buyer2?.nupcias_type ?? "",
     buyer2_address: buyer2?.address ?? "",
     buyer2_department: buyer2?.department ?? "",
@@ -232,10 +236,12 @@ export default async function EditarCompraventaPage({ params }: PageProps) {
     // Date
     transaction_date: tx.transaction_date ?? new Date().toISOString().split("T")[0],
     // Proto
-    paper_series_proto: tx.paper_series_proto ?? "",
-    paper_number_proto: tx.paper_number_proto ?? "",
-    paper_series_testimony: tx.paper_series_testimony ?? "",
-    paper_numbers_testimony: tx.paper_numbers_testimony ?? "",
+    folio_end_override: tx.folio_end?.toString() ?? "",
+    folio_end_is_vuelto: tx.folio_end_is_vuelto ?? true,
+    paper_series_proto: tx.paper_series_proto ?? profile?.paper_series_proto ?? "",
+    paper_number_proto: tx.paper_number_proto ?? profile?.paper_number_proto ?? "",
+    paper_series_testimony: tx.paper_series_testimony ?? profile?.paper_series_testimony ?? "",
+    paper_numbers_testimony: tx.paper_numbers_testimony ?? profile?.paper_numbers_testimony ?? "",
   };
 
   const editIds = {

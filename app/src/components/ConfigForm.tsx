@@ -18,6 +18,10 @@ export default function ConfigForm({ profile }: ConfigFormProps) {
     city: profile?.city ?? "",
     next_matriz_number: profile?.next_matriz_number ?? 133,
     next_folio_number: profile?.next_folio_number ?? 1,
+    paper_series_proto: profile?.paper_series_proto ?? "",
+    paper_number_proto: profile?.paper_number_proto ?? "",
+    paper_series_testimony: profile?.paper_series_testimony ?? "",
+    paper_numbers_testimony: profile?.paper_numbers_testimony ?? "",
   });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -36,6 +40,10 @@ export default function ConfigForm({ profile }: ConfigFormProps) {
         city: form.city,
         next_matriz_number: form.next_matriz_number,
         next_folio_number: form.next_folio_number,
+        paper_series_proto: form.paper_series_proto,
+        paper_number_proto: form.paper_number_proto,
+        paper_series_testimony: form.paper_series_testimony,
+        paper_numbers_testimony: form.paper_numbers_testimony,
       })
       .eq("id", profile?.id);
 
@@ -77,7 +85,7 @@ export default function ConfigForm({ profile }: ConfigFormProps) {
                 onChange={(e) =>
                   setForm((f) => ({ ...f, notary_name: e.target.value }))
                 }
-                placeholder="Ej: Franco Escribano"
+                placeholder="Ej: Franco Castiglioni Abelenda"
                 className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -91,7 +99,7 @@ export default function ConfigForm({ profile }: ConfigFormProps) {
                 onChange={(e) =>
                   setForm((f) => ({ ...f, notary_initials: e.target.value }))
                 }
-                placeholder="Ej: F.E."
+                placeholder="Ej: F.C.A."
                 className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -153,6 +161,72 @@ export default function ConfigForm({ profile }: ConfigFormProps) {
           <p className="text-xs text-gray-400 mt-2">
             Estos números se incrementan automáticamente al completar una
             compraventa.
+          </p>
+        </div>
+
+        <div className="border-t pt-6">
+          <h2 className="font-semibold text-gray-800 mb-3">
+            Papel notarial por defecto
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">
+                Serie papel (protocolo)
+              </label>
+              <input
+                type="text"
+                value={form.paper_series_proto}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, paper_series_proto: e.target.value }))
+                }
+                placeholder="Ej: AO"
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">
+                Nro. papel (protocolo)
+              </label>
+              <input
+                type="text"
+                value={form.paper_number_proto}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, paper_number_proto: e.target.value }))
+                }
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">
+                Serie papel (testimonio)
+              </label>
+              <input
+                type="text"
+                value={form.paper_series_testimony}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, paper_series_testimony: e.target.value }))
+                }
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">
+                Nro(s). papel (testimonio)
+              </label>
+              <input
+                type="text"
+                value={form.paper_numbers_testimony}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, paper_numbers_testimony: e.target.value }))
+                }
+                placeholder="Ej: 1234567 y 1234568"
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+          <p className="text-xs text-gray-400 mt-2">
+            Estos valores se usan como base en nuevas operaciones, pero siguen
+            siendo editables por compraventa.
           </p>
         </div>
 

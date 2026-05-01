@@ -140,7 +140,7 @@ PARAGRAPHS_12_5 = {
         ("{proto_partes} ", True, False),   # B
         ("En {ciudad} el día {fecha_letras} cumpliendo con lo dispuesto por el artículo 292 de la ley 18362 incorporo a mi Registro de Protocolizaciones compraventa automotor de padrón ", False, False),
         ("{vehicle_padron} ", True, False),   # B
-        ("con certificación y la presente con el número {matriz_numero}, extendida de folio {folio_start} a {folio_end} vuelto. ", False, False),
+        ("con certificación y la presente con el número {matriz_numero}, extendida de folio {folio_start} a {folio_end_display}. ", False, False),
         ("{notary_firma_short}", True, False),   # B
     ],
     # P16: ES PRIMER TESTIMONIO

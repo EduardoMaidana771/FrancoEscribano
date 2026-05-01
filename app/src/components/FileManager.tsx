@@ -26,6 +26,7 @@ import {
   Loader2,
   FileSearch,
   ArrowRight,
+  RefreshCw,
 } from "lucide-react";
 
 interface FileManagerProps {
@@ -36,7 +37,7 @@ interface FileManagerProps {
   breadcrumbs?: { id: string | null; name: string }[];
 }
 
-type ExtractResultType = "cedula" | "libreta" | "cached" | "text";
+type ExtractResultType = "cedula" | "libreta" | "cached" | "text" | "antecedente" | "carta_poder";
 
 interface ExtractResultState {
   fileId: string;
@@ -101,6 +102,8 @@ export default function FileManager({
   ): ExtractResultType => {
     if (fileType === "text/plain" || hasStructuredTextPayload(data)) return "text";
     if (data.brand || data.plate || data.padron) return "libreta";
+    if (data.poderdante || data.apoderado) return "carta_poder";
+    if (isRecord(data.buyer) && (data.buyer as Record<string, unknown>).full_name) return "antecedente";
     return "cedula";
   };
 
@@ -183,6 +186,7 @@ export default function FileManager({
     setIfMeaningful(prefill, `${prefix}_birth_date`, person.birth_date);
     setIfMeaningful(prefill, `${prefix}_birth_place`, person.birth_place);
     setIfMeaningful(prefill, `${prefix}_civil_status`, person.civil_status);
+    setIfMeaningful(prefill, `${prefix}_gender`, person.gender);
     setIfMeaningful(prefill, `${prefix}_civil_status_detail`, person.civil_status_detail);
     setIfMeaningful(prefill, `${prefix}_address`, person.address);
     setIfMeaningful(prefill, `${prefix}_department`, person.department);
@@ -602,8 +606,8 @@ export default function FileManager({
   );
   const hasExtractableFiles = processableFiles.length > 0;
 
-  async function bulkExtract() {
-    const targets = processableFiles;
+  async function bulkExtract(overrideTargets?: typeof processableFiles) {
+    const targets = overrideTargets ?? processableFiles;
     setBulkPhase("extracting");
     setBulkError("");
     setBulkResults([]);
@@ -663,10 +667,14 @@ export default function FileManager({
         setFiles((prev) =>
           prev.map((f) => (f.id === file.id ? { ...f, extracted_data: json.data } : f))
         );
+        const knownTypes = ["cedula", "libreta", "text", "antecedente", "carta_poder"];
+        const resolvedType = knownTypes.includes(json.type)
+          ? json.type
+          : detectExtractResultType(json.data as Record<string, unknown>, file.file_type);
         results.push({
           fileId: file.id,
           fileName: file.file_name,
-          type: detectExtractResultType(json.data as Record<string, unknown>, file.file_type),
+          type: resolvedType,
           data: json.data,
         });
       } catch (err) {
@@ -680,16 +688,43 @@ export default function FileManager({
     }
 
     setBulkResults(results);
-    // Auto-assign first person as seller, second as buyer
+    // Auto-assign roles: if an antecedente is present, the seller comes from there,
+    // so cedulas should default to comprador instead of vendedor
     const persons = results.filter((r) => r.type === "cedula");
+    const hasAntecedente = results.some((r) => r.type === "antecedente");
     const roles: Record<number, string> = {};
     persons.forEach((_, i) => {
-      if (i === 0) roles[i] = "vendedor";
-      else if (i === 1) roles[i] = "comprador";
-      else roles[i] = "ignorar";
+      if (hasAntecedente) {
+        if (i === 0) roles[i] = "comprador";
+        else if (i === 1) roles[i] = "co_comprador";
+        else roles[i] = "ignorar";
+      } else {
+        if (i === 0) roles[i] = "vendedor";
+        else if (i === 1) roles[i] = "comprador";
+        else roles[i] = "ignorar";
+      }
     });
     setPersonRoles(roles);
     setBulkPhase("assign");
+  }
+
+  async function forceReExtract() {
+    const targets = processableFiles;
+    if (targets.length === 0) return;
+
+    const ids = targets.map((f) => f.id);
+    await supabase
+      .from("files")
+      .update({ extracted_data: null })
+      .in("id", ids)
+      .eq("user_id", userId);
+
+    setFiles((prev) =>
+      prev.map((f) => (ids.includes(f.id) ? { ...f, extracted_data: null } : f))
+    );
+
+    const clearedTargets = targets.map((f) => ({ ...f, extracted_data: null }));
+    await bulkExtract(clearedTargets);
   }
 
   function buildPrefillData(): Record<string, unknown> {
@@ -697,6 +732,8 @@ export default function FileManager({
     const persons = bulkResults.filter((r) => r.type === "cedula");
     const vehicles = bulkResults.filter((r) => r.type === "libreta");
     const textResults = bulkResults.filter((r) => r.type === "text");
+    const antecedentes = bulkResults.filter((r) => r.type === "antecedente");
+    const cartasPoder = bulkResults.filter((r) => r.type === "carta_poder");
 
     // Map persons by role
     for (let i = 0; i < persons.length; i++) {
@@ -712,6 +749,48 @@ export default function FileManager({
       else continue;
 
       applyPersonToPrefill(prefill, prefix, d as ExtractedTextPerson);
+    }
+
+    // From antecedente: the buyer in that document IS the current seller
+    for (const ant of antecedentes) {
+      const buyer = ant.data.buyer as {
+        full_name?: string;
+        ci_number?: string;
+        gender?: "M" | "F" | null;
+        address?: string;
+        department?: string;
+      } | undefined;
+      if (buyer) {
+        const hasExplicitSeller = persons.some((_, i) => personRoles[i] === "vendedor");
+        if (!hasExplicitSeller) {
+          setIfMeaningful(prefill, "seller_full_name", buyer.full_name);
+          setIfMeaningful(prefill, "seller_ci", buyer.ci_number);
+          setIfMeaningful(prefill, "seller_gender", buyer.gender);
+          setIfMeaningful(prefill, "seller_address", buyer.address);
+          setIfMeaningful(prefill, "seller_department", buyer.department);
+        }
+      }
+      // Also extract vehicle data if no libreta is present
+      if (isRecord(ant.data.vehicle) && vehicles.length === 0) {
+        applyVehicleToPrefill(prefill, ant.data.vehicle as ExtractedVehicleData);
+      }
+    }
+
+    // From carta poder: apoderado → seller representative fields
+    for (const cp of cartasPoder) {
+      const apoderado = cp.data.apoderado as { full_name?: string; ci_number?: string; address?: string } | undefined;
+      if (apoderado?.full_name) {
+        prefill.seller_has_representative = true;
+        setIfMeaningful(prefill, "seller_rep_name", apoderado.full_name);
+        setIfMeaningful(prefill, "seller_rep_ci", apoderado.ci_number);
+        setIfMeaningful(prefill, "seller_rep_address", apoderado.address);
+        prefill.seller_rep_power_type = cp.data.power_type ?? "carta_poder";
+        setIfMeaningful(prefill, "seller_rep_power_date", cp.data.power_date);
+        setIfMeaningful(prefill, "seller_rep_power_notary", cp.data.notary);
+        if (cp.data.can_substitute !== undefined && cp.data.can_substitute !== null) {
+          prefill.seller_rep_can_substitute = cp.data.can_substitute;
+        }
+      }
     }
 
     // Map first vehicle
@@ -765,6 +844,7 @@ export default function FileManager({
       birth_date: "Fecha nacimiento",
       birth_place: "Lugar nacimiento",
       civil_status: "Estado civil",
+      gender: "Género",
       civil_status_detail: "Detalle estado civil",
       spouse_name: "Cónyuge",
       is_company: "Es empresa",
@@ -798,6 +878,16 @@ export default function FileManager({
       previous_title_date: "Fecha título anterior",
       previous_title_notary: "Escribano título anterior",
       phone: "Teléfono",
+      buyer: "Comprador (vendedor actual)",
+      seller: "Vendedor anterior",
+      transfer_date: "Fecha de transferencia",
+      notary: "Escribano",
+      vehicle: "Vehículo",
+      poderdante: "Poderdante",
+      apoderado: "Apoderado",
+      power_type: "Tipo de poder",
+      power_date: "Fecha del poder",
+      can_substitute: "Puede sustituir",
     };
     return labels[key] || key;
   }
@@ -917,14 +1007,24 @@ export default function FileManager({
 
         <div className="flex items-center gap-2">
           {hasExtractableFiles && currentFolderId && (
-            <button
-              onClick={bulkExtract}
-              disabled={bulkPhase === "extracting"}
-              className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:opacity-50"
-            >
-              <FileSearch size={16} />
-              Generar compraventa
-            </button>
+            <>
+              <button
+                onClick={bulkExtract}
+                disabled={bulkPhase === "extracting"}
+                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:opacity-50"
+              >
+                <FileSearch size={16} />
+                Generar compraventa
+              </button>
+              <button
+                onClick={forceReExtract}
+                disabled={bulkPhase === "extracting"}
+                className="flex items-center gap-1 px-3 py-1.5 text-sm border border-green-600 text-green-700 rounded-md hover:bg-green-50 transition-colors disabled:opacity-50"
+              >
+                <RefreshCw size={16} />
+                Re-escanear todo
+              </button>
+            </>
           )}
           <button
             onClick={() => setShowNewFolder(true)}
@@ -1315,6 +1415,104 @@ export default function FileManager({
                 </div>
               ))}
 
+            {/* Antecedentes */}
+            {bulkResults
+              .filter((r) => r.type === "antecedente")
+              .map((ant) => {
+                const buyer = isRecord(ant.data.buyer) ? ant.data.buyer as Record<string, unknown> : null;
+                const seller = isRecord(ant.data.seller) ? ant.data.seller as Record<string, unknown> : null;
+                return (
+                  <div key={ant.fileId} className="border border-orange-200 rounded-lg p-3 bg-orange-50">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-medium">
+                        Antecedente
+                      </span>
+                      <span className="text-xs text-gray-500">{ant.fileName}</span>
+                      <span className="text-xs text-orange-600 ml-auto">Comprador → Vendedor actual</span>
+                    </div>
+                    {buyer && (
+                      <div className="mb-1.5">
+                        <p className="text-xs font-semibold text-orange-700 mb-1">Comprador (será el vendedor actual):</p>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                          {Object.entries(buyer)
+                            .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                            .map(([key, value]) => (
+                              <div key={key} className="text-xs">
+                                <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
+                                <span className="font-medium text-gray-800">{String(value)}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )}
+                    {seller && (
+                      <div>
+                        <p className="text-xs font-semibold text-gray-500 mb-1">Vendedor anterior:</p>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                          {Object.entries(seller)
+                            .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                            .map(([key, value]) => (
+                              <div key={key} className="text-xs">
+                                <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
+                                <span className="font-medium text-gray-800">{String(value)}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+
+            {/* Cartas poder */}
+            {bulkResults
+              .filter((r) => r.type === "carta_poder")
+              .map((cp) => {
+                const apoderado = isRecord(cp.data.apoderado) ? cp.data.apoderado as Record<string, unknown> : null;
+                const poderdante = isRecord(cp.data.poderdante) ? cp.data.poderdante as Record<string, unknown> : null;
+                return (
+                  <div key={cp.fileId} className="border border-teal-200 rounded-lg p-3 bg-teal-50">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full font-medium">
+                        Carta poder
+                      </span>
+                      <span className="text-xs text-gray-500">{cp.fileName}</span>
+                      <span className="text-xs text-teal-600 ml-auto">Apoderado → Representante del vendedor</span>
+                    </div>
+                    {poderdante && (
+                      <div className="mb-1.5">
+                        <p className="text-xs font-semibold text-teal-700 mb-1">Poderdante (vendedor que otorga el poder):</p>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                          {Object.entries(poderdante)
+                            .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                            .map(([key, value]) => (
+                              <div key={key} className="text-xs">
+                                <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
+                                <span className="font-medium text-gray-800">{String(value)}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )}
+                    {apoderado && (
+                      <div>
+                        <p className="text-xs font-semibold text-teal-700 mb-1">Apoderado (actúa en nombre del vendedor):</p>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                          {Object.entries(apoderado)
+                            .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                            .map(([key, value]) => (
+                              <div key={key} className="text-xs">
+                                <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
+                                <span className="font-medium text-gray-800">{String(value)}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+
             {/* Unknown / errors */}
             {bulkResults
               .filter((r) => r.type === "unknown" || r.type === "error")
@@ -1347,7 +1545,9 @@ export default function FileManager({
                 onClick={handleContinueToForm}
                 disabled={
                   bulkResults.filter((r) => r.type === "cedula").length === 0 &&
-                  bulkResults.filter((r) => r.type === "libreta").length === 0
+                  bulkResults.filter((r) => r.type === "libreta").length === 0 &&
+                  bulkResults.filter((r) => r.type === "antecedente").length === 0 &&
+                  bulkResults.filter((r) => r.type === "carta_poder").length === 0
                 }
                 className="flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
               >

@@ -19,6 +19,10 @@ create table public.profiles (
   city text not null default 'Maldonado',
   notary_name text not null default '',
   notary_initials text not null default '',
+  paper_series_proto text not null default '',
+  paper_number_proto text not null default '',
+  paper_series_testimony text not null default '',
+  paper_numbers_testimony text not null default '',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -63,6 +67,7 @@ create table public.clients (
   birth_date date,
   birth_place text,
   civil_status text default 'soltero', -- soltero, casado, divorciado, viudo, separado_bienes
+  gender text check (gender in ('M', 'F')),
   civil_status_detail text, -- "en únicas nupcias", "en segundas nupcias", etc.
   nupcias_type text, -- unicas, primeras, segundas, terceras
   spouse_name text,
@@ -210,6 +215,7 @@ create table public.transactions (
   matriz_number int,
   folio_start int,
   folio_end int,
+  folio_end_is_vuelto boolean not null default true,
   previous_matriz_number int,
   previous_matriz_type text, -- "compraventa automotor", "carta poder", "prenda automotor"
   previous_matriz_folio_start int,

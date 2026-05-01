@@ -24,6 +24,7 @@ interface FormData {
   seller_birth_place: string;
   seller_civil_status: string;
   seller_civil_status_detail: string;
+  seller_gender: string;
   seller_nupcias_type: string;
   seller_spouse_name: string;
   seller_divorce_ficha: string;
@@ -54,6 +55,7 @@ interface FormData {
   seller2_birth_place: string;
   seller2_civil_status: string;
   seller2_civil_status_detail: string;
+  seller2_gender: string;
   seller2_nupcias_type: string;
   seller2_address: string;
   seller2_department: string;
@@ -75,6 +77,7 @@ interface FormData {
   buyer_birth_place: string;
   buyer_civil_status: string;
   buyer_civil_status_detail: string;
+  buyer_gender: string;
   buyer_nupcias_type: string;
   buyer_spouse_name: string;
   buyer_divorce_ficha: string;
@@ -105,6 +108,7 @@ interface FormData {
   buyer2_birth_place: string;
   buyer2_civil_status: string;
   buyer2_civil_status_detail: string;
+  buyer2_gender: string;
   buyer2_nupcias_type: string;
   buyer2_address: string;
   buyer2_department: string;
@@ -183,6 +187,8 @@ interface FormData {
   // Date
   transaction_date: string;
   // Protocolización
+  folio_end_override: string;
+  folio_end_is_vuelto: boolean;
   paper_series_proto: string;
   paper_number_proto: string;
   paper_series_testimony: string;
@@ -197,6 +203,7 @@ const defaultForm: FormData = {
   seller_birth_place: "",
   seller_civil_status: "soltero",
   seller_civil_status_detail: "",
+  seller_gender: "",
   seller_nupcias_type: "",
   seller_spouse_name: "",
   seller_divorce_ficha: "",
@@ -226,6 +233,7 @@ const defaultForm: FormData = {
   seller2_birth_place: "",
   seller2_civil_status: "casado",
   seller2_civil_status_detail: "",
+  seller2_gender: "",
   seller2_nupcias_type: "",
   seller2_address: "",
   seller2_department: "",
@@ -245,6 +253,7 @@ const defaultForm: FormData = {
   buyer_birth_place: "",
   buyer_civil_status: "soltero",
   buyer_civil_status_detail: "",
+  buyer_gender: "",
   buyer_nupcias_type: "",
   buyer_spouse_name: "",
   buyer_divorce_ficha: "",
@@ -274,6 +283,7 @@ const defaultForm: FormData = {
   buyer2_birth_place: "",
   buyer2_civil_status: "casado",
   buyer2_civil_status_detail: "",
+  buyer2_gender: "",
   buyer2_nupcias_type: "",
   buyer2_address: "",
   buyer2_department: "",
@@ -342,6 +352,8 @@ const defaultForm: FormData = {
   has_traffic_responsibility_clause: false,
   traffic_responsibility_date: "",
   transaction_date: new Date().toISOString().split("T")[0],
+  folio_end_override: "",
+  folio_end_is_vuelto: true,
   paper_series_proto: "",
   paper_number_proto: "",
   paper_series_testimony: "",
@@ -354,6 +366,12 @@ const civilStatusOptions = [
   { value: "divorciado", label: "Divorciado/a" },
   { value: "viudo", label: "Viudo/a" },
   { value: "separado_bienes", label: "Separado/a de bienes" },
+];
+
+const genderOptions = [
+  { value: "", label: "—" },
+  { value: "M", label: "Masculino" },
+  { value: "F", label: "Femenino" },
 ];
 
 const nupciasOptions = [
@@ -392,6 +410,68 @@ const previousTitleTypeOptions = [
   { value: "escritura_publica", label: "Escritura pública" },
   { value: "sucesion", label: "Sucesión" },
 ];
+
+function numberToWordsEs(n: number): string {
+  if (isNaN(n) || n < 0) return "";
+  if (n === 0) return "CERO";
+  const ones = [
+    "", "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE",
+    "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISÉIS", "DIECISIETE",
+    "DIECIOCHO", "DIECINUEVE",
+  ];
+  const veintis = [
+    "", "VEINTIUNO", "VEINTIDÓS", "VEINTITRÉS", "VEINTICUATRO", "VEINTICINCO",
+    "VEINTISÉIS", "VEINTISIETE", "VEINTIOCHO", "VEINTINUEVE",
+  ];
+  const tens = ["", "DIEZ", "VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SETENTA", "OCHENTA", "NOVENTA"];
+  const hundreds = [
+    "", "CIENTO", "DOSCIENTOS", "TRESCIENTOS", "CUATROCIENTOS", "QUINIENTOS",
+    "SEISCIENTOS", "SETECIENTOS", "OCHOCIENTOS", "NOVECIENTOS",
+  ];
+
+  function chunk(n: number): string {
+    if (n === 0) return "";
+    if (n < 20) return ones[n];
+    if (n < 30) return veintis[n - 20];
+    if (n < 100) {
+      const o = n % 10;
+      return o === 0 ? tens[Math.floor(n / 10)] : `${tens[Math.floor(n / 10)]} Y ${ones[o]}`;
+    }
+    if (n === 100) return "CIEN";
+    const h = Math.floor(n / 100);
+    const rest = n % 100;
+    return rest === 0 ? hundreds[h] : `${hundreds[h]} ${chunk(rest)}`;
+  }
+
+  const int = Math.floor(n);
+  if (int < 1000) return chunk(int);
+  if (int < 1_000_000) {
+    const t = Math.floor(int / 1000);
+    const r = int % 1000;
+    const prefix = t === 1 ? "MIL" : `${chunk(t)} MIL`;
+    return r === 0 ? prefix : `${prefix} ${chunk(r)}`;
+  }
+  const m = Math.floor(int / 1_000_000);
+  const r = int % 1_000_000;
+  const prefix = m === 1 ? "UN MILLÓN" : `${chunk(m)} MILLONES`;
+  if (r === 0) return prefix;
+  const rPart = r < 1000 ? chunk(r) : numberToWordsEs(r);
+  return `${prefix} ${rPart}`;
+}
+
+function amountInWords(amount: string, currency: string): string {
+  const n = parseFloat(amount);
+  if (isNaN(n) || amount === "") return "";
+  const currencyLabel =
+    currency === "USD" ? "DÓLARES ESTADOUNIDENSES" :
+    currency === "UYU" ? "PESOS URUGUAYOS" :
+    currency;
+  const int = Math.floor(n);
+  const cents = Math.round((n - int) * 100);
+  let result = `${numberToWordsEs(int)} ${currencyLabel}`;
+  if (cents > 0) result += ` CON ${numberToWordsEs(cents)} CENTAVOS`;
+  return result;
+}
 
 function Input({
   label,
@@ -567,6 +647,7 @@ export default function TransactionForm({
       seller_birth_place: prev.buyer_birth_place,
       seller_civil_status: prev.buyer_civil_status,
       seller_civil_status_detail: prev.buyer_civil_status_detail,
+      seller_gender: prev.buyer_gender,
       seller_nupcias_type: prev.buyer_nupcias_type,
       seller_spouse_name: prev.buyer_spouse_name,
       seller_divorce_ficha: prev.buyer_divorce_ficha,
@@ -595,6 +676,7 @@ export default function TransactionForm({
       buyer_birth_place: prev.seller_birth_place,
       buyer_civil_status: prev.seller_civil_status,
       buyer_civil_status_detail: prev.seller_civil_status_detail,
+      buyer_gender: prev.seller_gender,
       buyer_nupcias_type: prev.seller_nupcias_type,
       buyer_spouse_name: prev.seller_spouse_name,
       buyer_divorce_ficha: prev.seller_divorce_ficha,
@@ -652,6 +734,7 @@ export default function TransactionForm({
       birth_date: (form[p("birth_date")] as string) || null,
       birth_place: (form[p("birth_place")] as string) || null,
       civil_status: form[p("civil_status")] as string,
+      gender: (form[p("gender")] as string) || null,
       civil_status_detail: (form[p("civil_status_detail")] as string) || null,
       nupcias_type: (form[p("nupcias_type")] as string) || null,
       address: (form[p("address")] as string) || null,
@@ -770,6 +853,8 @@ export default function TransactionForm({
       traffic_responsibility_date: form.traffic_responsibility_date || null,
       matriz_number: matrizNumber,
       folio_start: folioStart,
+      folio_end: form.folio_end_override ? parseInt(form.folio_end_override) : null,
+      folio_end_is_vuelto: form.folio_end_is_vuelto,
       paper_series_proto: form.paper_series_proto || null,
       paper_number_proto: form.paper_number_proto || null,
       paper_series_testimony: form.paper_series_testimony || null,
@@ -1131,6 +1216,12 @@ export default function TransactionForm({
               onChange={(v) => set(p("civil_status"), v)}
               options={civilStatusOptions}
             />
+            <Select
+              label="Género"
+              value={form[p("gender")] as string}
+              onChange={(v) => set(p("gender"), v)}
+              options={genderOptions}
+            />
             {showNupcias && (
               <Select
                 label="Nupcias"
@@ -1310,6 +1401,12 @@ export default function TransactionForm({
               value={form[p("civil_status")] as string}
               onChange={(v) => set(p("civil_status"), v)}
               options={civilStatusOptions}
+            />
+            <Select
+              label="Género"
+              value={form[p("gender")] as string}
+              onChange={(v) => set(p("gender"), v)}
+              options={genderOptions}
             />
             {(form[p("civil_status")] === "casado" || form[p("civil_status")] === "separado_bienes" || form[p("civil_status")] === "viudo" || form[p("civil_status")] === "divorciado") && (
               <Select
@@ -1504,26 +1601,52 @@ export default function TransactionForm({
             label="Monto"
             type="number"
             value={form.price_amount}
-            onChange={(v) => set("price_amount", v)}
+            onChange={(v) => {
+              set("price_amount", v);
+              if (!form.price_in_words) {
+                const words = amountInWords(v, form.price_currency);
+                if (words) set("price_in_words", words);
+              }
+            }}
             error={validationErrors.price_amount}
             fieldKey="price_amount"
           />
           <Select
             label="Moneda"
             value={form.price_currency}
-            onChange={(v) => set("price_currency", v)}
+            onChange={(v) => {
+              set("price_currency", v);
+              if (form.price_amount) {
+                set("price_in_words", amountInWords(form.price_amount, v));
+              }
+            }}
             options={[
               { value: "USD", label: "Dólares (USD)" },
               { value: "UYU", label: "Pesos Uruguayos ($)" },
             ]}
           />
-          <Input
-            label="Monto en letras"
-            value={form.price_in_words}
-            onChange={(v) => set("price_in_words", v)}
-            className="md:col-span-3"
-            placeholder="Ej: TRES MIL QUINIENTOS DÓLARES AMERICANOS"
-          />
+          <div className="md:col-span-3">
+            <div className="flex items-center gap-1 mb-1">
+              <label className="text-xs font-medium text-gray-600">Monto en letras</label>
+              {form.price_amount && (
+                <button
+                  type="button"
+                  onClick={() => set("price_in_words", amountInWords(form.price_amount, form.price_currency))}
+                  className="text-xs text-blue-500 hover:text-blue-700 underline"
+                  title="Regenerar desde el monto"
+                >
+                  ↺ auto
+                </button>
+              )}
+            </div>
+            <input
+              type="text"
+              value={form.price_in_words}
+              onChange={(e) => set("price_in_words", e.target.value)}
+              placeholder="Ej: DOCE MIL SEISCIENTOS DÓLARES ESTADOUNIDENSES"
+              className="w-full border rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent border-gray-300"
+            />
+          </div>
           <Select
             label="Forma de pago"
             value={form.payment_type}
@@ -1830,7 +1953,21 @@ export default function TransactionForm({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="md:col-span-3 text-sm text-gray-500 mb-2">
             Próximo número de matriz: <strong>{nextMatriz}</strong> — Próximo
-            folio: <strong>{nextFolio}</strong>
+            folio inicio: <strong>{nextFolio}</strong>
+          </div>
+          <Input
+            label="Folio final (dejar vacío = folio inicio + 1)"
+            value={form.folio_end_override}
+            onChange={(v) => set("folio_end_override", v)}
+            type="number"
+            placeholder={`Ej: ${nextFolio + 1}`}
+          />
+          <div className="flex items-end">
+            <Checkbox
+              label="El folio final lleva 'vuelto'"
+              checked={form.folio_end_is_vuelto}
+              onChange={(v) => set("folio_end_is_vuelto", v)}
+            />
           </div>
           <Input
             label="Serie papel (protocolo)"

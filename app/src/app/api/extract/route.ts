@@ -76,7 +76,7 @@ async function generateWithModelFallback(input: unknown) {
   throw new Error(`No fue posible generar contenido con ningún modelo. ${failures.join(" | ")}`);
 }
 
-const PERSON_PROMPT = `Sos un asistente de un escribano uruguayo. Analizá esta imagen de una cédula de identidad uruguaya y extraé los siguientes datos en formato JSON estricto. Si un campo no es visible o legible, usá null.
+const PERSON_PROMPT = `Sos un asistente de un escribano uruguayo. Analizá esta imagen de una cédula de identidad uruguaya y extraé los siguientes datos en formato JSON estricto. Si un campo no es visible o legible, usá null. Si el sexo o género no está claramente visible, devolvé null y no lo infieras.
 
 Formato esperado:
 {
@@ -86,6 +86,7 @@ Formato esperado:
   "birth_date": "YYYY-MM-DD",
   "birth_place": "Ciudad, Departamento",
   "civil_status": null,
+  "gender": "M" | "F" | null,
   "address": null,
   "department": null
 }
@@ -118,11 +119,69 @@ Devolvé SOLO el JSON, sin texto adicional ni backticks.`;
 const CLASSIFY_PROMPT = `Analizá este documento y clasificalo en una de estas categorías:
 - "cedula": es una cédula de identidad uruguaya (documento de identidad de una persona)
 - "libreta": es una libreta de propiedad de un vehículo uruguayo (documento de registro vehicular)
-- "otro": no es ninguno de los anteriores (por ejemplo: carta poder, antecedentes, u otro documento legal)
+- "antecedente": es un antecedente de matrícula o escritura de transferencia anterior de un vehículo (muestra una compraventa previa)
+- "carta_poder": es una carta poder o poder notarial (documento donde alguien otorga poder a otro para actuar en su nombre)
+- "otro": no es ninguno de los anteriores
 
-Respondé SOLO con una de estas tres palabras: cedula, libreta, otro. Sin puntuación ni texto adicional.`;
+Respondé SOLO con una de estas cinco palabras: cedula, libreta, antecedente, carta_poder, otro. Sin puntuación ni texto adicional.`;
 
-const TEXT_PROMPT = `Sos un asistente de un escribano uruguayo. Del siguiente texto (posiblemente un mensaje de WhatsApp con datos de una operación), extraé toda la información que puedas identificar como datos de personas o vehículos. Devolvé un JSON con la estructura:
+const ANTECEDENTE_PROMPT = `Sos un asistente de un escribano uruguayo. Analizá este documento (antecedente de matrícula o escritura de transferencia anterior de un vehículo) y extraé los datos. Si un campo no es visible o legible, usá null.
+
+IMPORTANTE: El "comprador" en este antecedente es la persona que adquirió el vehículo en esa operación anterior — es quien actualmente actúa como VENDEDOR en la operación presente.
+
+Formato esperado:
+{
+  "buyer": {
+    "full_name": "NOMBRE COMPLETO",
+    "ci_number": "1.234.567-8",
+    "gender": "M" | "F" | null,
+    "address": "Domicilio",
+    "department": "Departamento"
+  },
+  "seller": {
+    "full_name": "NOMBRE COMPLETO DEL VENDEDOR ANTERIOR",
+    "ci_number": "1.234.567-8",
+    "gender": "M" | "F" | null
+  },
+  "transfer_date": "YYYY-MM-DD",
+  "notary": "Nombre del escribano",
+  "vehicle": {
+    "brand": "MARCA",
+    "model": "MODELO",
+    "padron": "123456",
+    "plate": "ABC1234",
+    "chassis_number": "NUMERO_CHASIS",
+    "motor_number": "NUMERO_MOTOR"
+  }
+}
+
+Devolvé SOLO el JSON, sin texto adicional ni backticks.`;
+
+const CARTA_PODER_PROMPT = `Sos un asistente de un escribano uruguayo. Analizá esta carta poder o poder notarial y extraé los datos del PODERDANTE (quien otorga el poder) y del APODERADO (quien recibe el poder para actuar). Si un campo no es visible o legible, usá null.
+
+Formato esperado:
+{
+  "poderdante": {
+    "full_name": "NOMBRE COMPLETO",
+    "ci_number": "1.234.567-8",
+    "gender": "M" | "F" | null,
+    "address": "Domicilio"
+  },
+  "apoderado": {
+    "full_name": "NOMBRE COMPLETO",
+    "ci_number": "1.234.567-8",
+    "gender": "M" | "F" | null,
+    "address": "Domicilio"
+  },
+  "power_type": "carta_poder",
+  "power_date": "YYYY-MM-DD",
+  "notary": "Nombre del escribano",
+  "can_substitute": false
+}
+
+Devolvé SOLO el JSON, sin texto adicional ni backticks.`;
+
+const TEXT_PROMPT = `Sos un asistente de un escribano uruguayo. Del siguiente texto (posiblemente un mensaje de WhatsApp con datos de una operación), extraé toda la información que puedas identificar como datos de personas o vehículos. Prestá especial atención a domicilio y departamento cuando aparezcan en el texto libre. Solo devolvé gender si aparece explícito o si la inferencia es muy confiable; si no, usá null. Devolvé un JSON con la estructura:
 
 {
   "persons": [
@@ -134,7 +193,9 @@ const TEXT_PROMPT = `Sos un asistente de un escribano uruguayo. Del siguiente te
       "birth_date": "YYYY-MM-DD",
       "birth_place": "...",
       "civil_status": "soltero|casado|divorciado|viudo",
+      "gender": "M" | "F" | null,
       "civil_status_detail": "...",
+      "nupcias_type": "unicas|primeras|segundas|terceras",
       "spouse_name": "...",
       "address": "...",
       "department": "...",
@@ -178,7 +239,13 @@ const TEXT_PROMPT = `Sos un asistente de un escribano uruguayo. Del siguiente te
     "imeba_status": "no|si|no_controlado",
     "previous_owner_name": "...",
     "previous_title_date": "YYYY-MM-DD",
-    "previous_title_notary": "..."
+    "previous_title_notary": "...",
+    "previous_title_registry": "...",
+    "previous_title_number": "...",
+    "previous_title_registry_date": "YYYY-MM-DD",
+    "insurance_policy_number": "...",
+    "insurance_company": "...",
+    "insurance_expiry": "YYYY-MM-DD"
   }
 }
 
@@ -283,6 +350,10 @@ export async function POST(request: NextRequest) {
         type = "cedula";
       } else if (name.includes("libreta") || name.includes("vehiculo") || name.includes("vehículo") || name.includes("padron") || name.includes("padrón")) {
         type = "libreta";
+      } else if (name.includes("antecedente")) {
+        type = "antecedente";
+      } else if (name.includes("carta_poder") || name.includes("carta poder") || name.includes("poder")) {
+        type = "carta_poder";
       } else {
         // 2. Ask Gemini to classify
         const classifyRes = await generateWithModelFallback([CLASSIFY_PROMPT, { inlineData }]);
@@ -292,6 +363,10 @@ export async function POST(request: NextRequest) {
           type = "cedula";
         } else if (classification === "libreta") {
           type = "libreta";
+        } else if (classification === "antecedente") {
+          type = "antecedente";
+        } else if (classification === "carta_poder") {
+          type = "carta_poder";
         } else {
           // Unknown type — return early so UI can ask user
           return NextResponse.json({ data: null, type: "unknown" });
@@ -300,7 +375,11 @@ export async function POST(request: NextRequest) {
     }
 
     const prompt =
-      type === "cedula" ? PERSON_PROMPT : VEHICLE_PROMPT;
+      type === "cedula" ? PERSON_PROMPT :
+      type === "libreta" ? VEHICLE_PROMPT :
+      type === "antecedente" ? ANTECEDENTE_PROMPT :
+      type === "carta_poder" ? CARTA_PODER_PROMPT :
+      VEHICLE_PROMPT;
 
     const response = await generateWithModelFallback([prompt, { inlineData }]);
     usedModel = response.modelName;
