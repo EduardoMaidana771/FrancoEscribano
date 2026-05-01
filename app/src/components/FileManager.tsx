@@ -20,6 +20,12 @@ import {
 } from "@/lib/power-parties";
 import { normalizeNationalityValue } from "@/lib/nationality";
 import {
+  assignTextPersonsToParties,
+  extractTextPersons,
+  inferTextPartyRoleFromSourceName,
+  type TextPartyRole,
+} from "@/lib/text-prefill";
+import {
   FolderPlus,
   Upload,
   Folder as FolderIcon,
@@ -103,13 +109,13 @@ export default function FileManager({
     isRecord(data.price) ||
     isRecord(data.transaction);
 
-  const isTextFile = (type: string | null) => type === "text/plain";
+  const isTextFile = (type: string | null) => type?.startsWith("text/") ?? false;
 
   const detectExtractResultType = (
     data: Record<string, unknown>,
     fileType?: string | null
   ): ExtractResultType => {
-    if (fileType === "text/plain" || hasStructuredTextPayload(data)) return "text";
+    if (isTextFile(fileType ?? null) || hasStructuredTextPayload(data)) return "text";
     if (data.brand || data.plate || data.padron) return "libreta";
     if (data.poderdante || data.apoderado || Array.isArray(data.poderdantes) || Array.isArray(data.apoderados)) {
       return "carta_poder";
@@ -133,7 +139,7 @@ export default function FileManager({
     if (!result) return false;
     if (result.type === "text") return true;
     const file = files.find((item) => item.id === result.fileId);
-    return file?.file_type === "text/plain" || hasStructuredTextPayload(result.data);
+    return isTextFile(file?.file_type ?? null) || hasStructuredTextPayload(result.data);
   };
 
   const normalizeRole = (role: string | undefined) =>
@@ -289,26 +295,45 @@ export default function FileManager({
     setEditedExtractJson(JSON.stringify(result.data, null, 2));
   };
 
-  const buildPrefillDataFromText = (data: Record<string, unknown>) => {
+  const hasPartyPrefill = (
+    prefill: Record<string, unknown>,
+    prefix: "seller" | "buyer"
+  ) => {
+    const keys = [
+      `${prefix}_full_name`,
+      `${prefix}_ci`,
+      `${prefix}_company_name`,
+      `${prefix}_rut`,
+    ];
+    return keys.some((key) => isMeaningfulValue(prefill[key]));
+  };
+
+  const resolvePreferredSingleTextPartyRole = (
+    prefill: Record<string, unknown>,
+    sourceName?: string
+  ): TextPartyRole | undefined => {
+    const hintedRole = inferTextPartyRoleFromSourceName(sourceName);
+    if (hintedRole) return hintedRole;
+
+    const hasSeller = hasPartyPrefill(prefill, "seller");
+    const hasBuyer = hasPartyPrefill(prefill, "buyer");
+    if (hasSeller && !hasBuyer) return "comprador";
+    if (!hasSeller && hasBuyer) return "vendedor";
+    return undefined;
+  };
+
+  const buildPrefillDataFromText = (
+    data: Record<string, unknown>,
+    options: {
+      sourceName?: string;
+      preferredSinglePersonRole?: TextPartyRole;
+    } = {}
+  ) => {
     const prefill: Record<string, unknown> = {};
     const extracted = data as ExtractedTextData;
-    const persons = Array.isArray(extracted.persons) ? extracted.persons : [];
+    const persons = extractTextPersons(data, options);
     const vehicles = Array.isArray(extracted.vehicles) ? extracted.vehicles : [];
-    const remaining = [...persons];
-
-    const takePerson = (role: string) => {
-      const index = remaining.findIndex(
-        (person) => normalizeRole(person.role) === normalizeRole(role)
-      );
-      if (index === -1) return null;
-      const [person] = remaining.splice(index, 1);
-      return person;
-    };
-
-    const seller = takePerson("vendedor") ?? remaining.shift() ?? null;
-    const buyer = takePerson("comprador") ?? remaining.shift() ?? null;
-    const seller2 = remaining.shift() ?? null;
-    const buyer2 = remaining.shift() ?? null;
+    const { seller, buyer, seller2, buyer2 } = assignTextPersonsToParties(persons);
 
     if (seller) applyPersonToPrefill(prefill, "seller", seller);
     if (buyer) applyPersonToPrefill(prefill, "buyer", buyer);
@@ -332,7 +357,10 @@ export default function FileManager({
       Array.isArray(result.data.persons) ||
       Array.isArray(result.data.vehicles)
     ) {
-      return buildPrefillDataFromText(result.data);
+      return buildPrefillDataFromText(result.data, {
+        sourceName: result.fileName,
+        preferredSinglePersonRole: inferTextPartyRoleFromSourceName(result.fileName),
+      });
     }
 
     const prefill: Record<string, unknown> = {};
@@ -886,7 +914,16 @@ export default function FileManager({
     }
 
     for (const textResult of textResults) {
-      mergeIntoPrefill(prefill, buildPrefillDataFromText(textResult.data));
+      mergeIntoPrefill(
+        prefill,
+        buildPrefillDataFromText(textResult.data, {
+          sourceName: textResult.fileName,
+          preferredSinglePersonRole: resolvePreferredSingleTextPartyRole(
+            prefill,
+            textResult.fileName
+          ),
+        })
+      );
     }
 
     return prefill;

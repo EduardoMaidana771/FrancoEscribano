@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import {
   buildSignatureLinesText,
   buildSignatureNarrative,
+  keepSignatureParagraphsTogether,
   stripNotarialCertificationSections,
 } from "@/lib/word-closing";
 import Docxtemplater from "docxtemplater";
@@ -691,7 +692,12 @@ export async function POST(request: NextRequest) {
   );
   if (!includeNotarialCertification) {
     fixedXml = stripNotarialCertificationSections(fixedXml);
+    fixedXml = fixedXml.replace(
+      /((?:<w:p\b(?:(?!<w:t[ >])[\s\S])*?<\/w:p>\s*){2,})(?=<w:sectPr)/,
+      '<w:p><w:pPr><w:spacing w:line="240" w:lineRule="atLeast"/></w:pPr></w:p>'
+    );
   }
+  fixedXml = keepSignatureParagraphsTogether(fixedXml);
   if (tx.folio_end_is_vuelto === false && folioEndText !== "___") {
     fixedXml = fixedXml.replace(
       new RegExp(`(a ${folioEndText}) vuelto(\.)`, "g"),
