@@ -216,6 +216,27 @@ export interface ExtractedVehicleData {
   owner_ci?: string;
 }
 
+export interface ExtractedPowerPartyData {
+  full_name?: string;
+  ci_number?: string;
+  rut?: string;
+  gender?: "M" | "F" | null;
+  address?: string;
+  kind?: "person" | "company";
+  role?: string;
+}
+
+export interface ExtractedCartaPoderData {
+  poderdante?: ExtractedPowerPartyData;
+  apoderado?: ExtractedPowerPartyData;
+  poderdantes?: ExtractedPowerPartyData[];
+  apoderados?: ExtractedPowerPartyData[];
+  power_type?: string;
+  power_date?: string;
+  notary?: string;
+  can_substitute?: boolean;
+}
+
 export interface ExtractedTextData {
   persons?: Array<
     ExtractedPersonData & {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { buildPriceParts } from "@/lib/price-words";
 import { createClient } from "@/lib/supabase/server";
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
@@ -6,6 +7,8 @@ import { readFileSync } from "fs";
 import path from "path";
 
 // ─── FORMAT HELPERS ──────────────────────────────────────────
+
+const PAGE_BREAK_AFTER_REPRESENTATIVE_MARKER = "__PAGE_BREAK_AFTER_REPRESENTATIVE__";
 
 function toRoman(n: number): string {
   const map = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
@@ -43,12 +46,6 @@ function normalizeNupcias(nupcias: string | unknown): string {
     unicas: "únicas", primeras: "primeras", segundas: "segundas", terceras: "terceras",
   };
   return map[String(nupcias || "")] || String(nupcias || "únicas");
-}
-
-function formatAmount(amount: unknown): string {
-  const n = parseFloat(String(amount));
-  if (isNaN(n)) return String(amount || "___");
-  return n.toLocaleString("es-UY", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
 
 function buildPlateHistoryText(
@@ -114,6 +111,23 @@ function normalizeGender(value: unknown): "M" | "F" | null {
   return normalized === "M" || normalized === "F" ? normalized : null;
 }
 
+function extractPreferredIdentityNumber(value: unknown): string {
+  const rawValue = String(value || "").trim();
+  if (!rawValue) return "___";
+
+  const ciMatches = rawValue.match(/\d{1,2}\.??\d{3}\.??\d{3}-?\d/g);
+  if (ciMatches && ciMatches.length > 0) {
+    return ciMatches[0];
+  }
+
+  const rutMatches = rawValue.match(/\d{12}/g);
+  if (rutMatches && rutMatches.length > 0) {
+    return rutMatches[0];
+  }
+
+  return rawValue.split(",")[0]?.trim() || "___";
+}
+
 function formatCivilStatusSimple(c: Record<string, unknown>): string {
   const status = c.civil_status as string;
   const gender = normalizeGender(c.gender);
@@ -156,7 +170,7 @@ function buildParteVendedora(
       texto += `, representada en este acto por`;
       if (seller.representative_role) texto += ` su ${seller.representative_role}`;
       texto += ` ${seller.representative_name}`;
-      if (seller.representative_ci) texto += `, con cédula de identidad número ${seller.representative_ci}`;
+      if (seller.representative_ci) texto += `, con cédula de identidad número ${extractPreferredIdentityNumber(seller.representative_ci)}`;
       if (seller.representative_address) texto += `, domiciliado en ${seller.representative_address}`;
     }
     texto += ".";
@@ -177,7 +191,7 @@ function buildParteVendedora(
     texto += `, domiciliados en ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
     if (tx.seller_has_representative) {
       texto += `, representados en este acto por ${tx.seller_representative_name || "___"}`;
-      texto += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
+      texto += `, con cédula de identidad número ${extractPreferredIdentityNumber(tx.seller_representative_ci)}`;
       if (tx.seller_representative_address) texto += ` y domicilio en ${tx.seller_representative_address}`;
     }
     texto += ".";
@@ -191,7 +205,7 @@ function buildParteVendedora(
   texto += `, domiciliado en la calle ${seller.address || "___"}, departamento de ${seller.department || "___"}`;
   if (tx.seller_has_representative) {
     texto += `, representado en este acto por ${tx.seller_representative_name || "___"}`;
-    texto += `, con cédula de identidad número ${tx.seller_representative_ci || "___"}`;
+    texto += `, con cédula de identidad número ${extractPreferredIdentityNumber(tx.seller_representative_ci)}`;
     if (tx.seller_representative_address) texto += ` y domicilio en ${tx.seller_representative_address}`;
   }
   texto += ".";
@@ -212,7 +226,7 @@ function buildParteCompradora(
       texto += `, representada en este acto por`;
       if (buyer.representative_role) texto += ` su ${buyer.representative_role}`;
       texto += ` ${buyer.representative_name}`;
-      if (buyer.representative_ci) texto += `, con cédula de identidad número ${buyer.representative_ci}`;
+      if (buyer.representative_ci) texto += `, con cédula de identidad número ${extractPreferredIdentityNumber(buyer.representative_ci)}`;
       if (buyer.representative_address) texto += `, domiciliado en ${buyer.representative_address}`;
     }
     texto += ".";
@@ -242,53 +256,11 @@ function buildParteCompradora(
   texto += `, domiciliado en la calle ${buyer.address || "___"}, Departamento de ${buyer.department || "___"}`;
   if (tx.buyer_has_representative) {
     texto += `, representado en este acto por ${tx.buyer_representative_name || "___"}`;
-    texto += `, con cédula de identidad número ${tx.buyer_representative_ci || "___"}`;
+    texto += `, con cédula de identidad número ${extractPreferredIdentityNumber(tx.buyer_representative_ci)}`;
     if (tx.buyer_representative_address) texto += ` y domicilio en ${tx.buyer_representative_address}`;
   }
   texto += ".";
   return { titulo: `2. PARTE COMPRADORA. – ${name}`, texto };
-}
-
-function buildPrecio(tx: Record<string, unknown>): {
-  moneda: string;
-  monto: string;
-  pago: string;
-} {
-  const moneda = tx.price_currency === "USD"
-    ? "dólares estadounidenses"
-    : "pesos uruguayos";
-  const symbol = tx.price_currency === "USD" ? "U$S" : "$";
-  const amount = formatAmount(tx.price_amount);
-  const words = tx.price_in_words || "___";
-  const monto = `${String(words)} (${symbol} ${amount}, oo)`;
-
-  let pago: string;
-  switch (tx.payment_type) {
-    case "contado":
-      pago = `, pagaderos al contado, en este acto, suma por la cual la parte vendedora entrega a la parte compradora carta total y eficaz de pago por el total del precio estipulado, declarando no tener más nada que reclamar por ningún concepto. -`;
-      break;
-    case "contado_cheque":
-      pago = `, que se abona totalmente en este acto, mediante cheque de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total y eficaz carta de pago.`;
-      break;
-    case "contado_transferencia":
-      pago = `, que se abona totalmente en este acto, mediante transferencia bancaria de ${tx.payment_bank_name || "___"}, suma por la cual se otorga total carta de pago.`;
-      break;
-    case "saldo_precio":
-      pago = `, pagaderos en ${tx.payment_installments_count || "___"} cuotas de ${symbol} ${formatAmount(tx.payment_installment_amount)} cada una. ${tx.payment_detail || ""}`;
-      break;
-    case "mixto":
-      pago = `, parte al contado (${symbol} ${formatAmount(tx.payment_cash_amount)}) y ${tx.payment_detail || "saldo en cuotas"}, suma por la cual se otorga total carta de pago.`;
-      break;
-    case "letra_cambio":
-      pago = `, que se abonan mediante letra de cambio${tx.payment_bank_name ? ` emitida por ${tx.payment_bank_name}` : ""}${tx.payment_detail ? `. ${tx.payment_detail}` : "."}`;
-      break;
-    case "cesion_tercero":
-      pago = `, que se abonan mediante cesión a favor de tercero${tx.payment_third_party_name ? ` (${tx.payment_third_party_name})` : ""}${tx.payment_detail ? `. ${tx.payment_detail}` : "."}.`;
-      break;
-    default:
-      pago = `, que fueron abonados antes de este acto, suma por la cual la parte vendedora otorga total carta de pago.`;
-  }
-  return { moneda, monto, pago };
 }
 
 function buildDeclaracionBps(bpsStatus: unknown, iraeStatus: unknown, imebaStatus: unknown): string {
@@ -367,10 +339,10 @@ function buildCertificoQue(
   const cis: string[] = [];
   if (tx.seller_has_representative) {
     names.push(String(tx.seller_representative_name || "___"));
-    cis.push(String(tx.seller_representative_ci || "___"));
+    cis.push(extractPreferredIdentityNumber(tx.seller_representative_ci));
   } else if (seller.is_company && seller.representative_name) {
     names.push(String(seller.representative_name));
-    cis.push(String(seller.representative_ci || "___"));
+    cis.push(extractPreferredIdentityNumber(seller.representative_ci));
   } else {
     names.push(String(seller.full_name || "___"));
     cis.push(String(seller.ci_number || "___"));
@@ -381,7 +353,7 @@ function buildCertificoQue(
   }
   if (buyer.is_company && buyer.representative_name) {
     names.push(String(buyer.representative_name));
-    cis.push(String(buyer.representative_ci || "___"));
+    cis.push(extractPreferredIdentityNumber(buyer.representative_ci));
   } else {
     names.push(String(buyer.full_name || "___"));
     cis.push(String(buyer.ci_number || "___"));
@@ -453,7 +425,7 @@ function buildCertificoQue(
     } else {
       secciones += ` certificado y protocolizado por el Escribano ${tx.seller_representative_power_notary || "___"} en la misma fecha`;
     }
-    secciones += `, con facultades para este acto y vigente a la fecha.`;
+    secciones += `, con facultades para este acto y vigente a la fecha.${PAGE_BREAK_AFTER_REPRESENTATIVE_MARKER}`;
   }
 
   // Insurance — only when not handled as a separate certificate
@@ -597,7 +569,7 @@ export async function POST(request: NextRequest) {
   const cuotaParte = "1/1";
   const vendedora = buildParteVendedora(seller, seller2, tx);
   const compradora = buildParteCompradora(buyer, buyer2, tx);
-  const precio = buildPrecio(tx as unknown as Record<string, unknown>);
+  const precio = buildPriceParts(tx as unknown as Record<string, unknown>);
   const certQ = buildCertificoQue(seller, seller2, buyer, tx as unknown as Record<string, unknown>);
   const initials = String(prof.notary_initials || "F.C.A.");
   const notaryName = String(prof.notary_name || prof.full_name || "Franco Castiglioni Abelenda");
@@ -707,6 +679,10 @@ export async function POST(request: NextRequest) {
     /((?:<w:p\b(?:(?!<w:t[ >])[\s\S])*?<\/w:p>\s*){2,})(<w:sectPr)/,
     (_m, _block, sectPr) =>
       `<w:p><w:pPr><w:spacing w:line="240" w:lineRule="atLeast"/></w:pPr></w:p>\n${sectPr}`
+  );
+  fixedXml = fixedXml.replaceAll(
+    PAGE_BREAK_AFTER_REPRESENTATIVE_MARKER,
+    "</w:t><w:br w:type=\"page\"/><w:t>"
   );
   if (tx.folio_end_is_vuelto === false && folioEndText !== "___") {
     fixedXml = fixedXml.replace(

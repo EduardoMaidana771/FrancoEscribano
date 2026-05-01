@@ -159,20 +159,38 @@ Devolvé SOLO el JSON, sin texto adicional ni backticks.`;
 
 const CARTA_PODER_PROMPT = `Sos un asistente de un escribano uruguayo. Analizá esta carta poder o poder notarial y extraé los datos del PODERDANTE (quien otorga el poder) y del APODERADO (quien recibe el poder para actuar). Si un campo no es visible o legible, usá null.
 
+IMPORTANTE:
+- No mezcles RUT de empresa con cédula de persona.
+- Si aparecen varias personas o empresas relacionadas, devolvelas separadas dentro de arrays.
+- Cada entrada debe representar un solo candidato con un solo identificador.
+- Si un candidato es empresa, usá "kind": "company" y completá "rut". En ese caso, "ci_number" debe ser null.
+- Si un candidato es persona, usá "kind": "person" y completá "ci_number". En ese caso, "rut" debe ser null.
+- Los APODERADOS son quienes reciben el poder y pueden actuar. Los PODERDANTES son quienes lo otorgan.
+
 Formato esperado:
 {
-  "poderdante": {
-    "full_name": "NOMBRE COMPLETO",
-    "ci_number": "1.234.567-8",
-    "gender": "M" | "F" | null,
-    "address": "Domicilio"
-  },
-  "apoderado": {
-    "full_name": "NOMBRE COMPLETO",
-    "ci_number": "1.234.567-8",
-    "gender": "M" | "F" | null,
-    "address": "Domicilio"
-  },
+  "poderdantes": [
+    {
+      "full_name": "NOMBRE COMPLETO O EMPRESA",
+      "kind": "person" | "company",
+      "ci_number": "1.234.567-8" | null,
+      "rut": "219864140014" | null,
+      "gender": "M" | "F" | null,
+      "address": "Domicilio",
+      "role": "poderdante"
+    }
+  ],
+  "apoderados": [
+    {
+      "full_name": "NOMBRE COMPLETO O EMPRESA",
+      "kind": "person" | "company",
+      "ci_number": "1.234.567-8" | null,
+      "rut": "219864140014" | null,
+      "gender": "M" | "F" | null,
+      "address": "Domicilio",
+      "role": "apoderado"
+    }
+  ],
   "power_type": "carta_poder",
   "power_date": "YYYY-MM-DD",
   "notary": "Nombre del escribano",

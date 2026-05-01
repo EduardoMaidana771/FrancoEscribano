@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import type {
   Folder,
   FileRecord,
+  ExtractedCartaPoderData,
+  ExtractedPowerPartyData,
   ExtractedTextData,
   ExtractedVehicleData,
 } from "@/lib/types";
@@ -48,6 +50,15 @@ interface ExtractResultState {
 
 type ExtractedTextPerson = NonNullable<ExtractedTextData["persons"]>[number];
 type ExtractedTransactionData = NonNullable<ExtractedTextData["transaction"]>;
+type PowerCandidate = {
+  id: string;
+  label: string;
+  full_name?: string;
+  ci_number?: string;
+  rut?: string;
+  address?: string;
+  kind: "person" | "company";
+};
 
 export default function FileManager({
   initialFolders,
@@ -82,6 +93,7 @@ export default function FileManager({
   const [bulkError, setBulkError] = useState("");
   // Role assignment state: index into bulkResults persons → role
   const [personRoles, setPersonRoles] = useState<Record<number, string>>({});
+  const [powerSelections, setPowerSelections] = useState<Record<string, string>>({});
   const supabase = createClient();
   const router = useRouter();
 
@@ -102,9 +114,71 @@ export default function FileManager({
   ): ExtractResultType => {
     if (fileType === "text/plain" || hasStructuredTextPayload(data)) return "text";
     if (data.brand || data.plate || data.padron) return "libreta";
-    if (data.poderdante || data.apoderado) return "carta_poder";
+    if (data.poderdante || data.apoderado || Array.isArray(data.poderdantes) || Array.isArray(data.apoderados)) {
+      return "carta_poder";
+    }
     if (isRecord(data.buyer) && (data.buyer as Record<string, unknown>).full_name) return "antecedente";
     return "cedula";
+  };
+
+  const normalizePowerKind = (party: ExtractedPowerPartyData): "person" | "company" => {
+    if (party.kind === "company") return "company";
+    if (party.kind === "person") return "person";
+    return party.rut && !party.ci_number ? "company" : "person";
+  };
+
+  const getPowerPartyIdentifier = (party: ExtractedPowerPartyData) => {
+    const kind = normalizePowerKind(party);
+    return kind === "company" ? party.rut : party.ci_number;
+  };
+
+  const buildPowerCandidates = (data: Record<string, unknown>): PowerCandidate[] => {
+    const cartaPoder = data as ExtractedCartaPoderData;
+    const apoderados = Array.isArray(cartaPoder.apoderados)
+      ? cartaPoder.apoderados
+      : cartaPoder.apoderado
+        ? [cartaPoder.apoderado]
+        : [];
+
+    return apoderados.reduce<PowerCandidate[]>((candidates, party, index) => {
+      if (!party) return candidates;
+      const kind = normalizePowerKind(party);
+      const identifier = getPowerPartyIdentifier(party);
+      const fullName = party.full_name?.trim();
+      if (!fullName && !identifier) return candidates;
+      candidates.push({
+        id: `${kind}:${identifier ?? fullName ?? index}`,
+        label: identifier ? `${fullName ?? "Sin nombre"} - ${identifier}` : fullName ?? "Sin nombre",
+        full_name: fullName,
+        ci_number: party.ci_number?.trim(),
+        rut: party.rut?.trim(),
+        address: party.address?.trim(),
+        kind,
+      });
+      return candidates;
+    }, []);
+  };
+
+  const getPowerGrantors = (data: Record<string, unknown>) => {
+    const cartaPoder = data as ExtractedCartaPoderData;
+    const poderdantes = Array.isArray(cartaPoder.poderdantes)
+      ? cartaPoder.poderdantes
+      : cartaPoder.poderdante
+        ? [cartaPoder.poderdante]
+        : [];
+
+    return poderdantes.filter((party): party is ExtractedPowerPartyData => Boolean(party));
+  };
+
+  const getSelectedPowerCandidate = (
+    fileId: string,
+    data: Record<string, unknown>,
+    selections: Record<string, string> = powerSelections
+  ) => {
+    const candidates = buildPowerCandidates(data);
+    if (candidates.length === 1) return candidates[0];
+    const selectedId = selections[fileId];
+    return candidates.find((candidate) => candidate.id === selectedId) ?? null;
   };
 
   const isTextExtractResult = (result: ExtractResultState | null) => {
@@ -318,6 +392,27 @@ export default function FileManager({
 
     if (result.type === "libreta" || flatData.brand || flatData.plate || flatData.padron) {
       applyVehicleToPrefill(prefill, flatData);
+    }
+
+    if (result.type === "carta_poder") {
+      const selectedCandidate = getSelectedPowerCandidate(result.fileId, result.data, {});
+      if (selectedCandidate) {
+        prefill.seller_has_representative = true;
+        setIfMeaningful(prefill, "seller_rep_name", selectedCandidate.full_name);
+        setIfMeaningful(
+          prefill,
+          "seller_rep_ci",
+          selectedCandidate.kind === "company" ? selectedCandidate.rut : selectedCandidate.ci_number
+        );
+        setIfMeaningful(prefill, "seller_rep_address", selectedCandidate.address);
+        prefill.seller_rep_power_type = result.data.power_type ?? "carta_poder";
+        setIfMeaningful(prefill, "seller_rep_power_date", result.data.power_date);
+        setIfMeaningful(prefill, "seller_rep_power_notary", result.data.notary);
+        if (result.data.can_substitute !== undefined && result.data.can_substitute !== null) {
+          prefill.seller_rep_can_substitute = result.data.can_substitute;
+        }
+      }
+      return prefill;
     }
 
     if (result.type !== "libreta") {
@@ -612,6 +707,7 @@ export default function FileManager({
     setBulkError("");
     setBulkResults([]);
     setPersonRoles({});
+    setPowerSelections({});
     const results: typeof bulkResults = [];
 
     for (let i = 0; i < targets.length; i++) {
@@ -688,6 +784,14 @@ export default function FileManager({
     }
 
     setBulkResults(results);
+    const nextPowerSelections: Record<string, string> = {};
+    for (const result of results.filter((item) => item.type === "carta_poder")) {
+      const candidates = buildPowerCandidates(result.data);
+      if (candidates.length === 1) {
+        nextPowerSelections[result.fileId] = candidates[0].id;
+      }
+    }
+    setPowerSelections(nextPowerSelections);
     // Auto-assign roles: if an antecedente is present, the seller comes from there,
     // so cedulas should default to comprador instead of vendedor
     const persons = results.filter((r) => r.type === "cedula");
@@ -778,12 +882,16 @@ export default function FileManager({
 
     // From carta poder: apoderado → seller representative fields
     for (const cp of cartasPoder) {
-      const apoderado = cp.data.apoderado as { full_name?: string; ci_number?: string; address?: string } | undefined;
-      if (apoderado?.full_name) {
+      const selectedCandidate = getSelectedPowerCandidate(cp.fileId, cp.data);
+      if (selectedCandidate?.full_name) {
         prefill.seller_has_representative = true;
-        setIfMeaningful(prefill, "seller_rep_name", apoderado.full_name);
-        setIfMeaningful(prefill, "seller_rep_ci", apoderado.ci_number);
-        setIfMeaningful(prefill, "seller_rep_address", apoderado.address);
+        setIfMeaningful(prefill, "seller_rep_name", selectedCandidate.full_name);
+        setIfMeaningful(
+          prefill,
+          "seller_rep_ci",
+          selectedCandidate.kind === "company" ? selectedCandidate.rut : selectedCandidate.ci_number
+        );
+        setIfMeaningful(prefill, "seller_rep_address", selectedCandidate.address);
         prefill.seller_rep_power_type = cp.data.power_type ?? "carta_poder";
         setIfMeaningful(prefill, "seller_rep_power_date", cp.data.power_date);
         setIfMeaningful(prefill, "seller_rep_power_notary", cp.data.notary);
@@ -891,6 +999,13 @@ export default function FileManager({
     };
     return labels[key] || key;
   }
+
+  const hasPendingPowerSelection = bulkResults
+    .filter((result) => result.type === "carta_poder")
+    .some((result) => {
+      const candidates = buildPowerCandidates(result.data);
+      return candidates.length > 1 && !powerSelections[result.fileId];
+    });
 
   const handleDrop = useCallback(
     (e: DragEvent) => {
@@ -1347,7 +1462,7 @@ export default function FileManager({
               </p>
             </div>
             <button
-              onClick={() => { setBulkPhase("idle"); setBulkResults([]); }}
+              onClick={() => { setBulkPhase("idle"); setBulkResults([]); setPowerSelections({}); }}
               className="p-1 hover:bg-gray-200 rounded"
             >
               <X size={16} className="text-gray-500" />
@@ -1470,8 +1585,9 @@ export default function FileManager({
             {bulkResults
               .filter((r) => r.type === "carta_poder")
               .map((cp) => {
-                const apoderado = isRecord(cp.data.apoderado) ? cp.data.apoderado as Record<string, unknown> : null;
-                const poderdante = isRecord(cp.data.poderdante) ? cp.data.poderdante as Record<string, unknown> : null;
+                const apoderados = buildPowerCandidates(cp.data);
+                const selectedApoderado = getSelectedPowerCandidate(cp.fileId, cp.data);
+                const poderdantes = getPowerGrantors(cp.data);
                 return (
                   <div key={cp.fileId} className="border border-teal-200 rounded-lg p-3 bg-teal-50">
                     <div className="flex items-center gap-2 mb-2">
@@ -1481,33 +1597,66 @@ export default function FileManager({
                       <span className="text-xs text-gray-500">{cp.fileName}</span>
                       <span className="text-xs text-teal-600 ml-auto">Apoderado → Representante del vendedor</span>
                     </div>
-                    {poderdante && (
+                    {poderdantes.length > 0 && (
                       <div className="mb-1.5">
                         <p className="text-xs font-semibold text-teal-700 mb-1">Poderdante (vendedor que otorga el poder):</p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
-                          {Object.entries(poderdante)
-                            .filter(([, v]) => v !== null && v !== undefined && v !== "")
-                            .map(([key, value]) => (
-                              <div key={key} className="text-xs">
-                                <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
-                                <span className="font-medium text-gray-800">{String(value)}</span>
-                              </div>
-                            ))}
+                        <div className="space-y-2">
+                          {poderdantes.map((poderdante, index) => (
+                            <div key={`${cp.fileId}-poderdante-${index}`} className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                              {Object.entries(poderdante)
+                                .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                                .map(([key, value]) => (
+                                  <div key={key} className="text-xs">
+                                    <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
+                                    <span className="font-medium text-gray-800">{String(value)}</span>
+                                  </div>
+                                ))}
+                            </div>
+                          ))}
                         </div>
                       </div>
                     )}
-                    {apoderado && (
+                    {apoderados.length > 0 && (
                       <div>
                         <p className="text-xs font-semibold text-teal-700 mb-1">Apoderado (actúa en nombre del vendedor):</p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
-                          {Object.entries(apoderado)
-                            .filter(([, v]) => v !== null && v !== undefined && v !== "")
-                            .map(([key, value]) => (
-                              <div key={key} className="text-xs">
-                                <span className="text-gray-500">{formatExtractedLabel(key)}: </span>
-                                <span className="font-medium text-gray-800">{String(value)}</span>
-                              </div>
+                        <div className="space-y-2">
+                          <select
+                            value={powerSelections[cp.fileId] ?? ""}
+                            onChange={(event) =>
+                              setPowerSelections((prev) => ({ ...prev, [cp.fileId]: event.target.value }))
+                            }
+                            className="text-sm border border-teal-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"
+                          >
+                            <option value="">Seleccionar apoderado...</option>
+                            {apoderados.map((candidate) => (
+                              <option key={candidate.id} value={candidate.id}>{candidate.label}</option>
                             ))}
+                          </select>
+                          {apoderados.length > 1 && !selectedApoderado && (
+                            <p className="text-xs text-amber-700">
+                              Esta carta poder tiene varios candidatos. Elegí uno antes de continuar.
+                            </p>
+                          )}
+                          {selectedApoderado && (
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5">
+                              <div className="text-xs">
+                                <span className="text-gray-500">Nombre: </span>
+                                <span className="font-medium text-gray-800">{selectedApoderado.full_name}</span>
+                              </div>
+                              <div className="text-xs">
+                                <span className="text-gray-500">{selectedApoderado.kind === "company" ? "RUT" : "CI"}: </span>
+                                <span className="font-medium text-gray-800">
+                                  {selectedApoderado.kind === "company" ? selectedApoderado.rut : selectedApoderado.ci_number}
+                                </span>
+                              </div>
+                              {selectedApoderado.address && (
+                                <div className="text-xs">
+                                  <span className="text-gray-500">Domicilio: </span>
+                                  <span className="font-medium text-gray-800">{selectedApoderado.address}</span>
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}
@@ -1538,7 +1687,7 @@ export default function FileManager({
             {/* Actions */}
             <div className="flex items-center justify-end gap-3 pt-2 border-t">
               <button
-                onClick={() => { setBulkPhase("idle"); setBulkResults([]); }}
+                onClick={() => { setBulkPhase("idle"); setBulkResults([]); setPowerSelections({}); }}
                 className="px-4 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
               >
                 Cancelar
@@ -1546,10 +1695,12 @@ export default function FileManager({
               <button
                 onClick={handleContinueToForm}
                 disabled={
-                  bulkResults.filter((r) => r.type === "cedula").length === 0 &&
-                  bulkResults.filter((r) => r.type === "libreta").length === 0 &&
-                  bulkResults.filter((r) => r.type === "antecedente").length === 0 &&
-                  bulkResults.filter((r) => r.type === "carta_poder").length === 0
+                  hasPendingPowerSelection || (
+                    bulkResults.filter((r) => r.type === "cedula").length === 0 &&
+                    bulkResults.filter((r) => r.type === "libreta").length === 0 &&
+                    bulkResults.filter((r) => r.type === "antecedente").length === 0 &&
+                    bulkResults.filter((r) => r.type === "carta_poder").length === 0
+                  )
                 }
                 className="flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
               >

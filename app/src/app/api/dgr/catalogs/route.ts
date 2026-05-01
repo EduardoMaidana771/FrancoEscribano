@@ -41,11 +41,18 @@ export async function GET(req: NextRequest) {
     .eq("user_id", user.id)
     .eq("cache_key", cacheKey)
     .gte("fetched_at", oneDayAgo)
-    .single();
+    .maybeSingle();
 
   if (cached) {
-    return NextResponse.json({ data: cached.data, cached: true });
+    return NextResponse.json({ data: cached.data, cached: true, stale: false });
   }
+
+  const { data: staleCached } = await supabase
+    .from("dgr_cache")
+    .select("data, fetched_at")
+    .eq("user_id", user.id)
+    .eq("cache_key", cacheKey)
+    .maybeSingle();
 
   // Need fresh data — get DGR session
   const { data: session } = await supabase
@@ -62,6 +69,9 @@ export async function GET(req: NextRequest) {
       : null;
 
   if (!cookies) {
+    if (staleCached) {
+      return NextResponse.json({ data: staleCached.data, cached: true, stale: true });
+    }
     return NextResponse.json(
       { error: "No active DGR session. Please log in to DGR first." },
       { status: 401 },
@@ -90,9 +100,12 @@ export async function GET(req: NextRequest) {
       { onConflict: "user_id,cache_key" },
     );
 
-    return NextResponse.json({ data, cached: false });
+    return NextResponse.json({ data, cached: false, stale: false });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
+    if (staleCached) {
+      return NextResponse.json({ data: staleCached.data, cached: true, stale: true, error: message });
+    }
     return NextResponse.json({ error: message }, { status: 502 });
   }
 }
