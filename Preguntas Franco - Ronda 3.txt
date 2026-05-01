@@ -1,0 +1,103 @@
+Preguntas para Franco - Ronda 3
+Fecha: 25 de abril de 2026
+Contexto: generamos la compraventa OAE 7011 y encontramos campos vacíos y casos no cubiertos.
+
+-----------------------------------
+
+PENDIENTES DE RONDAS ANTERIORES (prometiste pasar documentos de ejemplo)
+
+1- Estado civil DIVORCIADO: ¿qué texto exacto va en el documento?
+   Ej: "divorciado/a en primeras nupcias de [nombre]" o diferente?
+   NECESITAMOS DOCUMENTO DE EJEMPLO.
+1 respuesta: "divorciado/a en primeras nupcias de [nombre][apellido]" (puede ser primera/segunda nupcias, etc.)
+
+2- Estado civil VIUDO/A: ¿qué texto exacto va en el documento?
+   NECESITAMOS DOCUMENTO DE EJEMPLO.
+2 respuesta: "viudo/a de primera nupcias [nombre][apellido]" (puede ser viudo/a de primera/segunda nupcias, etc.)
+
+3- Forma de pago FINANCIADO / SALDO DE PRECIO ( son lo mismo estos dos) - (contado, financiado(con entrega y saldo precio)
+): ¿qué texto exacto cambia en la cláusula 5?
+   NECESITAMOS DOCUMENTO DE EJEMPLO con este caso.
+3 respuesta: K motors (contado), Buscar con saldo en los documentos ya hay ejemplos.
+
+4- Cuando el vendedor/comprador SÍ es contribuyente de BPS, IRAE o IMEBA:
+   ¿Qué texto exacto reemplaza la declaración negativa?
+   ¿Puede ser contribuyente de más de uno a la vez? ¿Cómo queda el texto?
+   NECESITAMOS DOCUMENTO DE EJEMPLO.
+4 respuesta: "contribuyente de BPS, IRAE e IMEBA" (puede ser uno o más a la vez, se listan todos los que correspondan) ( ya hay ejemplos buscar)
+
+5- Vendedor casado (2 vendedores): ¿cómo queda la cláusula 1 con marido y mujer?
+   ¿Y cuando uno tiene apoderado y el otro no?
+   NECESITAMOS DOCUMENTO DE EJEMPLO.
+Ya lo vimos buscar ejemplos en documentos anteriores, pero básicamente es "María Pérez de López y Juan López" (si ambos venden) 
+o "María Pérez de López por sí y Juan López por sí" (si ambos venden pero uno con apoderado y el otro sin apoderado).
+
+-----------------------------------
+
+NUEVAS PREGUNTAS (surgieron del documento generado OAE 7011)
+
+6- DOMICILIO DEL COMPRADOR: en el documento quedó vacío ("domiciliado en la calle ___, Departamento de ___").
+   La cédula uruguaya no trae dirección.
+   ¿Dónde obtenés ese dato? ¿El cliente te lo dice verbalmente?
+   ¿Es obligatorio tenerlo o se puede dejar en blanco?
+6 Respuesta: La direccion venia en el texto que se le dio a la IA para generar el documento, pero no se extrajo.
+ Se puede pedir al cliente que lo proporcione verbalmente o por escrito, y es recomendable incluirlo en el documento para mayor claridad,
+aunque no es estrictamente obligatorio.
+
+7- GÉNERO EN EL ESTADO CIVIL: el sistema generó "soltera" para Marcelo (hombre).
+   La IA que lee la cédula a veces extrae el estado civil en femenino aunque sea hombre.
+   ¿La cédula uruguaya tiene algún campo de sexo/género visible que podamos leer?
+   ¿O lo inferimos del nombre?
+7 Respuesta: Este fue un bug, en este caso la ia de Guillermo o marcelo deberia haber leído "soltero" en lugar de "soltera". 
+La cédula uruguaya tiene un campo de sexo/género visible que se puede leer, pero también se puede inferir del nombre si es necesario. 
+Es importante corregir este error para evitar confusiones en el futuro.
+
+8- PAPEL NOTARIAL (series y números del Testimonio): en el documento quedaron como "___".
+   ¿Cuándo se completan esos datos? ¿Antes de imprimir o después?
+   ¿Se pueden dejar en blanco para completar a mano, o hay que ingresarlos en el sistema?
+8 Respuesta: Los datos del papel notarial, falto configurarlo.
+
+9- FOLIO "VUELTO": en el documento dice "extendida de folio 301 a 302 vuelto".
+   El "vuelto" está fijo en la plantilla.
+   ¿El folio final SIEMPRE termina en "vuelto"? ¿O puede terminar en el anverso (sin "vuelto")?
+Puede terminar en el anverso ( dejar para que se pueda editar )
+
+10- NOMBRE DEL ESCRIBANO: en la configuración actual del sistema aparece como "Franco Acceso".
+    En la protocolización apareció como "Franco Castiglioni Abelenda".
+    ¿Cuál es el nombre completo correcto para el documento? ¿Y las iniciales?
+10 Respuesta: El nombre completo correcto para el documento es "Franco Castiglioni Abelenda".
+Las iniciales serían "F.C.A."
+ Es importante actualizar la configuración del sistema para reflejar el nombre completo correcto y evitar confusiones en el futuro.
+
+-----------------------------------
+
+CASOS ESPECIALES QUE NECESITAMOS CUBRIR (para futuras operaciones)
+
+11- APODERADO del vendedor/comprador: cuando actúa por carta poder, ¿qué texto exacto va?
+    ¿Cambia la cláusula 1 o solo el CERTIFICO?
+    NECESITAMOS DOCUMENTO DE EJEMPLO.
+    Termina ahi si no tiene apoderado ejemplo:
+    1.PARTE VENDEDORA. – Marcelo Nicolás LAVALLEN ACUÑA, oriental, mayor de edad, soltero, titular de la cédula de identidad número 5.157.390-7, domiciliado en la calle Ruta 12 y 9, departamento de Maldonado.
+
+12- EMPRESA como vendedora o compradora: ¿SA, SRL, SAS tienen texto diferente entre sí?
+    ¿O es siempre igual independientemente del tipo societario?
+    NECESITAMOS DOCUMENTO DE EJEMPLO con una empresa vendiendo.
+En la carta poder esta si es SA o SRL o SAS se debe indicar el tipo societario, pero el texto es similar, por ejemplo:
+"PARTE VENDEDORA. – XYZ S.A., sociedad anónima, con domicilio en [dirección], representada por [nombre del representante], titular de la cédula de
+identidad número [número de cédula], en su calidad de [cargo del representante]."
+Tambien puede compadecer una empresa como comprador ( buscar ejemplos en documentos anteriores)
+
+13- VEHÍCULO SIN MATRÍCULA NUEVA (solo padrón viejo tipo SCB2356):
+    ¿Qué campo queda vacío? ¿Se omite la línea de matrícula o se deja en blanco?
+No se entendio esta pregunta.
+
+Dato extra:
+Si la libreta difiere de la carta poder, el texto se cambia, mirar ejemplos anteriores. ( se debe hacer todo el camino )
+
+14- MOTO vs AUTO vs CAMIÓN: ¿el documento cambia significativamente según el tipo de vehículo?
+    ¿O es el mismo texto y solo cambian los datos del vehículo?
+14 Respuesta: No se hace moto, auto y camion es lo mismo.
+
+-----------------------------------
+
+FIN DE PREGUNTAS - RONDA 3

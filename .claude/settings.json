@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/manue/Downloads/Franco/Documentos de ejemplos/VENTAS/SUZUKI ALTO javier villegas/**)",
+      "Read(//c/Users/manue/Downloads/Franco/Documentos de ejemplos/VENTAS/HYUNDAI AAO6827/**)"
+    ]
+  }
+}

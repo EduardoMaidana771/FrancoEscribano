@@ -16,6 +16,10 @@ const navItems = [
   { href: "/archivos", label: "Archivos", icon: FolderOpen },
   { href: "/compraventa/nueva", label: "Nueva Compraventa", icon: FilePlus },
   { href: "/compraventas", label: "Compraventas", icon: FileText },
+  { href: "/carta-deslinde/nueva", label: "Carta de Deslinde", icon: FileText },
+  { href: "/certificacion-imm/nueva", label: "Certificación IMM", icon: FileText },
+  { href: "/prenda/nueva", label: "Prenda de Vehículo", icon: FileText },
+  { href: "/compromiso/nueva", label: "Compromiso de Compraventa", icon: FileText },
   { href: "/configuracion", label: "Configuración", icon: Settings },
 ];
 

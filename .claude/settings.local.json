@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_engram_engram__mem_search",
+      "mcp__plugin_engram_engram__mem_context",
+      "mcp__plugin_engram_engram__mem_save",
+      "Bash(npx tsc *)",
+      "Bash(dir \"c:\\\\Users\\\\manue\\\\source\\\\repos\\\\FrancoEscribano\")",
+      "mcp__plugin_engram_engram__mem_session_summary",
+      "mcp__plugin_engram_engram__mem_get_observation",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const d=require\\('/dev/stdin'\\); console.log\\(JSON.stringify\\({test:d.scripts?.test, build:d.scripts?.build},null,2\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('test:', p.scripts?.test\\); console.log\\('build:', p.scripts?.build\\);\")"
+    ]
+  }
+}

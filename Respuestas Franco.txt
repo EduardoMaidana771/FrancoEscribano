@@ -1,3 +1,42 @@
+Preguntas para Franco
+A. Sobre la plantilla de compraventa
+Fecha del documento: ¿siempre va en letras? Ej: "veintiséis de marzo de dos mil veintiséis". ¿Hay algún formato específico?
+Nacionalidad: ¿las opciones son solo "oriental" (uruguaya) y "argentina", o puede ser cualquier nacionalidad? ¿Cómo se escribe si es brasileña, paraguaya, etc.?
+Estado civil — casado: cuando es casado en primera nupcia, ¿el texto dice exactamente "casado/a en primeras nupcias con [nombre]"? ¿Cómo cambia para segunda y tercera nupcia? ¿Se necesita la cédula del cónyuge?
+Estado civil — divorciado/viudo: ¿lleva algún texto adicional? ¿Se menciona de quién se divorció o enviudó?
+Representante/apoderado: cuando el vendedor o comprador actúa por medio de un apoderado, ¿qué texto exacto se agrega? ¿Es un párrafo completo o solo una línea? ¿Necesita número de carta poder?
+Empresa como vendedora/compradora: ¿qué datos exactos se ponen? ¿Nombre de empresa, tipo (SA, SRL, SAS?), RUT, domicilio, y luego el representante? ¿Qué texto cambia respecto a persona física?
+Datos del vehículo: del listado (tipo, modelo, padrón, motor, chasis, marca, año, matrícula), ¿van todos siempre? ¿Falta algún campo?
+Precio — contado: ¿el texto dice solo "de contado" o hay algo más?
+Precio — financiado: ¿qué variantes hay? ¿Puede ser "parte contado y parte financiado"? ¿Se detalla cuánto de cada uno? ¿Se mencionan cuotas, plazos, garantías?
+Monedas: además de dólares americanos (USD) y pesos uruguayos ($), ¿puede haber otra moneda? ¿El monto siempre va en número y en letras?
+Declaraciones tributarias: "No ser contribuyente de BPS, IRAE, IMEBA" — ¿qué pasa cuando SÍ es contribuyente de uno de ellos? ¿Qué texto cambia? ¿Puede ser contribuyente de más de uno a la vez?
+Título del auto: mencionaste "TIENE TÍTULO" — ¿qué cambia en el documento si tiene título vs si no lo tiene?
+B. Sobre matriz y folio
+Número de matriz: ¿es un número que Franco asigna de forma correlativa? Es decir, la anterior fue 132, la siguiente es 133, etc.?
+Folio: ¿cuántos folios ocupa generalmente una compraventa? ¿Varía según el caso? ¿Cómo se calcula?
+Referencia a matriz anterior: en el documento dice "viene de matriz número X, folios Y a Z" — ¿eso se refiere a la operación inmediatamente anterior del mismo vehículo, o a otra cosa?
+¿Hay una numeración separada para los folios? Es decir, ¿la matriz 132 ocupa folios 450-452, y la 133 arranca en folio 453?
+C. Sobre el flujo de trabajo
+¿Qué hace primero Franco cuando le llega un negocio nuevo? ¿Crea una carpeta en su PC? ¿Qué nombre le pone?
+¿Cuántos documentos recibe típicamente por operación? (cédula comprador, cédula vendedor, libreta de propiedad, antecedentes, ¿algo más?)
+¿Consulta la DGR para cada operación? ¿Qué datos saca de ahí exactamente?
+¿Hay casos donde necesita datos que NO están en los documentos que le pasan? Ej: ¿le pregunta verbalmente al cliente su estado civil, dirección, etc.?
+Una vez generado el Word, ¿lo imprime directamente o lo modifica antes? ¿Qué tipo de modificaciones suele hacer?
+D. Sobre variantes y casos especiales
+¿Puede haber más de un comprador o vendedor? Ej: una pareja comprando juntos.
+¿Hay operaciones con vehículos que no tienen matrícula nueva? (solo padrón viejo tipo SCB2356)
+¿Qué son los antecedentes del auto? ¿Es un documento que siempre se necesita? ¿De dónde sale?
+¿Hay algún tipo de vehículo que cambie significativamente el documento? Ej: moto vs auto vs camión
+¿La carta poder es un documento separado que se genera aparte, o va dentro de la compraventa?
+¿Hay otros documentos que genera además de la compraventa y la carta poder? Ej: certificados, declaraciones juradas
+E. Sobre DGR
+¿Con qué frecuencia consulta la DGR? ¿En cada operación?
+¿Qué datos específicos obtiene de la DGR? ¿Marca, modelo, tipo, combustible del vehículo?
+¿La sesión de DGR dura cuánto tiempo aproximadamente antes de expirar?
+Si la DGR está caída, ¿puede completar la operación igual con los datos que ya tiene?
+
+
 A
 
 1- SIEMPRE VA EN LETRAS
@@ -47,6 +86,17 @@ E
 -----------------------------------
 
 Preguntas importantes
+
+¿"En efectivo" vs "al contado" son lo mismo o hay diferencia?
+¿Qué pasa cuando alguien SÍ es contribuyente de BPS/IRAE/IMEBA? ¿Qué texto cambia?
+¿Cuándo va la mención de "votaron en elecciones" en el CERTIFICO?
+¿El seguro obligatorio va dentro del CERTIFICO o como certificación separada? ¿Cuándo cada uno?
+Declaraciones: ¿prefiere formato A/B/C detallado o simplificado?
+Responsabilidad motor/chasis: ¿la declara el vendedor o la asume el comprador?
+¿Puede haber más de 1 comprador o vendedor?
+¿La cuota parte siempre es 1/1 o puede ser fraccional?
+¿Existe forma de pago financiado? ¿Qué texto exacto?
+¿Los apoderados de carta poder son fijos o cambian por operación?
 
 1- Son lo mismo
 2- Pasa documento de ejemplo
