@@ -24,6 +24,14 @@ interface TransactionRow {
   vehicle: { brand: string; model: string; plate: string } | null;
 }
 
+function formatPriceAmount(amount: number): string {
+  const [rawIntegerPart, rawDecimalPart = ""] = amount.toString().split(".");
+  const integerPart = rawIntegerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  const decimalPart = rawDecimalPart.replace(/0+$/, "");
+
+  return decimalPart ? `${integerPart},${decimalPart}` : integerPart;
+}
+
 export default function CompraventasList({
   transactions,
 }: {
@@ -180,7 +188,7 @@ export default function CompraventasList({
                   </td>
                   <td className="px-4 py-3">
                     {tx.price_amount
-                      ? `${tx.price_currency === "USD" ? "USD" : "$"} ${tx.price_amount.toLocaleString()}`
+                      ? `${tx.price_currency === "USD" ? "USD" : "$"} ${formatPriceAmount(tx.price_amount)}`
                       : "—"}
                   </td>
                   <td className="px-4 py-3">

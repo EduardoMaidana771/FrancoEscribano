@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { normalizeExtractedCartaPoderData } from "@/lib/power-parties";
 import mammoth from "mammoth";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
@@ -421,6 +422,9 @@ export async function POST(request: NextRequest) {
       .replace(/```\s*/g, "")
       .trim();
     parsed = JSON.parse(cleaned);
+    if (type === "carta_poder" && parsed && typeof parsed === "object") {
+      parsed = normalizeExtractedCartaPoderData(parsed);
+    }
   } catch {
     return NextResponse.json(
       { error: "Error al parsear respuesta de IA", raw: result },

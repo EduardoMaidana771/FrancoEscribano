@@ -13,6 +13,12 @@ import type {
   ExtractedVehicleData,
 } from "@/lib/types";
 import {
+  buildPowerCandidates,
+  getPowerGrantors,
+  normalizeExtractedCartaPoderData,
+  type PowerCandidate,
+} from "@/lib/power-parties";
+import {
   FolderPlus,
   Upload,
   Folder as FolderIcon,
@@ -50,16 +56,6 @@ interface ExtractResultState {
 
 type ExtractedTextPerson = NonNullable<ExtractedTextData["persons"]>[number];
 type ExtractedTransactionData = NonNullable<ExtractedTextData["transaction"]>;
-type PowerCandidate = {
-  id: string;
-  label: string;
-  full_name?: string;
-  ci_number?: string;
-  rut?: string;
-  address?: string;
-  kind: "person" | "company";
-};
-
 export default function FileManager({
   initialFolders,
   initialFiles,
@@ -119,55 +115,6 @@ export default function FileManager({
     }
     if (isRecord(data.buyer) && (data.buyer as Record<string, unknown>).full_name) return "antecedente";
     return "cedula";
-  };
-
-  const normalizePowerKind = (party: ExtractedPowerPartyData): "person" | "company" => {
-    if (party.kind === "company") return "company";
-    if (party.kind === "person") return "person";
-    return party.rut && !party.ci_number ? "company" : "person";
-  };
-
-  const getPowerPartyIdentifier = (party: ExtractedPowerPartyData) => {
-    const kind = normalizePowerKind(party);
-    return kind === "company" ? party.rut : party.ci_number;
-  };
-
-  const buildPowerCandidates = (data: Record<string, unknown>): PowerCandidate[] => {
-    const cartaPoder = data as ExtractedCartaPoderData;
-    const apoderados = Array.isArray(cartaPoder.apoderados)
-      ? cartaPoder.apoderados
-      : cartaPoder.apoderado
-        ? [cartaPoder.apoderado]
-        : [];
-
-    return apoderados.reduce<PowerCandidate[]>((candidates, party, index) => {
-      if (!party) return candidates;
-      const kind = normalizePowerKind(party);
-      const identifier = getPowerPartyIdentifier(party);
-      const fullName = party.full_name?.trim();
-      if (!fullName && !identifier) return candidates;
-      candidates.push({
-        id: `${kind}:${identifier ?? fullName ?? index}`,
-        label: identifier ? `${fullName ?? "Sin nombre"} - ${identifier}` : fullName ?? "Sin nombre",
-        full_name: fullName,
-        ci_number: party.ci_number?.trim(),
-        rut: party.rut?.trim(),
-        address: party.address?.trim(),
-        kind,
-      });
-      return candidates;
-    }, []);
-  };
-
-  const getPowerGrantors = (data: Record<string, unknown>) => {
-    const cartaPoder = data as ExtractedCartaPoderData;
-    const poderdantes = Array.isArray(cartaPoder.poderdantes)
-      ? cartaPoder.poderdantes
-      : cartaPoder.poderdante
-        ? [cartaPoder.poderdante]
-        : [];
-
-    return poderdantes.filter((party): party is ExtractedPowerPartyData => Boolean(party));
   };
 
   const getSelectedPowerCandidate = (
@@ -395,6 +342,18 @@ export default function FileManager({
     }
 
     if (result.type === "carta_poder") {
+      const normalizedPowerData = normalizeExtractedCartaPoderData(result.data as ExtractedCartaPoderData);
+      const candidates = buildPowerCandidates(normalizedPowerData as unknown as Record<string, unknown>);
+      if (candidates.length > 0) {
+        prefill.seller_has_representative = true;
+        prefill.seller_rep_candidates = candidates;
+      }
+      prefill.seller_rep_power_type = normalizedPowerData.power_type ?? "carta_poder";
+      setIfMeaningful(prefill, "seller_rep_power_date", normalizedPowerData.power_date);
+      setIfMeaningful(prefill, "seller_rep_power_notary", normalizedPowerData.notary);
+      if (normalizedPowerData.can_substitute !== undefined && normalizedPowerData.can_substitute !== null) {
+        prefill.seller_rep_can_substitute = normalizedPowerData.can_substitute;
+      }
       const selectedCandidate = getSelectedPowerCandidate(result.fileId, result.data, {});
       if (selectedCandidate) {
         prefill.seller_has_representative = true;
@@ -838,6 +797,17 @@ export default function FileManager({
     const textResults = bulkResults.filter((r) => r.type === "text");
     const antecedentes = bulkResults.filter((r) => r.type === "antecedente");
     const cartasPoder = bulkResults.filter((r) => r.type === "carta_poder");
+    const representativeCandidates = cartasPoder.flatMap((cp) =>
+      buildPowerCandidates(cp.data).map((candidate) => ({ ...candidate }))
+    );
+    const uniqueRepresentativeCandidates = representativeCandidates.filter(
+      (candidate, index, all) => all.findIndex((item) => item.id === candidate.id) === index
+    );
+
+    if (uniqueRepresentativeCandidates.length > 0) {
+      prefill.seller_has_representative = true;
+      prefill.seller_rep_candidates = uniqueRepresentativeCandidates;
+    }
 
     // Map persons by role
     for (let i = 0; i < persons.length; i++) {
@@ -882,6 +852,17 @@ export default function FileManager({
 
     // From carta poder: apoderado → seller representative fields
     for (const cp of cartasPoder) {
+      prefill.seller_rep_power_type ??= cp.data.power_type ?? "carta_poder";
+      setIfMeaningful(prefill, "seller_rep_power_date", cp.data.power_date);
+      setIfMeaningful(prefill, "seller_rep_power_notary", cp.data.notary);
+      if (
+        prefill.seller_rep_can_substitute === undefined &&
+        cp.data.can_substitute !== undefined &&
+        cp.data.can_substitute !== null
+      ) {
+        prefill.seller_rep_can_substitute = cp.data.can_substitute;
+      }
+
       const selectedCandidate = getSelectedPowerCandidate(cp.fileId, cp.data);
       if (selectedCandidate?.full_name) {
         prefill.seller_has_representative = true;
@@ -892,12 +873,6 @@ export default function FileManager({
           selectedCandidate.kind === "company" ? selectedCandidate.rut : selectedCandidate.ci_number
         );
         setIfMeaningful(prefill, "seller_rep_address", selectedCandidate.address);
-        prefill.seller_rep_power_type = cp.data.power_type ?? "carta_poder";
-        setIfMeaningful(prefill, "seller_rep_power_date", cp.data.power_date);
-        setIfMeaningful(prefill, "seller_rep_power_notary", cp.data.notary);
-        if (cp.data.can_substitute !== undefined && cp.data.can_substitute !== null) {
-          prefill.seller_rep_can_substitute = cp.data.can_substitute;
-        }
       }
     }
 
@@ -999,13 +974,6 @@ export default function FileManager({
     };
     return labels[key] || key;
   }
-
-  const hasPendingPowerSelection = bulkResults
-    .filter((result) => result.type === "carta_poder")
-    .some((result) => {
-      const candidates = buildPowerCandidates(result.data);
-      return candidates.length > 1 && !powerSelections[result.fileId];
-    });
 
   const handleDrop = useCallback(
     (e: DragEvent) => {
@@ -1634,7 +1602,7 @@ export default function FileManager({
                           </select>
                           {apoderados.length > 1 && !selectedApoderado && (
                             <p className="text-xs text-amber-700">
-                              Esta carta poder tiene varios candidatos. Elegí uno antes de continuar.
+                              Si querés, podés dejarlo sin elegir acá y seleccionarlo después en el formulario.
                             </p>
                           )}
                           {selectedApoderado && (
@@ -1695,12 +1663,10 @@ export default function FileManager({
               <button
                 onClick={handleContinueToForm}
                 disabled={
-                  hasPendingPowerSelection || (
-                    bulkResults.filter((r) => r.type === "cedula").length === 0 &&
-                    bulkResults.filter((r) => r.type === "libreta").length === 0 &&
-                    bulkResults.filter((r) => r.type === "antecedente").length === 0 &&
-                    bulkResults.filter((r) => r.type === "carta_poder").length === 0
-                  )
+                  bulkResults.filter((r) => r.type === "cedula").length === 0 &&
+                  bulkResults.filter((r) => r.type === "libreta").length === 0 &&
+                  bulkResults.filter((r) => r.type === "antecedente").length === 0 &&
+                  bulkResults.filter((r) => r.type === "carta_poder").length === 0
                 }
                 className="flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
               >
