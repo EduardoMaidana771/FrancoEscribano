@@ -151,6 +151,7 @@ export interface Transaction {
   paper_number_proto: string | null;
   paper_series_testimony: string | null;
   paper_numbers_testimony: string | null;
+  include_notarial_certification: boolean;
   protocolization_date: string | null;
   transaction_date: string;
   status: "borrador" | "completado";

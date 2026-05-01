@@ -242,6 +242,7 @@ export default async function EditarCompraventaPage({ params }: PageProps) {
     paper_number_proto: tx.paper_number_proto ?? profile?.paper_number_proto ?? "",
     paper_series_testimony: tx.paper_series_testimony ?? profile?.paper_series_testimony ?? "",
     paper_numbers_testimony: tx.paper_numbers_testimony ?? profile?.paper_numbers_testimony ?? "",
+    include_notarial_certification: tx.include_notarial_certification ?? true,
   };
 
   const editIds = {

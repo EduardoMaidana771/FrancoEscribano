@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildPriceParts } from "@/lib/price-words";
 import { createClient } from "@/lib/supabase/server";
+import {
+  buildSignatureLinesText,
+  buildSignatureNarrative,
+  stripNotarialCertificationSections,
+} from "@/lib/word-closing";
 import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import { readFileSync } from "fs";
@@ -286,12 +291,21 @@ function buildDeclaracionResponsabilidadTexto(tx: Record<string, unknown>): stri
 }
 
 function buildFirmasTexto(
+  signers: string[],
+  includeNotarialCertification: boolean
+): string {
+  return includeNotarialCertification
+    ? buildSignatureNarrative(signers)
+    : buildSignatureLinesText(signers);
+}
+
+function collectSignerNames(
   seller: Record<string, unknown>,
   seller2: Record<string, unknown> | null,
   buyer: Record<string, unknown>,
   buyer2: Record<string, unknown> | null,
   tx: Record<string, unknown>
-): string {
+): string[] {
   const signers: string[] = [];
 
   // Seller signer(s)
@@ -314,18 +328,7 @@ function buildFirmasTexto(
     if (buyer2) signers.push(String(buyer2.full_name || "___"));
   }
 
-  if (signers.length === 1) {
-    return `Hay una firma de ${signers[0]}.`;
-  }
-  let result = `Hay una firma de ${signers[0]}`;
-  for (let i = 1; i < signers.length; i++) {
-    if (i === signers.length - 1) {
-      result += ` y otra de ${signers[i]}`;
-    } else {
-      result += `, otra de ${signers[i]}`;
-    }
-  }
-  return result + ".";
+  return signers;
 }
 
 function buildCertificoQue(
@@ -571,6 +574,8 @@ export async function POST(request: NextRequest) {
   const compradora = buildParteCompradora(buyer, buyer2, tx);
   const precio = buildPriceParts(tx as unknown as Record<string, unknown>);
   const certQ = buildCertificoQue(seller, seller2, buyer, tx as unknown as Record<string, unknown>);
+  const includeNotarialCertification = tx.include_notarial_certification !== false;
+  const signerNames = collectSignerNames(seller, seller2, buyer, buyer2, tx as unknown as Record<string, unknown>);
   const initials = String(prof.notary_initials || "F.C.A.");
   const notaryName = String(prof.notary_name || prof.full_name || "Franco Castiglioni Abelenda");
   const resolvedFolioEnd = tx.folio_end || (tx.folio_start ? (tx.folio_start as number) + 1 : "___");
@@ -614,7 +619,7 @@ export async function POST(request: NextRequest) {
     declaracion_responsabilidad_texto: buildDeclaracionResponsabilidadTexto(tx as unknown as Record<string, unknown>),
 
     // Cláusula 10 - Firmas (bold)
-    firmas_texto: buildFirmasTexto(seller, seller2, buyer, buyer2, tx as unknown as Record<string, unknown>),
+    firmas_texto: buildFirmasTexto(signerNames, includeNotarialCertification),
 
     // Certifico que (nombres=bold, rest=normal)
     certifico_nombres: certQ.nombres,
@@ -684,6 +689,9 @@ export async function POST(request: NextRequest) {
     PAGE_BREAK_AFTER_REPRESENTATIVE_MARKER,
     "</w:t><w:br w:type=\"page\"/><w:t>"
   );
+  if (!includeNotarialCertification) {
+    fixedXml = stripNotarialCertificationSections(fixedXml);
+  }
   if (tx.folio_end_is_vuelto === false && folioEndText !== "___") {
     fixedXml = fixedXml.replace(
       new RegExp(`(a ${folioEndText}) vuelto(\.)`, "g"),

@@ -18,6 +18,7 @@ import {
   normalizeExtractedCartaPoderData,
   type PowerCandidate,
 } from "@/lib/power-parties";
+import { normalizeNationalityValue } from "@/lib/nationality";
 import {
   FolderPlus,
   Upload,
@@ -203,7 +204,7 @@ export default function FileManager({
 
     setIfMeaningful(prefill, `${prefix}_full_name`, person.full_name);
     setIfMeaningful(prefill, `${prefix}_ci`, person.ci_number);
-    setIfMeaningful(prefill, `${prefix}_nationality`, person.nationality);
+    setIfMeaningful(prefill, `${prefix}_nationality`, normalizeNationalityValue(person.nationality));
     setIfMeaningful(prefill, `${prefix}_birth_date`, person.birth_date);
     setIfMeaningful(prefill, `${prefix}_birth_place`, person.birth_place);
     setIfMeaningful(prefill, `${prefix}_civil_status`, person.civil_status);
