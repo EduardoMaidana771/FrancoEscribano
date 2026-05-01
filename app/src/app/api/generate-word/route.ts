@@ -704,7 +704,7 @@ export async function POST(request: NextRequest) {
   const zipObj = doc.getZip();
   const rawXml = zipObj.files["word/document.xml"].asText();
   let fixedXml = rawXml.replace(
-    /((?:<w:p\b(?:(?!<w:t[ >]).)*?<\/w:p>\s*){2,})(<w:sectPr)/s,
+    /((?:<w:p\b(?:(?!<w:t[ >])[\s\S])*?<\/w:p>\s*){2,})(<w:sectPr)/,
     (_m, _block, sectPr) =>
       `<w:p><w:pPr><w:spacing w:line="240" w:lineRule="atLeast"/></w:pPr></w:p>\n${sectPr}`
   );
